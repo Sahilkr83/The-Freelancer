@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+
 import logo from "../assests/tf-removebg-preview.png"
 const NavBar = () => {
 
@@ -14,9 +14,7 @@ const NavBar = () => {
         
         
         <div className='gap-4 flex '>
-          <NavLink> Home</NavLink>
-          <NavLink> Project</NavLink>
-          <NavLink> About us</NavLink>
+
         </div>
         
         <button onClick={click}>Contact Us</button>

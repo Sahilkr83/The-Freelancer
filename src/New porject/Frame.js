@@ -15,17 +15,17 @@ const Frame = ({video1,video2,video3,editName,number1,number2,number3,type1,type
           <div className='flex items-center justify-around w-full frame'>
 
             <div className='relative w-fit h-fit '>
-              <img src={iphoneFrame} alt='frame' className=' z-10' />
+              <img src={iphoneFrame} alt='frame' className=' z-10'   />
               <video className='absolute top-0 z-10 right-3 w-[185px] h-[420px]'autoPlay controls muted loop src={video1}/>
             </div>
 
             <div className='relative w-fit h-fit '>
-              <img src={iphoneFrame} className=' z-10' />
+              <img src={iphoneFrame} className=' z-10'   alt=''/>
               <video className='absolute top-0 z-10 right-3 w-[185px] h-[420px]'autoPlay controls muted loop src={video2}/>
             </div>
 
             <div className='relative w-fit h-fit '>
-              <img src={iphoneFrame} className=' z-10' />
+              <img src={iphoneFrame} className=' z-10' alt=''/>
               <video className='absolute top-0 z-10 right-3 w-[185px] h-[420px]'autoPlay controls muted loop src={video3}/>
             </div>
 
