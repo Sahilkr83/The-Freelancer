@@ -61,8 +61,6 @@
 
 
 
-
-
 .video{
     padding-top: 280px;
 }
@@ -85,6 +83,26 @@
 }
 .types-of-edit-heading{
     font-size: 2rem;
+}
+.pre-loader-text{
+    font-size: 3rem;
+}
+
+.input{
+    all: unset;
+    border: solid 1px rgb(106, 106, 106);
+    padding: 15px 25px;
+    width: 100%;
+}
+.input:focus , .input:hover{
+    outline: white solid 2px;
+}
+.textarea{
+    all: unset;
+    border: solid 1px rgb(106, 106, 106);
+    padding: 15px 25px;
+    
+    height: 140px;
 }
 
 
@@ -113,8 +131,16 @@
         gap: 10px;
     }
 }
+@media (max-width:800px){
+    .input-div{
+        flex-direction: column;
+    }
+}
 
 @media (max-width:670px) {
+    .pre-loader-text{
+        font-size: 2rem;
+    }
     .footer-text{
         font-size: 13px;
     }
@@ -165,7 +191,7 @@
 }
 
 
-@media (max-width:380px){
+@media (max-width:450px){
     .footer-heading{
         font-size: 21px ;
     }
