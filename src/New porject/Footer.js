@@ -5,7 +5,7 @@ import backgroundVideo from "../assests/background video.mp4"
 
 const Footer = () => {
 
-
+// final
 
   return (
     <div className='bg-black z-10  mx-auto'>
