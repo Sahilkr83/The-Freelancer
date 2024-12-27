@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaLongArrowAltRight,FaFacebookF,FaTwitter, FaInstagram,FaYoutube} from "react-icons/fa";
 import  href  from "./Link";
-
+import backgroundVideo from "../assests/background video.mp4"
 
 const Footer = () => {
 
@@ -15,7 +15,7 @@ const Footer = () => {
 
        <div className='w-full max-h-[100px] overflow-clip relative flex  items-center pb-[56.25%] video'>
 
-        <div className=' w-full h-full -z-20  backVideo place-items-center'><video  autoPlay muted loop src=""></video></div>
+        <div className=' w-full h-full -z-20  backVideo place-items-center'><video  autoPlay muted loop src={backgroundVideo}></video></div>
 
         <div className='text-white py-[20px] flex justify-center text-center w-full  absolute top-0 footer-video-front'>
 
