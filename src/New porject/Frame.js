@@ -16,17 +16,17 @@ const Frame = ({video1,video2,video3,editName,number1,number2,number3,type1,type
 
             <div className='relative w-fit h-fit '>
               <img src={iphoneFrame} alt='frame' className=' z-10'   />
-              <video className='absolute top-0 z-10 right-3 w-[185px] h-[420px]'autoPlay controls muted loop src={video1} loading="lazy" />
+              <video className='absolute top-3 z-10 right-3 w-[185px] h-[400px] 'autoPlay controls muted loop src={video1} loading="lazy" />
             </div>
 
             <div className='relative w-fit h-fit '>
               <img src={iphoneFrame} className=' z-10'   alt=''/>
-              <video className='absolute top-0 z-10 right-3 w-[185px] h-[420px]'autoPlay controls muted loop src={video2} loading="lazy" />
+              <video className='absolute top-3 z-10 right-3 w-[185px] h-[400px]'autoPlay controls muted loop src={video2} loading="lazy" />
             </div>
 
             <div className='relative w-fit h-fit '>
               <img src={iphoneFrame} className=' z-10' alt=''/>
-              <video className='absolute top-0 z-10 right-3 w-[185px] h-[420px]'autoPlay controls muted loop src={video3} loading="lazy" />
+              <video className='absolute top-3 z-10 right-3 w-[185px] h-[400px]'autoPlay controls muted loop src={video3} loading="lazy" />
             </div>
 
             <div className='flex flex-col text-[1.5rem] gap-4 '>
