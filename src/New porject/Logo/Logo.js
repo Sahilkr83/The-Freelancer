@@ -9,7 +9,8 @@ const Logo = ({logo,appName}) => {
         <img 
         style={{
             filter: hovered ? 'grayscale(0)' : 'grayscale(1)',
-            transition: 'filter 0.3s ease',}}
+            transform: hovered ? 'scale(1.3)' : 'scale(1)',
+            transition: 'all 0.3s ease',}}
 
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}

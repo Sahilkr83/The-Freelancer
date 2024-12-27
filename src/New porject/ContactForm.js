@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState , useRef } from 'react'
+
+import emailjs from '@emailjs/browser';
 
 const ContactForm = () => {
     const [formData , setFormData] = useState({
@@ -11,13 +13,31 @@ const ContactForm = () => {
             [event.target.name] : event.target.value
         }))
     }
-    function submitHandler (event){
-        event.preventDefault()
-        setFormData({
-            name:"", email: "", number:"" , subject:"" , help:""
+
+
+    const form = useRef();
+
+    const sendEmail = (e) => {
+      e.preventDefault();
+
+      setFormData({
+        name:"", email: "", number:"" , subject:"" , help:""
+    })
+
+      emailjs
+        .sendForm('service_1wkykx4', 'template_5zil37u', form.current, {
+          publicKey: 'xAMcVpwEtgkUjpzOb',
         })
-        console.log(formData)
-    }
+        .then(
+          () => {
+            console.log('SUCCESS!');
+          },
+          (error) => {
+            console.log('FAILED...', error.text);
+          },
+        );
+    };
+
   return (
     <div className='w-11/12 max-w-[1350px]  mx-auto pt-[100px] pb-[140px] px-[10px] text-white relative z-20 '>
         <div>
@@ -54,7 +74,7 @@ const ContactForm = () => {
             </div>
 
            <div className='md:pl-[60px]  pt-2 w-11/12 '>
-           <form onSubmit={submitHandler} className='w-full flex flex-col gap-4'>
+           <form  ref={form} onSubmit={sendEmail} className='w-full flex flex-col gap-4 '>
 
                <div className='w-full flex gap-6  md:flex-row flex-col'>
                 <input
@@ -92,7 +112,7 @@ const ContactForm = () => {
                </div>
 
                <textarea
-                    className='textarea '
+                    className='textarea  max-w-[865px]'
                      rows="10" cols="30"
                     name='help'
                     type='text'

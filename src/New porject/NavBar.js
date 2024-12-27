@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from "../assests/tf-removebg-preview.png"
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const NavBar = ({setContactOn}) => {
 
@@ -16,16 +16,20 @@ const NavBar = ({setContactOn}) => {
   }
 
   return (
-    <div className='mx-auto max-w-[1160px] w-11/12 justify-between items-center  pt-7 px-7 text-white flex z-20'>
+    <div className='w-full h-fit relative z-30'>
+      <div className='navbar mx-auto max-w-[1350px] w-11/12 justify-between items-center  pt-7 px-7 text-white flex  '>
 
         <img onClick={clickHandler2} src={logo} width={50} height={50} alt=''/>
-        
-        
+
+
         <div onClick={clickHandler2} className='gap-4 flex '>
-          Home
+          <NavLink>Home</NavLink>
         </div>
+
+        <button onClick={clickHandler}><NavLink>Contact Us</NavLink></button>
         
-        <button onClick={clickHandler}>Contact Us</button>
+      </div>
+      <div className='absolute w-[110%] h-[1px] bg-white -bottom-5 opacity-50 left-0 '></div>
     </div>
   )
 }
