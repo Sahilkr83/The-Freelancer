@@ -1,5 +1,5 @@
 import React from 'react'
-import homePAgeImg from "../assests/homePageImg.png"
+import homePAgeImg from "../assests/homePageImg.jpg"
 import simpleImg from '../assests/Simple.jpeg.jpg'
 import commercial from '../assests/Simple Edits.jpg'
 import Frame from './Frame';

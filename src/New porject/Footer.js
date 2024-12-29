@@ -38,7 +38,7 @@ const Footer = ({setContactOn,contactOn}) => {
 
        <div className='w-full max-h-[100px] overflow-clip relative flex  items-center pb-[56.25%] video'>
 
-        <div className=' w-full h-full -z-20  backVideo place-items-center'><video playsInline autoPlay muted loop src={urls[0].backgroundVideoUrl} preload="auto"  onCanPlayThrough={()=> setReadyToPlay(true)} style={{display: readyToPlay ? "block" : "none"}} ></video></div>
+        <div className=' w-full h-full -z-20  backVideo place-items-center'><video poster playsInline autoPlay muted loop src={urls[0].backgroundVideoUrl} preload="auto"  onCanPlayThrough={()=> setReadyToPlay(true)} style={{display: readyToPlay ? "block" : "none"}} ></video></div>
 
         <div className='text-white py-[20px] flex justify-center text-center w-full  absolute top-0 footer-video-front'>
 
