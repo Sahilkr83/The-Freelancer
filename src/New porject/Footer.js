@@ -78,9 +78,9 @@ const Footer = ({setContactOn,contactOn}) => {
 
             <hr className='opacity-50'/>
 
-            <div className='flex justify-between py-10'>
-                <p>Video Production Agency By The Freelancer</p>
-                <p>Copyright © 2024. All rights reserved</p>
+            <div className='flex justify-between gap-4 py-10 text-center'>
+                <p className="sm:text-base text-xs ">Video Production Agency By The Freelancer</p>
+                <p className="sm:text-base text-xs">Copyright © 2024. All rights reserved</p>
             </div>
             
         </div>
