@@ -1,9 +1,22 @@
-import React from 'react'
+import {useEffect} from 'react'
 import { FaSearch } from "react-icons/fa";
 import iphoneFrame from "../assests/iphone_frame.png"
 
 
 const Frame = ({video1,video2,video3,editName,number1,number2,number3,type1,type2,type3}) => {
+
+  useEffect(() => {
+    const videoAll = document.querySelectorAll('video');
+    videoAll.forEach((video) => {
+      try {
+        video.play();
+      } catch (error) {
+        alert.error("Autoplay failed:", error);
+      }
+    });
+  }, []);
+
+  
   return (
     <div className='flex flex-col items-center  gap-20 mb-20'>
 
@@ -16,17 +29,17 @@ const Frame = ({video1,video2,video3,editName,number1,number2,number3,type1,type
 
             <div className='relative w-fit h-fit '>
               <img src={iphoneFrame} alt='frame' className=' z-10'   />
-              <video className='absolute top-3 z-10 right-3 w-[185px] h-[400px] 'autoPlay controls muted loop src={video1} loading="lazy" />
+              <video playsInline className='absolute top-3 z-10 right-3 w-[185px] h-[400px] 'autoPlay controls muted loop src={video1} preload='auto'  />
             </div>
 
             <div className='relative w-fit h-fit '>
               <img src={iphoneFrame} className=' z-10'   alt=''/>
-              <video className='absolute top-3 z-10 right-3 w-[185px] h-[400px]'autoPlay controls muted loop src={video2} loading="lazy" />
+              <video playsInline className='absolute top-3 z-10 right-3 w-[185px] h-[400px]'autoPlay controls muted loop src={video2} preload='auto'  />
             </div>
 
             <div className='relative w-fit h-fit '>
               <img src={iphoneFrame} className=' z-10' alt=''/>
-              <video className='absolute top-3 z-10 right-3 w-[185px] h-[400px]'autoPlay controls muted loop src={video3} loading="lazy" />
+              <video playsInline className='absolute top-3 z-10 right-3 w-[185px] h-[400px]'autoPlay controls muted loop src={video3} preload='auto'  />
             </div>
 
             <div className='flex flex-col text-[1.5rem] gap-4 '>

@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from "../assests/tf-removebg-preview.png"
+import logo from "../assests/logo/TheFreelancer logo.png"
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const NavBar = ({setContactOn}) => {
@@ -19,7 +19,7 @@ const NavBar = ({setContactOn}) => {
     <div className='w-full h-fit relative z-30'>
       <div className='navbar mx-auto max-w-[1350px] w-11/12 justify-between items-center  pt-7 px-7 text-white flex  '>
 
-        <img onClick={clickHandler2} src={logo} width={50} height={50} alt=''/>
+        <img onClick={clickHandler2} src={logo} width={50} height={50} alt='logo'/>
 
 
         <div onClick={clickHandler2} className='gap-4 flex '>

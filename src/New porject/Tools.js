@@ -1,8 +1,8 @@
 import React from 'react'
-import prLogo from '../assests/Adobe_Premiere logo.png'
-import aeLogo from '../assests/Adobe After logo.png'
-import davanciResovle from '../assests/davinci-resolve logo.png'
-import filmora from '../assests/Filmora logo.jpeg'
+import prLogo from '../assests/logo/Adobe_Premiere logo.png'
+import aeLogo from '../assests/logo/Adobe After logo.png'
+import davanciResovle from '../assests/logo/davinci-resolve logo.png'
+import filmora from '../assests/logo/Filmora logo.jpeg'
 import Logo from './Logo/Logo'
 
 const Tools = () => {
@@ -12,19 +12,19 @@ const Tools = () => {
 
         <div className='flex w-full flex-wrap gap-y-10 justify-between'>
             <Logo 
-            logo={prLogo}
+             logo={prLogo}
              appName="Adobe Premiere Pro"
             />
             <Logo 
-            logo={aeLogo}
+             logo={aeLogo}
              appName="Adobe After Effect"
             />
             <Logo 
-            logo={davanciResovle}
+              logo={davanciResovle}
              appName="Davinci Resolve"
             />
             <Logo 
-            logo={filmora}
+             logo={filmora}
              appName="Filmora"
             />
             

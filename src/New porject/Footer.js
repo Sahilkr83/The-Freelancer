@@ -1,17 +1,32 @@
-import React from 'react'
 import { FaLongArrowAltRight,FaFacebookF,FaTwitter, FaInstagram,FaYoutube} from "react-icons/fa";
-import  href  from "./Link";
-import backgroundVideo from "../assests/background video.mp4"
+
+import  href  from "../Url Files/links";
+import urls from '../Url Files/Urls';
+
 import { useNavigate } from 'react-router-dom';
+import { useState,useEffect } from "react";
+
 
 const Footer = ({setContactOn,contactOn}) => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   function clickHandler (){
     setContactOn(true)
     navigate("/contactus")
   }
+  const [readyToPlay , setReadyToPlay] = useState(false)
+
+  useEffect(() => {
+    const videoAll = document.querySelectorAll('video');
+    videoAll.forEach((video) => {
+      try {
+        video.play();
+      } catch (error) {
+        alert.error("Autoplay failed:", error);
+      }
+    });
+  }, []);
 
   return (
     <div className='bg-black z-10  mx-auto w-full'>
@@ -23,7 +38,7 @@ const Footer = ({setContactOn,contactOn}) => {
 
        <div className='w-full max-h-[100px] overflow-clip relative flex  items-center pb-[56.25%] video'>
 
-        <div className=' w-full h-full -z-20  backVideo place-items-center'><video  autoPlay muted loop src={backgroundVideo} ></video></div>
+        <div className=' w-full h-full -z-20  backVideo place-items-center'><video playsInline autoPlay muted loop src={urls[0].backgroundVideoUrl} preload="auto"  onCanPlayThrough={()=> setReadyToPlay(true)} style={{display: readyToPlay ? "block" : "none"}} ></video></div>
 
         <div className='text-white py-[20px] flex justify-center text-center w-full  absolute top-0 footer-video-front'>
 
