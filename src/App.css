@@ -108,7 +108,9 @@
     .footer-heading{
         font-size: 41px ;
     }
-
+    .footer-second-heading{
+        font-size: 36px;
+    }
 
     #footer-text{
         font-size: 14px ;
@@ -169,7 +171,5 @@
     .video{
         padding-top: 40px;
     }
-    .footer-second-heading{
-        font-size: 36px;
-    }
+
 }
