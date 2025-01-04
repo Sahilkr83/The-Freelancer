@@ -12,7 +12,7 @@ const Preloader = ({fadeOut}) => {
     useEffect (()=>{
         setTimeout(()=>{
             setFirstLoop(true)
-        },1700)
+        },1000)
     },[])
 
 
@@ -29,19 +29,16 @@ const Preloader = ({fadeOut}) => {
             loop={1}
             cursor
             cursorStyle='_'
-            typeSpeed={120}
-            deleteSpeed={70}
-            delaySpeed={2500}
+            typeSpeed={50}
+            
           />
         </span>
         {firstLoop && 
         <span className='text-white text-[1.2rem] z-40'>
         <Typewriter
-            words={['COMPANY']}
+            words={['A SOCIAL MEDIA AGENCY']}
             loop={1}
-            deleteSpeed={70}
-            delaySpeed={2000}
-            typeSpeed={110}
+            typeSpeed={40}
           />
         </span>}
         

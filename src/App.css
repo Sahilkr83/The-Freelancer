@@ -64,13 +64,20 @@
 }
 
 
-@media (max-width:1200px){
+@media (max-width:1280px){
    
     .video{
         padding-top: 210px;
     }
+    .img-section {
+        flex-direction: column-reverse;
+    }
 }
 
+.footer-last{
+    display: flex;
+    flex-direction: column;
+}
 
 @media (max-width:1000px){
     .frame{
@@ -83,14 +90,10 @@
         gap: 10;
     }
     .footer-last{
-        display: flex;
-        flex-direction: column;
         align-items: center;
         gap: 10px;
     }
-    .img-section {
-        flex-direction: column-reverse;
-    }
+
 }
 @media (max-width:800px){
     .textarea{

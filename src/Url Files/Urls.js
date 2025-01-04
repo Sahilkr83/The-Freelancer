@@ -1,13 +1,10 @@
 function optimizeCloudinaryUrl(url) {
     if (!url.includes("/upload/")) return url; 
-    return url.replace("/upload/", "/upload/q_auto,f_auto/");
+    return url.replace("/upload/", "/upload/q_auto,f_auto/,h_480/");
   }
   
   const urls = [
     {
-      backgroundVideoUrl: optimizeCloudinaryUrl(
-        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735458285/background_video_dbrrbr.mp4"
-      ),
       ad1: optimizeCloudinaryUrl(
         "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735460290/adEdit1_ip7ucu.mp4"
       ),
@@ -25,6 +22,12 @@ function optimizeCloudinaryUrl(url) {
       ),
       simple3: optimizeCloudinaryUrl(
         "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735469055/sp2_eej222.mp4"
+      ),
+      motion1: optimizeCloudinaryUrl(
+        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735976869/ALL_THE_EDITSrf_cymctm.mp4"
+      ),
+      motion2: optimizeCloudinaryUrl(
+        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735977983/Comp_1_1_fxehc0.mp4"
       ),
 
     },

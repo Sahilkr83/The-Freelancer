@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import iphoneFrame from "../assests/iphone_frame.png"
 
 
-const Frame = ({video1,video2,video3,editName,number1,number2,number3,type1,type2,type3}) => {
+const Frame = ({video1,video2,video3,editName,number1,number2,number3,type1,type2,type3,className}) => {
 
   useEffect(() => {
     const videoAll = document.querySelectorAll('video');
@@ -20,7 +20,7 @@ const Frame = ({video1,video2,video3,editName,number1,number2,number3,type1,type
   return (
     <div className='flex flex-col items-center  gap-20 mb-20'>
 
-          <div className='frame-text  py-2 px-8 font-semibold uppercase text-[#a8e3f5] border-[#a8e3f5] border-4 w-fit flex gap-5 items-center'>
+          <div className='frame-text text-center py-2 px-8 font-semibold uppercase text-[#a8e3f5] border-[#a8e3f5] border-4 w-fit flex gap-5 items-center'>
             <FaSearch /> 
             <h1>{editName} edit</h1>
            </div>
@@ -29,17 +29,17 @@ const Frame = ({video1,video2,video3,editName,number1,number2,number3,type1,type
 
             <div className='relative w-fit h-fit '>
               <img src={iphoneFrame} alt='frame' className=' z-10'   />
-              <video poster playsInline className='absolute top-3 z-10 right-3 w-[185px] h-[400px] 'autoPlay controls muted loop src={video1} preload='auto'  />
+              <video  playsInline className='absolute top-3 z-10 right-3 w-[185px] h-[400px] 'autoPlay controls muted loop src={video1} preload='auto'  />
             </div>
 
-            <div className='relative w-fit h-fit '>
+            <div className={`relative w-fit h-fit ${className}`}> 
               <img src={iphoneFrame} className=' z-10'   alt=''/>
-              <video poster playsInline className='absolute top-3 z-10 right-3 w-[185px] h-[400px]'autoPlay controls muted loop src={video2} preload='auto'  />
+              <video playsInline className={`${className} absolute top-3 z-10 right-3 w-[185px] h-[400px]`} autoPlay controls muted loop src={video2} preload='auto'  />
             </div>
 
-            <div className='relative w-fit h-fit '>
-              <img src={iphoneFrame} className=' z-10' alt=''/>
-              <video poster playsInline className='absolute top-3 z-10 right-3 w-[185px] h-[400px]'autoPlay controls muted loop src={video3} preload='auto'  />
+            <div className={`relative w-fit h-fit `}>
+              <img src={iphoneFrame} className={`z-10 `} alt=''/>
+              <video playsInline className='absolute top-3 z-10 right-3 w-[185px] h-[400px]'autoPlay controls muted loop src={video3} preload='auto'  />
             </div>
 
             <div className='flex flex-col text-[1.5rem] gap-4 '>

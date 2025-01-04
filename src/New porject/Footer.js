@@ -1,8 +1,6 @@
 import { FaLongArrowAltRight,FaFacebookF,FaTwitter, FaInstagram,FaYoutube} from "react-icons/fa";
 
 import  href  from "../Url Files/links";
-import urls from '../Url Files/Urls';
-
 import { useNavigate } from 'react-router-dom';
 import { useState,useEffect } from "react";
 
@@ -38,7 +36,7 @@ const Footer = ({setContactOn,contactOn}) => {
 
        <div className='w-full max-h-[100px] overflow-clip relative flex  items-center pb-[56.25%] video'>
 
-        <div className=' w-full h-full -z-20  backVideo place-items-center'><video poster playsInline autoPlay muted loop src={urls[0].backgroundVideoUrl} preload="auto"  onCanPlayThrough={()=> setReadyToPlay(true)} style={{display: readyToPlay ? "block" : "none"}} ></video></div>
+        <div className=' w-full h-full -z-20  backVideo place-items-center'><video playsInline autoPlay muted loop src="https://res.cloudinary.com/dxp7dcmvr/video/upload/q_auto,f_auto/v1735458285/background_video_dbrrbr.mp4" preload="auto"  onCanPlayThrough={()=> setReadyToPlay(true)} style={{display: readyToPlay ? "block" : "none"}} ></video></div>
 
         <div className='text-white py-[20px] flex justify-center text-center w-full  absolute top-0 footer-video-front'>
 
@@ -63,9 +61,9 @@ const Footer = ({setContactOn,contactOn}) => {
             <div className='flex justify-between  pb-[100px] footer'>
             <div className='footer-last'>
                 <h1 className='text-[#a8e3f5]  font-bold footer-second-heading'>The Freelancer_</h1>
-                <p className='pl-3' id='footer-text' itemType='email'>support@domain.com</p>
-                <p className='pl-3' id='footer-text' itemType='number'>(+62) 81 115 3568</p>
-                <p className='pl-3' id='footer-text' itemType='email'>Jl. Pantai Berawa, Tibubeneng, Kuta, Bali</p>
+                <a className='pl-3 ' id='footer-text' href='mailto:thefreelancers27@gmail.com'>thefreelancers27@gmail.com</a>
+                <a className='pl-3' id='footer-text'  href='tel:+917004505998' >(+91) 700 450 5998</a>
+                {/* <p className='pl-3' id='footer-text' itemType='email'>Jl. Pantai Berawa, Tibubeneng, Kuta, Bali</p> */}
                 
             </div>
             <div className='text-[#a8e3f5]  flex   footer-icons'>
