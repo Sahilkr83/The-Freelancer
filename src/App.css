@@ -53,7 +53,7 @@
     padding: 15px 25px;
     width: 100%;
 }
-.input:focus , .input:hover{
+.input:focus , .input:hover , .textarea:hover , .textarea:focus{
     outline: white solid 2px;
 }
 .textarea{
