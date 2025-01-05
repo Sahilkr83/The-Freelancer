@@ -26,7 +26,7 @@ function App() {
             media.onerror = resolve; 
           }
         } else if (media.tagName === "VIDEO") {
-          if (media.readyState >= 4) {
+          if (media.readyState === 4) {
             resolve();
           } else {
             media.oncanplaythrough = resolve;

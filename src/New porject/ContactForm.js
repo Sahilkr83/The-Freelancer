@@ -56,12 +56,12 @@ const ContactForm = () => {
                 <div className='w-full h-[2.5rem]'></div>
 
                 <h1 className='text-[1.5rem]'>Email Address</h1>
-                <lable type='email' className='text-base'>thefreelancers27@gmail.com</lable>
+                <a className='text-base' href='mailto:thefreelancers27@gmail.com'>thefreelancers27@gmail.com</a>
 
                 <div className='w-full h-[2.5rem]'></div>
 
                 <h1 className='text-[1.5rem]'>Call/Whatsapp</h1>
-                <p className='text-base'>(+91)70045 05998</p>
+                <a className='text-base' href='tel:+917004505998' >(+91) 70045 05998</a>
 
                 <div className='w-full h-[2.5rem]'></div>
 
