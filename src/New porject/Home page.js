@@ -67,8 +67,8 @@ const Homepage = () => {
         video3={urls[0].motion2}
 
         number1="4." type1="Hook Elements"
-        number2="5." type2="Color grading"
-        number3="5." type3="Fastpace Editing"/>
+        number2="5." type2="Motion Transition"
+        number3="6." type3="Fastpace Editing"/>
 
         <Frame
         editName="commercial"
@@ -79,7 +79,7 @@ const Homepage = () => {
 
         number1="4." type1="Hook Elements"
         number2="5." type2="Color grading"
-        number3="5." type3="Fastpace Editing"/>
+        number3="6." type3="Fastpace Editing"/>
 
         <Tools/>
         

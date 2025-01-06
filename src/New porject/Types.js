@@ -12,9 +12,9 @@ const Types = ({img,editType,href}) => {
   };
 
   return (
-    <div href={href} onClick={handleScroll}  className=' flex flex-col gap-3 pb-3'> 
-    <div href={href} className='border-4 border-[#a8e3f5] border-solid bg-white w-[200px] h-[180px] overflow-clip flex justify-center items-center rounded-[8px]  pt-3 types-of-edit-img'>
-    <img href={href} src={img} width={300} className='scale-[1.8]  object-fill' alt='Simple Edit Img' />
+    <div onClick={handleScroll}  className=' flex flex-col gap-3 pb-3'> 
+    <div className='border-4 border-[#a8e3f5] border-solid bg-white w-[200px] h-[180px] overflow-clip flex justify-center items-center rounded-[8px]  pt-3 types-of-edit-img'>
+    <img src={img} width={300} className='scale-[1.8]  object-fill' alt='Simple Edit Img' />
     </div>
     <p className='uppercase types-of-edit-text'>{editType}</p>
     <hr/>
