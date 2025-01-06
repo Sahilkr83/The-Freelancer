@@ -17,6 +17,7 @@ const Types = ({img,editType,href}) => {
     <img href={href} src={img} width={300} className='scale-[1.8]  object-fill' alt='Simple Edit Img' />
     </div>
     <p className='uppercase types-of-edit-text'>{editType}</p>
+    <hr/>
     </div>
   )
 }
