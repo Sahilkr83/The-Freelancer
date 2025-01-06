@@ -29,6 +29,9 @@ function optimizeCloudinaryUrl(url) {
       motion2: optimizeCloudinaryUrl(
         "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735977983/Comp_1_1_fxehc0.mp4"
       ),
+      motion3: optimizeCloudinaryUrl(
+        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1736136336/The%20Freelancer/motion%203.mp4"
+      ),
 
     },
   ];

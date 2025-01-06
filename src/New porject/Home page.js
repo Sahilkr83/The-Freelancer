@@ -1,6 +1,7 @@
 import React from 'react'
 import homePAgeImg from "../assests/homePageImg.webp"
 import simpleImg from '../assests/Simple.jpeg.jpg'
+import motionGraphic from '../assests/news_image_3269.webp'
 import commercial from '../assests/Simple Edits.jpg'
 import Frame from './Frame';
 import Types from './Types';
@@ -32,14 +33,17 @@ const Homepage = () => {
           <div className=' flex justify-evenly flex-wrap'>
 
             <Types 
+            href='#simple'
             img={simpleImg} 
             editType="Simple Edits"
             />
             <Types 
-            img={simpleImg} 
+            href='#motion'
+            img={motionGraphic} 
             editType="Motion graphic"
             />
             <Types 
+            href='#commercial'
             img={commercial} 
             editType="Commercial Edits"
             />
@@ -50,15 +54,16 @@ const Homepage = () => {
         
         <Frame
         editName="Simple"
+        id='simple'
         video1={urls[0].simple1}
         video2={urls[0].simple2}
         video3={urls[0].simple3}/>
         
         <Frame
         editName="motion graphic"
-        
+        id='motion'
         video1={urls[0].motion1}
-        video2={urls[0].ad3}
+        video2={urls[0].motion3}
         video3={urls[0].motion2}
 
         number1="4." type1="Hook Elements"
@@ -67,7 +72,7 @@ const Homepage = () => {
 
         <Frame
         editName="commercial"
-
+        id='commercial'
         video1={urls[0].ad1}
         video2={urls[0].ad3}
         video3={urls[0].ad2}

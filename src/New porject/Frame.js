@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import iphoneFrame from "../assests/iphone_frame.png"
 
 
-const Frame = ({video1,video2,video3,editName,number1,number2,number3,type1,type2,type3,className}) => {
+const Frame = ({id,video1,video2,video3,editName,number1,number2,number3,type1,type2,type3,className}) => {
 
   useEffect(() => {
     const videoAll = document.querySelectorAll('video');
@@ -18,7 +18,7 @@ const Frame = ({video1,video2,video3,editName,number1,number2,number3,type1,type
 
   
   return (
-    <div className='flex flex-col items-center  gap-20 mb-20'>
+    <div className='flex flex-col items-center  gap-20 mb-20' id={id}>
 
           <div className='frame-text text-center py-2 px-8 font-semibold uppercase text-[#a8e3f5] border-[#a8e3f5] border-4 w-fit flex gap-5 items-center'>
             <FaSearch /> 

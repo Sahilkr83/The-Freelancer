@@ -17,6 +17,7 @@ function App() {
     ];
     
     const mediaPromises = mediaElements.map((media) => {
+
       return new Promise((resolve) => {
         if (media.tagName === "IMG") {
           if (media.complete) {
@@ -42,6 +43,7 @@ function App() {
 
   
   useEffect(() => {
+
     const handlePreload = async () => {
       
       const minPreloadDuration = new Promise((resolve) => {
@@ -57,6 +59,7 @@ function App() {
     };
 
     handlePreload();
+    
   }, []);;
  
  

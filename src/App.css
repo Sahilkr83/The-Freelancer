@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     background-color: bg-slate-950;
+    scrollbar-width: smooth;
 }
 .main{
     padding: 44px 37px;
@@ -15,7 +16,9 @@
     background: rgb(0,0,0);
     background: linear-gradient(180deg, rgba(0,0,0,0.5011600928074246) 0%, rgba(20,20,20,0.6844547563805105) 51%, rgba(0,0,0,1) 84%);
 }
-
+html{
+    scrollbar-width: smooth;
+}
 
 
 
