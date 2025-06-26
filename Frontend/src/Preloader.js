@@ -2,7 +2,7 @@ import React ,{useState,useEffect}from 'react'
 
 import { Typewriter } from 'react-simple-typewriter'
 
-// import logo from "./assests/logo/TheFreelancer logo.png"
+import logo from "./assests/logo/TheFreelancer logo.png"
 
 const Preloader = ({fadeOut}) => {
 
@@ -21,7 +21,7 @@ const Preloader = ({fadeOut}) => {
         fadeOut ?  'opacity-0 scale-100 z-40' : 'opacity-100 scale-50 z-40'
       }`}
     >
-        {/* <img className='z-40' src={logo} width={200} alt='logo'/> */}
+        <img className='z-40' src={logo} width={200} alt='logo'/>
 
         <span className='text-white  font-bold z-40 pre-loader-text'>
         <Typewriter
