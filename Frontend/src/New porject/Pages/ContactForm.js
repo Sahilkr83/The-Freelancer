@@ -7,7 +7,7 @@ const ContactForm = () => {
     const [formData , setFormData] = useState({
         name:"", email: "", number:"" , subject:"" , help:""
     })
-    const {register,handleSubmit} = useForm()
+    const {register} = useForm()
 
     function changeHandler(event){
         setFormData(prevData => ({
