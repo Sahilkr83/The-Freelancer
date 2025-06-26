@@ -1,11 +1,13 @@
 import React, { useState , useRef } from 'react'
 
 import emailjs from '@emailjs/browser';
+import { useForm } from 'react-hook-form';
 
 const ContactForm = () => {
     const [formData , setFormData] = useState({
         name:"", email: "", number:"" , subject:"" , help:""
     })
+    const {register,handleSubmit} = useForm()
 
     function changeHandler(event){
         setFormData(prevData => ({
@@ -78,6 +80,7 @@ const ContactForm = () => {
 
                <div className='w-full flex gap-6  md:flex-row flex-col'>
                 <input
+                {...register("name")}
                     className='input'
                     name='name'
                     type='text'
@@ -85,6 +88,7 @@ const ContactForm = () => {
                     placeholder='Your Name'
                     onChange={changeHandler}/>
                 <input
+                 {...register("email")}
                     className='input'
                     name='email'
                     type='email'
@@ -96,6 +100,7 @@ const ContactForm = () => {
 
                <div className='w-full flex gap-6 md:flex-row flex-col'>
                 <input
+                 {...register("number")}
                     className='input'
                     name='number'
                     type='tel'
@@ -103,6 +108,7 @@ const ContactForm = () => {
                     placeholder='Your Number'
                     onChange={changeHandler}/>
                 <input
+                 {...register("subject")}
                     className='input'
                     name='subject'
                     type='text'
@@ -112,6 +118,7 @@ const ContactForm = () => {
                </div>
 
                <textarea
+                {...register("help")}
                     className='textarea  max-w-[865px]'
                      rows="10" cols="30"
                     name='help'

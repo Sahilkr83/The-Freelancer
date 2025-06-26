@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import logo from "../assests/logo/TheFreelancer logo.png"
 import { NavLink, useNavigate } from 'react-router-dom';
+import { AppContext } from '../../Context/AppContext';
 
-const NavBar = ({setContactOn}) => {
+const NavBar = () => {
+
+  const {setContactOn} = useContext(AppContext)
 
   const navigate = useNavigate();
 

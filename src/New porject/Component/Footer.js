@@ -1,12 +1,15 @@
 import { FaLongArrowAltRight,FaFacebookF,FaTwitter, FaInstagram,FaYoutube} from "react-icons/fa";
 
-import  href  from "../Url Files/links";
+import  href  from "../../Url Files/links";
 import { useNavigate } from 'react-router-dom';
-import { useState,useEffect } from "react";
+import { useState,useEffect, createContext } from "react";
+import { AppContext } from "../../Context/AppContext";
 
 
-const Footer = ({setContactOn,contactOn}) => {
+const Footer = () => {
 
+  const { setContactOn,contactOn} = createContext(AppContext)
+  
   const navigate = useNavigate();
 
   function clickHandler (){

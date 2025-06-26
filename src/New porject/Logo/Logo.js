@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-
+import { Image } from 'react-bootstrap'
 const Logo = ({logo,appName}) => {
 
     const [hovered , setHovered] = useState(false)
     
   return (
     <div className='flex items-center text-[1.5rem] font-semibold gap-4 '>
-        <img 
+        <Image
+       
         style={{
             filter: hovered ? 'grayscale(0)' : 'grayscale(1)',
             transform: hovered ? 'scale(1.3)' : 'scale(1)',
@@ -15,8 +16,8 @@ const Logo = ({logo,appName}) => {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
 
-            src={logo} width={70} className='tool-logo' 
-            alt='Adobe Premiere Logo'/>
+            src={logo}  height='auto' width='auto' className='tool-logo w-[70px] h-[70px]' 
+            alt='App Logo'/>
 
         <span onMouseEnter={() => setHovered(true) }
         onMouseLeave={() => setHovered(false)} className='tool-text'>{appName}</span>
