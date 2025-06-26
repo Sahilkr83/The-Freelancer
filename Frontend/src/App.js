@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import NewWeb from "./New porject/Pages/NewWeb";
-import Preloader from "./Preloader";
+import NewWeb from "./Newporject/Pages/NewWeb.js";
+import Preloader from "./Preloader.js";
 
 function App() {
   const [loading, setLoading] = useState(true);
