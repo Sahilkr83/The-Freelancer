@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import logo from "../assests/logo/TheFreelancer logo.png"
+import logo from "../../assests/logo/TheFreelancer logo.png"
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context/AppContext';
 

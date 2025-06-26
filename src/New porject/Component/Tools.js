@@ -1,9 +1,9 @@
 import React from 'react'
-import prLogo from '../assests/logo/Adobe_Premiere logo.png'
-import aeLogo from '../assests/logo/Adobe After logo.png'
-import davanciResovle from '../assests/logo/davinci-resolve logo.png'
-import filmora from '../assests/logo/Filmora logo.jpeg'
-import Logo from './Logo/Logo'
+import prLogo from '../../assests/logo/Adobe_Premiere logo.png'
+import aeLogo from '../../assests/logo/Adobe After logo.png'
+import davanciResovle from '../../assests/logo/davinci-resolve logo.png'
+import filmora from '../../assests/logo/Filmora logo.jpeg'
+import Logo from '../Logo/Logo'
 
 const Tools = () => {
   return (

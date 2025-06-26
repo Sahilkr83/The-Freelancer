@@ -1,11 +1,11 @@
 import React from 'react'
-import homePAgeImg from "../assests/homePageImg.webp"
-import simpleImg from '../assests/Simple.jpeg.jpg'
-import motionGraphic from '../assests/news_image_3269.webp'
-import commercial from '../assests/Simple Edits.jpg'
+import homePAgeImg from "../../assests/homePageImg.webp"
+import simpleImg from '../../assests/Simple.jpeg.jpg'
+import motionGraphic from '../../assests/news_image_3269.webp'
+import commercial from '../../assests/Simple Edits.jpg'
 import Frame from '../Component/Frame';
 import Types from '../Component/Types';
-import Tools from '../Tools';
+import Tools from '../Component/Tools';
 
 import urls from '../../Url Files/Urls';
 

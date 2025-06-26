@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import NewWeb from "./New porject/NewWeb";
+import NewWeb from "./New porject/Pages/NewWeb";
 import Preloader from "./Preloader";
 
 function App() {

@@ -1,7 +1,7 @@
 import React from 'react'
-import NavBar from './NavBar'
+import NavBar from '../Component/NavBar'
 import { Route, Routes } from "react-router-dom";
-import Footer from './Footer'
+import Footer from '../Component/Footer'
 import Homepage from './Home page'
 import ContactForm from './ContactForm'
 

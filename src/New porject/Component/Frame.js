@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import { FaSearch } from "react-icons/fa";
-import iphoneFrame from "../assests/iphone_frame.png"
+import iphoneFrame from "../../assests/iphone_frame.png"
 
 
 const Frame = ({id,video1,video2,video3,editName,number1,number2,number3,type1,type2,type3,className}) => {
