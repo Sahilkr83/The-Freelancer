@@ -78,7 +78,6 @@ function App() {
     checkLoggedInUser();
   }, []);
   useEffect(() => {
-     console.log("User is logged in:");
   },[user])
   return (
     <div className="relative w-[100vw] wrapper h-[100vh] overflow-x-hidden bg-slate-950">
