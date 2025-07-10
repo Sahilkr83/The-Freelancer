@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import logo from "../../assests/logo/TheFreelancer logo.png"
-import { NavLink, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context/AppContext.js';
 
 const NavBar = () => {
 
   const {setContactOn} = useContext(AppContext)
-
+  const {user} = useContext(AppContext)
   const navigate = useNavigate();
 
   function clickHandler (){
@@ -25,11 +25,23 @@ const NavBar = () => {
         <img onClick={clickHandler2} src={logo} width={50} height={50} alt='logo'/>
 
 
-        <div onClick={clickHandler2} className='gap-4 flex '>
-          <NavLink>Home</NavLink>
+        <div className='gap-4 flex '>
+          <button onClick={clickHandler2} >Home</button>
+          <button onClick={clickHandler}>Contact Us</button>
         </div>
 
-        <button onClick={clickHandler}><NavLink>Contact Us</NavLink></button>
+        <div className='flex gap-x-2'>
+          {user ? 
+          <div className='flex flex-col justify-center items-center' onClick={() => navigate("/profile")}> 
+            <img className="h-10 w-10 rounded-full object-cover"
+            src={user.image}
+            alt=""
+           /> <p>{user.name?.split(" ")[0]}</p></div>
+        : <>
+           <button className=' nav-btn ' onClick={() => navigate("/login")}>Login</button>
+          <button className=' nav-btn nav-btn-2' onClick={() => navigate("/signup")}>Sign Up</button> </>}
+          
+        </div>
         
       </div>
       <div className='absolute w-[110%] h-[1px] bg-white -bottom-5 opacity-50 left-0 '></div>

@@ -5,11 +5,15 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import AppContextProvider from "./Context/AppContext.js";
 
+import { Toaster } from "react-hot-toast";
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render( 
    <AppContextProvider>
     <BrowserRouter>
-      <App /> 
+     <Toaster /> {/* ✅ Required */}
+     <App /> 
     </BrowserRouter>
     </AppContextProvider>
   );
