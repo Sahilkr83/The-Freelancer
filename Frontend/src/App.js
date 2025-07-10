@@ -9,7 +9,7 @@ function App() {
   const [fadeOut, setFadeOut] = useState(false);
   const { checkLoggedInUser,user } = useContext(AppContext);
 
-  // Check if the preloader was already shown in this session
+
   useEffect(() => {
     const preloaderShown = sessionStorage.getItem("preloaderShown");
 
