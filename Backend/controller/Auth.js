@@ -103,16 +103,9 @@ exports.login = async (req,res) => {
             const userAgent = req.headers["user-agent"];
 
             const device = deviceDetector.parse(userAgent);
-            console.log(device)
             const parser = new UAParser(userAgent);
-            const result = parser.getResult();
-            // const hash = crypto.createHash('sha256').update(ua + ip).digest('hex');
-            // console.log("User-Agent:", req.headers["user-agent"]);
 
-
-            
-
-              const transporter = nodemailer.createTransport({
+            const transporter = nodemailer.createTransport({
                 service: "gmail", 
                 auth: {
                     user: process.env.EMAIL_USER,  

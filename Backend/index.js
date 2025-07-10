@@ -1,13 +1,14 @@
-const express = require("express")
-require("dotenv").config
-const app = express()
-const cors = require("cors");
+require('dotenv').config(); // Make sure env variables are loaded
+
+const express = require('express');
+const cors = require('cors');
+const app = express();
 // Cookie Parser
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
 app.use(cors({
-  origin: ["http://localhost:3000", "http://192.168.31.159:3000",process.env.FRONTEND_URL],
+  origin: [process.env.FRONTEND_URL, "http://192.168.31.159:3000"],
   credentials: true
 }));
 
