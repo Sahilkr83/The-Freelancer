@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
 app.use(cors({
-  origin: ["http://localhost:3000", "http://192.168.31.159:3000"],
+  origin: ["http://localhost:3000", "http://192.168.31.159:3000",process.env.FRONTEND_URL],
   credentials: true
 }));
 
