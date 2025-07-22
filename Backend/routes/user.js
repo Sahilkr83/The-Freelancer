@@ -36,9 +36,9 @@ router.get("/test", auth,(req,res) =>{
 router.post('/logout', (req, res) => {
   res.cookie('token', '', {
     httpOnly: true,
-    expires: new Date(0), // Set cookie expiry in past
-    sameSite: 'strict',
-    secure: process.env.NODE_ENV === 'production',
+    expires: new Date(0),
+    sameSite: 'None',  // Allow cross-origin
+    secure: true       // Required with SameSite=None
   });
   res.json({ message: 'Logged out successfully' });
 });

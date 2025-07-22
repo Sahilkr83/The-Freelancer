@@ -5,14 +5,12 @@ const util = require('util');
 const verifyToken = util.promisify(jwt.verify); 
 require("dotenv").config()
 const nodemailer = require("nodemailer");
-const crypto = require('crypto');
-const UAParser = require("ua-parser-js");
-const DeviceDetector = require("device-detector-js");
+
 
 exports.changePassword = async(req,res) => {
     try{
         // token and password extraction
-        const token =  req.headers.authorization?.split(' ')[1] || req.body.token || req.cookies?.token;
+        const token =  req.headers.authorization?.split(' ')[1] || req.cookies?.token;
         const {currentPassword , newPassword} = req.body;
 
         // token checking
@@ -83,8 +81,8 @@ exports.login = async (req,res) => {
 
             const options = {
                 httpOnly:true,
-                sameSite: "Lax",
-                secure: false,
+                sameSite: "None",
+                secure: true,
                 expires: rememberMe
                     ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
                     : 0, // Session cookie (deleted when browser closes)
@@ -97,55 +95,6 @@ exports.login = async (req,res) => {
                 user,
                 message:"Login successfully"
             })
-
-            const deviceDetector = new DeviceDetector();
-
-            const userAgent = req.headers["user-agent"];
-
-            const device = deviceDetector.parse(userAgent);
-            const parser = new UAParser(userAgent);
-
-            const transporter = nodemailer.createTransport({
-                service: "gmail", 
-                auth: {
-                    user: process.env.EMAIL_USER,  
-                    pass: process.env.EMAIL_PASS 
-                },
-            });
-        
-            const mailOptions = {
-                from: '"The Freelancer" <thefreelancers27@gmail.com>',
-                to: email,
-                subject: "New Login to Your Account",
-                html: `
-                    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 30px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;">
-                    <h2 style="text-align: center; color: #333;">New Login Detected</h2>
-                    <p style="font-size: 16px; color: #555;">
-                        We noticed a new login to your <strong>The Freelancer</strong> account. Here are the details:
-                    </p>
-                    <ul style="font-size: 15px; color: #555; line-height: 1.6;">
-                        <li><strong>Date:</strong> ${new Date().toLocaleString()}</li>
-                        <li><strong>Browser:</strong> ${device.client.name}</li>
-                        <li><strong>Device:</strong> ${device.device.type}</li>
-                        <li><strong>Os:</strong> ${device.os.name   || "Unknown"}</li>
-                    </ul>
-                    <p style="font-size: 14px; color: #888;">
-                        If this was you, you can safely ignore this email.<br>
-                        If not, we recommend changing your password immediately.
-                    </p>
-                    <p style="font-size: 14px; color: #888;">— The Freelancer Team</p>
-                    </div>
-                `
-                };
-
-
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    console.error("Login email failed:", error);
-                } else {
-                    console.log("Login email sent:", info.messageId);
-                }
-                });
         }
         else{
             return res.status(400).json({
@@ -248,8 +197,8 @@ exports.signup = async (req,res) => {
         const options = {
                 expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
                 httpOnly:true,
-                sameSite: "Lax",
-                secure: false,
+                sameSite: "None",
+                secure: true,
             }
 
        const { password: _, ...safeUser } = user.toObject();
@@ -271,7 +220,7 @@ exports.signup = async (req,res) => {
 exports.otp = async(req,res) =>  {
     
    try{
-        const  {token}  = req.body;
+        const  {token}  = req.header("Authorization")?.replace("Bearer ", "");
         if (!token) {
         return res.status(400).json({
             success: false,
@@ -369,7 +318,7 @@ exports.otp = async(req,res) =>  {
 }
 exports.forgetPassword = async(req,res) =>  {
     try{
-        const  {email}  = req.body;
+       const  {email}  = req.body;
 
         const user = await User.findOne({ email});
 
@@ -449,8 +398,8 @@ exports.forgetPassword = async(req,res) =>  {
         // //   sending cookie
         res.cookie("token",otpToken,{
         httpOnly: true,
-        sameSite: "Lax",
-        secure: false, // true in production with HTTPS
+        sameSite: "None",
+        secure: true, // true in production with HTTPS
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
         })
         
@@ -511,7 +460,7 @@ exports.otpverification = async (req, res) => {
 exports.newPassword = async(req,res) => {
     try{
         // token and password extraction
-        const token =  req.headers.authorization?.split(' ')[1] || req.body.token || req.cookies?.token;
+        const token =  req.headers.authorization?.split(' ')[1] || req.cookies?.token;
         const {newPassword} = req.body;
 
         // token checking
@@ -652,7 +601,7 @@ exports.verifyEmail = async (req, res) => {
 
     try {
         const info = await transporter.sendMail(mailOptions);
-            // console.log("Email sent:", info.messageId);
+            console.log("Email sent:", info.messageId);
     } catch (error) {
             console.error("Email send error:", error);
     }
@@ -672,8 +621,8 @@ exports.verifyEmail = async (req, res) => {
 
     res.cookie("token",newToken,{
       httpOnly: true,
-      sameSite: "Lax",
-      secure: false, // true in production with HTTPS
+      sameSite: "None",
+      secure: true, // true in production with HTTPS
       expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
     })
         const { password: _, ...safeUser } = user.toObject();

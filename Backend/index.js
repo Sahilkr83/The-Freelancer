@@ -1,22 +1,25 @@
-require('dotenv').config(); // Make sure env variables are loaded
+const express = require("express")
+require("dotenv").config(); 
 
-const express = require('express');
-const cors = require('cors');
-const app = express();
+const app = express()
+const cors = require("cors");
 // Cookie Parser
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
+
 app.use(cors({
-  origin: ["https://the-freelancer-app.netlify.app/",process.env.FRONTEND_URL, "http://192.168.31.159:3000"],
-  credentials: true
+  origin: ["https://the-freelancer-app.netlify.app",process.env.FRONTEND_URL,"https://thefreelancer.shop"] ,// specific origin only
+  credentials: true,
 }));
+
+
 
 
 const dbConnect = require("./config/database")
 app.use(express.json());
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 4000;
 
 const userRoutes = require("./routes/user");
 

@@ -94,10 +94,11 @@ const ForgetPassword = () => {
       const res = await fetch(`${process.env.REACT_APP_BASE_URL}/resend-otp`, {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${otpToken}`,
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({ token: otpToken }),
+        // body: JSON.stringify({ token: otpToken }),
       });
 
       const data = await res.json();
