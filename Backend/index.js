@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
 app.use(cors({
-  origin: ["https://the-freelancer-app.netlify.app/",process.env.FRONTEND_URL, "http://192.168.31.159:3000"],
+  origin: ["https://the-freelancer-app.netlify.app/",process.env.FRONTEND_URL, "http://192.168.31.159:3000",'thefreelancer.shop','www.thefreelancer.shop'],
   credentials: true
 }));
 
