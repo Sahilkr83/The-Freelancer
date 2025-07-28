@@ -1,3 +1,8 @@
 # https://www.robotstxt.org/robotstxt.html
+
 User-agent: *
-Disallow:
+Disallow: /login
+Disallow: /signup
+Disallow: /profile
+
+Sitemap: https://thefreelancer.shop/sitemap.xml
