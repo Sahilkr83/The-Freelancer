@@ -82,8 +82,9 @@ function App() {
   return (
     <div className="relative w-[100vw] wrapper h-[100vh] overflow-x-hidden bg-slate-950">
       <div className="absolute bottom-0 left-0 right-0 -top-36 z-10 bg-[radial-gradient(circle_500px_at_50%_200px,#3e3e3e,transparent)]"></div>
-      {/* Show Preloader or NewWeb based on loading state */}
-      {loading ? <Preloader fadeOut={fadeOut} /> : <NewWeb />}
+     
+      // {loading ? <Preloader fadeOut={fadeOut} /> : }
+        <NewWeb />
     </div>
   );
 }
