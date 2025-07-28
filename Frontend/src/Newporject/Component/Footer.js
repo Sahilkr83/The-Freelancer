@@ -56,7 +56,9 @@ const Footer = () => {
               onCanPlayThrough={() => setReadyToPlay(true)}
               style={{ display: readyToPlay ? "block" : "none" }}
               controls={false} // optionally hide controls for background video
-            />
+            >
+              <track kind="captions" srcLang="en" label="No captions available" src="" />
+            </video>
           </div>
 
           <div className="text-white py-[20px] flex justify-center text-center w-full absolute top-0 footer-video-front">
@@ -72,7 +74,7 @@ const Footer = () => {
               </p>
 
               <Link to="/contactus" onClick={() => setContactOn(true)} className="flex text-black gap-3 items-center justify-center text-[12px] font-semibold bg-[#a8e3f5] rounded-[30px] p-3">
-                <FaLongArrowAltRight /> Contact Us
+                <FaLongArrowAltRight aria-hidden="true"/> Contact Us
               </Link>
 
             </div>
@@ -92,17 +94,21 @@ const Footer = () => {
             </a>
           </div>
           <div className="text-[#a8e3f5] flex footer-icons">
-            <a href={href[0].facebook} target="_blank" rel="noopener noreferrer">
-              <FaFacebookF />
+            <a href={href[0].facebook} aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <FaFacebookF aria-hidden="true"/>
+              <span className="sr-only">Facebook</span>
             </a>
-            <a href={href[0].instagram} target="_blank" rel="noopener noreferrer">
-              <FaInstagram />
+            <a href={href[0].instagram}  aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <FaInstagram aria-hidden="true"/>
+              <span className="sr-only">Instagram</span>
             </a>
-            <a href={href[0].youtube} target="_blank" rel="noopener noreferrer">
-              <FaYoutube />
+            <a href={href[0].youtube} aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+              <FaYoutube aria-hidden="true"/>
+              <span className="sr-only">Youtube</span>
             </a>
-            <a href={href[0].twitter} target="_blank" rel="noopener noreferrer">
-              <FaTwitter />
+            <a href={href[0].twitter} aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+              <FaTwitter aria-hidden="true"/>
+              <span className="sr-only">Twitter</span>
             </a>
           </div>
         </div>

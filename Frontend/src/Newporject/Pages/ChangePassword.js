@@ -91,7 +91,7 @@ const ChangePassword = () => {
                              className="right-3 text-xl top-[46px] absolute cursor-pointer"
                              onClick={() => setShowPassword3((prev) => !prev)}
                            >
-                             {showPassword3 ? <IoEye /> : <IoEyeOff />}
+                             {showPassword3 ? <IoEye aria-hidden="true"/> : <IoEyeOff  aria-hidden="true"/>}
                            </span>
                          </label>
 
@@ -117,7 +117,7 @@ const ChangePassword = () => {
                              className="right-3 text-xl top-[46px] absolute cursor-pointer"
                              onClick={() => setShowPassword((prev) => !prev)}
                            >
-                             {showPassword ? <IoEye /> : <IoEyeOff />}
+                             {showPassword ? <IoEye aria-hidden="true"/> : <IoEyeOff aria-hidden="true" />}
                            </span>
                          </label>
      
@@ -146,7 +146,7 @@ const ChangePassword = () => {
                              className="right-3 text-xl top-[46px] absolute cursor-pointer"
                              onClick={() => setShowPassword2((prev) => !prev)}
                            >
-                             {showPassword2 ? <IoEye /> : <IoEyeOff />}
+                             {showPassword2 ? <IoEye aria-hidden="true"/> : <IoEyeOff aria-hidden="true" />}
                            </span>
                          </label>
                        </div>

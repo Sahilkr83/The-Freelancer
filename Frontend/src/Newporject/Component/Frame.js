@@ -44,7 +44,7 @@ const Frame = ({ id, video1, video2, video3, editName, number1, number2, number3
   return (
     <div className="flex flex-col items-center gap-20 mb-20" id={id}>
       <div className="frame-text text-center py-2 px-8 font-semibold uppercase text-[#a8e3f5] border-[#a8e3f5] border-4 w-fit flex gap-5 items-center">
-        <FaSearch />
+        <FaSearch aria-hidden="true" />
         <h1>{editName} edit</h1>
       </div>
 
@@ -59,7 +59,10 @@ const Frame = ({ id, video1, video2, video3, editName, number1, number2, number3
             loop
             preload="auto"
             src={video1}
-          />
+            alt="Frame" 
+          >
+            <track kind="captions" srcLang="en" label="No captions available" src="" />
+          </video>
         </div>
 
         <div className={`relative w-fit h-fit ${className}`}>
@@ -72,7 +75,10 @@ const Frame = ({ id, video1, video2, video3, editName, number1, number2, number3
             loop
             preload="auto"
             src={video2}
-          />
+            alt="Frame" 
+          >
+            <track kind="captions" srcLang="en" label="No captions available" src="" />
+          </video>
         </div>
 
         <div className="relative w-fit h-fit ">
@@ -85,7 +91,10 @@ const Frame = ({ id, video1, video2, video3, editName, number1, number2, number3
             loop
             preload="auto"
             src={video3}
-          />
+            alt="Frame" 
+          >
+            <track kind="captions" srcLang="en" label="No captions available" src="" />
+          </video>
         </div>
 
         <div className="flex flex-col text-[1.5rem] gap-4 ">
