@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import "./login.css"
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 const LoginPage = () => {
   const {
@@ -60,6 +61,12 @@ const LoginPage = () => {
 
   return (
     <div className='text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
+
+      <Helmet>
+        <title>Login – The Freelancer Shop</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+
        <section className="ftco-section img js-fullheight" style={{ backgroundImage: 'url(images/bg.jpg)' }}>
       <div className="container">
         <div className="row justify-content-center">

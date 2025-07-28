@@ -4,6 +4,7 @@ import { IoEye, IoEyeOff } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 const ChangePassword = () => {
     
@@ -47,6 +48,11 @@ const ChangePassword = () => {
   const password = watch('password');
   return (
      <div className="text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12">
+      <Helmet>
+        <title>Change Password – The Freelancer Shop</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+
            <section
              className="ftco-section img js-fullheight"
              style={{ backgroundImage: 'url(images/bg.jpg)' }}

@@ -38,6 +38,7 @@ const Frame = ({ id, video1, video2, video3, editName, number1, number2, number3
         if (ref.current) observer.unobserve(ref.current);
       });
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

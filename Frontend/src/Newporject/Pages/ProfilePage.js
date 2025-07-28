@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context/AppContext.js';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 export default function ProfilePage() {
   const { user, setUser } = useContext(AppContext);
@@ -35,6 +36,11 @@ export default function ProfilePage() {
 
   return (
     <div className='text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
+      <Helmet>
+        <title>Your Profile – The Freelancer Shop</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+
          <div className=" mx-auto p-6 mt-10  shadow-xl rounded-2xl flex justify-between h-96 profile-div">
         <div>
       <div className="flex items-center space-x-6">

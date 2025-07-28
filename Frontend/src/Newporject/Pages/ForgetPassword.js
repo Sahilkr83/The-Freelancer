@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
+import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import {  useNavigate } from 'react-router-dom'
@@ -197,6 +198,11 @@ const ForgetPassword = () => {
 
   return (
     <div className="text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 relative">
+      <Helmet>
+        <title>Forgot Password – The Freelancer Shop</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+
         <section
            className="ftco-section img js-fullheight"
            style={{ backgroundImage: 'url(images/bg.jpg)' }}>

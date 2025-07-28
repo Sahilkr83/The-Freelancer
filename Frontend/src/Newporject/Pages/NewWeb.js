@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import NavBar from '../Component/NavBar.js';
 import Footer from '../Component/Footer.js';
 import Homepage from './Homepage.js';
-import ContactForm from './ContactForm.js';
+import ContactUs from './ContactUs.js';
 import LoginPage from './LoginPage.js';
 import SignupPage from './SignupPage.js';
 import GuestRoute from '../Component/GuestRoute.js';
@@ -29,7 +29,7 @@ const NewWeb = () => {
 
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/contactus" element={<ContactForm />} />
+        <Route path="/contactus" element={<ContactUs />} />
         <Route path="/login" element={<GuestRoute><LoginPage /></GuestRoute>} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/profile" element={<ProfilePage />} />

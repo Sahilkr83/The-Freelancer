@@ -1,9 +1,9 @@
 import React, { useState , useRef } from 'react'
-
+import { Helmet } from 'react-helmet'; 
 import emailjs from '@emailjs/browser';
 import { useForm } from 'react-hook-form';
 
-const ContactForm = () => {
+const ContactUs = () => {
     const [formData , setFormData] = useState({
         name:"", email: "", number:"" , subject:"" , help:""
     })
@@ -42,6 +42,13 @@ const ContactForm = () => {
 
   return (
     <div className='w-11/12 max-w-[1350px]  mx-auto pt-[100px] pb-[140px] px-[10px] text-white relative z-20 '>
+
+      {/* Helmet block for dynamic <title> and meta */}
+      <Helmet>
+        <title>Contact Us – The Freelancer Shop</title>
+        <meta name="description" content="Get in touch with The Freelancer Shop for professional video editing and web design services." />
+      </Helmet>
+      
         <div>
             <p className='text-[20px] text-[#a8e3f5]'>Get In Touch _____</p>
             <h1 className='md:text-[51px] text-[39px] font-semibold'>Send Us a Message So We Can Work Together &  Make Something Happen</h1>
@@ -140,4 +147,4 @@ const ContactForm = () => {
   )
 }
 
-export default ContactForm
+export default ContactUs

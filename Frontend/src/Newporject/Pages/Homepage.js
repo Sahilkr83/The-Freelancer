@@ -8,11 +8,21 @@ import Types from '../Component/Types.js';
 import Tools from '../Component/Tools.js';
 
 import urls from '../../Url Files/Urls.js';
+import { Helmet } from 'react-helmet'
 
 
 const Homepage = () => {
   return (
     <div className='text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
+
+       <Helmet>
+        <title>The Freelancer Shop – Video Editing & Web Design Services</title>
+        <meta
+          name="description"
+          content="Welcome to The Freelancer Shop – your go-to source for professional video editing, motion graphics, and responsive web design. Let’s create something amazing together."
+        />
+      </Helmet>
+      
       <div className='py-[100px]'>
 
         <h1 className='lg:text-[2.5rem] text-4xl font-bold pb-10 leading-[3.4rem]'>Welcome to The Freelancer - Your Hub for All Things Video Editing!</h1>

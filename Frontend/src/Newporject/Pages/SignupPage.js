@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context/AppContext.js';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 const SignupPage = () => {
   const {
@@ -239,6 +240,11 @@ const deleteAccount = async (email) => {
 
   return (
     <div className="text-white relative pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12">
+      <Helmet>
+        <title>Sign Up – The Freelancer Shop</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+
       {/* SignUp Form */}
       <section className="ftco-section img js-fullheight " style={{ backgroundImage: 'url(images/bg.jpg)' }}>
         <div className="container">
