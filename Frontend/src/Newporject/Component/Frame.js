@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
-import iphoneFrame from "../../assests/iphone_frame.png";
+import iphoneFrame from "../../assests/iphone_frame.webp";
 
 const Frame = ({ id, video1, video2, video3, editName, number1, number2, number3, type1, type2, type3, className }) => {
   const videoRefs = [useRef(null), useRef(null), useRef(null)];
@@ -38,7 +38,7 @@ const Frame = ({ id, video1, video2, video3, editName, number1, number2, number3
         if (ref.current) observer.unobserve(ref.current);
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

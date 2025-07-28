@@ -217,8 +217,8 @@ select {
 button,
 [type="button"],
 [type="reset"],
-[type="submit"] {
-  -webkit-appearance: button; }
+[type="submit"] 
+
 
 button:not(:disabled),
 [type="button"]:not(:disabled),
@@ -242,8 +242,7 @@ input[type="checkbox"] {
 input[type="date"],
 input[type="time"],
 input[type="datetime-local"],
-input[type="month"] {
-  -webkit-appearance: listbox; }
+input[type="month"] 
 
 textarea {
   overflow: auto;
@@ -273,10 +272,7 @@ progress {
 [type="number"]::-webkit-outer-spin-button {
   height: auto; }
 
-[type="search"] {
-  outline-offset: -2px;
-  -webkit-appearance: none; }
-
+[type="search"] 
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none; }
 

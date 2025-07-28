@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import logo from "../../assests/logo/TheFreelancer logo.png"
-import {useNavigate } from 'react-router-dom';
+import logo from "../../assests/logo/TheFreelancer logo.webp"
+import {Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context/AppContext.js';
 
 const NavBar = () => {
@@ -9,10 +9,7 @@ const NavBar = () => {
   const {user} = useContext(AppContext)
   const navigate = useNavigate();
 
-  function clickHandler (){
-    setContactOn(true)
-    navigate("/contactus")
-  }
+
   function clickHandler2 (){
     setContactOn(false)
     navigate("/")
@@ -22,24 +19,27 @@ const NavBar = () => {
     <div className='w-full h-fit relative z-30'>
       <div className='navbar mx-auto max-w-[1350px] w-11/12 justify-between items-center  pt-7 px-7 text-white flex  '>
 
-        <img onClick={clickHandler2} src={logo} width={50} height={50} alt='logo'/>
+        <img loading="lazy" onClick={clickHandler2} src={logo} width={50} height={50} alt='logo'/>
 
 
         <div className='gap-4 flex '>
-          <button onClick={clickHandler2} >Home</button>
-          <button onClick={clickHandler}>Contact Us</button>
+          <Link to="/" className='text-white' onClick={() => setContactOn(false)}>Home</Link>
+          <Link to="/contactus"className='text-white' onClick={() => setContactOn(true)}>Contact Us</Link>
         </div>
 
         <div className='flex gap-x-2'>
           {user ? 
-          <div className='flex flex-col justify-center items-center' onClick={() => navigate("/profile")}> 
+          <Link to="/profile" className="flex flex-col text-white justify-center items-center">
             <img className="h-10 w-10 rounded-full object-cover"
-            src={user.image}
-            alt=""
-           /> <p>{user.name?.split(" ")[0]}</p></div>
+              src={user.image}
+              alt={`${user.name}'s profile`}
+              loading="lazy"
+            />
+            <p>{user.name?.split(" ")[0]}</p>
+          </Link>
         : <>
-           <button className=' nav-btn ' onClick={() => navigate("/login")}>Login</button>
-          <button className=' nav-btn nav-btn-2' onClick={() => navigate("/signup")}>Sign Up</button> </>}
+           <Link to="/login" className='nav-btn items-center flex text-white'>Login</Link>
+           <Link to="/signup" className='nav-btn nav-btn-2 items-center flex text-white'>Sign Up</Link> </>}
           
         </div>
         

@@ -51,7 +51,7 @@ const NewPassword = () => {
              <div className="container">
                <div className="row justify-content-center">
                  <div className="col-md-6 text-center mb-5">
-                   <h2 className="heading-section">Change Your Password</h2>
+                   <h1 className="heading-section">Change Your Password</h1>
                  </div>
                </div>
      

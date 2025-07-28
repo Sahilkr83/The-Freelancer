@@ -37,7 +37,7 @@ export default function ProfilePage() {
   return (
     <div className='text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
       <Helmet>
-        <title>Your Profile – The Freelancer Shop</title>
+        <title>	Your Profile – Manage Projects & Account Details</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
@@ -48,7 +48,7 @@ export default function ProfilePage() {
           {user?.name?.charAt(0).toUpperCase()}
         </div>
         <div>
-          <h2 className="text-2xl font-bold">{user.name}</h2>
+          <h1 className="text-2xl font-bold">{user.name}</h1>
           <p className="">{user.email}</p>
         </div>
       </div>

@@ -49,7 +49,7 @@ const ChangePassword = () => {
   return (
      <div className="text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12">
       <Helmet>
-        <title>Change Password – The Freelancer Shop</title>
+        <title>Change Your Account Password – The Freelancer Shop</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
@@ -60,7 +60,7 @@ const ChangePassword = () => {
              <div className="container">
                <div className="row justify-content-center">
                  <div className="col-md-6 text-center mb-5">
-                   <h2 className="heading-section">Change Your Password</h2>
+                   <h1 className="heading-section">Change Your Password</h1>
                  </div>
                </div>
      

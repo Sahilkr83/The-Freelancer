@@ -1,18 +1,13 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { FaLongArrowAltRight, FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import href from "../../Url Files/links.js";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext.js";
 
 const Footer = () => {
   const { setContactOn, contactOn } = useContext(AppContext); // fix here: useContext instead of createContext
-  const navigate = useNavigate();
+  
   const videoRef = useRef(null);  // 1. ref for the video element
-
-  function clickHandler() {
-    setContactOn(true);
-    navigate("/contactus");
-  }
 
   const [readyToPlay, setReadyToPlay] = useState(false);
 
@@ -76,12 +71,10 @@ const Footer = () => {
                 that tell your story and leave a lasting impression."
               </p>
 
-              <button
-                onClick={clickHandler}
-                className="flex text-black gap-3 items-center justify-center text-[12px] font-semibold bg-[#a8e3f5] rounded-[30px] p-3"
-              >
+              <Link to="/contactus" onClick={() => setContactOn(true)} className="flex text-black gap-3 items-center justify-center text-[12px] font-semibold bg-[#a8e3f5] rounded-[30px] p-3">
                 <FaLongArrowAltRight /> Contact Us
-              </button>
+              </Link>
+
             </div>
           </div>
         </div>

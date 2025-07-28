@@ -1,0 +1,16 @@
+# Cache static assets (CSS, JS, fonts, etc.) for 1 year (immutable)
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Do not aggressively cache your main HTML file (index.html)
+/index.html
+  Cache-Control: no-cache
+
+# Cache images for 1 week
+/images/*
+  Cache-Control: public, max-age=604800
+
+
+# Cache videos for 1 month
+/videos/*
+  Cache-Control: public, max-age=2592000, immutable

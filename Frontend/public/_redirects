@@ -1,1 +1,12 @@
+# Redirect www to non-www
+https://www.thefreelancer.shop/*  https://thefreelancer.shop/:splat  301!
+
+# 🔒 Redirect HTTP to HTTPS (just in case)
+http://thefreelancer.shop/*  https://thefreelancer.shop/:splat  301!
+http://www.thefreelancer.shop/*  https://thefreelancer.shop/:splat  301!
+
+# Redirect /index.html to /
+/index.html  /  301
+
+# Keep SPA fallback
 /*    /index.html   200

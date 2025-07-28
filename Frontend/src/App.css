@@ -66,6 +66,7 @@ html{
     height: 140px;
 }
 .nav-btn{
+    display: none;
   border: none;
   height: 50px;
   color: white !important;

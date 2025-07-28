@@ -1,8 +1,8 @@
 import React from 'react'
-import prLogo from '../../assests/logo/Adobe_Premiere logo.png'
-import aeLogo from '../../assests/logo/Adobe After logo.png'
-import davanciResovle from '../../assests/logo/davinci-resolve logo.png'
-import filmora from '../../assests/logo/Filmora logo.jpeg'
+import prLogo from '../../assests/logo/Adobe_Premiere logo.webp'
+import aeLogo from '../../assests/logo/Adobe After logo.webp'
+import davanciResovle from '../../assests/logo/davinci-resolve logo.webp'
+import filmora from '../../assests/logo/Filmora logo.webp'
 import Logo from '../Logo/Logo.js'
 
 const Tools = () => {

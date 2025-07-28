@@ -1,8 +1,8 @@
 import React from 'react'
 import homePAgeImg from "../../assests/homePageImg.webp"
-import simpleImg from '../../assests/Simple.jpeg.jpg'
+import simpleImg from '../../assests/Simple.jpeg.webp'
 import motionGraphic from '../../assests/news_image_3269.webp'
-import commercial from '../../assests/Simple Edits.jpg'
+import commercial from '../../assests/Simple Edits.webp'
 import Frame from '../Component/Frame.js';
 import Types from '../Component/Types.js';
 import Tools from '../Component/Tools.js';
@@ -17,18 +17,22 @@ const Homepage = () => {
 
        <Helmet>
         <title>The Freelancer Shop – Video Editing & Web Design Services</title>
+        <link rel="canonical" href="https://thefreelancer.shop/" />
         <meta
           name="description"
           content="Welcome to The Freelancer Shop – your go-to source for professional video editing, motion graphics, and responsive web design. Let’s create something amazing together."
         />
+        <meta property="og:title" content="The Freelancer Shop – Video Editing & Web Design Services" />
+        <meta property="og:description" content="Professional video editing, motion graphics, and web design services to make your brand stand out." />
+        <meta property="og:url" content="https://thefreelancer.shop/" />
       </Helmet>
-      
+
       <div className='py-[100px]'>
 
         <h1 className='lg:text-[2.5rem] text-4xl font-bold pb-10 leading-[3.4rem]'>Welcome to The Freelancer - Your Hub for All Things Video Editing!</h1>
         <div className='flex lg:items-center img-section '>
 
-          <img alt='Home Page Img' rel="preload" src={homePAgeImg} width={875} height={450} />
+          <img alt='Home Page Img' loading="lazy" rel="preload" src={homePAgeImg} width={875} height={450} />
 
           <div className='xl:w-[475px] w-full xl:pl-16 h-full pb-10 xl:pb-0'>
             <p className='lg:text-base text-sm '>Whether you're a content creator, business owner, or marketer, we specialize in transforming your raw footage into polished, professional videos that captivate your audience. From stunning visual effects to seamless transitions and compelling storytelling, we’re here to bring your creative vision to life. With expert editing and a keen eye for detail, we help you craft videos that stand out and make an impact. Let’s turn your ideas into exceptional videos that tell your story perfectly!</p>

@@ -13,7 +13,7 @@ import ProfilePage from './ProfilePage.js';
 import ChangePassword from './ChangePassword.js';
 import ForgetPassword from './ForgetPassword.js';
 import NewPassword from './NewPassword.js';
-import TestingPage from './TestPage.js';
+// import TestingPage from './TestPage.js';
 
 const NewWeb = () => {
   const location = useLocation();
@@ -36,7 +36,7 @@ const NewWeb = () => {
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/new-password" element={<NewPassword />} />
-        <Route path="/test" element={<TestingPage />} />
+        {/* <Route path="/test" element={<TestingPage />} /> */}
 
       </Routes>
 

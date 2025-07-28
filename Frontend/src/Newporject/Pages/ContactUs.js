@@ -45,8 +45,19 @@ const ContactUs = () => {
 
       {/* Helmet block for dynamic <title> and meta */}
       <Helmet>
-        <title>Contact Us – The Freelancer Shop</title>
+        <title>	Contact Us – Let’s Collaborate on Your Next Project</title>
         <meta name="description" content="Get in touch with The Freelancer Shop for professional video editing and web design services." />
+        <link rel="canonical" href="https://thefreelancer.shop/contactus" />
+           <script type="application/ld+json">
+            {`
+              {
+                "@context": "https://schema.org",
+                "@type": "ContactPage",
+                "url": "https://thefreelancer.shop/contactus",
+                "name": "Contact Us – The Freelancer Shop",
+                "description": "Reach out to us for professional video editing or web design help."
+              }
+            `}</script>
       </Helmet>
       
         <div>
@@ -61,15 +72,15 @@ const ContactUs = () => {
 
             <div className='max-w-[405px] w-11/12 pr-[2.5rem] font-semibold '>
 
-                <h1 className='text-[2rem]'>Drop Us Line</h1>
+                <h2 className='text-[2rem]'>Drop Us Line</h2>
                 <div className='w-full h-[2.5rem]'></div>
 
-                <h1 className='text-[1.5rem]'>Email Address</h1>
+                <h2 className='text-[1.5rem]'>Email Address</h2>
                 <a className='text-base' href='mailto:thefreelancers27@gmail.com'>thefreelancers27@gmail.com</a>
 
                 <div className='w-full h-[2.5rem]'></div>
 
-                <h1 className='text-[1.5rem]'>Call/Whatsapp</h1>
+                <h2 className='text-[1.5rem]'>Call/Whatsapp</h2>
                 <a className='text-base' href='tel:+917004505998' >(+91) 70045 05998</a>
 
                 <div className='w-full h-[2.5rem]'></div>
