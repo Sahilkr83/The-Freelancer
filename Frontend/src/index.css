@@ -178,6 +178,9 @@ html{
         .password-div{
         flex-direction: row;
     }
+    .nav-btn-2{
+        display: none;
+    }
 }
 
 @media (max-width:670px) {
@@ -233,9 +236,7 @@ html{
     .types-of-edit-text{
         font-size: 12px;
     }
-    .nav-btn-2{
-        display: none;
-    }
+
   
 }
 @media (max-width:460px){

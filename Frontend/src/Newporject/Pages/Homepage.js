@@ -13,7 +13,7 @@ import { Helmet } from 'react-helmet'
 
 const Homepage = () => {
   return (
-    <div className='text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
+    <div className='text-white relative pt-7 lg:px-7 mx-auto max-w-[1460px] w-11/12  z-30 '>
 
        <Helmet>
         <title>The Freelancer Shop – Video Editing & Web Design Services</title>

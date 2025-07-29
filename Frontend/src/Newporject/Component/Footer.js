@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext.js";
 
 const Footer = () => {
-  const { setContactOn, contactOn } = useContext(AppContext); // fix here: useContext instead of createContext
-  
+  const { setContactOn, contactOn } = useContext(AppContext);
   const videoRef = useRef(null);  // 1. ref for the video element
 
   const [readyToPlay, setReadyToPlay] = useState(false);

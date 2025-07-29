@@ -47,7 +47,7 @@ const ChangePassword = () => {
   }
   const password = watch('password');
   return (
-     <div className="text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12">
+     <div className="text-white relative pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12">
       <Helmet>
         <title>Change Your Account Password – The Freelancer Shop</title>
         <meta name="robots" content="noindex, nofollow" />

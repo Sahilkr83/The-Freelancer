@@ -60,7 +60,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className='text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
+    <div className='text-white pt-7 relative lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
 
       <Helmet>
         <title>Login to Your Freelancer Account – Secure Access</title>
