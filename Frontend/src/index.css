@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-.wrapper{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: bg-slate-950;
-    scrollbar-width: smooth;
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; */
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  
 }
 .main{
     padding: 44px 37px;
@@ -22,6 +25,10 @@
 }
 html{
     scrollbar-width: smooth;
+    /* font-family: sans-serif; */
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .sr-only {
   position: absolute;
@@ -32,8 +39,19 @@ html{
   white-space: nowrap;
   border: 0;
 }
-
-
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 .video{
     padding-top: 280px;
@@ -65,7 +83,7 @@ html{
 .input{
     all: unset;
     border: solid 1px rgb(106, 106, 106);
-    padding: 15px 25px;
+    padding: 15px 15px;
     width: 100%;
 }
 .input:focus , .input:hover , .textarea:hover , .textarea:focus{
@@ -74,7 +92,7 @@ html{
 .textarea{
     all: unset;
     border: solid 1px rgb(106, 106, 106);
-    padding: 15px 25px;
+    padding: 15px 15px;
     height: 140px;
 }
 .nav-btn{
@@ -207,9 +225,7 @@ html{
     .video{
         padding-top: 100px;
     }
-    .footer-video-front{
-        bottom: 10px;
-    }
+
 
 }
 
@@ -284,46 +300,4 @@ html{
 
 
 
-aside {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-
-  input {
-    width: 1.1rem;
-    padding: 0.4rem 0.7rem;
-    border-radius: 0.2rem 0.2rem 0 0;
-    border: none;
-    border-bottom: solid 0.2rem #883aea;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    background-color: transparent;
-    color: #fff;
-    caret-color: #883aea;
-    transition: transform 0.2s, border-bottom-color 0.2s, background-color 0.5s;
-    cursor: default;
-
-    &:focus {
-      outline: none;
-      border-bottom-color: #e0ccfa;
-      animation: border-bottom-pulse 1s infinite 1.5s;
-    }
-
-    &::placeholder {
-      color: #e0ccfa;
-      opacity: 0.8;
-    }
-
-    &:focus::placeholder {
-      opacity: 0;
-    }
-
-    &:hover {
-      transform: translateY(-3px);
-      background-color: #310a65;
-    }
-  }
-}
 

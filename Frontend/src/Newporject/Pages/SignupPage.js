@@ -5,6 +5,7 @@ import { AppContext } from '../../Context/AppContext.js';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
 
 const SignupPage = () => {
   const {
@@ -219,8 +220,6 @@ const deleteAccount = async (email) => {
     console.error(err);
   }
 };
-
-
   // Format timer
   const formatTime = (seconds) => {
       const m = Math.floor(seconds / 60).toString().padStart(2, '0');
@@ -239,7 +238,13 @@ const deleteAccount = async (email) => {
   }, [timeLeft ,otpField]);
 
   return (
-    <div className="text-white relative pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12">
+     <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+          <div className="text-white relative pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12">
       <Helmet>
         <title>Create an Account – The Freelancer Shop</title>
         <meta name="robots" content="noindex, nofollow" />
@@ -248,13 +253,13 @@ const deleteAccount = async (email) => {
       {/* SignUp Form */}
       <section className="ftco-section img js-fullheight " style={{ backgroundImage: 'url(images/bg.jpg)' }}>
         <div className="container">
-          <div className="row justify-content-center">
+          <div className="flex justify-content-center">
             <div className="col-md-6 text-center mb-5">
               <h1 className="heading-section">Welcome To The Freelancer</h1>
             </div>
           </div>
 
-          <div className="row justify-content-center">
+          <div className="flex justify-content-center">
             <div className="col-md-6 col-lg-5">
               <div className="login-wrap p-0">
                 <h3 className="mb-4 text-center">Create a new account</h3>
@@ -465,10 +470,8 @@ const deleteAccount = async (email) => {
     </div>
   </div>
 )}
-
-
-
     </div>
+    </motion.div>
   );
 };
 

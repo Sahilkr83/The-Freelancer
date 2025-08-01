@@ -1,125 +1,141 @@
-import { useState, useEffect, useRef, useContext } from "react";
-import { FaLongArrowAltRight, FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
-import href from "../../Url Files/links.js";
-import { Link } from "react-router-dom";
+import { useRef, useEffect, useContext } from "react";
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext.js";
+import href from "../../Url Files/links.js";
 
 const Footer = () => {
-  const { setContactOn, contactOn } = useContext(AppContext);
-  const videoRef = useRef(null);  // 1. ref for the video element
-
-  const [readyToPlay, setReadyToPlay] = useState(false);
+  const { setContactOn } = useContext(AppContext);
+  const location = useLocation();
+  const hideLayoutRoutes = ['/login',"/signup","/contactus","/profile","/change-password","/forget-password"];
+  
+  const contactOn = hideLayoutRoutes.includes(location.pathname);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.5, // play when 50% visible
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch((e) => console.warn("Autoplay prevented:", e));
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
 
-    const handleIntersection = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          video.play().catch((e) => {
-            console.warn("Autoplay prevented:", e);
-          });
-        } else {
-          video.pause();
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersection, options);
     observer.observe(video);
-
-    return () => {
-      observer.unobserve(video);
-    };
+    return () => observer.unobserve(video);
   }, []);
 
-  return (
-    <div className="bg-black z-10 mx-auto w-full">
-      <div className={`overflow-clip yt ${contactOn ? "hidden" : "block"}`}>
-        <div className="w-full max-h-[100px] overflow-clip relative flex items-center pb-[56.25%] video">
-          <div className="w-full h-full -z-20 backVideo place-items-center">
-            <video
-              ref={videoRef}  // 2. attach the ref here
-              playsInline
-              muted
-              loop
-              src="https://res.cloudinary.com/dxp7dcmvr/video/upload/q_auto,f_auto/v1735458285/background_video_dbrrbr.mp4"
-              preload="auto"
-              onCanPlayThrough={() => setReadyToPlay(true)}
-              style={{ display: readyToPlay ? "block" : "none" }}
-              controls={false} // optionally hide controls for background video
-            >
-              <track kind="captions" srcLang="en" label="No captions available" src="" />
-            </video>
-          </div>
 
-          <div className="text-white py-[20px] flex justify-center text-center w-full absolute top-0 footer-video-front">
-            <div className="w-[685px] flex flex-col items-center gap-3">
-              <h1 className="font-semibold footer-heading">
+  return (
+    <footer className="bg-black text-white w-full relative overflow-hidden z-10 pb-8">
+      {/* ==== CTA SECTION OVER VIDEO ==== */}
+      {!contactOn && (
+        <section
+          aria-label="Video Background Section"
+          className="relative w-full h-[400px] overflow-hidden"
+        >
+          <video
+            ref={videoRef}
+            className="absolute inset-0 w-full h-full object-cover"
+            playsInline
+            muted
+            loop
+            autoPlay
+            preload="auto"
+            loading="lazy"
+            src="https://res.cloudinary.com/dxp7dcmvr/video/upload/q_auto,f_auto/v1735458285/background_video_dbrrbr.mp4"
+          >
+            <track kind="captions" srcLang="en" label="No captions available" src="" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/40 flex items-center justify-center px-6 text-center">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight">
                 Ready To Capture Your <br />
                 Brand Vision?
-              </h1>
-
-              <p className="pb-3 footer-text">
-                "Where creativity meets precision, we bring your vision to life—crafting stunning videos
-                that tell your story and leave a lasting impression."
+              </h2>
+              <p className="text-gray-300 text-sm md:text-base mb-6">
+                We blend creativity and precision to tell your story with stunning visuals that leave a lasting impression.
               </p>
-
-              <Link to="/contactus" onClick={() => setContactOn(true)} className="flex text-black gap-3 items-center justify-center text-[12px] font-semibold bg-[#a8e3f5] rounded-[30px] p-3">
-                <FaLongArrowAltRight aria-hidden="true"/> Contact Us
+              <Link
+                to="/contactus"
+                onClick={() => setContactOn(true)}
+                className="inline-block bg-[#a8e3f5] text-black px-6 py-2 font-semibold rounded-md hover:bg-[#89d8f0] transition duration-300"
+                aria-label="Contact us to bring your brand vision to life"
+              >
+                Contact Us
               </Link>
-
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="text-white px-7 bg-black flex flex-col justify-between max-w-[1350px] mx-auto w-11/12">
+        </section>
+      )}
+      {/* ==== MAIN FOOTER CONTENT ==== */}
+      <section  className="px-6 pt-8 flex flex-col justify-between max-w-[1350px] mx-auto w-11/12" aria-label="Footer Information">
         <div className="flex justify-between pb-[100px] footer">
-          <div className="footer-last">
-            <h1 className="text-[#a8e3f5] font-bold footer-second-heading">The Freelancer_</h1>
-            <a className="pl-3" id="footer-text" href="mailto:thefreelancers27@gmail.com">
-              thefreelancers27@gmail.com
-            </a>
-            <a className="pl-3" id="footer-text" href="tel:+917004505998">
-              (+91) 700 450 5998
-            </a>
-          </div>
-          <div className="text-[#a8e3f5] flex footer-icons">
-            <a href={href[0].facebook} aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-              <FaFacebookF aria-hidden="true"/>
-              <span className="sr-only">Facebook</span>
-            </a>
-            <a href={href[0].instagram}  aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <FaInstagram aria-hidden="true"/>
-              <span className="sr-only">Instagram</span>
-            </a>
-            <a href={href[0].youtube} aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-              <FaYoutube aria-hidden="true"/>
-              <span className="sr-only">Youtube</span>
-            </a>
-            <a href={href[0].twitter} aria-label="Twitter" target="_blank" rel="noopener noreferrer">
-              <FaTwitter aria-hidden="true"/>
-              <span className="sr-only">Twitter</span>
-            </a>
-          </div>
+          {/* Left Info Block */}
+            <address className="not-italic text-sm space-y-2 footer-last" itemScope itemType="http://schema.org/Organization">
+            <h3 className="text-[#a8e3f5] font-bold footer-second-heading pb-4" itemProp="name">
+              The Freelancer_
+            </h3>
+            <p className="text-base">
+              <a
+                href="mailto:thefreelancers27@gmail.com"
+                className="text-gray-300 hover:underline"
+                itemProp="email"
+              >
+                thefreelancers27@gmail.com
+              </a>
+            </p>
+            <p className="text-base">
+              <a
+                href="tel:+917004505998"
+                className="text-gray-300 hover:underline"
+                itemProp="telephone"
+              >
+                (+91) 700 450 5998
+              </a>
+            </p>
+          </address>
+
+          {/* Social Media Icons */}
+
+          <nav aria-label="Social Media" className="flex gap-5 pt-6 text-[#a8e3f5] md:text-3xl ">
+            {[
+              { href: href[0].facebook, icon: <FaFacebookF />, label: "Facebook" },
+              { href: href[0].instagram, icon: <FaInstagram />, label: "Instagram" },
+              { href: href[0].youtube, icon: <FaYoutube />, label: "YouTube" },
+              { href: href[0].twitter, icon: <FaTwitter />, label: "Twitter" },
+            ].map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition"
+                aria-label={`Visit us on ${social.label}`}
+              >
+                {social.icon}
+              </a>
+            ))}
+          </nav>
         </div>
 
-        <hr className="opacity-50" />
+        <hr className="border-gray-700 mb-8" />
 
-        <div className="flex justify-between gap-4 py-10 text-center">
-          <p className="sm:text-base text-xs">Video Production Agency By The Freelancer</p>
-          <p className="sm:text-base text-xs">Copyright © 2024. All rights reserved</p>
+        {/* Bottom Footer */}
+        <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400 gap-2 text-center">
+          <p>Video Production Agency by The Freelancer</p>
+          <p>© 2024 All rights reserved</p>
         </div>
-      </div>
-    </div>
+      </section>
+    </footer>
   );
 };
 

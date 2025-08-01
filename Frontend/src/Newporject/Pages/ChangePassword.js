@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Helmet } from 'react-helmet';
-
+import { motion } from 'framer-motion';
 const ChangePassword = () => {
     
     const {
@@ -47,7 +47,13 @@ const ChangePassword = () => {
   }
   const password = watch('password');
   return (
-     <div className="text-white relative pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+    <div className="text-white relative pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12">
       <Helmet>
         <title>Change Your Account Password – The Freelancer Shop</title>
         <meta name="robots" content="noindex, nofollow" />
@@ -58,14 +64,14 @@ const ChangePassword = () => {
              style={{ backgroundImage: 'url(images/bg.jpg)' }}
            >
              <div className="container">
-               <div className="row justify-content-center">
+               <div className="flex justify-content-center">
                  <div className="col-md-6 text-center mb-5">
                    <h1 className="heading-section">Change Your Password</h1>
                  </div>
                </div>
      
-               <div className="row justify-content-center">
-                 <div className="col-md-6 col-lg-5">
+               <div className="flex justify-content-center">
+                 <div className="col-md-6 col-lg-4">
                    <div className="login-wrap p-0">
                      {/* <h3 className="mb-4 text-center capitalize">
                        Create a new account and become a part of us.
@@ -188,7 +194,8 @@ const ChangePassword = () => {
                </div>
              </div>
            </section>
-         </div>
+     </div>
+    </motion.div>
   )
 }
 

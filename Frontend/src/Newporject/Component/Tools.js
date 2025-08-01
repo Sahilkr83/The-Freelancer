@@ -8,7 +8,7 @@ import Logo from '../Logo/Logo.js'
 const Tools = () => {
   return (
     <div className='max-w-[1460px] w-11/12  text-start flex flex-col gap-10 mb-20'>
-        <h1 className='text-[2.5rem] font-bold'>Tools We Use </h1>
+        <h3 className='text-[2.5rem] font-bold'>Tools We Use </h3>
 
         <div className='flex w-full flex-wrap gap-y-10 justify-between'>
             <Logo 

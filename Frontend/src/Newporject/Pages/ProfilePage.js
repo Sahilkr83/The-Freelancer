@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context/AppContext.js';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet';
-
+import { motion } from 'framer-motion';
 export default function ProfilePage() {
   const { user, setUser } = useContext(AppContext);
   const navigate = useNavigate();
@@ -35,13 +35,19 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className='text-white relative pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
+     <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+    <div className='text-white relative pt-10 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
       <Helmet>
         <title>	Your Profile – Manage Projects & Account Details</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-         <div className=" mx-auto p-6 mt-10  shadow-xl rounded-2xl flex justify-between h-96 profile-div">
+         <div className=" mx-auto p-6 pt-10 md:mb-36  mt-10  shadow-xl rounded-2xl flex justify-between h-96 profile-div">
         <div>
       <div className="flex items-center space-x-6">
         <div className="w-20 h-20 rounded-full bg-blue-500 flex items-center justify-center text-white text-3xl font-bold">
@@ -73,6 +79,7 @@ export default function ProfilePage() {
       </button>
     </div>
     </div>
+    </motion.div>
    
   );
 }

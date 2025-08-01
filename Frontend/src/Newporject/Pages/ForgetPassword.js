@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import {  useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion';
 
 const ForgetPassword = () => {
         
@@ -197,83 +198,89 @@ const ForgetPassword = () => {
   }, [otpField, timeLeft]);
 
   return (
-    <div className="text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 relative">
+ <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+          <div className="text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 relative">
       <Helmet>
         <title>Recover Your Freelancer Account Password</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-        <section
-           className="ftco-section img js-fullheight"
-           style={{ backgroundImage: 'url(images/bg.jpg)' }}>
+    <section
+        className="ftco-section img js-fullheight"
+        style={{ backgroundImage: 'url(images/bg.jpg)' }}>
 
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-md-6 text-center mb-5">
-                <h1 className="heading-section">Change Your Password</h1>
-               </div>
-               </div>
-         
-               <div className="row justify-content-center">
-                 <div className="col-md-6 col-lg-5">
-                   <div className="login-wrap p-0">
-                     {/* <h3 className="mb-4 text-center capitalize">
-                       Create a new account and become a part of us.
-                     </h3> */}
-                    <form onSubmit={handleSubmit(forgetPassword)}  className="signin-form">
-                      <label className="relative flex flex-col w-full">
+      <div className="container">
+        <div className="flex justify-content-center">
+          <div className="col-md-6 text-center mb-5">
+            <h1 className="heading-section">Change Your Password</h1>
+            </div>
+            </div>
+      
+            <div className="flex justify-content-center">
+              <div className="col-md-6 col-lg-4">
+                <div className="login-wrap p-0">
+                  {/* <h3 className="mb-4 text-center capitalize">
+                    Create a new account and become a part of us.
+                  </h3> */}
+                <form onSubmit={handleSubmit(forgetPassword)}  className="signin-form">
+                  <label className="relative flex flex-col w-full">
 
-                        <p className="pb-2 pl-3 capitalize">
-                          Enter your registered email <sup className="text-red-500">*</sup>
-                        </p>
-                        <div className="form-group">
-
-                          <input
-                            className="form-control"
-                            type='text'
-                            placeholder="Enter Your Registered email"
-                            {...register('email', { required: 'Registered Email is required' })}
-                          />
-                        </div>
-                          {errors.email && (
-                             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-                             )}
-                      </label>
-
-                      {/* Submit */}
-                      <div className="form-group mt-6">
-                        <button
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                              e.preventDefault();
-                              handleSubmit(forgetPassword)();
-                            }
-                          }} 
-                          style={{
-                            backgroundImage: 'linear-gradient(to right, #5159ff, #424eed, #3244da, #1f3ac9, #0030b7)',}}
-                            type="submit"
-                            className="form-control btn  px-3"
-                            disabled={!isValid || loading}>
-                             {loading ? "loading" : "Forget Password"}
-                        </button>
-                      </div>
-                    </form>
-                    <p className="w-100 text-center pb-3">&mdash; Or Sign In &mdash;</p>
+                    <p className="pb-2 pl-3 capitalize">
+                      Enter your registered email <sup className="text-red-500">*</sup>
+                    </p>
                     <div className="form-group">
-                      <button
-                        style={{
-                          backgroundImage: ' linear-gradient(to right, #1e227e, #253098, #293eb3, #2b4dce, #2a5deb)',}}
-                        onClick={() => navigate('/login')}
-                        className="form-control btn b px-3">
 
-                          Sign In
-                      </button>
+                      <input
+                        className="form-control"
+                        type='text'
+                        placeholder="Enter Your Registered email"
+                        {...register('email', { required: 'Registered Email is required' })}
+                      />
                     </div>
+                      {errors.email && (
+                          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                          )}
+                  </label>
+
+                  {/* Submit */}
+                  <div className="form-group mt-6">
+                    <button
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleSubmit(forgetPassword)();
+                        }
+                      }} 
+                      style={{
+                        backgroundImage: 'linear-gradient(to right, #5159ff, #424eed, #3244da, #1f3ac9, #0030b7)',}}
+                        type="submit"
+                        className="form-control btn  px-3"
+                        disabled={!isValid || loading}>
+                          {loading ? "loading" : "Forget Password"}
+                    </button>
                   </div>
+                </form>
+                <p className="w-100 text-center pb-3">&mdash; Or Sign In &mdash;</p>
+                <div className="form-group">
+                  <button
+                    style={{
+                      backgroundImage: ' linear-gradient(to right, #1e227e, #253098, #293eb3, #2b4dce, #2a5deb)',}}
+                    onClick={() => navigate('/login')}
+                    className="form-control btn b px-3">
+
+                      Sign In
+                  </button>
                 </div>
               </div>
             </div>
-        </section>    
+          </div>
+        </div>
+    </section>    
 
 
         
@@ -356,6 +363,7 @@ const ForgetPassword = () => {
       )}
 
     </div>
+    </motion.div>
   )
 }
 

@@ -6,6 +6,7 @@ import "./login.css"
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
 
 const LoginPage = () => {
   const {
@@ -60,21 +61,27 @@ const LoginPage = () => {
   };
 
   return (
-    <div className='text-white pt-7 relative lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
+ <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+          <div className='text-white pt-7 relative lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
 
       <Helmet>
         <title>Login to Your Freelancer Account – Secure Access</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-       <section className="ftco-section img js-fullheight" style={{ backgroundImage: 'url(images/bg.jpg)' }}>
+      <section className="ftco-section img js-fullheight" style={{ backgroundImage: 'url(images/bg.jpg)' }}>
       <div className="container">
-        <div className="row justify-content-center">
+        <div className="flex justify-content-center">
           <div className="col-md-6 text-center mb-5">
             <h1 className="heading-section">Welcome Back</h1>
           </div>
         </div>
-        <div className="row justify-content-center">
+        <div className="flex justify-content-center">
           <div className="col-md-6 col-lg-4">
             <div className="login-wrap p-0">
               <h3 className="mb-4 text-center">Have an account?</h3>
@@ -175,6 +182,7 @@ const LoginPage = () => {
       </div>
     </section>
     </div>
+    </motion.div>
    
   );
 };

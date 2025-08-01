@@ -45,7 +45,7 @@ const Frame = ({ id, video1, video2, video3, editName, number1, number2, number3
     <div className="flex flex-col items-center gap-20 mb-20" id={id}>
       <div className="frame-text text-center py-2 px-8 font-semibold uppercase text-[#a8e3f5] border-[#a8e3f5] border-4 w-fit flex gap-5 items-center">
         <FaSearch aria-hidden="true" />
-        <h1>{editName} edit</h1>
+        <h2>{editName} edit</h2>
       </div>
 
       <div className="flex items-center justify-around w-full frame">
@@ -98,7 +98,7 @@ const Frame = ({ id, video1, video2, video3, editName, number1, number2, number3
         </div>
 
         <div className="flex flex-col text-[1.5rem] gap-4 ">
-          <h1 className="uppercase text-[2rem] font-semibold text-[#a8e3f5]">{editName} edit</h1>
+          <h3 className="uppercase text-[2rem] font-semibold text-[#a8e3f5]">{editName} edit</h3>
           <ol className="flex flex-col gap-3">
             <li>
               <span className="text-[#a8e3f5]">1.</span> Fine Cuts
