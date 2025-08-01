@@ -29,7 +29,7 @@ function App() {
     checkLoggedInUser();
     projectDataFetch();
     // eslint-disable-next-line 
-  },[user])
+  },[])
   useEffect(() => {
   },[user])
   return (
