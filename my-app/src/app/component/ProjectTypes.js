@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 export default function ProjectTypes({ href, img, editType }) {
   return (
     <a href={href} className="block cursor-pointer m-3 text-center max-w-[200px]">

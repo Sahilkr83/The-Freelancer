@@ -5,7 +5,6 @@ import AppContextProvider from "./context/AppContext";
 import NavBar from "@/app/component/NavBar";
 import Footer from "./component/Footer";
 import { Toaster } from "react-hot-toast";
-import Icon from '../../public/fivicon.ico'
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

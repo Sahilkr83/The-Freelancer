@@ -71,10 +71,10 @@ const Home = () => {
                 Welcome to <strong>The Freelancer Shop</strong> — your hub for expert-level
                 <strong> video editing</strong> and <strong>web design</strong> services.
                 We specialize in turning raw footage into cinematic videos and crafting sleek,
-                modern websites tailored to your brand’s voice.
+                modern websites tailored to your brand&apos;s voice.
               </p>
               <p className="mb-6">
-                Whether you're a content creator, entrepreneur, or agency, we deliver
+                Whether you&apos;re a content creator, entrepreneur, or agency, we deliver
                 professional-grade <strong>editing</strong> with seamless transitions, motion graphics,
                 and dynamic storytelling to help you grow your online presence.
               </p>
