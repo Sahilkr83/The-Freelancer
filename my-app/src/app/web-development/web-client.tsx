@@ -37,32 +37,31 @@ const projects: ProjectCategory[] = [
     title: 'Frontend Development',
     description: 'Modern responsive websites with React, TailwindCSS, and accessibility in mind.',
     img: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    project:[
-
+    project: [
       {
-        id:1,
-        title: 'Frontend Development',
+        id: 1,
+        title: 'Razorpay Landing Page Clone',
         description: 'Razorpay landing page clone built with React and TailwindCSS.',
-        feature:true,
-        date:"25/07/2025",
-        img:"https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/670ef02f926e1700084f5b4d/screenshot_2024-10-15-22-44-45-0000.webp&fit=cover&h=500&q=40&w=800",
+        feature: true,
+        date: "25/07/2025",
+        img: "https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/670ef02f926e1700084f5b4d/screenshot_2024-10-15-22-44-45-0000.webp&fit=cover&h=500&q=40&w=800",
         url: 'https://sahils-razorpay-clone.netlify.app',
       },
       {
-        id:2,
-        title: 'Frontend Development',
+        id: 2,
+        title: 'Live Weather Forecast App',
         description: 'Weather app using OpenWeatherMap API with dynamic UI updates.',
-        date:"14/01/2025",
-        img:"https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/6714034fd5be710008003c54/screenshot_2024-10-19-19-07-25-0000.webp&fit=cover&h=500&q=40&w=800",
+        date: "14/01/2025",
+        img: "https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/6714034fd5be710008003c54/screenshot_2024-10-19-19-07-25-0000.webp&fit=cover&h=500&q=40&w=800",
         url: 'https://weather-app-not-accurate.netlify.app',
       },
       {
-        id:3,
-        title: 'Frontend Development',
+        id: 3,
+        title: 'React E-commerce Cart System',
         description: "E-commerce shopping cart built with React and context-based state management.",
-        feature:true,
-        date:"02/04/2025",
-        img:"https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/6840c188ec01b500088c8274/screenshot_2025-06-04-21-59-05-0000.webp&fit=cover&h=500&q=40&w=800",
+        feature: true,
+        date: "02/04/2025",
+        img: "https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/6840c188ec01b500088c8274/screenshot_2025-06-04-21-59-05-0000.webp&fit=cover&h=500&q=40&w=800",
         url: "https://shopping-cart-first.netlify.app",
       },
     ]
@@ -81,25 +80,26 @@ const projects: ProjectCategory[] = [
     title: 'Full Stack Projects',
     description: 'End-to-end applications combining frontend & backend with deployment pipelines.',
     img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-    project:[
+    project: [
       {
-        id:1,
-        title: 'Full Stack Projects',
+        id: 1,
+        title: 'Freelancer Agency Platform',
         description: 'Freelancer Agency – a full-stack product showcase platform with user auth and real-time data.',
-        feature:true,
-        date:"19/03/2025",
-        img:"https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/68892485e7416e000894ada9/screenshot_2025-07-29-19-44-45-0000.webp&fit=cover&h=500&q=40&w=800",
+        feature: true,
+        date: "19/03/2025",
+        img: "https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/68892485e7416e000894ada9/screenshot_2025-07-29-19-44-45-0000.webp&fit=cover&h=500&q=40&w=800",
         url: 'https://freelancer-agency.netlify.app/',
       },
       {
-        id:2,
-        title: 'Full Stack Projects',
+        id: 2,
+        title: 'Employee Management System',
         description: 'A streamlined system for employee registration and record management.',
-        date:"30/05/2025",
-        img:"https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/68709aa566c4a1923132b8f0/screenshot_2025-07-11-05-02-07-0000.webp&fit=cover&h=500&q=40&w=800",
+        date: "30/05/2025",
+        img: "https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/68709aa566c4a1923132b8f0/screenshot_2025-07-11-05-02-07-0000.webp&fit=cover&h=500&q=40&w=800",
         url: 'https://test-the-back.netlify.app/',
       },
     ]
+
   },
 ];
 
@@ -116,19 +116,13 @@ const projects: ProjectCategory[] = [
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
+            whileInView="visible"
+            viewport={{ once: true }}
+
             className="text-2xl sm:text-4xl lg:text-5xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
             React & Full-Stack Developer Portfolio
           </motion.h1>
-{/* 
-          <motion.h2
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="text-2xl sm:text-4xl lg:text-5xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
-          >
-              Web Development Portfolio
-          </motion.h2> */}
 
           <motion.h2
             initial={{ opacity: 0, x: 40 }}
@@ -175,7 +169,7 @@ const projects: ProjectCategory[] = [
         </section>
         {/* Project Types */}
         <section className="py-12 text-center">
-          <h2 className="text-2xl font-bold uppercase tracking-wider mb-6">Project Types</h2>
+          <h2 className="text-2xl font-bold uppercase tracking-wider mb-6">Explore Project Categories</h2>
           <div className="flex justify-center flex-wrap gap-6">
             {projects.map(({ id, img, title }) => (
               <ProjectTypes key={id} href={`#${id}`} img={img} editType={title} />
@@ -188,7 +182,7 @@ const projects: ProjectCategory[] = [
           <ProjectFrame
             key={id}
             id={id}
-            title={title}
+            title={`Projects: ${title}`}
             description={description}
             projects={project}
           />

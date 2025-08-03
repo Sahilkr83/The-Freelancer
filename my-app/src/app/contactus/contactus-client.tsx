@@ -38,24 +38,31 @@ const ContactPage = () => {
   return (
     <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
       <div className="w-11/12 max-w-[1350px] mx-auto pt-[140px] pb-[140px] text-white">
-        <motion.p initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} className="text-[20px] text-[#a8e3f5]">
+        <p  className="text-[20px] text-[#a8e3f5]">
           Get In Touch _____
-        </motion.p>
+        </p>
 
-        <motion.h1 initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} className="md:text-[51px] text-[39px] font-bold pt-4">
-          Send Us a Message So We Can Work Together & Make Something Happen
-        </motion.h1>
+        <h1  className="md:text-[51px] text-[39px] font-bold pt-4">
+          Contact Us — Send a Message to The Freelancer Shop
+        </h1>
 
-        <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, delay: 0.2 }} className="pt-5 text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
+        <div  className="pt-5 text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
           <p>
             Whether you need a promotional video, YouTube content, a cinematic masterpiece, or high-quality visuals for your website — we’re here to transform your ideas into stunning, professional-grade videos.
           </p>
           <p className="mt-4">
             Our expert editors specialize in storytelling that connects with your audience, delivering custom edits that match your brand and goals.
           </p>
-        </motion.div>
+          <p className="mt-4">
+            We specialize in a wide variety of video editing styles — from corporate promos and short-form reels to long-form YouTube content. Our editing workflow ensures precision, pacing, and creativity every step of the way.
+          </p>
+          <p className="mt-4">
+            With tools like Adobe Premiere Pro, After Effects, and DaVinci Resolve, we guarantee professional-level polish and creative storytelling tailored to your brand voice and audience engagement goals.
+          </p>
 
-        <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-24 flex flex-col md:flex-row">
+        </div>
+
+        <div  className="pt-24 flex flex-col md:flex-row">
           <div className="max-w-[405px] pr-[2.5rem] font-semibold">
             <h2  className="text-[2rem]">Drop Us a Line</h2>
 
@@ -103,7 +110,7 @@ const ContactPage = () => {
               </button>
             </form>
           </div>
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );

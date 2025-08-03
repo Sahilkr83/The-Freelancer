@@ -30,7 +30,7 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
 
   return (
     <section id={id} className="my-20 px-4">
-      <h2 className="text-3xl font-bold mb-4">{title}</h2>
+      <h3 className="text-3xl font-bold mb-4">{title}</h3>
       {description && <p className="text-gray-300 mb-6">{description}</p>}
 
       <div className={`grid gap-6 justify-items-center ${gridCols}`}>
@@ -77,9 +77,9 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
                   Website
                 </span>
               </div>
-              <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">
+              <h4 className="text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">
                 {item.title}
-              </h3>
+              </h4>
               <p className="text-sm text-gray-300 mb-4">{item.description}</p>
               <div className="flex items-center justify-between text-sm text-gray-400">
                 <span>{item.date}</span>
