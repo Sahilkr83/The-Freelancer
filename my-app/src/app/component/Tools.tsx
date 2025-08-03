@@ -1,0 +1,20 @@
+import React from 'react';
+import prLogo from '@/app/assests/logo/Adobe_Premiere logo.webp';
+import aeLogo from '@/app/assests/logo/Adobe After logo.webp';
+import davanciResovle from '@/app/assests/logo/davinci-resolve logo.webp';
+import filmora from '@/app/assests/logo/Filmora logo.webp';
+import Logo from '@/app/Logo/Logo';
+
+const Tools = () => (
+  <div className="max-w-[1460px] w-11/12 text-start flex flex-col gap-10 mb-20">
+    <h3 className="text-[2.5rem] font-bold">Tools We Use</h3>
+    <div className="flex w-full flex-wrap gap-y-10 justify-between">
+      <Logo logo={prLogo} appName="Adobe Premiere Pro" />
+      <Logo logo={aeLogo} appName="Adobe After Effect" />
+      <Logo logo={davanciResovle} appName="Davinci Resolve" />
+      <Logo logo={filmora} appName="Filmora" />
+    </div>
+  </div>
+);
+
+export default Tools;
