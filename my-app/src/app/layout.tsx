@@ -5,7 +5,7 @@ import AppContextProvider from "./context/AppContext";
 import NavBar from "@/app/component/NavBar";
 import Footer from "./component/Footer";
 import { Toaster } from "react-hot-toast";
-
+import Icon from '../../public/fivicon.ico'
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -19,6 +19,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "The Freelancer Shop – Video Editing & Web Design Services",
   description: "Professional video editing, motion graphics, and responsive web design to elevate your brand. Hire freelance editors today!",
+  icons: {
+    icon: '/fivicon.ico',             // your favicon
+    apple: '/apple-touch-icon.png',  // apple touch icon for iOS devices
+  },
   keywords: [
     "video editing",
     "freelance editor",
@@ -53,6 +57,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://thefreelancer.shop/"),
 };
+
 
 export default function RootLayout({
   children,
@@ -108,46 +113,6 @@ export default function RootLayout({
               },
             }}
           />
-          {/* <Toaster
-  position="top-center"
-  toastOptions={{
-    className: 'custom-toast',
-    duration: 3000,
-    style: {
-      backdropFilter: 'blur(6px)',
-      WebkitBackdropFilter: 'blur(6px)',
-      border: '1px solid rgba(255, 255, 255, 0.2)',
-      boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)',
-      borderRadius: '14px',
-      fontSize: '1rem',
-      fontWeight: 600,
-      display: 'flex',
-      alignItems: 'center',
-      gap: '12px',
-    },
-    success: {
-      duration: 5000,
-      className: 'custom-toast',
-      style: {
-        background: 'linear-gradient(135deg, #4ade80, #22c55e)', // green gradient
-        color: '#fff',
-        boxShadow: '0 8px 25px rgba(34, 197, 94, 0.5)',
-        textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-      },
-    },
-    error: {
-      duration: 3500,
-      className: 'custom-toast',
-      style: {
-        background: 'linear-gradient(135deg, #f87171, #ef4444)', // red gradient
-        color: '#fff',
-        boxShadow: '0 8px 25px rgba(239, 68, 68, 0.5)',
-        textShadow: '0 1px 2px rgba(0, 0, 0, 0.25)',
-      },
-    },
-  }}
-/> */}
-
           {children}
           <Footer />
         </div>

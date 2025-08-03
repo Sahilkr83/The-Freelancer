@@ -60,7 +60,7 @@ const Frame: React.FC<FrameProps> = ({
       <div className="flex items-center justify-around w-full frame">
         {videos.map((src, i) => (
           <div key={i} className="relative w-fit h-fit">
-            <Image src={iphoneFrame} alt="iPhone frame" />
+            <Image src={iphoneFrame} priority alt="iPhone frame" />
             <video
               ref={videoRefs[i]}
               playsInline

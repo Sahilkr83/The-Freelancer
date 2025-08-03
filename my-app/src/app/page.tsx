@@ -21,41 +21,6 @@ const Home = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
     >
-      {/* <Head>
-        <title></title>
-        <link rel="canonical" href="https://thefreelancer.shop/" />
-        <meta
-          name="description"
-          content="Professional video editing, motion graphics, and responsive web design to elevate your brand. Hire freelance editors today!"
-        />
-        <meta
-          name="keywords"
-          content="video editing, freelance editor, motion graphics, commercial video editing, YouTube editing, web design services, The Freelancer Shop"
-        />
-        <meta name="author" content="The Freelancer Shop" />
-
-        {/* Open Graph 
-        <meta property="og:title" content="The Freelancer Shop – Video Editing & Web Design Services" />
-        <meta
-          property="og:description"
-          content="Elevate your brand with professional video editing, motion graphics, and creative web design services."
-        />
-        <meta property="og:image" content="https://thefreelancer.shop/assets/home-banner.png" />
-        <meta property="og:url" content="https://thefreelancer.shop/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="The Freelancer Shop" />
-
-        {/* Twitter Card
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="The Freelancer Shop – Video Editing & Web Design Services" />
-        <meta
-          name="twitter:description"
-          content="Transform your content into stunning visuals and interactive websites with expert freelance services."
-        />
-        <meta name="twitter:image" content="https://thefreelancer.shop/assets/home-banner.png" />
-        <meta name="twitter:url" content="https://thefreelancer.shop/" />
-        <meta name="twitter:site" content="@thefreelancer27" />
-      </Head> */}
 
       <main className="text-white relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-[1460px] w-full z-30 select-none">
         {/* Hero Section */}
@@ -67,18 +32,18 @@ const Home = () => {
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="text-3xl sm:text-5xl lg:text-6xl  font-extrabold leading-tight max-w-5xl mx-auto text-center text-white bg-clip-text "
+            className="text-2xl sm:text-4xl lg:text-5xl  font-extrabold leading-tight max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
-            Welcome to The Freelancer
+            Pro Video Editing & Web Design
           </motion.h1>
-          <motion.h1
+          <motion.h2
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-2xl sm:text-4xl lg:text-5xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
+            className="text-xl sm:text-43xl lg:text-4xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
-            Your Hub for All Things Video Editing!
-          </motion.h1>
+            By The Freelancer - Your Hub for Creative Digital Solutions
+          </motion.h2>
 
           <div className="mt-10 flex flex-col lg:flex-row items-center lg:items-start gap-12 max-w-7xl mx-auto">
             <motion.div
@@ -88,7 +53,6 @@ const Home = () => {
             >
               <Image
                 alt="Freelance Video Editing and Web Design Service - Homepage Banner"
-
                 rel="preload"
                 src={homePAgeImg}
                 width={875}
@@ -97,7 +61,6 @@ const Home = () => {
                 priority
               />
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -105,18 +68,24 @@ const Home = () => {
               className="max-w-xl text-center lg:text-left text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide"
             >
               <p className="mb-6">
-                Whether you&apos;re a content creator, business owner, or marketer, we
-                specialize in transforming your raw footage into polished,
-                professional videos that captivate your audience. From stunning
-                visual effects to seamless transitions and compelling storytelling,
-                we bring your creative vision to life.
+                Welcome to <strong>The Freelancer Shop</strong> — your hub for expert-level
+                <strong> video editing</strong> and <strong>web design</strong> services.
+                We specialize in turning raw footage into cinematic videos and crafting sleek,
+                modern websites tailored to your brand’s voice.
+              </p>
+              <p className="mb-6">
+                Whether you're a content creator, entrepreneur, or agency, we deliver
+                professional-grade <strong>editing</strong> with seamless transitions, motion graphics,
+                and dynamic storytelling to help you grow your online presence.
               </p>
               <p>
-                With expert editing and a keen eye for detail, we help you craft
-                videos that stand out and make an impact. Let&apos;s turn your ideas
-                into exceptional videos that tell your story perfectly!
+                Our <strong>web development</strong> services include building fast, SEO-friendly sites
+                using technologies like <strong>React</strong>, <strong>Next.js</strong>, <strong>Tailwind CSS</strong>,
+                and <strong>MongoDB</strong>. With attention to performance, responsiveness, and user experience,
+                we ensure your site not only looks great but ranks high too.
               </p>
             </motion.div>
+
           </div>
         </section>
 
@@ -145,6 +114,7 @@ const Home = () => {
           </div>
 
         </section>
+        
             
         <Frame
         editName="Simple"
@@ -175,6 +145,16 @@ const Home = () => {
             number1="4." type1="Hook Elements"
             number2="5." type2="Color grading"
             number3="6." type3="Fastpace Editing"/>
+
+          <section className="py-10 max-w-4xl mx-auto text-center text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide">
+            <p>
+              At The Freelancer Shop, we offer a variety of video editing packages including
+              <strong> simple edits</strong>, <strong>motion graphics</strong>, and <strong>commercial ad creation</strong>.
+              Whether you need quick social media content or detailed promotional videos,
+              we use tools like After Effects, Premiere Pro, and CapCut to deliver high-quality results.
+            </p>
+          </section>
+
 
         <Tools/>
             

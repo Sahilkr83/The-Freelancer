@@ -116,11 +116,11 @@ const projects: ProjectCategory[] = [
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="text-3xl sm:text-5xl lg:text-6xl  font-extrabold leading-tight max-w-5xl mx-auto text-center text-white bg-clip-text "
+            className="text-2xl sm:text-4xl lg:text-5xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
-            Welcome to The Freelancer
+            React & Full-Stack Developer Portfolio
           </motion.h1>
-
+{/* 
           <motion.h2
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -128,15 +128,15 @@ const projects: ProjectCategory[] = [
             className="text-2xl sm:text-4xl lg:text-5xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
               Web Development Portfolio
-          </motion.h2>
+          </motion.h2> */}
 
           <motion.h2
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
             className="text-lg sm:text-xl lg:text-2xl mt-10  font-extrabold leading-tight max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
-            React Developer | Full-Stack Engineer | JavaScript Expert
+            Built with JavaScript, Tailwind CSS & MongoDB
           </motion.h2>
 
           <div className="flex flex-col-reverse lg:flex-row items-center gap-10 py-10">

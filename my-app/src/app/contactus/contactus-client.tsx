@@ -76,7 +76,7 @@ const ContactPage = () => {
             </address>
           </div>
 
-          <div className="md:pl-[60px] pt-2 w-full">
+          <div className="md:pl-[60px] pt-2 w-full pr-8 md:pr-0 lg:pr-0">
             <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-4">
               <div className="flex gap-6 flex-col md:flex-row">
                 <input  {...register('name')} className="input" name="name" type="text" value={formData.name} placeholder="Your Name" onChange={handleChange} />
