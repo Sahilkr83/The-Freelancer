@@ -69,18 +69,18 @@ const Home = () => {
             >
               <p className="mb-6">
                 Welcome to <strong>The Freelancer Shop</strong> — your hub for expert-level
-                <strong> video editing</strong> and <strong>web design</strong> services.
+                <span className="font-semibold"> video editing</span> and <span className="font-semibold">web design</span> services.
                 We specialize in turning raw footage into cinematic videos and crafting sleek,
                 modern websites tailored to your brand&apos;s voice.
               </p>
               <p className="mb-6">
                 Whether you&apos;re a content creator, entrepreneur, or agency, we deliver
-                professional-grade <strong>editing</strong> with seamless transitions, motion graphics,
+                professional-grade <span className="font-semibold">editing</span> with seamless transitions, motion graphics,
                 and dynamic storytelling to help you grow your online presence.
               </p>
               <p>
-                Our <strong>web development</strong> services include building fast, SEO-friendly sites
-                using technologies like <strong>React</strong>, <strong>Next.js</strong>, <strong>Tailwind CSS</strong>,
+                Our <span className="font-semibold">web development</span> services include building fast, SEO-friendly sites
+                using technologies like <span className="font-semibold">React</span>, <span className="font-semibold">Next.js</span>, <span className="font-semibold">Tailwind CSS</span>,
                 and <strong>MongoDB</strong>. With attention to performance, responsiveness, and user experience,
                 we ensure your site not only looks great but ranks high too.
               </p>
@@ -91,24 +91,24 @@ const Home = () => {
 
         <section className='flex flex-col justify-between py-10 w-full gap-5 text-center' id="services" aria-label="Service Types">
 
-          <h2 className=' font-bold uppercase types-of-edit-heading '>We Offer To You</h2> 
+          <h3 className=' font-bold uppercase types-of-edit-heading '>We Offer To You</h3> 
 
           <div className=' flex justify-between flex-wrap'>
 
             <Types 
             href='#simple'
             img={simpleImg} 
-            editType="Simple Edits"
+            editType="Basic Editing "
             />
             <Types 
             href='#motion'
             img={motionGraphic} 
-            editType="Motion graphic"
+            editType="Motion Graphics " 
             />
             <Types 
             href='#commercial'
             img={commercial} 
-            editType="Commercial Edits"
+            editType="Commercial Editing "
             />
 
           </div>
@@ -117,7 +117,7 @@ const Home = () => {
         
             
         <Frame
-        editName="Simple"
+        editName="Basic"
         id='simple'
         video1={urls[0].simple1}
         video2={urls[0].simple2}
@@ -125,35 +125,34 @@ const Home = () => {
         />
             
         <Frame
-        editName="motion graphic"
-            id='motion'
-            video1={urls[0].motion1}
-            video2={urls[0].motion3}
-            video3={urls[0].motion2}
-
-            number1="4." type1="Hook Elements"
-            number2="5." type2="Motion Transition"
-            number3="6." type3="Fastpace Editing"/>
+        editName="Motion Graphics"
+        id='motion'
+        video1={urls[0].motion1}
+        video2={urls[0].motion3}
+        video3={urls[0].motion2}
+        number1="4." type1="Hook Elements"
+        number2="5." type2="Motion Transition"
+        number3="6." type3="Fastpace Editing"/>
 
         <Frame
-        editName="commercial"
-            id='commercial'
-            video1={urls[0].ad1}
-            video2={urls[0].ad3}
-            video3={urls[0].ad2}
+        editName="Commercial"
+        id='commercial'
+        video1={urls[0].ad1}
+        video2={urls[0].ad3}
+        video3={urls[0].ad2}
+        number1="4." type1="Hook Elements"
+        number2="5." type2="Color grading"
+        number3="6." type3="Fastpace Editing"
+        />
 
-            number1="4." type1="Hook Elements"
-            number2="5." type2="Color grading"
-            number3="6." type3="Fastpace Editing"/>
-
-          <section className="py-10 max-w-4xl mx-auto text-center text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide">
-            <p>
-              At The Freelancer Shop, we offer a variety of video editing packages including
-              <strong> simple edits</strong>, <strong>motion graphics</strong>, and <strong>commercial ad creation</strong>.
-              Whether you need quick social media content or detailed promotional videos,
-              we use tools like After Effects, Premiere Pro, and CapCut to deliver high-quality results.
-            </p>
-          </section>
+        <section className="py-10 max-w-4xl mx-auto text-center text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide">
+          <p>
+            At The Freelancer Shop, we offer a variety of video editing packages including
+            <strong> simple edits</strong>, <strong>motion graphics</strong>, and <strong>commercial ad creation</strong>.
+            Whether you need quick social media content or detailed promotional videos,
+            we use tools like After Effects, Premiere Pro, and CapCut to deliver high-quality results.
+          </p>
+        </section>
 
 
         <Tools/>

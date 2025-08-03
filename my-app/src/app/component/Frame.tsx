@@ -54,13 +54,13 @@ const Frame: React.FC<FrameProps> = ({
     <div className="flex flex-col items-center gap-20 mb-20" id={id}>
       <div className="frame-text text-center py-2 px-8 font-semibold uppercase text-[#a8e3f5] border-[#a8e3f5] border-4 w-fit flex gap-5 items-center">
         <FaSearch aria-hidden="true" />
-        <h2>{editName} edit</h2>
+        <h4>{editName} edit</h4>
       </div>
 
       <div className="flex items-center justify-around w-full frame">
         {videos.map((src, i) => (
           <div key={i} className="relative w-fit h-fit">
-            <Image src={iphoneFrame} priority alt="iPhone frame" />
+            <Image src={iphoneFrame} alt="iPhone frame" />
             <video
               ref={videoRefs[i]}
               playsInline
