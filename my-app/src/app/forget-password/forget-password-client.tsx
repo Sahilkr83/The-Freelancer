@@ -22,7 +22,7 @@ const ForgetPassword = () => {
   const [timeLeft, setTimeLeft] = useState(120);
   const [otpToken, setOtpToken] = useState<string | null>(null);
   const [otpValues, setOtpValues] = useState(new Array(4).fill(''));
-  const [otp, setOtp] = useState<string | null>(null);
+  const [otp, setOtp] = useState<string >('');
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const formatTime = (seconds: number) => {
@@ -137,6 +137,7 @@ const ForgetPassword = () => {
     };
 
   const verifyEmail = async (enteredOtp: string) => {
+    enteredOtp = otp;
     if (!enteredOtp || enteredOtp.trim().length !== otpValues.length) {
       toast.error('Invalid or incomplete OTP.');
       return;

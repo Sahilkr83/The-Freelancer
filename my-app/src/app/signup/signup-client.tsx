@@ -148,6 +148,7 @@ const SignupPage = () => {
 
   // Verify OTP
   const verifyEmail = async (enteredOtp: string) => {
+    enteredOtp = otp
   if (!enteredOtp || enteredOtp.trim().length !== otpValues.length) {
     toast.error('Invalid or incomplete OTP.');
     return;
@@ -165,6 +166,7 @@ const SignupPage = () => {
     const res = await response.json();
 
     if (response.ok) {
+      setUser(res.user);
       setOtpField(false);
       toast.success(res.message);
       router.push('/new-password');

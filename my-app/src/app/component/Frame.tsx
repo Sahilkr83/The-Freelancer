@@ -45,6 +45,7 @@ const Frame: React.FC<FrameProps> = ({
         if (ref.current) observer.unobserve(ref.current);
       });
     };
+          // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const videos = [video1, video2, video3];
