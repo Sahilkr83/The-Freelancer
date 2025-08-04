@@ -111,7 +111,7 @@ const projects: ProjectCategory[] = [
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
       <main className="text-white relative pt-20 px-4 sm:px-6 lg:px-8 mx-auto max-w-[1460px] z-30">
@@ -119,11 +119,8 @@ const projects: ProjectCategory[] = [
         <section className="py-14">
           <motion.h1
             initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            whileInView="visible"
-            viewport={{ once: true }}
-
             className="text-2xl sm:text-4xl lg:text-5xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
             React & Full-Stack Developer Portfolio
@@ -131,7 +128,7 @@ const projects: ProjectCategory[] = [
 
           <motion.h2
             initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="text-lg sm:text-xl lg:text-2xl mt-10  font-extrabold leading-tight max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
@@ -141,7 +138,7 @@ const projects: ProjectCategory[] = [
           <div className="flex flex-col-reverse lg:flex-row items-center gap-10 py-10">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
               className="max-w-xl text-center lg:text-left text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide xl:w-[475px] w-full xl:pl-16 h-full pb-10 xl:pb-0"
             >
@@ -173,14 +170,18 @@ const projects: ProjectCategory[] = [
           </div>
         </section>
         {/* Project Types */}
-        <section className="py-12 text-center">
+        <motion.section         
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }} 
+        className="py-12 text-center">
           <h2 className="text-2xl font-bold uppercase tracking-wider mb-6">Explore Project Categories</h2>
           <div className="flex justify-center flex-wrap gap-6">
             {projects.map(({ id, img, title }) => (
               <ProjectTypes key={id} href={`#${id}`} img={img} editType={title} />
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* Projects */}
         {projects.map(({ id, title, description, project }) => (

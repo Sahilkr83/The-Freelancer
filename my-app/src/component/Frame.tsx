@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { FaSearch, FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
+import { motion } from "framer-motion";
 import iphoneFrame from "@/assets/iphone_frame.webp";
 import Image from 'next/image';
 
@@ -83,7 +84,11 @@ const Frame: React.FC<FrameProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center gap-20 mb-20" id={id}>
+    <motion.div 
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      className="flex flex-col items-center gap-20 mb-20" id={id}>
       <div className="frame-text text-center py-2 px-8 font-semibold uppercase text-[#a8e3f5] border-[#a8e3f5] border-4 w-fit flex gap-5 items-center">
         <FaSearch aria-hidden="true" />
         <h4>{editName} edit</h4>
@@ -100,6 +105,8 @@ const Frame: React.FC<FrameProps> = ({
               loop
               preload="auto"
               src={src}
+              aria-label='Freelance video editing portfolio reel'
+              title="Freelance video editing portfolio reel"
               className="absolute top-3 right-3 w-[185px] h-[400px] rounded-lg"
               onPlay={() => setIsPlaying(prev => prev.map((p, idx) => (idx === i ? true : p)))}
               onPause={() => setIsPlaying(prev => prev.map((p, idx) => (idx === i ? false : p)))}
@@ -156,7 +163,7 @@ const Frame: React.FC<FrameProps> = ({
           </ol>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

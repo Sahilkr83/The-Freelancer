@@ -6,6 +6,8 @@ import { AppContext } from '@/context/AppContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+// import { ReactNode } from 'react';
+// import{AnimatePresence, motion} from 'framer-motion';
 
 export default function NavBar() {
   const { user } = useContext(AppContext)!;
@@ -13,6 +15,7 @@ export default function NavBar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -36,27 +39,46 @@ export default function NavBar() {
           src={logo}
           width={50}
           height={50}
-          alt="logo"
+          alt="The Freelancer Shop logo"
+          title="The Freelancer Shop – Freelance Video Editing & Web Design"
           className="cursor-pointer"
         />
 
         {/* Desktop Links */}
-        <div className="hidden md:flex gap-6 items-center font-medium">
-          {[
-            { href: '/', label: 'Home' },
-            { href: '/web-development', label: 'Web Portfolio' },
-          ].map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`px-2 py-1 border-b-2 transition ${
-                pathname === href ? 'border-white' : 'border-transparent'
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
+      <div className="hidden md:flex gap-6 items-center font-medium relative">
+        {/* Home */}
+        {/* <FlyOutLink href='/' FlyoutContent={<WebPortfolio/>}>Home</FlyOutLink> */}
+        <Link
+          href="/"
+          className={`px-2 py-1 border-b-2 transition ${
+            pathname === '/' ? 'border-white' : 'border-transparent'
+          }`}
+        >
+          Home
+        </Link>
+
+          {/* Trigger */}
+        <Link
+          href="/web-development"
+          className={`px-2 py-1 border-b-2 transition ${
+            pathname === '/web-development' ? 'border-white' : 'border-transparent'
+          }`}
+        >
+          Web Portfolio
+        </Link>
+
+
+        {/* About Us */}
+        <Link
+          href="/about-us"
+          className={`px-2 py-1 border-b-2 transition ${
+            pathname === '/about-us' ? 'border-white' : 'border-transparent'
+          }`}
+        >
+          About Us
+        </Link>
+      </div>
+
 
         {/* User Buttons */}
         <div className="hidden md:flex items-center gap-4">
@@ -130,16 +152,18 @@ export default function NavBar() {
         `}
       >
         <div className="flex flex-col p-4 space-y-2 font-medium text-white">
-          <Link href="/" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md">
-            🏠 Home
+          <Link href="/" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+            <span aria-hidden="true">🏠</span> Home
           </Link>
-          <Link href="/web-development" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md">
-            💻 Web Portfolio
+          <Link href="/web-development" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+            <span aria-hidden="true">💻</span> Web Portfolio
           </Link>
-          <Link href="/contactus" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md">
-            📞 Contact Us
+          <Link href="/contactus" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+            <span aria-hidden="true">📞</span> Contact Us
           </Link>
-
+          <Link href="/about-us" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+            <span aria-hidden="true">ℹ️</span> About Us
+          </Link>
           <div className="border-t border-gray-700 my-2" />
 
           {user ? (
@@ -170,3 +194,87 @@ export default function NavBar() {
     </div>
   );
 }
+
+
+
+// type FlyOutLinkProps = {
+//   children: ReactNode;
+//   href: string;
+//   FlyoutContent?: ReactNode;
+// };
+
+// const FlyOutLink = ({ children, href, FlyoutContent }: FlyOutLinkProps) => {
+//   const [showDropdown, setShowDropdown] = useState(false);
+//   const showFlyOut = showDropdown && FlyoutContent
+
+//   return (
+//     <div
+
+//       onMouseEnter={() => setShowDropdown(true)}
+//       onMouseLeave={()=> setShowDropdown(false)}
+//       className="relative group"
+//     >
+//       <Link href={href}>
+//         {children}
+//         <span style={{ transform : showFlyOut ? "scaleX(1)": "scaleX(0)"}} className='absolute -bottom-2 -left-2 -right-2 h-1 origin-left rounded-full bg-white transitiont-transform duration-300 ease-out'/>
+//       </Link>
+//       <AnimatePresence>
+//       {showFlyOut && (
+//         <motion.div 
+//           initial={{opacity:0 , y:10}}
+//           animate={{opacity:1 , y:0}}
+//           exit={{opacity:0 , y:10}}
+//           style={{x: '-50%'}}
+//           transition={{ duration: 0.3, ease: 'easeOut' }}
+//           className="absolute top-full left-1/2  mt-5 z-50 rounded-xl min-w-48 bg-black  backdrop-blur-md transition-all "
+//         >
+//           <div className='absolute -top-6 left-0 right-0 h-6 bg-transparent'/>
+//           <div className='absolute top-0 left-1/2 -translate-x-1/2 h-4 w-4 -translate-y-1/2 rotate-45 bg-black'/>
+//           {FlyoutContent}
+//         </motion.div>
+//       )}
+//       </AnimatePresence>
+//     </div>
+//   );
+// };
+
+// const WebPortfolio = () => {
+//   return (
+//           <div>
+//             <ul className="flex gap-3 p-5 text-sm text-gray-200 text-nowrap">
+//               <li>
+//                 <Link
+//                   href="/web-development/frontend"
+//                   className="flex items-center gap-3 mx-2 py-1 w-full  rounded-md hover:bg-black transition"
+//                 >
+//                   <span>🧩</span> <span>Frontend Projects</span>
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link
+//                   href="/web-development/fullstack"
+//                   className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-black transition"
+//                 >
+//                   <span>🧠</span> <span>Fullstack Projects</span>
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link
+//                   href="/web-development/landing-pages"
+//                   className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-black transition"
+//                 >
+//                   <span>🖼️</span> <span>Landing Pages</span>
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link
+//                   href="/web-development/ui-designs"
+//                   className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-black transition"
+//                 >
+//                   <span>🎨</span> <span>UI/UX Designs</span>
+//                 </Link>
+//               </li>
+//             </ul>
+//           </div>
+//   )
+// }

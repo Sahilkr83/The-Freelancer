@@ -17,8 +17,8 @@ const Home = () => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      // exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
     >
 
@@ -30,7 +30,7 @@ const Home = () => {
         >
           <motion.h1
             initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
             className="text-2xl sm:text-4xl lg:text-5xl  font-extrabold leading-tight max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
@@ -38,7 +38,7 @@ const Home = () => {
           </motion.h1>
           <motion.h2
             initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="text-xl sm:text-43xl lg:text-4xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
@@ -52,6 +52,7 @@ const Home = () => {
               className="rounded-xl overflow-hidden shadow-2xl"
             >
               <Image
+                title="Our professional video editing and web design service banner"
                 alt="Freelance Video Editing and Web Design Service - Homepage Banner"
                 rel="preload"
                 src={homePAgeImg}
@@ -63,7 +64,7 @@ const Home = () => {
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
               className="max-w-xl text-center lg:text-left text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide"
             >
@@ -145,17 +146,42 @@ const Home = () => {
         number3="6." type3="Fastpace Editing"
         />
 
-        <section className="py-10 max-w-4xl mx-auto text-center text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide">
+        <motion.section         
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="py-10 max-w-4xl mx-auto text-center text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide">
           <p>
             At The Freelancer Shop, we offer a variety of video editing packages including
             <strong> simple edits</strong>, <strong>motion graphics</strong>, and <strong>commercial ad creation</strong>.
             Whether you need quick social media content or detailed promotional videos,
             we use tools like After Effects, Premiere Pro, and CapCut to deliver high-quality results.
           </p>
-        </section>
+        </motion.section>
 
 
         <Tools/>
+            {/* <motion.div
+      className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
+      animate={{
+        y: [0, -10, 0],
+      }}
+      transition={{
+        duration: 2,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+    >
+      <div className="w-16 h-16 rounded-full shadow-xl border-4 border-white overflow-hidden bg-white">
+        <Image
+          src="/avatar.png" // Replace with your image path
+          alt="Animated Avatar"
+          width={64}
+          height={64}
+          className="object-cover"
+        />
+      </div>
+    </motion.div> */}
             
       </main>
     </motion.div>

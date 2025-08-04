@@ -19,8 +19,9 @@ const Logo = ({logo,appName}) => {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
 
-            src={logo}  height='auto' width='auto' className='tool-logo w-[70px] h-[70px]' 
-            alt='App Logo'/>
+            src={logo}  height='auto' width='auto' className='tool-logo w-[70px] h-[70px] rounded-xl ' 
+            alt='App Logo'
+            title='Software used: Adobe Premiere Pro'/>
 
         <span onMouseEnter={() => setHovered(true) }
         onMouseLeave={() => setHovered(false)} className='tool-text'>{appName}</span>

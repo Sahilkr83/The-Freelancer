@@ -1,140 +1,14 @@
-// import React, { useState } from "react";
-// import {
-//   FaBars,
-//   FaHome,
-//   FaUser,
-//   FaCog,
-//   FaChartLine,
-//   FaChevronDown,
-// } from "react-icons/fa";
-// import { NavLink } from "react-router-dom";
-
-// const routes = [
-//   { to: "/", label: "Home", icon: <FaHome /> },
-//   {
-//     label: "Analytics",
-//     icon: <FaChartLine />,
-//     children: [
-//       { to: "/reports", label: "Reports" },
-//       { to: "/stats", label: "Stats" },
-//     ],
-//   },
-//   { to: "/profile", label: "Profile", icon: <FaUser /> },
-//   { to: "/settings", label: "Settings", icon: <FaCog /> },
-// ];
-
-// const Sidebar = () => {
-//   const [isOpen, setIsOpen] = useState(true);
-//   const [openSubmenu, setOpenSubmenu] = useState(null);
-
-//   const toggleSidebar = () => setIsOpen(!isOpen);
-//   const toggleSubmenu = (idx) =>
-//     setOpenSubmenu((prev) => (prev === idx ? null : idx));
-
-//   return (
-//     <div className="flex h-screen bg-gray-800 text-gray-200 z-40">
-//       {/* Sidebar */}
-//       <div
-//         className={`${
-//           isOpen ? "w-64" : "w-16"
-//         } bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 transition-all duration-300 flex flex-col shadow-xl`}
-//       >
-//         <div className="flex items-center justify-between p-3 border-b border-gray-700">
-//           <span
-//             className={`text-2xl font-bold tracking-wider ${
-//               isOpen ? "opacity-100" : "opacity-0 hidden"
-//             } transition-opacity`}
-//           >
-//             MyApp
-//           </span>
-//           <button onClick={toggleSidebar} className="p-1 hover:text-blue-400">
-//             <FaBars size={20} />
-//           </button>
-//         </div>
-
-//         <nav className="flex-1 px-2 py-4 space-y-2">
-//           {routes.map((route, idx) => (
-//             <div key={idx}>
-//               {route.children ? (
-//                 <>
-//                   <button
-//                     onClick={() => toggleSubmenu(idx)}
-//                     className="flex items-center justify-between w-full p-2 rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
-//                   >
-//                     <div className="flex items-center gap-3">
-//                       <span className="text-lg">{route.icon}</span>
-//                       {isOpen && <span>{route.label}</span>}
-//                     </div>
-//                     {isOpen && (
-//                       <FaChevronDown
-//                         className={`transition-transform ${
-//                           openSubmenu === idx ? "rotate-180" : "rotate-0"
-//                         }`}
-//                       />
-//                     )}
-//                   </button>
-//                   {openSubmenu === idx && isOpen && (
-//                     <div className="ml-8 flex flex-col space-y-1">
-//                       {route.children.map((sub, subIdx) => (
-//                         <NavLink
-//                           key={subIdx}
-//                           to={sub.to}
-//                           className={({ isActive }) =>
-//                             `p-2 rounded-lg hover:bg-blue-500 transition-colors ${
-//                               isActive
-//                                 ? "bg-blue-700 text-white font-semibold"
-//                                 : "text-gray-300"
-//                             }`
-//                           }
-//                         >
-//                           {sub.label}
-//                         </NavLink>
-//                       ))}
-//                     </div>
-//                   )}
-//                 </>
-//               ) : (
-//                 <NavLink
-//                   to={route.to}
-//                   className={({ isActive }) =>
-//                     `flex items-center gap-3 p-2 rounded-lg hover:bg-blue-600 hover:text-white transition-colors ${
-//                       isActive
-//                         ? "bg-blue-700 text-white font-semibold"
-//                         : "text-gray-300"
-//                     }`
-//                   }
-//                 >
-//                   <span className="text-lg">{route.icon}</span>
-//                   {isOpen && <span>{route.label}</span>}
-//                 </NavLink>
-//               )}
-//             </div>
-//           ))}
-//         </nav>
-
-//         <div className="p-4 border-t border-gray-700">
-//           <button className="flex items-center gap-3 w-full p-2 rounded-lg hover:bg-blue-600 transition-colors">
-//             <FaUser />
-//             {isOpen && <span>Logout</span>}
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* Content Area */}
-//       <div className="flex-1 p-6 bg-gray-100">
-//         <h1 className="text-3xl font-bold text-gray-800">Dashboard Content</h1>
-//         <p className="mt-4 text-gray-600">Your application’s main area.</p>
-//       </div>
-//     </div>
-//   );
-// };
 'use client'
-// export default Sidebar;
-import { motion } from "framer-motion";
+import { motion} from "framer-motion";
+import { useInView } from 'react-intersection-observer'
 import Image from "next/image";
 import Link from "next/link";
-
+import CountUpNumber from '@/component/CountUpNumber';
 const AboutUs = () => {
+const { ref: achievementsRef, inView: achievementsInView } = useInView({
+  threshold: 0.3, // Adjust as needed
+});
+
   return (
     <section
       className="py-24  pt-36 px-6 sm:px-12 lg:px-20 max-w-[1400px] mx-auto text-gray-200 space-y-24"
@@ -149,7 +23,6 @@ const AboutUs = () => {
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
         >
           <Image
             src="https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5"
@@ -167,7 +40,6 @@ const AboutUs = () => {
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
         >
           <p className="uppercase text-sm font-semibold tracking-widest text-indigo-400 mb-2">
             Who We Are
@@ -222,7 +94,6 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
       >
         <h3 className="text-3xl font-bold text-white mb-4">Our Mission & Vision</h3>
         <p className="text-lg text-gray-300 leading-relaxed">
@@ -238,7 +109,6 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
       >
         {[
           { label: "Creative Expertise", desc: "10+ years combined experience" },
@@ -262,7 +132,6 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
       >
         <h3 className="text-3xl font-bold text-white mb-4">Tech We Use</h3>
         <p className="text-gray-300 max-w-3xl mx-auto mb-6">
@@ -293,25 +162,32 @@ const AboutUs = () => {
       </motion.div>
 
       {/* Achievements */}
-      <motion.div
-        className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        {[
-          { count: "120+", label: "Clients " },
-          { count: "250+", label: "Projects Completed" },
-          { count: "4.9/5", label: "Client Rating" },
-          { count: "3+", label: "Years Experience" },
-        ].map(({ count, label }, idx) => (
-          <div key={idx}>
-            <p className="text-4xl font-extrabold text-white">{count}</p>
-            <p className="text-gray-400 text-sm mt-1">{label}</p>
-          </div>
-        ))}
-      </motion.div>
+<motion.div
+  ref={achievementsRef}
+  className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ duration: 0.8 }}
+>
+  {[
+    { count: 120, label: "Clients", suffix: "+" },
+    { count: 250, label: "Projects Completed", suffix: "+" },
+    { count: 4.9, label: "Client Rating", suffix: "/5" },
+    { count: 3, label: "Years Experience", suffix: "+" },
+  ].map(({ count, label, suffix }, idx) => (
+    <div key={idx}>
+      <p className="text-4xl font-extrabold text-white">
+        {achievementsInView ? (
+          <CountUpNumber key={`count-${idx}-${Date.now()}`} end={count} suffix={suffix} />
+        ) : (
+          `0${suffix}`
+        )}
+      </p>
+      <p className="text-gray-400 text-sm mt-1">{label}</p>
+    </div>
+  ))}
+</motion.div>
+
 
       {/* Our Journey */}
       <motion.div
@@ -319,7 +195,6 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
       >
         <h3 className="text-3xl font-bold text-white text-center mb-10">Our Journey</h3>
         <ol className="relative border-l border-indigo-400 pl-6 space-y-10">
@@ -356,7 +231,6 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
       >
         <h3 className="text-3xl font-bold text-white mb-10">What Clients Say</h3>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
@@ -392,7 +266,6 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
       >
         <h3 className="text-2xl font-semibold text-white mb-4">Trusted By</h3>
         <div className="flex flex-wrap justify-center items-center gap-6 opacity-80 grayscale hover:grayscale-0 transition-all">
@@ -420,7 +293,6 @@ const AboutUs = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
       >
         <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
           Ready to bring your vision to life?
