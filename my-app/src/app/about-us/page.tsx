@@ -3,7 +3,7 @@ import AboutUsPageClient from './about-us-client';
 export const metadata = {
   title: 'About Us – Meet The Freelancer Shop Team',
   description:
-    "Discover the creative minds behind The Freelancer Shop. We specialize in video editing, motion graphics, and web development to help you build impactful digital experiences.",
+    "Discover the creative minds behind The Freelancer Shop. We specialize in video editing, motion graphics, and web development.",
   keywords: [
     "About The Freelancer Shop",
     "video editors team",

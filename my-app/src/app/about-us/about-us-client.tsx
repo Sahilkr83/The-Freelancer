@@ -44,9 +44,9 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
           <p className="uppercase text-sm font-semibold tracking-widest text-indigo-400 mb-2">
             Who We Are
           </p>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
             About <span className="text-indigo-400">The Freelancer Shop</span>
-          </h2>
+          </h1>
 
           <p className="mb-6 text-lg sm:text-xl leading-relaxed text-gray-300">
             <strong className="text-white">The Freelancer Shop</strong> is your all-in-one creative partner for premium{" "}
@@ -80,7 +80,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
           </div>
 
           <Link
-            href="/portfolio"
+            href="/web-development"
             className="inline-block bg-indigo-500 hover:bg-indigo-600 transition-colors text-white px-6 py-3 rounded-full text-base font-semibold shadow-lg"
           >
             Explore Our Work
@@ -95,7 +95,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <h3 className="text-3xl font-bold text-white mb-4">Our Mission & Vision</h3>
+        <h2 className="text-3xl font-bold text-white mb-4">Our Mission & Vision</h2>
         <p className="text-lg text-gray-300 leading-relaxed">
           We’re on a mission to empower individuals, brands, and businesses with impactful digital
           solutions that tell their stories with clarity and creativity. Our vision is to be the
@@ -298,7 +298,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
           Ready to bring your vision to life?
         </h3>
         <Link
-          href="/contact"
+          href="/contactus"
           className="inline-block bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-full font-medium shadow-md transition-all"
         >
           Contact Us Today
