@@ -1,9 +1,9 @@
 import React from 'react';
-import prLogo from '@/app/assests/logo/Adobe_Premiere logo.webp';
-import aeLogo from '@/app/assests/logo/Adobe After logo.webp';
-import davanciResovle from '@/app/assests/logo/davinci-resolve logo.webp';
-import filmora from '@/app/assests/logo/Filmora logo.webp';
-import Logo from '@/app/Logo/Logo';
+import prLogo from '@/assets/logo/Adobe_Premiere logo.webp';
+import aeLogo from '@/assets/logo/Adobe After logo.webp';
+import davanciResovle from '@/assets/logo/davinci-resolve logo.webp';
+import filmora from '@/assets/logo/Filmora logo.webp';
+import Logo from '@/Logo/Logo';
 
 const Tools = () => (
   <div className="max-w-[1460px] w-11/12 text-start flex flex-col gap-10 mb-20">

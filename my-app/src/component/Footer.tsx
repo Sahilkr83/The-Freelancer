@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import href from "@/app/urlfiles/links";
+import href from "@/urlfiles/links";
 import { usePathname } from "next/navigation";
 
 const Footer = () => {

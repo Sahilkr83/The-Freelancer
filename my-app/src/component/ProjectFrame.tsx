@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import React from 'react';
 
 interface InnerProject {
@@ -7,7 +7,7 @@ interface InnerProject {
   description: string;
   feature?: boolean;
   date: string;
-  img: string;
+  img: string |StaticImageData;
   url: string;
 }
 

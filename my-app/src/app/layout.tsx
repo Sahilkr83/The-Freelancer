@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import AppContextProvider from "./context/AppContext";
-import NavBar from "@/app/component/NavBar";
-import Footer from "./component/Footer";
+import AppContextProvider from "@/context/AppContext";
+import NavBar from "@/component/NavBar";
+import Footer from "@/component/Footer";
 import { Toaster } from "react-hot-toast";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "The Freelancer Shop – Video Editing & Web Design Services",
   description: "Professional video editing, motion graphics, and responsive web design to elevate your brand. Hire freelance editors today!",
   icons: {
-    icon: '/fivicon.ico',             // your favicon
+    // icon: '/fivicon.ico',             // your favicon
     apple: '/apple-touch-icon.png',  // apple touch icon for iOS devices
   },
   keywords: [

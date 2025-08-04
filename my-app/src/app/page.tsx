@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react'
-import homePAgeImg from "@/app/assests/homePageImg.webp"
-import simpleImg from '@/app/assests/Simple.jpeg.webp'
-import motionGraphic from '@/app/assests/news_image_3269.webp'
-import commercial from '@/app/assests/Simple Edits.webp'
-import Frame from '@/app/component/Frame';
-import Types from '@/app/component/Types';
-import Tools from '@/app/component/Tools';
-import urls from '@/app/urlfiles/Urls';
+import homePAgeImg from "@/assets/homePageImg.webp"
+import simpleImg from '@/assets/Simple.jpeg.webp'
+import motionGraphic from '@/assets/news_image_3269.webp'
+import commercial from '@/assets/Simple Edits.webp'
+import Frame from '@/component/Frame';
+import Types from '@/component/Types';
+import Tools from '@/component/Tools';
+import urls from '@/urlfiles/Urls';
 import { motion } from 'framer-motion';
 // import Head from 'next/head'
 import Image from 'next/image'

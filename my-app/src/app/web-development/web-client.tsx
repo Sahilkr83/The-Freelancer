@@ -2,10 +2,15 @@
 import React from 'react';
 // import Head from 'next/head';
 import { motion } from 'framer-motion';
-import frontendImg from '@/app/assests/web-dev.webp';
-import ProjectFrame from '@/app/component/ProjectFrame';
-import ProjectTypes from '@/app/component/ProjectTypes';
-import Image from 'next/image';
+import frontendImg from '@/assets/web-client/web-dev.webp';
+import ProjectFrame from '@/component/ProjectFrame';
+import ProjectTypes from '@/component/ProjectTypes';
+import Image, { StaticImageData } from 'next/image';
+import razorpayImg from '@/assets/web-client/Razorpay Landing Page Clone.webp'
+import weatherForecastImg from '@/assets/web-client/Live Weather Forecast App.webp'
+import eCommerceCartImg from '@/assets/web-client/React E-commerce Cart System.webp'
+import freelancerAgencyImg from '@/assets/web-client/Freelancer Agency Platform.webp'
+import employeeManagementImg from '@/assets/web-client/Employee Management System.webp'
 
 
 interface InnerProject {
@@ -14,7 +19,7 @@ interface InnerProject {
   description: string;
   feature?: boolean;
   date: string;
-  img: string;
+  img: string | StaticImageData;
   url: string;
 }
 
@@ -44,7 +49,7 @@ const projects: ProjectCategory[] = [
         description: 'Razorpay landing page clone built with React and TailwindCSS.',
         feature: true,
         date: "25/07/2025",
-        img: "https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/670ef02f926e1700084f5b4d/screenshot_2024-10-15-22-44-45-0000.webp&fit=cover&h=500&q=40&w=800",
+        img: razorpayImg,
         url: 'https://sahils-razorpay-clone.netlify.app',
       },
       {
@@ -52,7 +57,7 @@ const projects: ProjectCategory[] = [
         title: 'Live Weather Forecast App',
         description: 'Weather app using OpenWeatherMap API with dynamic UI updates.',
         date: "14/01/2025",
-        img: "https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/6714034fd5be710008003c54/screenshot_2024-10-19-19-07-25-0000.webp&fit=cover&h=500&q=40&w=800",
+        img: weatherForecastImg,
         url: 'https://weather-app-not-accurate.netlify.app',
       },
       {
@@ -61,7 +66,7 @@ const projects: ProjectCategory[] = [
         description: "E-commerce shopping cart built with React and context-based state management.",
         feature: true,
         date: "02/04/2025",
-        img: "https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/6840c188ec01b500088c8274/screenshot_2025-06-04-21-59-05-0000.webp&fit=cover&h=500&q=40&w=800",
+        img: eCommerceCartImg,
         url: "https://shopping-cart-first.netlify.app",
       },
     ]
@@ -87,7 +92,7 @@ const projects: ProjectCategory[] = [
         description: 'Freelancer Agency – a full-stack product showcase platform with user auth and real-time data.',
         feature: true,
         date: "19/03/2025",
-        img: "https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/68892485e7416e000894ada9/screenshot_2025-07-29-19-44-45-0000.webp&fit=cover&h=500&q=40&w=800",
+        img: freelancerAgencyImg,
         url: 'https://freelancer-agency.netlify.app/',
       },
       {
@@ -95,7 +100,7 @@ const projects: ProjectCategory[] = [
         title: 'Employee Management System',
         description: 'A streamlined system for employee registration and record management.',
         date: "30/05/2025",
-        img: "https://app.netlify.com//.netlify/images?url=https://d33wubrfki0l68.cloudfront.net/68709aa566c4a1923132b8f0/screenshot_2025-07-11-05-02-07-0000.webp&fit=cover&h=500&q=40&w=800",
+        img: employeeManagementImg,
         url: 'https://test-the-back.netlify.app/',
       },
     ]

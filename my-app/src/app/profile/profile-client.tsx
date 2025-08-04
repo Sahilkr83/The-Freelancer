@@ -1,7 +1,7 @@
 'use client';
 import React, { useContext } from 'react';
 import { useRouter } from 'next/navigation';
-import { AppContext } from '@/app/context/AppContext';
+import { AppContext } from '@/context/AppContext';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 

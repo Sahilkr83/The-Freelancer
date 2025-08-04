@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useContext, useEffect, useState } from 'react';
-import logo from '@/app/assests/logo/TheFreelancer logo.png';
-import { AppContext } from '@/app/context/AppContext';
+import logo from '@/assets/logo/TheFreelancer logo.png';
+import { AppContext } from '@/context/AppContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';

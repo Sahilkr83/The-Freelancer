@@ -215,6 +215,9 @@ html{
 }
 
 @media (max-width:670px) {
+  .controls{
+    opacity: 100;
+  }
     .pre-loader-text{
         font-size: 2rem;
     }

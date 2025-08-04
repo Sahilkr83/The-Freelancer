@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AppContext } from '@/app/context/AppContext';
+import { AppContext } from '@/context/AppContext';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
