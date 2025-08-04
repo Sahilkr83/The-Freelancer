@@ -2,12 +2,11 @@
 
 import { useRef, useEffect } from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import { useRouter,usePathname } from "next/navigation";
 import href from "@/urlfiles/links";
-import { usePathname } from "next/navigation";
 
 const Footer = () => {
-  const hideLayoutRoutes = ['/login', '/signup', '/contactus', '/profile', '/change-password', '/forget-password'];
+  const hideLayoutRoutes = ['/login', '/signup', '/contactus', '/profile', '/change-password', '/forget-password','/new-password'];
   const pathname = usePathname();
   const contactOn = hideLayoutRoutes.includes(pathname);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -52,10 +51,8 @@ const Footer = () => {
           </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/40 flex items-center justify-center px-6 text-center">
             <div className="max-w-2xl">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight">
-                Ready To Capture Your <br />
-                Brand Vision?
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight"> Ready To Capture Your <br /> Brand Vision? </h2>
+
               <p className="text-gray-300 text-sm md:text-base mb-6">
                 We blend creativity and precision to tell your story with stunning visuals that leave a lasting impression.
               </p>
