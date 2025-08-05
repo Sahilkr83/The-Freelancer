@@ -19,7 +19,7 @@ const Home = () => {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       // exit={{ opacity: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.5 }}
     >
 
       <main className="text-white relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-[1460px] w-full z-30 select-none">
@@ -149,7 +149,7 @@ const Home = () => {
         <motion.section         
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.5 }}
         className="py-10 max-w-4xl mx-auto text-center text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide">
           <p>
             At The Freelancer Shop, we offer a variety of video editing packages including

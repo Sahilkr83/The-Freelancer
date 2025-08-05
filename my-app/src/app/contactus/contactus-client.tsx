@@ -36,7 +36,7 @@ const ContactPage = () => {
   };
 
   return (
-    <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+    <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
       <div className="w-11/12 max-w-[1350px] mx-auto pt-[140px] pb-[140px] text-white">
         <p  className="text-[20px] text-[#a8e3f5]">
           Get In Touch _____

@@ -112,7 +112,7 @@ const projects: ProjectCategory[] = [
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.5 }}
     >
       <main className="text-white relative pt-20 px-4 sm:px-6 lg:px-8 mx-auto max-w-[1460px] z-30">
         {/* Introduction Section */}
@@ -173,10 +173,10 @@ const projects: ProjectCategory[] = [
         <motion.section         
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }} 
-        className="py-12 text-center">
+        transition={{ duration: 0.5 }} 
+        className="py-12 text-center  ">
           <h2 className="text-2xl font-bold uppercase tracking-wider mb-6">Explore Project Categories</h2>
-          <div className="flex justify-center flex-wrap gap-6">
+          <div className="flex justify-center flex-wrap gap-6 flex-grow">
             {projects.map(({ id, img, title }) => (
               <ProjectTypes key={id} href={`#${id}`} img={img} editType={title} />
             ))}
