@@ -158,6 +158,7 @@ const projects: ProjectCategory[] = [
               className="rounded-2xl overflow-hidden shadow-2xl"
             >
               <Image
+                title="Professional web design Image"
                 alt="React Developer working on a responsive website"
                 rel="preload"
                 src={frontendImg}

@@ -52,7 +52,7 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
             key={item.id}
             variants={cardVariant}
             whileHover={{ scale: 1.03, y: -5 }}
-            transition={{ type: 'spring', stiffness: 200 }}
+            // transition={{ type: 'spring', stiffness: 100 }}
             className={`${getWidthClass()} bg-[#1f1f2f] rounded-2xl overflow-hidden shadow-xl border border-gray-700 hover:border-indigo-500 transition-all group
               flex flex-col
             `}

@@ -26,7 +26,42 @@ body {
 }
 
 
+ .particle {
+          position: fixed;
+          border-radius: 50%;
+          pointer-events: none;
+          opacity: 0.6;
+          animation-timing-function: linear;
+        }
 
+        /* Star style */
+        .star {
+          background: radial-gradient(circle, #fff 60%, transparent 90%);
+          filter: drop-shadow(0 0 3px #a0c8ff);
+          animation-name: twinkle;
+          animation-iteration-count: infinite;
+          animation-duration: 4s;
+        }
+
+        /* Bubble style */
+        .bubble {
+          background: rgba(200, 220, 255, 0.15);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          animation-name: floatUp;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+          animation-duration: 8s;
+        }
+
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.6; }
+          50% { opacity: 1; }
+        }
+
+        @keyframes floatUp {
+          0% { transform: translateY(0); opacity: 0.6; }
+          100% { transform: translateY(-20px); opacity: 0.2; }
+        }
 
 
 .main{

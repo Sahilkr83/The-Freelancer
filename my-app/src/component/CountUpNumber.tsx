@@ -7,7 +7,7 @@ interface CountUpNumberProps {
   suffix?: string;
 }
 
-const CountUpNumber = ({ end, duration = 6500, suffix = "" }: CountUpNumberProps) => {
+const CountUpNumber = ({ end, duration = 4000, suffix = "" }: CountUpNumberProps) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import { AppContext } from '@/context/AppContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { FaFilm } from "react-icons/fa";
 // import { ReactNode } from 'react';
 // import{AnimatePresence, motion} from 'framer-motion';
 
@@ -45,49 +46,66 @@ export default function NavBar() {
         />
 
         {/* Desktop Links */}
-      <div className="hidden md:flex gap-6 items-center font-medium relative">
+      <div className="hidden lg:flex gap-6 items-center font-medium relative">
         {/* Home */}
         {/* <FlyOutLink href='/' FlyoutContent={<WebPortfolio/>}>Home</FlyOutLink> */}
         <Link
           href="/"
-          className={`px-2 py-1 border-b-2 transition ${
-            pathname === '/' ? 'border-white' : 'border-transparent'
-          }`}
+          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
+            pathname === '/' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'}`}
         >
           Home
         </Link>
 
-          {/* Trigger */}
+          {/* web-development */}
         <Link
           href="/web-development"
-          className={`px-2 py-1 border-b-2 transition ${
-            pathname === '/web-development' ? 'border-white' : 'border-transparent'
+          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
+            pathname === '/web-development' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'
           }`}
         >
           Web Portfolio
+        </Link>
+          {/* video-portfolio*/}
+        <Link
+          href="/video-portfolio"
+          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
+            pathname === '/video-portfolio' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'
+          }`}
+        >
+          Video Portfolio
         </Link>
 
 
         {/* About Us */}
         <Link
           href="/about-us"
-          className={`px-2 py-1 border-b-2 transition ${
-            pathname === '/about-us' ? 'border-white' : 'border-transparent'
+          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
+            pathname === '/about-us' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'
           }`}
         >
           About Us
+        </Link>
+        {/* About Us */}
+        <Link
+          href="/contactus"
+          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
+            pathname === '/contactus' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'
+          }`}
+        >
+          Contact Us
         </Link>
       </div>
 
 
         {/* User Buttons */}
-        <div className="hidden md:flex items-center gap-4">
-          <Link
+        <div className="hidden lg:flex items-center gap-4">
+          {/* <Link
             href="/contactus"
             className="px-4 py-2 rounded-lg bg-white text-black font-semibold hover:bg-gray-200 transition"
           >
             Contact Us
-          </Link>
+          </Link> */}
 
           {user ? (
             <Link href="/profile" className="flex items-center gap-2">
@@ -120,7 +138,7 @@ export default function NavBar() {
 
         {/* Hamburger */}
         <button
-          className="md:hidden p-2 rounded-md border border-white"
+          className="lg:hidden p-2 rounded-md border border-white"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -148,7 +166,7 @@ export default function NavBar() {
           absolute top-full right-4 mt-3 w-64 rounded-xl border border-gray-700 bg-slate-950
           transition-all duration-300 origin-top-right shadow-2xl
           ${menuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}
-          md:hidden
+          lg:hidden
         `}
       >
         <div className="flex flex-col p-4 space-y-2 font-medium text-white">
@@ -157,6 +175,9 @@ export default function NavBar() {
           </Link>
           <Link href="/web-development" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
             <span aria-hidden="true">💻</span> Web Portfolio
+          </Link>
+          <Link href="/video-portfolio" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+            <FaFilm className="w-5 h-5" aria-hidden="true" /> Video Portfolio
           </Link>
           <Link href="/contactus" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
             <span aria-hidden="true">📞</span> Contact Us

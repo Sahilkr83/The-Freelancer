@@ -5,6 +5,7 @@ import AppContextProvider from "@/context/AppContext";
 import NavBar from "@/component/NavBar";
 import Footer from "@/component/Footer";
 import { Toaster } from "react-hot-toast";
+import FloatingParticles from "@/component/FloatingParticles";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -17,24 +18,37 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "The Freelancer Shop – Video Editing & Web Design Services",
-  description: "Professional video editing, motion graphics, and responsive web design to elevate your brand. Hire freelance editors today!",
+  description: "Expert freelance video editing, motion graphics, and modern responsive web design services to elevate your brand and digital presence.",
   icons: {
-    // icon: '/fivicon.ico',             // your favicon
-    apple: '/apple-touch-icon.png',  // apple touch icon for iOS devices
+    apple: '/apple-touch-icon.png',  
   },
   keywords: [
-    "video editing",
-    "freelance editor",
+    "professional video editing",
+    "pro video editor",
+    "video editing services",
+    "freelance video editor",
     "motion graphics",
     "commercial video editing",
-    "YouTube editing",
+    "YouTube video editing",
+    "video post production",
     "web design services",
+    "professional web design",
+    "responsive web design",
+    "modern web design",
+    "React web developer",
+    "Next.js developer",
+    "Tailwind CSS",
+    "full stack web developer",
+    "freelance web designer",
+    "freelance web developer",
+    "SEO friendly websites",
+    "creative digital solutions",
     "The Freelancer Shop",
   ],
   authors: [{ name: "The Freelancer Shop" }],
   openGraph: {
     title: "The Freelancer Shop – Video Editing & Web Design Services",
-    description: "Elevate your brand with professional video editing, motion graphics, and creative web design services.",
+    description: "Transform your content with professional video editing and build sleek, SEO-friendly websites using React and Next.js.",
     url: "https://thefreelancer.shop/",
     siteName: "The Freelancer Shop",
     type: "website",
@@ -50,7 +64,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "The Freelancer Shop – Video Editing & Web Design Services",
-    description: "Transform your content into stunning visuals and interactive websites with expert freelance services.",
+    description: "Expert freelance video editing, motion graphics, and web design services tailored to grow your brand and online presence.",
     images: ["https://thefreelancer.shop/assets/home-banner.png"],
     site: "@thefreelancer27",
   },
@@ -66,6 +80,7 @@ export default function RootLayout({
   return (
 <html lang="en">
   <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 text-white font-['Rajdhani',_sans-serif]`}>
+    <FloatingParticles />
     <AppContextProvider>
       <div className="relative min-h-screen overflow-x-hidden">
         {/* Layered radial glow effect */}
@@ -112,6 +127,7 @@ export default function RootLayout({
               },
             }}
           />
+
           {children}
           <Footer />
         </div>
