@@ -151,7 +151,7 @@ const Home = () => {
               we bring your vision to life.
             </p>
             <p>
-              Our collaborative process keeps you in the loop every step of the way, ensuring your brand's
+              Our collaborative process keeps you in the loop every step of the way, ensuring your brand&apos;s
               personality shines through every frame and every pixel. We pride ourselves on timely delivery,
               attention to detail, and a commitment to quality.
             </p>

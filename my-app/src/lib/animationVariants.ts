@@ -1,4 +1,4 @@
-import { Variants, easeIn, easeOut } from "framer-motion";
+import { Variants, easeIn} from "framer-motion";
 
 export const cardVariant: Variants = {
   hidden: { opacity: 0, y: 30 },
