@@ -88,9 +88,9 @@ export default function NavBar() {
         </Link>
         {/* About Us */}
         <Link
-          href="/contactus"
+          href="/contact-us"
           className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
-            pathname === '/contactus' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'
+            pathname === '/contact-us' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'
           }`}
         >
           Contact Us
@@ -101,7 +101,7 @@ export default function NavBar() {
         {/* User Buttons */}
         <div className="hidden lg:flex items-center gap-4">
           {/* <Link
-            href="/contactus"
+            href="/contact-us"
             className="px-4 py-2 rounded-lg bg-white text-black font-semibold hover:bg-gray-200 transition"
           >
             Contact Us
@@ -121,13 +121,13 @@ export default function NavBar() {
           ) : (
             <>
               <Link
-                href="/login"
+                href="/auth/sign-in"
                 className="px-3 py-1.5 border border-white rounded-md hover:bg-white hover:text-black transition"
               >
-                Login
+                Sign In
               </Link>
               <Link
-                href="/signup"
+                href="/auth/sign-up"
                 className="px-3 py-1.5 bg-blue-600 rounded-md hover:bg-blue-800 transition font-semibold"
               >
                 Sign Up
@@ -179,7 +179,7 @@ export default function NavBar() {
           <Link href="/video-portfolio" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
             <FaFilm className="w-5 h-5" aria-hidden="true" /> Video Portfolio
           </Link>
-          <Link href="/contactus" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+          <Link href="/contact-us" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
             <span aria-hidden="true">📞</span> Contact Us
           </Link>
           <Link href="/about-us" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
@@ -200,10 +200,10 @@ export default function NavBar() {
             </Link>
           ) : (
             <>
-              <Link href="/login" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md">
+              <Link href="/auth/sign-in" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md">
                 🔐 Login
               </Link>
-              <Link href="/signup" onClick={() => setMenuOpen(false)} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold text-center">
+              <Link href="/auth/sign-up" onClick={() => setMenuOpen(false)} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold text-center">
                 ✨ Sign Up
               </Link>
             </>

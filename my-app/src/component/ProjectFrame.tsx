@@ -36,7 +36,7 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
       className="my-24 px-4 sm:px-10 max-w-[1400px] mx-auto"
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       variants={containerVariant}
     >
       <div className="text-center mb-16 space-y-3">
@@ -52,6 +52,7 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
             key={item.id}
             variants={cardVariant}
             whileHover={{ scale: 1.03, y: -5 }}
+            viewport={{ once: true }}
             // transition={{ type: 'spring', stiffness: 100 }}
             className={`${getWidthClass()} bg-[#1f1f2f] rounded-2xl overflow-hidden shadow-xl border border-gray-700 hover:border-indigo-500 transition-all group
               flex flex-col

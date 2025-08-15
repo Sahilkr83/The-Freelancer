@@ -3,7 +3,7 @@
 import React from 'react';
 import homePAgeImg from "@/assets/homePageImg.webp";
 import Frame from '@/component/Frame';
-import urls from '@/urlfiles/Urls';
+import urls from '@/component/urlfiles/Urls';
 import { motion } from 'framer-motion';
 import ProjectFrame from '@/component/ProjectFrame';
 import Image, { StaticImageData } from 'next/image';
@@ -73,6 +73,7 @@ const Home = () => {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
     >
       <main className="text-white relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-[1460px] w-full z-30 select-none">
         {/* Hero Section */}
@@ -84,6 +85,7 @@ const Home = () => {
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
+            viewport={{ once: true }}
             className="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
             Pro Video Editing & Web Design
@@ -92,6 +94,7 @@ const Home = () => {
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
+            viewport={{ once: true }}
             className="text-xl sm:text-3xl lg:text-4xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
           >
             By The Freelancer - Your Hub for Creative Digital Solutions
@@ -101,6 +104,7 @@ const Home = () => {
             <motion.div
               whileHover={{ scale: 1.05, filter: "brightness(1.1)" }}
               transition={{ type: "spring", stiffness: 300 }}
+              viewport={{ once: true }}
               className="rounded-3xl overflow-hidden shadow-2xl"
             >
               <Image
@@ -118,6 +122,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
+              viewport={{ once: true }}
               className="max-w-xl text-center lg:text-left text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide"
             >
               <p className="mb-6">
@@ -282,6 +287,7 @@ const Home = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
           className="py-10 max-w-4xl mx-auto text-center text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide"
         >
           <p>

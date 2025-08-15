@@ -3,10 +3,10 @@
 import { useRef, useEffect } from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import { useRouter,usePathname } from "next/navigation";
-import href from "@/urlfiles/links";
+import href from "@/component/urlfiles/links";
 
 const Footer = () => {
-  const hideLayoutRoutes = ['/login', '/signup', '/contactus', '/profile', '/change-password', '/forget-password','/new-password'];
+  const hideLayoutRoutes = ['/auth/sign-in', '/auth/sign-up', '/contact-us', '/profile', '/change-password', '/forget-password','/new-password'];
   const pathname = usePathname();
   const contactOn = hideLayoutRoutes.includes(pathname);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -57,7 +57,7 @@ const Footer = () => {
                 We blend creativity and precision to tell your story with stunning visuals that leave a lasting impression.
               </p>
               <button
-                onClick={() => router.push("/contactus")}
+                onClick={() => router.push("/contact-us")}
                 className="inline-block bg-[#a8e3f5] text-black px-6 py-2 font-semibold rounded-md hover:bg-[#89d8f0] transition duration-300"
               >
                 Contact Us

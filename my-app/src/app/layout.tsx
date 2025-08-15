@@ -6,6 +6,7 @@ import NavBar from "@/component/NavBar";
 import Footer from "@/component/Footer";
 import { Toaster } from "react-hot-toast";
 import FloatingParticles from "@/component/FloatingParticles";
+import AuthProvider from "@/context/AuthProvider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -79,9 +80,11 @@ export default function RootLayout({
 }>) {
   return (
 <html lang="en">
+  <AuthProvider>
   <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 text-white font-['Rajdhani',_sans-serif]`}>
     <FloatingParticles />
     <AppContextProvider>
+      
       <div className="relative min-h-screen overflow-x-hidden">
         {/* Layered radial glow effect */}
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -134,6 +137,7 @@ export default function RootLayout({
       </div>
     </AppContextProvider>
   </body>
+  </AuthProvider>
 </html>
 
   );

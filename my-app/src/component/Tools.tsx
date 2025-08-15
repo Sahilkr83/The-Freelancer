@@ -3,7 +3,7 @@ import prLogo from '@/assets/logo/Adobe_Premiere logo.webp';
 import aeLogo from '@/assets/logo/Adobe After logo.webp';
 import davinciResolve from '@/assets/logo/davinci-resolve logo.webp';
 import filmora from '@/assets/logo/Filmora logo.webp';
-import Logo from '@/Logo/Logo';
+import Logo from './Logo';
 import { motion } from 'framer-motion';
 
 const Tools = () => {
@@ -32,6 +32,7 @@ const Tools = () => {
             key={idx}
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 300 }}
+            viewport={{ once: true }}
             className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg hover:shadow-indigo-500/30"
           >
             <Logo logo={logo} appName={appName} />

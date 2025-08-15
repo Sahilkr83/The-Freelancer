@@ -88,6 +88,7 @@ const Frame: React.FC<FrameProps> = ({
       initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
+      viewport={{ once: true }}
       className="flex flex-col items-center gap-20 mb-20" id={id}>
       <div className="frame-text text-center py-2 px-8 font-semibold uppercase text-[#a8e3f5] border-[#a8e3f5] border-4 w-fit flex gap-5 items-center">
         <FaSearch aria-hidden="true" />
