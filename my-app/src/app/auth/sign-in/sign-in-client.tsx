@@ -14,7 +14,7 @@ import { signInSchema } from "@/schemas/signInSchema";
 import { signIn } from "next-auth/react";
 
 
-const signInPage = () => {
+export default function SignInPage() {
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema), mode: 'onChange',
     defaultValues: {
@@ -22,7 +22,7 @@ const signInPage = () => {
       password: "",
     }});
 
-  const { register, handleSubmit, watch, formState: { errors, isValid } } = form;
+  const { register, handleSubmit, watch, formState: { errors} } = form;
   const passwordValue = watch('password',''); 
   const router = useRouter()
   const [showPassword,setShowpassword] = useState(false)
@@ -36,7 +36,7 @@ const signInPage = () => {
       identifier: data.identifier,
       password: data.password,
     })
-    console.log(result, "result");
+    // console.log(result, "result");
     if (result?.error) {
       toast.error(result.error);
     }
@@ -228,4 +228,4 @@ const signInPage = () => {
   );
 };
 
-export default signInPage;
+// export default signInPage;

@@ -25,14 +25,14 @@ export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export default function AppContextProvider({ children }: { children: ReactNode }) {
 
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState<UserType | null>(null);
 
   useEffect(() => {
     setUser((session?.user as UserType) || null);
-    console.log("User in context:", session?.user);
+    // console.log("User in context:", session?.user);
   }, [session]);
 
 //   const [projectData, setProjectData] = useState<any[]>([]);

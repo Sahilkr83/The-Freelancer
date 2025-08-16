@@ -29,7 +29,7 @@ const SignupPage = () => {
           confirmPassword: "",
   }});
 
-  const { register, handleSubmit, watch, formState: { errors, isValid }, } = form
+  const { register, handleSubmit, watch, formState: { errors, }, } = form
 
   const passwordValue = watch('password',''); 
   const confirmPasswordValue = watch('confirmPassword', '');
@@ -44,7 +44,7 @@ const SignupPage = () => {
 //   const [username, setUsername] = useState('');
   const [passwordo, setPassword] = useState('');
   // const [timeLeft, setTimeLeft] = useState(120); // 2 minutes (in seconds)
-  const password = watch('password');
+  // const password = watch('password');
   const [otp , setOtp] = useState<string>("")
 
   const [otpValues, setOtpValues] = useState(new Array(6).fill(""));
@@ -92,7 +92,8 @@ const SignupPage = () => {
 
   setTypingTimeout(timeout);
 
-  return () => clearTimeout(timeout); // cleanup on unmount or next effect run
+  return () => clearTimeout(timeout);
+  // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [usernameValue]);
 
 // Signup logic
@@ -119,7 +120,7 @@ const SignupPage = () => {
     } catch (error) {
       console.error('Sign Up error:', error);
       const axiosError = error as AxiosError<ApiResponse>;
-      let errorMessage = axiosError.response?.data.message || "An error occurred during Sign Up";
+      const errorMessage = axiosError.response?.data.message || "An error occurred during Sign Up";
       toast.error(errorMessage);
     } finally {
       setLoading(false)

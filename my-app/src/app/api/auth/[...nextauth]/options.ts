@@ -1,39 +1,61 @@
 import { NextAuthOptions } from "next-auth";
+import type { User as NextAuthUser } from "next-auth";
 import  CredentialsProvider  from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
-import { email } from "zod";
+
 import GoogleProvider from "next-auth/providers/google";
 import { randomBytes } from "crypto";
 
+interface AuthUser extends NextAuthUser {
+  email: string;
+  username?: string;
+  isVerified: boolean;
+  name?: string;
+  image?: string;
+
+}
 export const authOptions:NextAuthOptions = {
     providers:[
         CredentialsProvider({
             id:"credentials",
             name:"Credentials",
             credentials:{
-                email:{label:"Email", type:'text',},
+                identifier:{label:"Email or Username", type:'text',},
                 password:{label:"Password", type:'password'}
             },
-            async authorize(credentials:any):Promise<any>{
+             async authorize(credentials): Promise<AuthUser | null> {
                 await dbConnect() 
+                // Check if credentials are provided
+                if (!credentials?.identifier || !credentials.password) {
+                    throw new Error("No credentials provided");
+                }
+                // Attempt to find the user by email or username
                 try{
-                    const user = await UserModel.findOne({$or:[{email:credentials.identifier},{username:credentials.identifier}]})
+                    const user = await UserModel.findOne({$or:[{email:credentials.identifier},{username:credentials.identifier}]}).lean();
+
                     if(!user){
-                        throw new Error('no user found with this email')
+                        throw new Error('no user found with this email or username')
                     }
                     if(!user.isVerified){
-                        throw new Error('please verify your account before login')
+                        throw new Error('please verify your account before login ')
                     }
                     const isPasswordCorredct = await bcrypt.compare(credentials.password, user.password)
                     if(isPasswordCorredct){
-                        return user;
+                        return {
+                            id: user._id.toString(),
+                            email: user.email,
+                            username: user.username,
+                            isVerified: user.isVerified,
+                            name:user.name,
+                            image:user.image || `https://api.dicebear.com/5.x/initials/png?seed=${user.name}`,
+                        } as AuthUser;
                     }else{
                         throw new Error('Incorrect Password')
                     }
-                } catch(err:any){
-                    throw new Error(err)
+                } catch (error) {
+                    throw new Error((error as Error)?.message || "Authorization failed");
                 }
             }
         }),  
@@ -45,7 +67,7 @@ export const authOptions:NextAuthOptions = {
     ],
     
     callbacks: {
-        async signIn({ user, account, profile }) {
+        async signIn({  account, profile }) {
             await dbConnect();
             if (account?.provider === "google" && profile) {
                 const googleProfile = profile as { email: string; name: string; picture: string };
@@ -73,24 +95,27 @@ export const authOptions:NextAuthOptions = {
             return true;
         },
         async session({ session, token }) {
-            if(token){
-                session.user._id = token._id;
-                session.user.username = token.username;
-                session.user.isVerified = token.isVerified;
+            if (token && session.user) {
+                session.user._id = token._id as string;
+                session.user.username = token.username as string;
+                session.user.isVerified = token.isVerified as boolean;
+                session.user.email = token.email as string;
+                session.user.name = token.name as string;
+                session.user.image = token.image as string || `https://api.dicebear.com/5.x/initials/png?seed=${token.name}`;
             }
             return session
         },
         async jwt({ token, user }) {
             if(user){
-                token._id = user._id?.toString()
-                token.username = user.username;
-                token.isVerified = user.isVerified;
+                token._id = user.id;  // NextAuth always sets `user.id`
+                token.username = (user).username;
+                token.isVerified = (user).isVerified;
+                token.email = (user).email;
+                token.name = (user).name;
+                token.image = (user).image || `https://api.dicebear.com/5.x/initials/png?seed=${(user).name}`;
             }
             return token
         }
-    },
-    pages:{
-        signIn:'/auth/sign-in',
     },
     session:{
         strategy:"jwt"

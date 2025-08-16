@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { signOut } from 'next-auth/react';
 
 export default function ProfilePage() {
-  const { user, setUser } = useContext(AppContext)!;
+  const { user} = useContext(AppContext)!;
   const router = useRouter()
   const handleLogout = async () => {
     signOut({ callbackUrl: "/auth/sign-in" });
