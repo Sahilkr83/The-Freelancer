@@ -13,11 +13,6 @@ export default function DashboardPage() {
   const router = useRouter();
   const [demoLink, setDemoLink] = useState("");
 
-  useEffect(() => {
-    if (user?.username) {
-      setDemoLink(`${window.location.origin}/demo-site/${user.username}`);
-    }
-  }, [user]);
 
   // Example demo + user projects (later replace with DB fetch)
   const [projects] = useState([
@@ -51,6 +46,8 @@ export default function DashboardPage() {
   }
   const shareButton = () => {
     if (navigator.share) {
+      const username = user?.username
+      setDemoLink(`${window.location.origin}/demo-site/${username}`);
       // Mobile-friendly native share
       navigator.share({
         title: "Check out my demo site!",
