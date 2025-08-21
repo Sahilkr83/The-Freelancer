@@ -81,7 +81,7 @@ export default function DashboardPage() {
         key={projects[0]?.id}
         whileHover={{ scale: 1.03, translateY: -3 }}
         transition={{ duration: 0.3 }}
-        className="mt-10 relative rounded-2xl backdrop-blur-xl bg-white/5 border border-white/10 shadow-lg hover:shadow-2xl overflow-hidden flex flex-row items-center"
+        className="mt-10 relative rounded-2xl backdrop-blur-xl h-[120%] bg-white/5 border border-white/10 shadow-lg hover:shadow-2xl overflow-hidden flex flex-row items-center"
       >
         {/* Edit button */}
         <button
@@ -97,7 +97,7 @@ export default function DashboardPage() {
           alt={projects[0]?.title || "Demo Project"}
           width={500}
           height={300}
-          className="object-cover w-[120px] sm:w-[250px] h-[130px] sm:h-[180px] cursor-pointer"
+          className="object-cover w-[110px] sm:w-[250px] h-[150px] sm:h-[180px] cursor-pointer"
           onClick={() => router.push(`/demo-site/${user?.username}`)}
         />
 
@@ -107,7 +107,7 @@ export default function DashboardPage() {
           <div>
             <h2 className="text-lg sm:text-2xl font-bold">{projects[0]?.title}</h2>
             <p className="text-gray-300 text-sm sm:text-base sm:mt-2 leading-relaxed">
-              {projects[0]?.description} ${user?.username}
+              {projects[0]?.description}
             </p>
           </div>
         </div>
@@ -117,7 +117,7 @@ export default function DashboardPage() {
           </span>
           <button
             onClick={() => shareButton()} // define shareButton function
-            className="text-sm h-8 w-24 sm:text-base bg-green-500 text-white px-2 py-1 rounded-full hover:bg-green-600 transition"
+            className="px-4 sm:py-2 py-1  mb-1 w-24 h-6 sm:h-8 rounded-full text-xs font-semibold bg-green-500 text-white hover:bg-green-600 transition"
           >
             Share
           </button>
