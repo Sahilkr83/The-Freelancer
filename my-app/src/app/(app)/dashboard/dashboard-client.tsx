@@ -3,14 +3,12 @@
 import { AppContext } from "@/context/AppContext";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext,  useState } from "react";
 import demoImage from '@/assets/500x300.png'
 import axios from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 export default function DashboardPage() {
   const { user } = useContext(AppContext)!;
-  const router = useRouter();
 
 
   // Example demo + user projects (later replace with DB fetch)
@@ -32,16 +30,12 @@ export default function DashboardPage() {
     },
   ]);
   const editButton = async () =>{
-    try{
-      const res = await axios.post<ApiResponse>('/api/edit-on')
-      
-      if (res.status === 200) {
-        router.push(`/demo-site/edit`)
-      }
-    }catch{
 
-    }
+    const res = await axios.post<ApiResponse>('/api/edit-on')
     
+    if (res.status === 200) {
+      window.open(`/demo-site/edit`)
+    }
   }
   const shareButton = () => {
     if (navigator.share) {
@@ -98,12 +92,12 @@ export default function DashboardPage() {
           width={500}
           height={300}
           className="object-cover w-[110px] sm:w-[250px] h-[150px] sm:h-[180px] cursor-pointer"
-          onClick={() => router.push(`/demo-site/${user?.username}`)}
+          onClick={() => window.open(`/demo-site/${user?.username}`, "_blank")}
         />
 
         {/* Content */}
         <div className="">
-        <div className=" sm:px-6 sm:pt-6 pl-2 flex flex-col justify-between w-full h-full cursor-pointer" onClick={() => router.push(`/demo-site/${user?.username}`)}>
+        <div className=" sm:px-6 sm:pt-6 pl-2 flex flex-col justify-between w-full h-full cursor-pointer" onClick={() => window.open(`/demo-site/${user?.username}`, "_blank")}>
           <div>
             <h2 className="text-lg sm:text-2xl font-bold">{projects[0]?.title}</h2>
             <p className="text-gray-300 text-sm sm:text-base sm:mt-2 leading-relaxed">
