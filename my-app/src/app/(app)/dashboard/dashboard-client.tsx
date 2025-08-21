@@ -4,13 +4,20 @@ import { AppContext } from "@/context/AppContext";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import demoImage from '@/assets/500x300.png'
 import axios from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 export default function DashboardPage() {
   const { user } = useContext(AppContext)!;
   const router = useRouter();
+  const [demoLink, setDemoLink] = useState("");
+
+  useEffect(() => {
+    if (user?.username) {
+      setDemoLink(`${window.location.origin}/demo-site/${user.username}`);
+    }
+  }, [user]);
 
   // Example demo + user projects (later replace with DB fetch)
   const [projects] = useState([
@@ -43,18 +50,16 @@ export default function DashboardPage() {
     
   }
   const shareButton = () => {
-  const demoLink = `${window.location.origin}/demo-site/${user?.username}`;
-  
-  if (navigator.share) {
-    // Mobile-friendly native share
-    navigator.share({
-      title: "Check out my demo site!",
-      text: "Here is my demo website you can explore:",
-      url: demoLink,
-    })
-    
-  }
-};
+    if (navigator.share) {
+      // Mobile-friendly native share
+      navigator.share({
+        title: "Check out my demo site!",
+        text: "Here is my demo website you can explore:",
+        url: demoLink,
+      })
+      
+    }
+  };
 
   return (
     <motion.div
