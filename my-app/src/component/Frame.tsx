@@ -101,6 +101,7 @@ const Frame: React.FC<FrameProps> = ({
           <div key={i} className="relative w-fit h-fit group">
             <Image src={iphoneFrame} alt="iPhone frame" />
             <video
+              suppressHydrationWarning
               ref={videoRefs[i]}
               playsInline
               muted={isMuted[i]}

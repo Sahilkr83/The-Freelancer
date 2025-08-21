@@ -1,6 +1,7 @@
 import VideoPageClient from './video-client';
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Professional Video Editing Services – The Freelancer Shop',
   description: 'High-quality video editing services including motion graphics, and cinematic storytelling. Perfect for YouTube, social media, and business projects.',
   keywords: [

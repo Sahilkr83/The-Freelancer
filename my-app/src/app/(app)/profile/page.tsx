@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "",
     description: "",
-    url: "https://thefreelancer.shop/signup",
+    url: "https://thefreelancer.shop/profile",
     siteName: "The Freelancer Shop",
     type: "website",
     images: [],

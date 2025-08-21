@@ -1,6 +1,7 @@
 import WebDevPageClient from './web-client';
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Web Development Portfolio – Frontend & Full-Stack Projects',
   description:'Explore cutting-edge web development projects by The Freelancer Shop, including frontend designs, backend APIs, and full-stack applications.',
   keywords: [

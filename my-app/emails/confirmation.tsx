@@ -1,4 +1,4 @@
-// emailTemplates/VerificationEmail.tsx
+// emailTemplates/PasswordChangedEmail.tsx
 import React from "react";
 import {
   Html,
@@ -9,16 +9,16 @@ import {
   Text,
 } from "@react-email/components";
 
-interface VerificationEmailProps {
+interface PasswordChangedEmailProps {
   name: string;
-  otp: string;
+  email: string;
 }
 
-export function VerificationEmail({ name, otp }: VerificationEmailProps) {
+export function PasswordChangedEmail({ name, email }: PasswordChangedEmailProps) {
   return (
     <Html lang="en" dir="ltr">
       <Head>
-        <title>Verification Code</title>
+        <title>Password Successfully Updated</title>
         <Font
           fontFamily="Arial, sans-serif"
           fallbackFontFamily={["Verdana"]}
@@ -31,7 +31,7 @@ export function VerificationEmail({ name, otp }: VerificationEmailProps) {
         />
       </Head>
 
-      <Preview>Your verification code from The Freelancer</Preview>
+      <Preview>Your password has been updated</Preview>
 
       <Section
         style={{
@@ -45,30 +45,19 @@ export function VerificationEmail({ name, otp }: VerificationEmailProps) {
         }}
       >
         <Text style={{ textAlign: 'center', color: '#333', fontSize: '24px', fontWeight: 'bold' }}>
-          Hello {name}, Email Verification
+          Hello {name},
         </Text>
 
         <Text style={{ fontSize: '16px', color: '#555', marginTop: '20px' }}>
-          Thank you for signing up with <strong>The Freelancer</strong>. To complete your registration, please verify your email address using the code below:
+          The password for your account <strong>{email}</strong> has been successfully updated. You can now use your new password to sign in.
         </Text>
 
-        <Section style={{ textAlign: 'center', margin: '20px 0' }}>
-          <Text style={{
-            display: 'inline-block',
-            fontSize: '24px',
-            letterSpacing: '8px',
-            padding: '10px 20px',
-            backgroundColor: '#f2f2f2',
-            borderRadius: '6px',
-            color: '#000',
-            fontWeight: 'bold',
-          }}>
-            {otp}
-          </Text>
-        </Section>
-
         <Text style={{ fontSize: '14px', color: '#888', marginTop: '10px' }}>
-          This code will expire in 1 hour. If you didn’t create an account, you can safely ignore this email.
+          If you did not make this change, please contact our support immediately to secure your account.
+        </Text>
+
+        <Text style={{ fontSize: '14px', color: '#888', marginTop: '20px' }}>
+          Thank you for using our service!
         </Text>
 
         <Text style={{ fontSize: '14px', color: '#888', marginTop: '10px' }}>

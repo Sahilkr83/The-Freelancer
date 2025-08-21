@@ -9,6 +9,12 @@ export interface User extends Document{
     verifyCode:string,
     verifyCodeExpiry:Date,
     isVerified: boolean
+    resetToken?: string;
+    resetTokenExpiry?: Date;
+    resetRequestCount: number;
+    resetRequestTimeWindow?: Date;
+    demoContentEdited: boolean; 
+    userProject:[]
 }
 
 const UserSchema : Schema<User> = new Schema({
@@ -26,7 +32,7 @@ const UserSchema : Schema<User> = new Schema({
         type:String,
         required:[true,"Email is required"],
         unique:true,
-        match:[/.+|@.+|../,'please use a valid email address']
+        match: [/\S+@\S+\.\S+/, 'Please use a valid email address']
     },
     image:{
 		type: String,
@@ -47,8 +53,31 @@ const UserSchema : Schema<User> = new Schema({
         type:Boolean,
         default:false
     },
+    resetToken: {
+        type: String,
+        default: null,
+    },
+    resetTokenExpiry: {
+        type: Date,
+        default: null,
+    },
+    resetRequestCount: {
+        type: Number, 
+        default: 0,
+        required:true
+    },
+    resetRequestTimeWindow: {
+        type: Date, 
+        default: Date.now,
+        required:true
+    },
+    demoContentEdited: {
+      type: Boolean,
+      required:true,
+      default:false// Link to the DemoContent model
+    },
+    userProject: [],
 })
 
-const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>('User',UserSchema)
-
+const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>('User', UserSchema);
 export default UserModel;

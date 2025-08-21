@@ -1,4 +1,4 @@
-// emailTemplates/VerificationEmail.tsx
+// emailTemplates/ResetPasswordEmail.tsx
 import React from "react";
 import {
   Html,
@@ -7,18 +7,19 @@ import {
   Preview,
   Section,
   Text,
+  Button,
 } from "@react-email/components";
 
-interface VerificationEmailProps {
+interface ResetPasswordEmailProps {
   name: string;
-  otp: string;
+  resetLink: string;
 }
 
-export function VerificationEmail({ name, otp }: VerificationEmailProps) {
+export function ResetPasswordEmail({ name, resetLink }: ResetPasswordEmailProps) {
   return (
     <Html lang="en" dir="ltr">
       <Head>
-        <title>Verification Code</title>
+        <title>Reset Your Password</title>
         <Font
           fontFamily="Arial, sans-serif"
           fallbackFontFamily={["Verdana"]}
@@ -31,7 +32,7 @@ export function VerificationEmail({ name, otp }: VerificationEmailProps) {
         />
       </Head>
 
-      <Preview>Your verification code from The Freelancer</Preview>
+      <Preview>Password Reset Request from The Freelancer</Preview>
 
       <Section
         style={{
@@ -45,33 +46,39 @@ export function VerificationEmail({ name, otp }: VerificationEmailProps) {
         }}
       >
         <Text style={{ textAlign: 'center', color: '#333', fontSize: '24px', fontWeight: 'bold' }}>
-          Hello {name}, Email Verification
+          Hello {name},
         </Text>
 
         <Text style={{ fontSize: '16px', color: '#555', marginTop: '20px' }}>
-          Thank you for signing up with <strong>The Freelancer</strong>. To complete your registration, please verify your email address using the code below:
+          We received a request to reset your password. Click the button below to set a new password:
         </Text>
 
-        <Section style={{ textAlign: 'center', margin: '20px 0' }}>
-          <Text style={{
-            display: 'inline-block',
-            fontSize: '24px',
-            letterSpacing: '8px',
-            padding: '10px 20px',
-            backgroundColor: '#f2f2f2',
-            borderRadius: '6px',
-            color: '#000',
-            fontWeight: 'bold',
-          }}>
-            {otp}
-          </Text>
+        <Section style={{ textAlign: 'center', margin: '25px 0' }}>
+          <Button
+            href={resetLink}
+            style={{
+              backgroundColor: "#2563EB",
+              color: "#ffffff",
+              borderRadius: "6px",
+              textDecoration: "none",
+              fontWeight: "bold",
+              padding: "12px 24px",
+              fontSize: "16px",
+            }}
+          >
+            Reset Password
+          </Button>
         </Section>
 
         <Text style={{ fontSize: '14px', color: '#888', marginTop: '10px' }}>
-          This code will expire in 1 hour. If you didn’t create an account, you can safely ignore this email.
+          If you did not request a password reset, please ignore this email.
         </Text>
 
         <Text style={{ fontSize: '14px', color: '#888', marginTop: '10px' }}>
+          This link will expire in 10 minutes.
+        </Text>
+
+        <Text style={{ fontSize: '14px', color: '#888', marginTop: '20px' }}>
           — The Freelancer Team
         </Text>
       </Section>

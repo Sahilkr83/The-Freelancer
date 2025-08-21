@@ -6,6 +6,7 @@ import {  useSession } from "next-auth/react";
 interface UserType {
   // Define properties of user, e.g.
   isVerified: boolean;
+  username:string;
   name?: string;
   email?: string;
   image:string,

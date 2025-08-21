@@ -8,10 +8,11 @@ export async function middleware(request:NextRequest){
 
     const token = await getToken({req:request})
     const url = request.nextUrl
-    if(token && (url.pathname.startsWith('/auth/sign-in') || url.pathname.startsWith('/auth/sign-up') || url.pathname.startsWith('/verify') || url.pathname.startsWith('/'))){
+
+    if(token && (url.pathname.startsWith('/auth/sign-in') || url.pathname.startsWith('/auth/sign-up') || url.pathname.startsWith('/auth/forget-password') || url.pathname.startsWith('/auth/reset-password'))){
         return NextResponse.redirect(new URL('/profile',request.url))
     }
-    if(!token && url.pathname.startsWith("/profile")){
+    if(!token && (url.pathname.startsWith("/profile") || url.pathname.startsWith("/auth/change-password") || url.pathname.startsWith('/dashboard') )){
         return NextResponse.redirect(new URL('/auth/sign-in',request.url))
     }
     return NextResponse.next()
@@ -20,6 +21,11 @@ export async function middleware(request:NextRequest){
 export const config = {
     matcher:[
         '/auth/sign-in',
-
+        '/auth/sign-up',
+        '/auth/forget-password',
+        '/auth/reset-password',
+        '/auth/change-password',
+        '/profile',
+        '/dashboard'
     ]
 }

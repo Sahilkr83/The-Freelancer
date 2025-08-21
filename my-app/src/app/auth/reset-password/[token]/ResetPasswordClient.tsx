@@ -4,55 +4,62 @@ import React, {  useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoEye, IoEyeOff } from 'react-icons/io5'
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { toast } from 'react-hot-toast';
 import { motion } from 'framer-motion';
+import { ApiResponse } from '@/types/ApiResponse';
+import z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ResetPasswordSchema } from '@/schemas/resetPasswordSchema';
 
-interface newPassword {
-  password:string,
-  newPassword:string
+interface Props {
+  token: string;
 }
-const NewPassword = () => {
-    
+
+
+const ResetPassword = ({ token }: Props) => {
+
+  const form = useForm<z.infer<typeof ResetPasswordSchema>>({
+    resolver: zodResolver(ResetPasswordSchema),  mode: 'onChange',
+    defaultValues: {
+      password: "",
+      confirmPassword: "",
+  }});
+
     const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isValid },
-  } = useForm<newPassword>({ mode: 'onChange' });
+  } = form
 
   const router = useRouter()
 
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
-  const passwordUpdate = async (formData : newPassword) => {
+  const [loading,setLoading] = useState(false)
 
+  const passwordUpdate = async (data: z.infer<typeof ResetPasswordSchema> ) => {
+    setLoading(true)
+    const formDataWithToken = {
+        ...data,   // existing form fields like password, newPassword
+        token: token   // add the token here
+    };
     try{
-        const response = await toast.promise(
-        axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/new-password`, formData, {
-            withCredentials: true,
-        }),
-        {
-            loading: 'Updating password...',
-            success: 'Password updated successfully!',
-            error: (err) => err?.response?.data?.message || 'Password update failed.',
-        }
-        );
-        const data = response.data;
-        if(data){
-          router.push('/auth/sign-in');
-        }
-        } catch (err: unknown) {
-          let errorMessage = "Something went wrong";
+      const response = await axios.post(`/api/reset-password`, formDataWithToken)
 
-          if (err instanceof Error) {
-            errorMessage = err.message;
-          } else if (typeof err === "string") {
-            errorMessage = err;
-          }
+      const data = response.data;
 
-          toast.error(errorMessage); // ✅ Now it's a string (Message)
-        }
+      if(data){
+        router.push('/auth/sign-in');
+        toast.success(data.message)  
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<ApiResponse>;
+      const errorMessage = axiosError.response?.data.message || "An error occurred during Sign Up";
+      toast.error(errorMessage); // ✅ Now it's a string (Message)
+    }
+    setLoading(false)
         
 
   }
@@ -113,7 +120,7 @@ const NewPassword = () => {
                   className="w-full px-6 py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
                   type={showPassword2 ? 'text' : 'password'}
                   placeholder="Confirm Password"
-                  {...register('newPassword', {
+                  {...register('confirmPassword', {
                     validate: (value) => value === password || 'Passwords do not match',
                   })}
                 />
@@ -123,20 +130,24 @@ const NewPassword = () => {
                 >
                   {showPassword2 ? <IoEye /> : <IoEyeOff />}
                 </span>
-                {errors.newPassword && (
-                  <p className="text-red-500 text-sm mt-2 font-semibold">{errors.newPassword.message}</p>
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-sm mt-2 font-semibold">{errors.confirmPassword.message}</p>
                 )}
               </div>
 
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl font-extrabold tracking-widest text-white text-lg uppercase shadow-lg transition duration-300 hover:brightness-125 hover:shadow-[0_0_20px_#4266ff]"
+                className={`w-full py-3 sm:py-4 rounded-xl font-extrabold tracking-widest text-white text-sm sm:text-base md:text-lg uppercase shadow-lg transition duration-300 ${
+                    !isValid || !loading
+                      ? 'opacity-50 cursor-not-allowed'
+                      : 'hover:brightness-125 hover:shadow-[0_0_20px_#4266ff]'
+                  }`}
                 style={{
                   backgroundImage:
                     'linear-gradient(to right, #5159ff, #424eed, #3244da, #1f3ac9, #0030b7)',
                 }}
-                disabled={!isValid}
+                disabled={!isValid || loading}
               >
                 Change Password
               </button>
@@ -167,4 +178,4 @@ const NewPassword = () => {
   )
 }
 
-export default NewPassword
+export default ResetPassword

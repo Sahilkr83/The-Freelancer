@@ -9,11 +9,13 @@ import GoogleProvider from "next-auth/providers/google";
 import { randomBytes } from "crypto";
 
 interface AuthUser extends NextAuthUser {
+  id:string;
   email: string;
   username?: string;
   isVerified: boolean;
   name?: string;
   image?: string;
+  userProject:[];
 
 }
 export const authOptions:NextAuthOptions = {
@@ -50,6 +52,7 @@ export const authOptions:NextAuthOptions = {
                             isVerified: user.isVerified,
                             name:user.name,
                             image:user.image || `https://api.dicebear.com/5.x/initials/png?seed=${user.name}`,
+                            userProject:[],
                         } as AuthUser;
                     }else{
                         throw new Error('Incorrect Password')
@@ -58,6 +61,7 @@ export const authOptions:NextAuthOptions = {
                     throw new Error((error as Error)?.message || "Authorization failed");
                 }
             }
+            
         }),  
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -87,7 +91,8 @@ export const authOptions:NextAuthOptions = {
                         isVerified: true,
                         password: await bcrypt.hash(randomPassword, 10),
                         verifyCode:"VERIFIED",
-                        verifyCodeExpiry:new Date() // empty or random password
+                        verifyCodeExpiry:new Date(),
+                        userProject:[] // empty or random password
                     });
                 }
             }
@@ -108,7 +113,7 @@ export const authOptions:NextAuthOptions = {
         async jwt({ token, user }) {
             if(user){
                 token._id = user.id;  // NextAuth always sets `user.id`
-                token.username = (user).username;
+                token.username = (user).username || (user).email?.split('@')[0]
                 token.isVerified = (user).isVerified;
                 token.email = (user).email;
                 token.name = (user).name;

@@ -5,8 +5,12 @@ import { AppContext } from '@/context/AppContext';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import { signOut } from 'next-auth/react';
+import { useSession } from "next-auth/react";
+import Image from 'next/image';
 
 export default function ProfilePage() {
+  const { status: sessionStatus } = useSession();
+
   const { user} = useContext(AppContext)!;
   const router = useRouter()
   const handleLogout = async () => {
@@ -14,15 +18,18 @@ export default function ProfilePage() {
     toast.success("Logged out successfully!");
   };
 
-  if (!user) {
+  if (sessionStatus === "loading") {
     return (
-       <div className='text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 '>
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-xl">You are not logged in.</p>
-      </div>
+      <div className="text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 min-h-screen flex justify-center items-center">
+        <div className="flex flex-col items-center space-y-4">
+          {/* Spinning loader */}
+          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-xl font-semibold tracking-wide">Loading...</p>
+        </div>
       </div>
     );
   }
+
   return (
   <motion.div
     initial={{ opacity: 0 }}
@@ -34,14 +41,20 @@ export default function ProfilePage() {
     <div className="text-white relative pt-24 pb-0 lg:pb-36 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 font-['Rajdhani',_sans-serif]">
       <div className="flex flex-col md:flex-row justify-between items-start gap-10 mt-10">
         <div className="flex items-center space-x-6">
-          <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white text-4xl font-extrabold shadow-neon-glow">
-            {user?.name?.charAt(0).toUpperCase()}
+          <div className="w-24 h-24 rounded-full  flex items-center justify-center   font-extrabold">
+            <Image 
+              src={user?.image || "/default-avatar.png"}
+              width={80} 
+              height={80}
+              alt="User"
+              className="h-full w-full rounded-full object-cover border border-white"
+            />
           </div>
           <div>
             <h1 className="text-4xl font-extrabold tracking-wide ">
-              {user.name}
+              {user?.name}
             </h1>
-            <p className="text-gray-300 text-lg mt-1">{user.email}</p>
+            <p className="text-gray-300 text-lg mt-1">{user?.email}</p>
           </div>
         </div>
 
@@ -51,13 +64,13 @@ export default function ProfilePage() {
               Profile Info
             </h3>
             <ul className="space-y-2 text-gray-300 text-lg">
-              <li><strong>Name:</strong> {user.name}</li>
-              <li><strong>Email:</strong> {user.email}</li>
+              <li><strong>Name:</strong> {user?.name}</li>
+              <li><strong>Email:</strong> {user?.email}</li>
               {/* Add more profile fields if needed */}
             </ul>
           </div>
           <button
-            onClick={() => router.push("/change-password")}
+            onClick={() => router.push("/auth/change-password")}
             className="px-6 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-purple-700 text-white font-bold tracking-widest uppercase shadow-lg hover:brightness-110 transition"
           >
             Change Password

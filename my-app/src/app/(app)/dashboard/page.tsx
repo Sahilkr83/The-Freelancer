@@ -1,15 +1,15 @@
-import NewPasswordPageClient from './new-password-client';
-import { Metadata } from 'next';
+import DashboardPageClient from './dashboard-client';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Change Your Password – The Freelancer Shop',
+  title: 'Dashboard – Manage Projects',
   description:'',
   keywords: [''],
   authors: [{ name: "The Freelancer Shop" }],
   openGraph: {
     title: "",
     description: "",
-    url: "https://thefreelancer.shop/signup",
+    url: "https://thefreelancer.shop/dashboard",
     siteName: "The Freelancer Shop",
     type: "website",
     images: [],
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://thefreelancer.shop/")
 };
 
-export default function NewPasswordPage() {
-  return <NewPasswordPageClient />;
+export default function DashboardPage() {
+  return <DashboardPageClient />;
 }
 
 

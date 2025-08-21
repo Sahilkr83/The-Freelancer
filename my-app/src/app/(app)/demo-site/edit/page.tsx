@@ -1,15 +1,14 @@
-import ForgetPasswordPageClient from './forget-password-client';
-import { Metadata } from 'next';
-
+import EditPageClient from './edit-client';
+import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Recover Your Freelancer Account Password',
-  description:'',
+  title: 'Edit Demo Site | The Freelancer Shop',
+  description: 'Edit your demo website with The Freelancer Shop platform. Customize content and style in real-time.',
   keywords: [''],
   authors: [{ name: "The Freelancer Shop" }],
   openGraph: {
     title: "",
     description: "",
-    url: "https://thefreelancer.shop/forget-password",
+    url: "https://thefreelancer.shop/demo-site/edit",
     siteName: "The Freelancer Shop",
     type: "website",
     images: [],
@@ -27,7 +26,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://thefreelancer.shop/")
 };
 
-export default function ForgetPasswordPage() {
-  return <ForgetPasswordPageClient />;
+export default function EditPage() {
+  return <EditPageClient />;
 }
+
 

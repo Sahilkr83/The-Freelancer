@@ -1,22 +1,28 @@
 'use client';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '@/assets/logo/TheFreelancer logo.png';
-import { AppContext } from '@/context/AppContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaFilm } from "react-icons/fa";
+import { useSession } from 'next-auth/react';
 // import { ReactNode } from 'react';
 // import{AnimatePresence, motion} from 'framer-motion';
 
 export default function NavBar() {
-  const { user } = useContext(AppContext)!;
   const router = useRouter();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { data: session, status } = useSession();
+  const user = session?.user || null;
+  const [mounted, setMounted] = useState(false); // track client mount
 
+  useEffect(() => {
+    setMounted(true); // now we are on the client
+  }, []);
+  const loadingUser = !mounted || status === 'loading';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -86,7 +92,7 @@ export default function NavBar() {
         >
           About Us
         </Link>
-        {/* About Us */}
+        {/* contact Us */}
         <Link
           href="/contact-us"
           className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
@@ -106,18 +112,27 @@ export default function NavBar() {
           >
             Contact Us
           </Link> */}
-
-          {user ? (
-            <Link href="/profile" className="flex items-center gap-2">
-              <Image
-                src={user.image}
-                width={40}
-                height={40}
-                alt={user.image}
-                className="h-10 w-10 rounded-full object-cover border border-white"
-              />
-              <span>{user.name?.split(' ')[0]}</span>
-            </Link>
+          {loadingUser ? (
+            <div className="w-32 h-10 bg-gray-700 animate-pulse rounded-md" />
+          ) : user ? (
+            <div className='flex items-center gap-4'>
+              <Link
+                href="/dashboard"
+                className="px-3 py-1.5 border border-white rounded-md hover:bg-white hover:text-black transition"
+              >
+                Dashboard
+              </Link>
+              <Link href="/profile" className="flex items-center gap-2">
+                <Image
+                  src={user.image}
+                  width={40}
+                  height={40}
+                  alt={user.image}
+                  className="h-10 w-10 rounded-full object-cover border border-white"
+                />
+                <span>{user.name?.split(' ')[0]}</span>
+              </Link>
+            </div>
           ) : (
             <>
               <Link
@@ -187,17 +202,34 @@ export default function NavBar() {
           </Link>
           <div className="border-t border-gray-700 my-2" />
 
-          {user ? (
-            <Link href="/profile" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 hover:bg-gray-700 px-4 py-2 rounded-md">
-              <Image
-                src={user.image}
-                width={40} 
-                height={40}
-                alt="User"
-                className="h-9 w-9 rounded-full object-cover border border-white"
-              />
-              <span>{user.name?.split(' ')[0]}</span>
-            </Link>
+          {loadingUser ? (
+            <div className="w-full h-10 bg-gray-700 animate-pulse rounded-md" />
+          ) :mounted ? (
+            user ? (
+            <div className="flex flex-col gap-2">
+              <Link
+                href="/profile"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-3 hover:bg-gray-700 px-4 py-2 rounded-md"
+              >
+                <Image
+                  src={user.image || '/default-avatar.png'}
+                  width={40}
+                  height={40}
+                  alt="User"
+                  className="h-9 w-9 rounded-full object-cover border border-white"
+                />
+                <span>{user.name?.split(' ')[0]}</span>
+              </Link>
+              <Link
+                href="/dashboard"
+                onClick={() => setMenuOpen(false)}
+                className="px-4 py-2 mx-1 rounded-md  border border-white text-center"
+              >
+                Dashboard
+              </Link>
+            </div>
+            
           ) : (
             <>
               <Link href="/auth/sign-in" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md">
@@ -206,6 +238,11 @@ export default function NavBar() {
               <Link href="/auth/sign-up" onClick={() => setMenuOpen(false)} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold text-center">
                 ✨ Sign Up
               </Link>
+            </>
+          )) : (
+            <>
+              <a className="hover:bg-gray-700 px-4 py-2 rounded-md invisible">Login</a>
+              <a className="bg-blue-600 px-4 py-2 rounded-md invisible">Sign Up</a>
             </>
           )}
         </div>

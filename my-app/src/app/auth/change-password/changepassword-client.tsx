@@ -4,26 +4,29 @@ import React, {  useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoEye, IoEyeOff } from 'react-icons/io5'
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { toast } from 'react-hot-toast';
 import { motion } from 'framer-motion';
-
-interface PasswordUpdateForm {
-  currentPassword: string;
-  confirmPassword: string;
-  newPassword: string; // if you have confirmation field
-}
+import z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { changePasswordSchema } from '@/schemas/chengePasswordSchema';
+import { ApiResponse } from '@/types/ApiResponse';
 
 const ChangePassword = () => {
+
+  const form = useForm<z.infer<typeof changePasswordSchema>>({
+    resolver: zodResolver(changePasswordSchema),  mode: 'onChange',
+      defaultValues: {
+        password: "",
+        confirmPassword: "",
+  }});
     
-const {
-  register,
-  handleSubmit,
-  formState: { errors, isValid },
-  watch,
-} = useForm<PasswordUpdateForm>({
-  mode: "onChange",
-});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    watch,
+  } = form
 
   const router = useRouter();
 
@@ -32,37 +35,30 @@ const {
   const [showPassword3, setShowPassword3] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const passwordUpdate = async (formData: PasswordUpdateForm) => {
+  const passwordUpdate = async (formData: z.infer<typeof changePasswordSchema> ) => {
     setLoading(true)
     try{
-        const response = await toast.promise(
-        axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/change-password`, formData, {
-            withCredentials: true,
-        }),
-        {
-            loading: 'Updating password...',
-            success: 'Password updated successfully!',
-            error: (err) => err?.response?.data?.message || 'Password update failed.',
-        }
-        );
+        const response = await axios.post(`/api/change-password`, formData)
         const data = response.data;
         if(data){
           router.push('/profile');
+          toast.success(data.message)
         }
-        } catch (err) {
-            console.log(err)
-
-        }
+       } catch (error) {
+          const axiosError = error as AxiosError<ApiResponse>;
+          const errorMessage = axiosError.response?.data.message || "An error occurred during Sign Up";
+          toast.error(errorMessage); // ✅ Now it's a string (Message)
+      }
     setLoading(false)
   }
   return (
-<motion.div
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  exit={{ opacity: 0 }}
-  transition={{ duration: 0.5 }}
-  viewport={{ once: true }}
->
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true }}
+  >
   <div className="text-white pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
     <section className="py-20 sm:py-24 md:py-28 lg:py-32">
       <div className="flex justify-center">
@@ -111,7 +107,7 @@ const {
                 className="w-full px-6 py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="New Password"
-                {...register('newPassword', { required: 'New Password is required' })}
+                {...register('password', { required: 'New Password is required' })}
               />
               <span
                 className="absolute right-5 top-4 text-indigo-400 cursor-pointer select-none hover:text-indigo-600 transition"
@@ -120,8 +116,8 @@ const {
               >
                 {showPassword ? <IoEye /> : <IoEyeOff />}
               </span>
-              {errors.newPassword && (
-                <p className="text-red-500 text-sm mt-2 font-semibold">{errors.newPassword.message}</p>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-2 font-semibold">{errors.password.message}</p>
               )}
             </div>
 
@@ -132,7 +128,7 @@ const {
                 type={showPassword2 ? 'text' : 'password'}
                 placeholder="Confirm Password"
                 {...register('confirmPassword', {
-                  validate: (value) => value === watch('newPassword') || 'Passwords do not match',
+                  validate: (value) => value === watch('password') || 'Passwords do not match',
                 })}
               />
               <span
@@ -150,8 +146,12 @@ const {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={!isValid }
-              className="w-full py-4 rounded-xl font-extrabold tracking-widest text-white text-lg uppercase shadow-lg transition duration-300 hover:brightness-125 hover:shadow-[0_0_20px_#4266ff]"
+              disabled={!isValid || loading}
+              className={`w-full py-3 sm:py-4 rounded-xl font-extrabold tracking-widest text-white text-sm sm:text-base md:text-lg uppercase shadow-lg transition duration-300 ${
+                    !isValid
+                      ? 'opacity-50 cursor-not-allowed'
+                      : 'hover:brightness-125 hover:shadow-[0_0_20px_#4266ff]'
+                  }`}
               style={{
                 backgroundImage:
                   'linear-gradient(to right, #5159ff, #424eed, #3244da, #1f3ac9, #0030b7)',
@@ -181,8 +181,7 @@ const {
       </div>
     </section>
   </div>
-</motion.div>
-
+  </motion.div>
   )
 }
 

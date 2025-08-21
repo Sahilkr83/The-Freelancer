@@ -17,34 +17,26 @@ const SignupPage = () => {
   const [username, setUsername] = useState("");
   const [usernameMessage, setUsernameMessage] = useState("");
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);
-  
   const router = useRouter();
 
   const form = useForm<z.infer<typeof signUpSchema>>({
-      resolver: zodResolver(signUpSchema),  mode: 'onChange',
+    resolver: zodResolver(signUpSchema),  mode: 'onChange',
       defaultValues: {
-          username: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
   }});
 
-  const { register, handleSubmit, watch, formState: { errors, }, } = form
-
+  const { register, handleSubmit, watch, formState: { errors,isValid }, } = form
   const passwordValue = watch('password',''); 
-  const confirmPasswordValue = watch('confirmPassword', '');
-
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const [otpField, setOtpField] = useState(false)
   const [loading, setLoading] = useState(false)
-  // const [resending, setResending] = useState(false);
   const [verifying, setVerifying] = useState(false);
   const [userEmail, setUserEmail] = useState('');
-//   const [username, setUsername] = useState('');
   const [passwordo, setPassword] = useState('');
-  // const [timeLeft, setTimeLeft] = useState(120); // 2 minutes (in seconds)
-  // const password = watch('password');
   const [otp , setOtp] = useState<string>("")
 
   const [otpValues, setOtpValues] = useState(new Array(6).fill(""));
@@ -99,10 +91,9 @@ const SignupPage = () => {
 // Signup logic
   const onSubmit = async (data: z.infer<typeof signUpSchema> ) => {
     setLoading(true);
-
     if (usernameMessage.includes("Username is already taken")) {
-        toast.error("Please choose a different username.");
-        return;
+      toast.error("Please choose a different username.");
+      return;
     }
   
     try {
@@ -219,9 +210,9 @@ const SignupPage = () => {
 
       if (response.ok) {
         await signIn('credentials', {
-              redirect: false,
-              identifier: username,
-              password: passwordo,
+          redirect: false,
+          identifier: username,
+          password: passwordo,
         })
         setOtpField(false);
         toast.success(res.message);
@@ -238,8 +229,6 @@ const SignupPage = () => {
     }
     setVerifying(false);
 };
-
-
   return (
   <motion.div
     initial={{ opacity: 0 }}
@@ -292,7 +281,7 @@ const SignupPage = () => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
-              {/* Full Name */}
+              {/* Username */}
               <motion.div
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -318,6 +307,7 @@ const SignupPage = () => {
                     ) : null}
                 </div>
               </motion.div>
+              {/* Full Name */}
               <motion.div
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -405,17 +395,17 @@ const SignupPage = () => {
                   <p className="text-red-500 text-sm mt-2 font-semibold">{errors.confirmPassword.message}</p>
                 )}
               </motion.div>
-
+              {/* Login Button*/}
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 type="submit"
-                disabled={passwordValue.length < 6 || confirmPasswordValue !== passwordValue }
-               className={`w-full py-3 sm:py-4 rounded-xl font-extrabold tracking-widest text-white text-sm sm:text-base md:text-lg uppercase shadow-lg transition duration-300 ${
-                  passwordValue.length < 6 || confirmPasswordValue !== passwordValue
+                disabled={!isValid || loading}
+                className={`w-full py-3 sm:py-4 rounded-xl font-extrabold tracking-widest text-white text-sm sm:text-base md:text-lg uppercase shadow-lg transition duration-300 ${
+                  !isValid || loading
                     ? 'opacity-50 cursor-not-allowed'
                     : 'hover:brightness-125 hover:shadow-[0_0_20px_#4266ff]'
-                }`}
+                  }`}
                 style={{
                   backgroundImage:
                     'linear-gradient(to right, #5159ff, #424eed, #3244da, #1f3ac9, #0030b7)',
@@ -424,6 +414,7 @@ const SignupPage = () => {
                 {loading ? 'Creating...' : 'Create Account'}
               </motion.button>
               </form>
+              {/*Google Login Button*/}
               <button
                   type="button"
                   onClick={() => signIn("google", { callbackUrl: "/" })}
@@ -442,7 +433,7 @@ const SignupPage = () => {
                 className="text-center text-sm text-gray-400 mt-3 tracking-wide font-semibold uppercase my-8">
                 &mdash; Or Sign In &mdash;
               </motion.div>
-
+              {/* Sign up page button*/}
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
@@ -461,7 +452,6 @@ const SignupPage = () => {
           </div>
         </motion.div>
       </section>
-
       {/* OTP Modal */}
       {otpField && (
         <motion.div
@@ -554,10 +544,8 @@ const SignupPage = () => {
           </motion.div>
         </motion.div>
       )}
-
     </div>
   </motion.div>
-
   );
 };
 

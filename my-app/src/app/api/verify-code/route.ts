@@ -1,4 +1,5 @@
 
+import { WelcomeEmailfunction } from "@/heplers/welcomeEmail";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 
@@ -31,12 +32,24 @@ export async function POST(request: Request) {
         if(isCodeValid && isCodeNotExpired){
             user.isVerified = true;
             user.verifyCode = 'VERIFIED';
-            await user.save()
+            await user.save();
+            
+            const emailResponse = await WelcomeEmailfunction(user?.name ,user.email);
+            if(!emailResponse.success){
+                return Response.json(
+                    {
+                        success:false,
+                        message: "Failed to send verification email. Please try again later."
+                    },
+                    {  status:500  }
+                )
+            }
 
             return Response.json({
                 success:true,
                 message:"Account verified successfully"
             }, {status:200})
+
         }else if (!isCodeNotExpired){
             return Response.json({
                 success:false,

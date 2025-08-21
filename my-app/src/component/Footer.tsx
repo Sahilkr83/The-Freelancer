@@ -6,9 +6,9 @@ import { useRouter,usePathname } from "next/navigation";
 import href from "@/component/urlfiles/links";
 
 const Footer = () => {
-  const hideLayoutRoutes = ['/auth/sign-in', '/auth/sign-up', '/contact-us', '/profile', '/change-password', '/forget-password','/new-password'];
+  const hideLayoutRoutes = ['/auth/sign-in', '/auth/sign-up', '/contact-us', '/profile', '/dashboard','/auth/change-password', '/auth/forget-password','/auth/reset-password'];
   const pathname = usePathname();
-  const contactOn = hideLayoutRoutes.includes(pathname);
+  const contactOn = hideLayoutRoutes.some((route) => pathname.startsWith(route));
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const router = useRouter()
   useEffect(() => {
@@ -46,6 +46,7 @@ const Footer = () => {
             autoPlay
             preload="auto"
             src="https://res.cloudinary.com/dxp7dcmvr/video/upload/q_auto,f_auto/v1735458285/background_video_dbrrbr.mp4"
+            suppressHydrationWarning
           >
             <track kind="captions" srcLang="en" label="No captions available" />
           </video>

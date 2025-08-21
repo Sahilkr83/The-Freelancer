@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "About Us – The Freelancer Shop",
     description:
       "Learn about our team, mission, and the creative process behind our video editing and web design services.",
-    url: "https://thefreelancer.shop/aboutus",
+    url: "https://thefreelancer.shop/about-us",
     siteName: "The Freelancer Shop",
     type: "website",
     images: [

@@ -22,8 +22,7 @@ export default function SignInPage() {
       password: "",
     }});
 
-  const { register, handleSubmit, watch, formState: { errors} } = form;
-  const passwordValue = watch('password',''); 
+  const { register, handleSubmit, formState: { errors,isValid} } = form;
   const router = useRouter()
   const [showPassword,setShowpassword] = useState(false)
   const [loading , setLoading] = useState(false)
@@ -159,7 +158,7 @@ export default function SignInPage() {
 
                 <button
                   type="button"
-                  onClick={() => router.push("/forget-password")}
+                  onClick={() => router.push("/auth/forget-password")}
                   className="text-blue-400 hover:underline"
                 >
                   Forgot Password?
@@ -170,14 +169,14 @@ export default function SignInPage() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 type="submit"
-                disabled={passwordValue.length < 6}
+                disabled={!loading || !isValid}
                 viewport={{ once: true }}
                 style={{
                   backgroundImage:
                     'linear-gradient(to right, #5159ff, #424eed, #3244da, #1f3ac9, #0030b7)',
                 }}
                 className={`w-full py-3 sm:py-4 rounded-xl font-extrabold tracking-widest text-white text-sm sm:text-base md:text-lg uppercase shadow-lg transition duration-300 ${
-                  passwordValue.length < 6
+                  !loading || !isValid
                     ? 'opacity-50 cursor-not-allowed'
                     : 'hover:brightness-125 hover:shadow-[0_0_20px_#4266ff]'
                 }`}
@@ -187,7 +186,16 @@ export default function SignInPage() {
             </form>
               <button
                   type="button"
-                  onClick={() => signIn("google", { callbackUrl: "/" })}
+                  onClick={async () => {
+                    const result = await signIn("google", { redirect: false, callbackUrl: "/" });
+                    if (result?.error) {
+                      toast.error(result.error || "Failed to sign in with Google");
+                    } else {
+                      toast.success("Signed in successfully!");
+                      // Redirect manually
+                      if (result?.url) window.location.href = result.url;
+                    }
+                  }}
                   className="w-full py-3 mt-8 mb-3 sm:py-4 rounded-xl font-extrabold tracking-widest text-white text-sm sm:text-base md:text-lg uppercase shadow-lg transition duration-300  hover:brightness-125 flex items-center justify-center gap-3 bg-black"
                 >
                   <FcGoogle className="text-2xl" />
@@ -211,7 +219,7 @@ export default function SignInPage() {
                 whileTap={{ scale: 0.97 }}
                 viewport={{ once: true }}
                 type="button"
-                onClick={() => router.push("//auth/sign-up")}
+                onClick={() => router.push("/auth/sign-up")}
                 style={{
                   backgroundImage: 'linear-gradient(to right, #1e227e, #253098, #293eb3, #2b4dce, #2a5deb)',
                 }}
