@@ -11,7 +11,6 @@ import { ApiResponse } from "@/types/ApiResponse";
 export default function DashboardPage() {
   const { user } = useContext(AppContext)!;
   const router = useRouter();
-  const [demoLink, setDemoLink] = useState("");
 
 
   // Example demo + user projects (later replace with DB fetch)
@@ -47,12 +46,11 @@ export default function DashboardPage() {
   const shareButton = () => {
     if (navigator.share) {
       const username = user?.username
-      setDemoLink(`${window.location.origin}/demo-site/${username}`);
       // Mobile-friendly native share
       navigator.share({
         title: "Check out my demo site!",
         text: "Here is my demo website you can explore:",
-        url: demoLink,
+        url: `${window.location.origin}/demo-site/${username}`,
       })
       
     }
