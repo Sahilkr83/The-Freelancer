@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import axios , {AxiosError} from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 import { signUpSchema } from "@/schemas/signUpSchema";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 
 const SignupPage = () => {
@@ -42,8 +42,9 @@ const SignupPage = () => {
   const [otpValues, setOtpValues] = useState(new Array(6).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [loadingGoogle , setLoadingGoogle] = useState(false)
   const usernameValue = watch('username');
-    
+  const { status } = useSession();
   useEffect(() => {
     if (typingTimeout) clearTimeout(typingTimeout);
 
@@ -87,6 +88,32 @@ const SignupPage = () => {
   return () => clearTimeout(timeout);
   // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [usernameValue]);
+
+  useEffect(() => {
+    if (status === "authenticated" && loadingGoogle) {
+      toast.success("Signed in successfully!");
+      setLoadingGoogle(false);
+    }
+  }, [status, loadingGoogle]);
+
+  const handleGoogleLogin = async () => {
+    if (loadingGoogle) return; // prevent double clicks
+    setLoadingGoogle(true);
+
+    const result = await signIn("google", {
+      redirect: false,
+      callbackUrl: "/",
+    });
+
+    if (result?.error) {
+      toast.error(result.error || "Failed to sign in with Google");
+      setLoadingGoogle(false);
+    } else  {
+      localStorage.setItem("login_success", "true"); // mark login success
+  // redirect
+    }
+  };
+
 
 // Signup logic
   const onSubmit = async (data: z.infer<typeof signUpSchema> ) => {
@@ -237,7 +264,7 @@ const SignupPage = () => {
     transition={{ duration: 0.6 }}
     viewport={{ once: true }}
   >
-    <div className="text-white pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
+    <div className=" pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
       <section className="py-20 sm:py-24 md:py-28 lg:py-32">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -274,10 +301,15 @@ const SignupPage = () => {
           viewport={{ once: true }}
           className="flex justify-center px-2 sm:px-0">
           <div
-            className="w-full max-w-md p-6 sm:p-10 bg-[rgba(30,30,40,0.7)] backdrop-blur-md rounded-3xl border border-gray-700 shadow-lg shadow-indigo-900/50"
+            className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-md 
+               p-4 sm:p-6 md:p-10 
+               rounded-3xl border shadow-lg backdrop-blur-md
+               bg-[color:var(--color-background)] 
+               border-[color:var(--color-border)] 
+               text-[color:var(--color-foreground)]"
             style={{
               boxShadow:
-                '0 0 15px 2px rgba(65, 105, 225, 0.6), inset 0 0 10px 2px rgba(65, 105, 225, 0.4)',
+                "0 0 15px 2px rgba(65, 105, 225, 0.4), inset 0 0 10px 2px rgba(65, 105, 225, 0.2)",
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
@@ -289,7 +321,13 @@ const SignupPage = () => {
                 viewport={{ once: true }}
               >
                 <input
-                  className="w-full px-6 py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
+                  className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl 
+                     bg-[color:var(--color-background)] 
+                     text-[color:var(--color-foreground)] 
+                     placeholder-gray-400 tracking-wide font-semibold 
+                     border border-[color:var(--color-border)] 
+                     transition focus:outline-none focus:border-indigo-500 
+                     focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
                   type="text"
                   placeholder="User Name"
                   {...register('username', { required: 'Userame is required' })}
@@ -315,7 +353,13 @@ const SignupPage = () => {
                 viewport={{ once: true }}
               >
                 <input
-                  className="w-full px-6 py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
+                  className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl 
+                     bg-[color:var(--color-background)] 
+                     text-[color:var(--color-foreground)] 
+                     placeholder-gray-400 tracking-wide font-semibold 
+                     border border-[color:var(--color-border)] 
+                     transition focus:outline-none focus:border-indigo-500 
+                     focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
                   type="text"
                   placeholder="Full Name"
                   {...register('name', { required: 'Name is required' })}
@@ -333,8 +377,13 @@ const SignupPage = () => {
                 viewport={{ once: true }}
               >
                 <input
-                  className="w-full px-6 py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
-                  type="email"
+                  className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl 
+                     bg-[color:var(--color-background)] 
+                     text-[color:var(--color-foreground)] 
+                     placeholder-gray-400 tracking-wide font-semibold 
+                     border border-[color:var(--color-border)] 
+                     transition focus:outline-none focus:border-indigo-500 
+                     focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"                  type="email"
                   placeholder="Email"
                   {...register('email', { required: 'Email is required' })}
                 />
@@ -351,8 +400,13 @@ const SignupPage = () => {
                 viewport={{ once: true }}
                 className="relative">
                 <input
-                  className="w-full px-6 py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
-                  type={showPassword ? 'text' : 'password'}
+                  className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl 
+                     bg-[color:var(--color-background)] 
+                     text-[color:var(--color-foreground)] 
+                     placeholder-gray-400 tracking-wide font-semibold 
+                     border border-[color:var(--color-border)] 
+                     transition focus:outline-none focus:border-indigo-500 
+                     focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"                  type={showPassword ? 'text' : 'password'}
                   placeholder="Password"
                   {...register('password', { required: 'Password is required' })}
                 />
@@ -377,7 +431,13 @@ const SignupPage = () => {
                 className="relative"
                 >
                 <input
-                  className="w-full px-6 py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
+                  className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl 
+                     bg-[color:var(--color-background)] 
+                     text-[color:var(--color-foreground)] 
+                     placeholder-gray-400 tracking-wide font-semibold 
+                     border border-[color:var(--color-border)] 
+                     transition focus:outline-none focus:border-indigo-500 
+                     focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"                  
                   type={showPassword2 ? 'text' : 'password'}
                   placeholder="Confirm Password"
                   {...register('confirmPassword', {
@@ -395,7 +455,7 @@ const SignupPage = () => {
                   <p className="text-red-500 text-sm mt-2 font-semibold">{errors.confirmPassword.message}</p>
                 )}
               </motion.div>
-              {/* Login Button*/}
+              {/* Sign-in Button*/}
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
@@ -414,15 +474,22 @@ const SignupPage = () => {
                 {loading ? 'Creating...' : 'Create Account'}
               </motion.button>
               </form>
-              {/*Google Login Button*/}
+              {/* Google Login */}
               <button
-                  type="button"
-                  onClick={() => signIn("google", { callbackUrl: "/" })}
-                  className="w-full py-3 mt-8 mb-3 sm:py-4 rounded-xl bg-black font-extrabold tracking-widest text-white text-sm sm:text-base md:text-lg uppercase shadow-lg transition duration-300  hover:brightness-125 flex items-center justify-center gap-3"
-                >
-                  <FcGoogle className="text-2xl" />
-                  <span className="hidden sm:inline">Sign in with Google</span>
-                  {/* Sign in with Google */}
+                type="button"
+                onClick={handleGoogleLogin}
+                disabled={loadingGoogle}
+                className={`w-full py-3 mt-8 mb-3 sm:py-4 rounded-xl font-extrabold 
+                  tracking-widest text-sm sm:text-base md:text-lg 
+                  uppercase shadow-lg transition duration-300 flex items-center 
+                  justify-center gap-3 bg-[color:var(--color-background)] 
+                  border border-[color:var(--color-border)] text-[color:var(--color-foreground)]
+                  ${loadingGoogle ? "opacity-50 cursor-not-allowed" : "hover:brightness-125"}`}
+              >
+                <FcGoogle className="text-2xl" />
+                <span className="hidden sm:inline">
+                  {loadingGoogle ? "Signing in..." : "Sign in with Google"}
+                </span>
               </button>
 
               <motion.div
@@ -430,7 +497,7 @@ const SignupPage = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.95, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="text-center text-sm text-gray-400 mt-3 tracking-wide font-semibold uppercase my-8">
+                className="text-center text-sm mt-8 tracking-wide font-semibold uppercase my-8">
                 &mdash; Or Sign In &mdash;
               </motion.div>
               {/* Sign up page button*/}
@@ -468,7 +535,7 @@ const SignupPage = () => {
             exit={{ opacity: 0, y: 30 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="bg-[rgba(20,20,30,0.9)] text-white rounded-3xl shadow-2xl p-10 w-full max-w-max "
+            className="otp-field-box rounded-3xl shadow-2xl p-10 w-full max-w-max "
             style={{
               boxShadow:
                 '0 0 20px 4px rgba(65, 105, 225, 0.7), inset 0 0 15px 3px rgba(65, 105, 225, 0.5)',
@@ -488,7 +555,7 @@ const SignupPage = () => {
               Enter the OTP sent to <span className="text-blue-500">{maskEmail(userEmail)}</span>
             </p>
 
-            <div className="flex justify-center gap-4 mb-8 text-white w-full">
+            <div className="flex justify-center gap-4 mb-8  w-full">
               {otpValues.map((value, i) => (
                 <motion.input
                   key={i}
@@ -536,7 +603,7 @@ const SignupPage = () => {
             <motion.button
               onClick={() => setOtpField(false)}
               viewport={{ once: true }}
-              className="w-full border border-gray-600 hover:bg-gray-900 text-white py-3 rounded-xl font-semibold transition duration-200 shadow-md"
+              className="w-full border border-gray-600 hover:bg-gray-900  py-3 rounded-xl font-semibold transition duration-200 shadow-md"
               whileTap={{ scale: 0.97 }}
             >
               Go Back

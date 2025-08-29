@@ -2,7 +2,7 @@
 import {zodResolver} from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from 'react-hook-form';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
@@ -11,7 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import { signInSchema } from "@/schemas/signInSchema";
 
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 
 export default function SignInPage() {
@@ -26,6 +26,8 @@ export default function SignInPage() {
   const router = useRouter()
   const [showPassword,setShowpassword] = useState(false)
   const [loading , setLoading] = useState(false)
+  const [loadingGoogle , setLoadingGoogle] = useState(false)
+  const { status } = useSession();
 //   const rememberMe = watch("rememberMe");
 
   const onSubmit = async (data: z.infer<typeof signInSchema> ) => {
@@ -46,6 +48,31 @@ export default function SignInPage() {
     setLoading(false);
   };
 
+  useEffect(() => {
+    if (status === "authenticated" && loadingGoogle) {
+      toast.success("Signed in successfully!");
+      setLoadingGoogle(false);
+    }
+  }, [status, loadingGoogle]);
+
+  const handleGoogleLogin = async () => {
+    if (loadingGoogle) return; // prevent double clicks
+    setLoadingGoogle(true);
+
+    const result = await signIn("google", {
+      redirect: false,
+      callbackUrl: "/",
+    });
+
+    if (result?.error) {
+      toast.error(result.error || "Failed to sign in with Google");
+      setLoadingGoogle(false);
+    } else  {
+      localStorage.setItem("login_success", "true"); // mark login success
+  // redirect
+    }
+  };
+
   return (
   <motion.div
     initial={{ opacity: 0 }}
@@ -54,7 +81,7 @@ export default function SignInPage() {
     transition={{ duration: 0.6 }}
     viewport={{ once: true }}
   >
-    <div className="text-white pt-7 relative px-4 sm:px-6 lg:px-8 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
+    <div className=" pt-7 relative px-4 sm:px-6 lg:px-8 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
       <section className="py-20 sm:py-24 md:py-28">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -93,13 +120,19 @@ export default function SignInPage() {
           className="flex justify-center"
         >
           <div
-            className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-md p-4 sm:p-6 md:p-10 bg-[rgba(30,30,40,0.7)] backdrop-blur-md rounded-3xl border border-gray-700 shadow-lg shadow-indigo-900/50"
+            className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-md 
+                      p-4 sm:p-6 md:p-10 
+                      rounded-3xl border shadow-lg backdrop-blur-md
+                      bg-[color:var(--color-background)] 
+                      border-[color:var(--color-border)] 
+                      text-[color:var(--color-foreground)]"
             style={{
               boxShadow:
-                '0 0 15px 2px rgba(65, 105, 225, 0.6), inset 0 0 10px 2px rgba(65, 105, 225, 0.4)',
+                "0 0 15px 2px rgba(65, 105, 225, 0.4), inset 0 0 10px 2px rgba(65, 105, 225, 0.2)",
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 sm:space-y-7">
+              {/* Email */}
               <motion.div
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -108,13 +141,24 @@ export default function SignInPage() {
               >
                 <input
                   type="text"
-                  className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
+                  className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl 
+                            bg-[color:var(--color-background)] 
+                            text-[color:var(--color-foreground)] 
+                            placeholder-gray-400 tracking-wide font-semibold 
+                            border border-[color:var(--color-border)] 
+                            transition focus:outline-none focus:border-indigo-500 
+                            focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
                   placeholder="Email / Username"
-                  {...register('identifier', { required: 'Email / Username is required' })}
+                  {...register("identifier", { required: "Email / Username is required" })}
                 />
-                {errors.identifier && <p className="text-red-500 text-sm mt-2 font-semibold">{errors.identifier.message}</p>}
+                {errors.identifier && (
+                  <p className="text-red-500 text-sm mt-2 font-semibold">
+                    {errors.identifier.message}
+                  </p>
+                )}
               </motion.div>
 
+              {/* Password */}
               <motion.div
                 initial={{ x: 20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -124,47 +168,55 @@ export default function SignInPage() {
               >
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
+                  className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl 
+                            bg-[color:var(--color-background)] 
+                            text-[color:var(--color-foreground)] 
+                            placeholder-gray-400 tracking-wide font-semibold 
+                            border border-[color:var(--color-border)] 
+                            transition focus:outline-none focus:border-indigo-500 
+                            focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
                   placeholder="Password"
-                  {...register('password', { required: 'Password is required' })}
+                  {...register("password", { required: "Password is required" })}
                 />
                 <span
-                  className="absolute right-4 sm:right-5 top-3.5 sm:top-4 text-indigo-400 cursor-pointer select-none hover:text-indigo-600 transition"
+                  className="absolute right-4 sm:right-5 top-3.5 sm:top-4 
+                            text-indigo-400 cursor-pointer select-none 
+                            hover:text-indigo-600 transition"
                   onClick={() => setShowpassword((prev) => !prev)}
                 >
                   {showPassword ? <IoEye /> : <IoEyeOff />}
                 </span>
                 {errors.password && (
-                  <p className="text-red-500 text-sm mt-2 font-semibold">{errors.password.message}</p>
+                  <p className="text-red-500 text-sm mt-2 font-semibold">
+                    {errors.password.message}
+                  </p>
                 )}
               </motion.div>
 
+              {/* Remember + Forgot */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.85, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400 font-semibold"
+                className="flex flex-col sm:flex-row items-center justify-between gap-4 
+                          text-sm text-[color:var(--color-foreground)] font-semibold"
               >
                 <label className="flex items-center space-x-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="accent-blue-600"
-                    // {...register("rememberMe")}
-                    // checked={rememberMe}
-                  />
+                  <input type="checkbox" className="accent-blue-600" />
                   <span>Remember Me</span>
                 </label>
 
                 <button
                   type="button"
                   onClick={() => router.push("/auth/forget-password")}
-                  className="text-blue-400 hover:underline"
+                  className="text-blue-500 hover:underline"
                 >
                   Forgot Password?
                 </button>
               </motion.div>
 
+              {/* Submit */}
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
@@ -173,63 +225,71 @@ export default function SignInPage() {
                 viewport={{ once: true }}
                 style={{
                   backgroundImage:
-                    'linear-gradient(to right, #5159ff, #424eed, #3244da, #1f3ac9, #0030b7)',
+                    "linear-gradient(to right, #5159ff, #3244da, #0030b7)",
                 }}
-                className={`w-full py-3 sm:py-4 rounded-xl font-extrabold tracking-widest text-white text-sm sm:text-base md:text-lg uppercase shadow-lg transition duration-300 ${
-                  !loading || !isValid
-                    ? 'opacity-50 cursor-not-allowed'
-                    : 'hover:brightness-125 hover:shadow-[0_0_20px_#4266ff]'
-                }`}
+                className={`w-full py-3 sm:py-4 rounded-xl font-extrabold 
+                            tracking-widest text-white text-sm sm:text-base md:text-lg 
+                            uppercase shadow-lg transition duration-300 ${
+                              loading || !isValid
+                                ? "opacity-50 cursor-not-allowed"
+                                : "hover:brightness-125 hover:shadow-[0_0_20px_#4266ff]"
+                            }`}
               >
-                {loading ? 'Please wait...' : 'Login'}
+                {loading ? "Please wait..." : "Login"}
               </motion.button>
             </form>
-              <button
-                  type="button"
-                  onClick={async () => {
-                    const result = await signIn("google", { redirect: false, callbackUrl: "/" });
-                    if (result?.error) {
-                      toast.error(result.error || "Failed to sign in with Google");
-                    } else {
-                      toast.success("Signed in successfully!");
-                      // Redirect manually
-                      if (result?.url) window.location.href = result.url;
-                    }
-                  }}
-                  className="w-full py-3 mt-8 mb-3 sm:py-4 rounded-xl font-extrabold tracking-widest text-white text-sm sm:text-base md:text-lg uppercase shadow-lg transition duration-300  hover:brightness-125 flex items-center justify-center gap-3 bg-black"
-                >
-                  <FcGoogle className="text-2xl" />
-                  <span className="hidden sm:inline">Sign in with Google</span>
-                  {/* Sign in with Google */}
-              </button>
-              
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.95, duration: 0.5 }}
-                viewport={{ once: true }}
-                className="text-center text-sm text-gray-400 tracking-wide font-semibold uppercase mb-8"
-              >
-                &mdash; Or Sign Up &mdash;
-              </motion.div>
+            {/* Google Login */}
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              disabled={loadingGoogle}
+              className={`w-full py-3 mt-8 mb-3 sm:py-4 rounded-xl font-extrabold 
+                tracking-widest text-sm sm:text-base md:text-lg 
+                uppercase shadow-lg transition duration-300 flex items-center 
+                justify-center gap-3 bg-[color:var(--color-background)] 
+                border border-[color:var(--color-border)] text-[color:var(--color-foreground)]
+                ${loadingGoogle ? "opacity-50 cursor-not-allowed" : "hover:brightness-125"}`}
+            >
+              <FcGoogle className="text-2xl" />
+              <span className="hidden sm:inline">
+                {loadingGoogle ? "Signing in..." : "Sign in with Google"}
+              </span>
+            </button>
 
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                viewport={{ once: true }}
-                type="button"
-                onClick={() => router.push("/auth/sign-up")}
-                style={{
-                  backgroundImage: 'linear-gradient(to right, #1e227e, #253098, #293eb3, #2b4dce, #2a5deb)',
-                }}
-                className="w-full py-3 sm:py-4 rounded-xl font-extrabold tracking-widest text-white text-sm sm:text-base md:text-lg uppercase shadow-lg transition duration-300 hover:brightness-125 hover:shadow-[0_0_20px_#1e227e]"
-              >
-                Sign Up
-              </motion.button>
+            {/* Divider */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.95, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-center text-sm text-[color:var(--color-foreground)] 
+                        tracking-wide font-semibold uppercase mb-8 mt-8"
+            >
+              &mdash; Or Sign Up &mdash;
+            </motion.div>
 
+            {/* Sign Up */}
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              viewport={{ once: true }}
+              type="button"
+              onClick={() => router.push("/auth/sign-up")}
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, #1e227e, #253098, #2b4dce, #2a5deb)",
+              }}
+              className="w-full py-3 sm:py-4 rounded-xl font-extrabold tracking-widest 
+                        text-white text-sm sm:text-base md:text-lg uppercase shadow-lg 
+                        transition duration-300 hover:brightness-125 
+                        hover:shadow-[0_0_20px_#1e227e]"
+            >
+              Sign Up
+            </motion.button>
           </div>
         </motion.div>
+
       </section>
     </div>
   </motion.div>

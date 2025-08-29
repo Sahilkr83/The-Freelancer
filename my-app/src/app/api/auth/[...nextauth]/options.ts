@@ -103,7 +103,7 @@ export const authOptions:NextAuthOptions = {
             if (token && session.user) {
                 session.user._id = token._id as string;
                 session.user.username = token.username as string;
-                session.user.isVerified = token.isVerified as boolean;
+                session.user.isVerified = true;
                 session.user.email = token.email as string;
                 session.user.name = token.name as string;
                 session.user.image = token.image as string || `https://api.dicebear.com/5.x/initials/png?seed=${token.name}`;
@@ -113,11 +113,11 @@ export const authOptions:NextAuthOptions = {
         async jwt({ token, user }) {
             if(user){
                 token._id = user.id;  // NextAuth always sets `user.id`
-                token.username = (user).username || (user).email?.split('@')[0]
-                token.isVerified = (user).isVerified;
-                token.email = (user).email;
-                token.name = (user).name;
-                token.image = (user).image || `https://api.dicebear.com/5.x/initials/png?seed=${(user).name}`;
+                token.username = user.username || (user).email?.split('@')[0]
+                token.isVerified = true;
+                token.email = user.email;
+                token.name = user.name;
+                token.image = user.image || `https://api.dicebear.com/5.x/initials/png?seed=${(user).name}`;
             }
             return token
         }

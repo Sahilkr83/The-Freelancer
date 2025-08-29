@@ -115,7 +115,7 @@ const projects: ProjectCategory[] = [
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
     >
-      <main className="text-white relative pt-20 px-4 sm:px-6 lg:px-8 mx-auto max-w-[1460px] z-30">
+      <main className="  relative pt-20 px-4 sm:px-6 lg:px-8 mx-auto max-w-[1460px] z-30">
         {/* Introduction Section */}
         <section className="py-14">
           <motion.h1
@@ -123,7 +123,7 @@ const projects: ProjectCategory[] = [
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-4xl lg:text-5xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
+            className="text-2xl sm:text-4xl lg:text-5xl pt-4 font-bold max-w-5xl mx-auto text-center   bg-clip-text "
           >
             React & Full-Stack Developer Portfolio
           </motion.h1>
@@ -133,7 +133,7 @@ const projects: ProjectCategory[] = [
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-lg sm:text-xl lg:text-2xl mt-10  font-extrabold leading-tight max-w-5xl mx-auto text-center text-white bg-clip-text "
+            className="text-lg sm:text-xl lg:text-2xl mt-10  font-extrabold leading-tight max-w-5xl mx-auto text-center   bg-clip-text "
           >
             Built with JavaScript, Tailwind CSS & MongoDB
           </motion.h2>
@@ -144,7 +144,7 @@ const projects: ProjectCategory[] = [
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
               viewport={{ once: true }}
-              className="max-w-xl text-center lg:text-left text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide xl:w-[475px] w-full xl:pl-16 h-full pb-10 xl:pb-0"
+              className="max-w-xl text-center lg:text-left   text-base sm:text-lg leading-relaxed tracking-wide xl:w-[475px] w-full xl:pl-16 h-full pb-10 xl:pb-0"
             >
               <p className="mb-6">
                 Discover my web development portfolio featuring real-world frontend and full-stack applications. As a React 

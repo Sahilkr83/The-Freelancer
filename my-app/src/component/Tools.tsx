@@ -20,13 +20,13 @@ const Tools = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="max-w-[1460px] w-11/12 mx-auto py-20 text-white"
+      className="max-w-[1460px] w-11/12 mx-auto py-20 "
     >
       <h3 className="text-3xl sm:text-4xl font-extrabold mb-12 text-center">
         Tools We <span className="text-indigo-400">Use</span>
       </h3>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white">
         {tools.map(({ logo, appName }, idx) => (
           <motion.div
             key={idx}

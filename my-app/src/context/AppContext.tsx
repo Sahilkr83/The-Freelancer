@@ -6,6 +6,7 @@ import {  useSession } from "next-auth/react";
 interface UserType {
   // Define properties of user, e.g.
   isVerified: boolean;
+  resetRequestCount: number;
   username:string;
   name?: string;
   email?: string;
@@ -33,8 +34,9 @@ export default function AppContextProvider({ children }: { children: ReactNode }
 
   useEffect(() => {
     setUser((session?.user as UserType) || null);
-    // console.log("User in context:", session?.user);
+    console.log("User in context:", session?.user);
   }, [session]);
+
 
 //   const [projectData, setProjectData] = useState<any[]>([]);
     

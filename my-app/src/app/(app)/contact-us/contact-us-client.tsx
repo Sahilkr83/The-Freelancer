@@ -41,17 +41,17 @@ const ContactPage = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       viewport={{ once: true }}
-      className="min-h-screen text-white py-12 px-6 sm:px-8 lg:px-20"
+      className="min-h-screen  py-12 px-6 sm:px-8 lg:px-20"
     >
       <div className="max-w-6xl mx-auto my-20 flex flex-col gap-20 leading-7">
         {/* Intro Section */}
         <section>
-          <h2 className="text-indigo-400 text-lg uppercase tracking-widest mb-2">Get In Touch</h2>
+          <h2 className="text-indigo-400 text-lg font-semibold uppercase tracking-widest mb-2">Get In Touch</h2>
           <h1 className="text-3xl sm:text-4xl font-extrabold mb-6 leading-tight">
             Contact Us — Send a Message to <span className="text-indigo-400">The Freelancer Shop</span>
           </h1>
 
-          <div className="space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed mb-8">
+          <div className="space-y-6   text-base sm:text-lg leading-relaxed mb-8">
             <p>
               Whether you’re looking for professional <strong>video editing</strong> to bring your story to life or expert <strong>web development</strong> to create a stunning, responsive online presence, we’re here to help turn your vision into reality.
             </p>
@@ -92,8 +92,8 @@ const ContactPage = () => {
           <h2 className="text-indigo-400 text-2xl font-bold mb-6">Our Services</h2>
 
           <div className="mb-8">
-            <h3 className="text-indigo-300 text-xl font-semibold mb-4">Video Editing</h3>
-            <ul className="list-disc list-inside text-gray-300 space-y-3">
+            <h3 className=" text-indigo-400 text-xl font-semibold mb-4">Video Editing</h3>
+            <ul className="list-disc list-inside   space-y-3">
               <li><strong>Corporate & Promo Videos:</strong> Professional videos tailored to your brand identity.</li>
               <li><strong>Social Media Reels:</strong> Dynamic short videos for Instagram, TikTok, and Facebook.</li>
               <li><strong>YouTube Content:</strong> Full edits including cuts, color grading, and sound design.</li>
@@ -103,8 +103,8 @@ const ContactPage = () => {
           </div>
 
           <div>
-            <h3 className="text-indigo-300 text-xl font-semibold mb-4">Web Development</h3>
-            <ul className="list-disc list-inside text-gray-300 space-y-3">
+            <h3 className=" text-indigo-400 text-xl font-semibold mb-4">Web Development</h3>
+            <ul className="list-disc list-inside   space-y-3">
               <li><strong>Custom Websites:</strong> Responsive, SEO-friendly sites built with React and Next.js.</li>
               <li><strong>E-commerce Solutions:</strong> Secure online stores with seamless user experience.</li>
               <li><strong>Portfolio & Business Sites:</strong> Showcasing your brand professionally and attractively.</li>
@@ -117,7 +117,7 @@ const ContactPage = () => {
         {/* How We Work */}
         <section className=" rounded-3xl p-8 sm:p-10 shadow-xl shadow-indigo-900/50">
           <h2 className="text-indigo-400 text-2xl font-bold mb-6">How We Work</h2>
-          <ol className="list-decimal list-inside text-gray-300 space-y-3">
+          <ol className="list-decimal list-inside   space-y-3">
             <li><strong>Consultation:</strong> We listen to understand your vision, goals, and requirements.</li>
             <li><strong>Planning:</strong> We map out timelines, workflows, and deliverables for clarity.</li>
             <li><strong>Creation:</strong> We develop your videos or websites with attention to detail and creativity.</li>
@@ -129,20 +129,20 @@ const ContactPage = () => {
         {/* Testimonials */}
         <section>
           <h2 className="text-indigo-400 text-2xl font-bold mb-6">What Our Clients Say</h2>
-          <div className="space-y-8 text-gray-300">
+          <div className="space-y-8  ">
             <blockquote className="border-l-4 border-indigo-400 pl-6 italic">
               “The Freelancer Shop created a stunning promotional video that boosted our brand awareness significantly.”
-              <footer className="mt-2 font-semibold text-indigo-300">— Priya K., Video Client</footer>
+              <footer className="mt-2 font-semibold  text-indigo-400">— Priya K., Video Client</footer>
             </blockquote>
 
             <blockquote className="border-l-4 border-indigo-400 pl-6 italic">
               “Their web development skills are top-notch. Our new website is fast, beautiful, and drives more customers.”
-              <footer className="mt-2 font-semibold text-indigo-300">— Rahul S., Web Dev Client</footer>
+              <footer className="mt-2 font-semibold  text-indigo-400">— Rahul S., Web Dev Client</footer>
             </blockquote>
 
             <blockquote className="border-l-4 border-indigo-400 pl-6 italic">
               “Excellent communication and quick turnaround on both video edits and website fixes. Highly recommended.”
-              <footer className="mt-2 font-semibold text-indigo-300">— Ayesha & Sameer, Happy Clients</footer>
+              <footer className="mt-2 font-semibold  text-indigo-400">— Ayesha & Sameer, Happy Clients</footer>
             </blockquote>
           </div>
         </section>
@@ -150,25 +150,25 @@ const ContactPage = () => {
         {/* FAQ Section */}
         <section className=" rounded-3xl p-8 sm:p-10 shadow-xl shadow-indigo-900/50">
           <h2 className="text-indigo-400 text-2xl font-bold mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-6 text-gray-300">
+          <div className="space-y-6  ">
             <div>
-              <h3 className="font-semibold text-lg text-indigo-300">What video formats do you deliver?</h3>
+              <h3 className="font-semibold text-lg  text-indigo-400">What video formats do you deliver?</h3>
               <p>We deliver MP4, MOV, AVI, and other formats optimized for your platform or use case.</p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-indigo-300">How long does web development usually take?</h3>
+              <h3 className="font-semibold text-lg  text-indigo-400">How long does web development usually take?</h3>
               <p>Typically 2-6 weeks depending on project scope, with regular updates and reviews.</p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-indigo-300">Do you offer website maintenance?</h3>
+              <h3 className="font-semibold text-lg  text-indigo-400">Do you offer website maintenance?</h3>
               <p>Yes! We offer ongoing support and optimization packages to keep your site running smoothly.</p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-indigo-300">Can you help with scriptwriting or storyboarding for videos?</h3>
+              <h3 className="font-semibold text-lg  text-indigo-400">Can you help with scriptwriting or storyboarding for videos?</h3>
               <p>Absolutely, we assist with creative planning to ensure your video’s story is clear and impactful.</p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-indigo-300">What if I need revisions?</h3>
+              <h3 className="font-semibold text-lg  text-indigo-400">What if I need revisions?</h3>
               <p>We provide multiple rounds of revisions on both video and web projects to ensure your satisfaction.</p>
             </div>
           </div>
@@ -252,40 +252,7 @@ const ContactPage = () => {
 
       {/* Tailwind CSS for inputs and textarea */}
       <style jsx>{`
-        .input-primary {
-          background: #1e293b;
-          color: white;
-          border: 2px solid transparent;
-          padding: 0.75rem 1rem;
-          border-radius: 12px;
-          font-size: 1rem;
-          transition: border-color 0.3s ease;
-          outline-offset: 2px;
-          min-width: 0;
-        }
-        .input-primary:focus {
-          border-color: #6366f1;
-          outline: none;
-          background: #273549;
-        }
-        .textarea-primary {
-          background: #1e293b;
-          color: white;
-          border: 2px solid transparent;
-          padding: 1rem 1rem;
-          border-radius: 16px;
-          font-size: 1rem;
-          resize: vertical;
-          min-height: 140px;
-          transition: border-color 0.3s ease;
-          outline-offset: 2px;
-          min-width: 0;
-        }
-        .textarea-primary:focus {
-          border-color: #6366f1;
-          outline: none;
-          background: #273549;
-        }
+        
       `}</style>
     </motion.div>
   );

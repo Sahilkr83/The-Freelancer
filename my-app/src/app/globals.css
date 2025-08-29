@@ -1,73 +1,108 @@
 @import "tailwindcss";
 
+/* Light mode defaults */
 :root {
-  --background: #171717;
-  --foreground: #171717;
-}
-
-/* @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: theme(colors.slate.50);
+  --color-foreground: theme(colors.slate.950);
+  --color-frame-border: theme(colors.slate.800); /* border in light mode */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-} */
+  --color-navbar: #6200EE;
+  --color-navbar-mobile: #6200EE;
+  --color-footor: #6200EE;
+  --color-footor-text: white;
+  --color-nav-text: white;
+  --color-input: white;
+  --star-color: #6200EE; /* light color for dark background */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+}
+
+.dark {
+  --color-background: theme(colors.slate.950);
+  --color-foreground: theme(colors.slate.50);
+  --color-input: #1e293b;
+  --color-navbar: theme(colors.slate.950 / 0.8); 
+  --color-navbar-mobile: theme(colors.slate.950); 
+  --color-footor: black; 
+  --color-footor-text: #a8e3f5; 
+  --star-color: white; /* star color in light mode */
+  --bubble-color-rgb: 100, 120, 150; /* bubble color in light mode */
+  --color-nav-text: theme(colors.indigo.400);
+
+  --color-frame-border: #a8e3f5; /* border in dark mode */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease,border-color 0.3s ease;
+}
+.otp-field-box{
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
+.dark .frame-text {
+  color: #a8e3f5;
+  border-color: var(--color-frame-border);
+}
+.frame-text {
+  color: var(--color-foreground);
+  border-color: var(--color-frame-border);
+}
+.nav-bar {
+  background-color: var(--color-navbar);
+}
+.nav-bar-mobile {
+  background-color: var(--color-navbar-mobile);
+}
+.footer-bg {
+  background-color: var(--color-footor);
+  color: var(--color-footor-text);
+}
 
- .particle {
-          position: fixed;
-          border-radius: 50%;
-          pointer-events: none;
-          opacity: 0.6;
-          animation-timing-function: linear;
-        }
+.nav-text {
+  color: var(--color-nav-text);
+  border-color: var(--color-nav-text);
+}
 
-        /* Star style */
-        .star {
-          background: radial-gradient(circle, #fff 60%, transparent 90%);
-          filter: drop-shadow(0 0 3px #a0c8ff);
-          animation-name: twinkle;
-          animation-iteration-count: infinite;
-          animation-duration: 4s;
-        }
-
-        /* Bubble style */
-        .bubble {
-          background: rgba(200, 220, 255, 0.15);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          animation-name: floatUp;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
-          animation-duration: 8s;
-        }
-
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.6; }
-          50% { opacity: 1; }
-        }
-
-        @keyframes floatUp {
-          0% { transform: translateY(0); opacity: 0.6; }
-          100% { transform: translateY(-20px); opacity: 0.2; }
-        }
-
-
+.input-primary {
+  background: var(--color-input);
+  color: var(--color-foreground);
+  border: 2px solid black;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  outline-offset: 2px;
+  min-width: 0;
+}
+.input-primary:focus {
+  border-color: #6366f1;
+  outline: none;
+}
+.textarea-primary {
+  background: var(--color-input);
+  color: var(--color-foreground);
+  border: 2px solid black;
+  padding: 1rem 1rem;
+  border-radius: 16px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 140px;
+  transition: border-color 0.3s ease;
+  outline-offset: 2px;
+  min-width: 0;
+}
+.textarea-primary:focus {
+  border-color: #6366f1;
+  outline: none;
+}
 .main{
-    padding: 44px 37px;
-    border-top-right-radius:3rem;
-    border-top-left-radius:3rem;
+  padding: 44px 37px;
+  border-top-right-radius:3rem;
+  border-top-left-radius:3rem;
 }
 
 .yt{
@@ -643,4 +678,3 @@ fieldset:disabled a.btn {
 .spin-always {
   -moz-appearance: number-input; /* Firefox */
 }
-

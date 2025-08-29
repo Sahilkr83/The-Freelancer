@@ -40,7 +40,7 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
       variants={containerVariant}
     >
       <div className="text-center mb-16 space-y-3">
-        <h3 className="text-3xl sm:text-4xl font-extrabold text-white">{title}</h3>
+        <h3 className="text-3xl sm:text-4xl font-extrabold ">{title}</h3>
         <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
           {description}
         </p>

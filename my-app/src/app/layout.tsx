@@ -4,6 +4,8 @@ import "./globals.css";
 import AuthProvider from "@/context/AuthProvider";
 import LayoutWrapper from "./(app)/LayoutWrapper";
 import AppContextProvider from "@/context/AppContext";
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -76,12 +78,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-  <html lang="en">
-    <AuthProvider>
-    <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 text-white font-['Rajdhani',_sans-serif]`}>
-      <LayoutWrapper><AppContextProvider>{children}</AppContextProvider></LayoutWrapper>
+  <html lang="en" suppressHydrationWarning>
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-['Rajdhani',_sans-serif]`}>
+      <AuthProvider>
+        <LayoutWrapper>
+          <AppContextProvider>
+            {children}
+          </AppContextProvider>
+        </LayoutWrapper>
+      </AuthProvider>
     </body>
-    </AuthProvider>
   </html>
 
   );

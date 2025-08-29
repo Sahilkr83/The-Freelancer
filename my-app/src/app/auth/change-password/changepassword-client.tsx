@@ -59,7 +59,7 @@ const ChangePassword = () => {
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
   >
-  <div className="text-white pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
+  <div className="pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
     <section className="py-20 sm:py-24 md:py-28 lg:py-32">
       <div className="flex justify-center">
         <div className="text-center mb-12 max-w-xl px-2">
@@ -74,17 +74,28 @@ const ChangePassword = () => {
 
       <div className="flex justify-center px-2 sm:px-0">
         <div
-          className="w-full max-w-md p-6 sm:p-10 bg-[rgba(30,30,40,0.7)] backdrop-blur-md rounded-3xl border border-gray-700 shadow-lg shadow-indigo-900/50"
-          style={{
-            boxShadow:
-              '0 0 15px 2px rgba(65, 105, 225, 0.6), inset 0 0 10px 2px rgba(65, 105, 225, 0.4)',
-          }}
-        >
+            className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-md 
+                      p-4 sm:p-6 md:p-10 
+                      rounded-3xl border shadow-lg backdrop-blur-md
+                      bg-[color:var(--color-background)] 
+                      border-[color:var(--color-border)] 
+                      text-[color:var(--color-foreground)]"
+            style={{
+              boxShadow:
+                "0 0 15px 2px rgba(65, 105, 225, 0.4), inset 0 0 10px 2px rgba(65, 105, 225, 0.2)",
+            }}
+          >
           <form onSubmit={handleSubmit(passwordUpdate)} className="space-y-7">
             {/* Current Password */}
             <div className="relative">
               <input
-                className="w-full px-6 py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
+                 className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl 
+                            bg-[color:var(--color-background)] 
+                            text-[color:var(--color-foreground)] 
+                            placeholder-gray-400 tracking-wide font-semibold 
+                            border border-[color:var(--color-border)] 
+                            transition focus:outline-none focus:border-indigo-500 
+                            focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
                 type={showPassword3 ? 'text' : 'password'}
                 placeholder="Current Password"
                 {...register('currentPassword', { required: 'Current Password is required' })}
@@ -104,7 +115,13 @@ const ChangePassword = () => {
             {/* New Password */}
             <div className="relative">
               <input
-                className="w-full px-6 py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
+                 className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl 
+                            bg-[color:var(--color-background)] 
+                            text-[color:var(--color-foreground)] 
+                            placeholder-gray-400 tracking-wide font-semibold 
+                            border border-[color:var(--color-border)] 
+                            transition focus:outline-none focus:border-indigo-500 
+                            focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="New Password"
                 {...register('password', { required: 'New Password is required' })}
@@ -124,7 +141,13 @@ const ChangePassword = () => {
             {/* Confirm Password */}
             <div className="relative">
               <input
-                className="w-full px-6 py-4 rounded-xl bg-black bg-opacity-20 text-white placeholder-gray-400 tracking-wide font-semibold border border-transparent transition focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
+                 className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl 
+                            bg-[color:var(--color-background)] 
+                            text-[color:var(--color-foreground)] 
+                            placeholder-gray-400 tracking-wide font-semibold 
+                            border border-[color:var(--color-border)] 
+                            transition focus:outline-none focus:border-indigo-500 
+                            focus:shadow-[0_0_15px_#4266ff] caret-indigo-400"
                 type={showPassword2 ? 'text' : 'password'}
                 placeholder="Confirm Password"
                 {...register('confirmPassword', {
@@ -161,7 +184,7 @@ const ChangePassword = () => {
               
             </button>
 
-            <div className="text-center text-sm text-gray-400 tracking-wide font-semibold uppercase">
+            <div className="text-center text-sm  tracking-wide font-semibold uppercase">
               &mdash; Or Sign In &mdash;
             </div>
 

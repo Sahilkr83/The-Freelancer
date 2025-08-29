@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 
-const NUM_STARS = 10;
-const NUM_BUBBLES = 10;
+const NUM_STARS = 15;
+
 
 const randomPercent = () => Math.random() * 100;
 const randomSize = () => 4 + Math.random() * 20;
@@ -19,7 +19,6 @@ type Particle = {
 
 export default function FloatingParticles() {
   const [stars, setStars] = useState<Particle[]>([]);
-  const [bubbles, setBubbles] = useState<Particle[]>([]);
 
   useEffect(() => {
     const newStars = Array.from({ length: NUM_STARS }).map(() => ({
@@ -29,16 +28,10 @@ export default function FloatingParticles() {
       delay: Math.random() * 4,
     }));
 
-    const newBubbles = Array.from({ length: NUM_BUBBLES }).map(() => ({
-      size: 10 + Math.random() * 20,
-      left: randomPercent(),
-      bottom: -(10 + Math.random() * 20), // match size for bottom offset
-      duration: 6 + Math.random() * 6,
-      delay: Math.random() * 8,
-    }));
+    
 
     setStars(newStars);
-    setBubbles(newBubbles);
+
   }, []);
 
   return (
@@ -53,7 +46,7 @@ export default function FloatingParticles() {
         }
 
         .star {
-          background: radial-gradient(circle, #fff 60%, transparent 90%);
+          background: radial-gradient(circle, var(--star-color) 60%, transparent 90%);
           filter: drop-shadow(0 0 3px #a0c8ff);
           animation-name: twinkle, starMove;
           animation-iteration-count: infinite;
@@ -63,7 +56,7 @@ export default function FloatingParticles() {
         }
 
         .bubble {
-          background: rgba(200, 220, 255, 0.15);
+           background: rgba(var(--bubble-color-rgb), 0.15);
           border: 1px solid rgba(255, 255, 255, 0.3);
           animation-name: floatUp, bubbleDrift;
           animation-iteration-count: infinite;
@@ -140,20 +133,7 @@ export default function FloatingParticles() {
       ))}
 
       {/* Render bubbles only after mount */}
-      {bubbles.map((bubble, i) => (
-        <div
-          key={`bubble-${i}`}
-          className="particle bubble"
-          style={{
-            width: bubble.size,
-            height: bubble.size,
-            left: `${bubble.left}%`,
-            bottom: `${bubble.bottom}px`,
-            animationDuration: `${bubble.duration}s, 6s`,
-            animationDelay: `${bubble.delay}s, ${bubble.delay}s`,
-          }}
-        />
-      ))}
+
     </>
   );
 }

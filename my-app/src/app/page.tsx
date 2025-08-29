@@ -75,7 +75,7 @@ const Home = () => {
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
     >
-      <main className="text-white relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-[1460px] w-full z-30 select-none">
+      <main className=" relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-[1460px] w-full z-30 select-none">
         {/* Hero Section */}
         <section
           className="py-20"
@@ -86,7 +86,7 @@ const Home = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight max-w-5xl mx-auto text-center text-white bg-clip-text "
+            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight max-w-5xl mx-auto text-center bg-clip-text "
           >
             Pro Video Editing & Web Design
           </motion.h1>
@@ -95,7 +95,7 @@ const Home = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-xl sm:text-3xl lg:text-4xl pt-4 font-bold max-w-5xl mx-auto text-center text-white bg-clip-text "
+            className="text-xl sm:text-3xl lg:text-4xl pt-4 font-bold max-w-5xl mx-auto text-center bg-clip-text "
           >
             By The Freelancer - Your Hub for Creative Digital Solutions
           </motion.h2>
@@ -123,7 +123,7 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
               viewport={{ once: true }}
-              className="max-w-xl text-center lg:text-left text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide"
+              className="max-w-xl text-center lg:text-left text-base sm:text-lg leading-relaxed tracking-wide"
             >
               <p className="mb-6">
                 Welcome to <strong>The Freelancer Shop</strong> — your hub for expert-level
@@ -147,8 +147,8 @@ const Home = () => {
         </section>
 
         {/* Why Choose Us */}
-        <section className="py-20 max-w-5xl mx-auto px-4 text-gray-300">
-          <h2 className="text-3xl font-bold mb-8 text-center text-white">Why Choose The Freelancer Shop?</h2>
+        <section className="py-20 max-w-5xl mx-auto px-4 ">
+          <h2 className="text-3xl font-bold mb-8 text-center">Why Choose The Freelancer Shop?</h2>
           <div className="grid sm:grid-cols-2 gap-12 text-lg leading-relaxed">
             <p>
               We combine creativity with technical excellence to deliver tailor-made digital solutions. Whether
@@ -177,11 +177,11 @@ const Home = () => {
           number3="6." type3="Fastpace Editing"
         />
         
-        <div className="mt-10 mb-16 flex justify-center gap-6">
+        <div className="mt-10 mb-16 flex justify-center gap-6 text-white">
           <Link
             href="/video-portfolio"
             
-            className="px-6 py-3  bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold transition"
+            className="px-6 py-3  bg-purple-600 hover:bg-purple-700  rounded-lg font-semibold transition"
             aria-label="Go to Video Portfolio"
           >
             Video Portfolio
@@ -189,7 +189,7 @@ const Home = () => {
         </div>
 
         {/* Projects Section */}
-        <section className="max-w-5xl mx-auto px-4 mb-10 text-gray-300 text-center">
+        <section className="max-w-5xl mx-auto px-4 mb-10  text-center">
           <p className="mb-4 text-lg">
             Explore a curated selection of projects showcasing our expertise in both frontend
             development and full-stack applications. We focus on performance, accessibility, and
@@ -214,14 +214,14 @@ const Home = () => {
           
           <Link
             href="/web-development"
-            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold transition"
+            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-semibold transition text-white"
             aria-label="Go to Web Portfolio"
           >
             Web Portfolio
           </Link>
         </div>
-        <section className="py-20 max-w-6xl mx-auto px-6 text-gray-300">
-          <h2 className="text-4xl font-extrabold mb-12 text-center text-white tracking-wide">
+        <section className="py-20 max-w-6xl mx-auto px-6 ">
+          <h2 className="text-4xl font-extrabold mb-12 text-centertracking-wide">
             Technologies & Tools
           </h2>
           <div className="flex flex-wrap justify-center gap-12">
@@ -230,10 +230,10 @@ const Home = () => {
               className=" rounded-2xl p-8 shadow-xl hover:shadow-indigo-500/50 md:shadow-black shadow-indigo-500/50  transition-shadow duration-300 cursor-default"
               aria-label="Web Development technologies"
             >
-              <h3 className="font-bold text-indigo-300 text-xl mb-6 tracking-wide uppercase border-b border-indigo-400 pb-3">
+              <h3 className="font-bold text-indigo-400 text-xl mb-6 tracking-wide uppercase border-b border-indigo-500 pb-3">
                 Web Development
               </h3>
-              <ul className="space-y-3 text-gray-200 text-sm">
+              <ul className="space-y-3  ">
                 {[
                   { name: "React", icon: "⚛️" },
                   { name: "Next.js", icon: "⏭️" },
@@ -254,13 +254,13 @@ const Home = () => {
 
             {/* Video Editing Card */}
             <div
-              className="0 rounded-2xl p-8 shadow-xl hover:shadow-purple-500/50 md:shadow-black shadow-purple-500/50 transition-shadow duration-300 cursor-default"
+              className="0 rounded-2xl p-8 shadow-xl  hover:shadow-purple-500/50 md:shadow-black shadow-purple-500 transition-shadow duration-300 cursor-default"
               aria-label="Video Editing software"
             >
-              <h3 className="font-bold text-purple-300 text-xl mb-6 tracking-wide uppercase border-b border-purple-400 pb-3">
+              <h3 className="font-bold text-purple-400 text-xl mb-6 tracking-wide uppercase border-b border-purple-500 pb-3">
                 Video Editing
               </h3>
-              <ul className="space-y-3 text-gray-200 text-sm">
+              <ul className="space-y-3">
                 {[
                   { name: "Adobe Premiere Pro", icon: "🎬" },
                   { name: "After Effects", icon: "✨" },
@@ -288,7 +288,7 @@ const Home = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="py-10 max-w-4xl mx-auto text-center text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide"
+          className="py-10 max-w-4xl mx-auto text-center text-base sm:text-lg leading-relaxed tracking-wide"
         >
           <p>
             At The Freelancer Shop, we offer a variety of video editing packages including
@@ -299,14 +299,14 @@ const Home = () => {
         </motion.section>
 
         {/* Testimonial Section */}
-        <section className="py-20 max-w-3xl mx-auto px-4 text-gray-300">
-          <blockquote className="border-l-4 border-indigo-400 pl-6 italic text-lg text-white max-w-xl mx-auto">
+        <section className="py-20 max-w-3xl mx-auto px-4">
+          <blockquote className="border-l-4 border-indigo-400 pl-6 italic text-lg  max-w-xl mx-auto">
             “Working with The Freelancer Shop was an absolute pleasure. Their
             attention to detail in both video editing and website design exceeded our expectations.
             Highly recommended for anyone seeking professional digital solutions.”
           </blockquote>
           
-          <p className="mt-6 text-right font-semibold text-indigo-400">— Happy Client</p>
+          <p className="mt-6 text-right font-semibold text-indigo-500">— Happy Client</p>
         </section>
       </main>
     </motion.div>

@@ -11,7 +11,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
 
   return (
     <section
-      className="py-24  pt-36 px-6 sm:px-12 lg:px-20 max-w-[1400px] mx-auto text-gray-200 space-y-24"
+      className="py-24  pt-36 px-6 sm:px-12 lg:px-20 max-w-[1400px] mx-auto  space-y-24"
       id="about"
       aria-label="About The Freelancer Shop"
     >
@@ -46,28 +46,28 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
             <p className="uppercase text-sm font-semibold tracking-widest text-indigo-400 mb-2">
                 Who We Are
             </p>
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl font-extrabold  mb-6 leading-tight">
                 About <span className="text-indigo-400">The Freelancer Shop</span>
             </h1>
 
-            <p className="mb-6 text-lg sm:text-xl leading-relaxed text-gray-300">
-                <strong className="text-white">The Freelancer Shop</strong> is your all-in-one creative partner for premium{" "}
-                <span className="text-white font-semibold">video editing</span>,{" "}
-                <span className="text-white font-semibold">motion graphics</span>, and{" "}
-                <span className="text-white font-semibold">web development</span>. We turn your ideas into powerful visuals and high-performance websites.
+            <p className="mb-6 text-lg sm:text-xl leading-relaxed ">
+                <strong className=" ">The Freelancer Shop</strong> is your all-in-one creative partner for premium{" "}
+                <span className="  font-semibold">video editing</span>,{" "}
+                <span className="  font-semibold">motion graphics</span>, and{" "}
+                <span className="  font-semibold">web development</span>. We turn your ideas into powerful visuals and high-performance websites.
             </p>
 
-            <p className="text-lg sm:text-xl leading-relaxed text-gray-300 mb-6">
+            <p className="text-lg sm:text-xl leading-relaxed mb-6">
                 Our expert team blends artistic creativity with cutting-edge tools like{" "}
-                <span className="text-white font-semibold">Adobe After Effects</span>,{" "}
-                <span className="text-white font-semibold">Premiere Pro</span>,{" "}
-                <span className="text-white font-semibold">React</span>, and{" "}
-                <span className="text-white font-semibold">Next.js</span>. Whether it’s a fast-paced ad,
+                <span className="  font-semibold">Adobe After Effects</span>,{" "}
+                <span className="  font-semibold">Premiere Pro</span>,{" "}
+                <span className="  font-semibold">React</span>, and{" "}
+                <span className="  font-semibold">Next.js</span>. Whether it’s a fast-paced ad,
                 cinematic trailer, or interactive portfolio — we build digital experiences that engage
                 and convert.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 text-sm sm:text-base text-gray-300">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 text-sm sm:text-base  ">
                 {[
                 "Custom Video Editing",
                 "Motion Graphics & Animation",
@@ -83,7 +83,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
 
             <Link
                 href="/web-development"
-                className="inline-block bg-indigo-500 hover:bg-indigo-600 transition-colors text-white px-6 py-3 rounded-full text-base font-semibold shadow-lg"
+                className="inline-block text-white bg-indigo-500 hover:bg-indigo-600 transition-colors  px-6 py-3 rounded-full text-base font-semibold shadow-lg"
             >
                 Explore Our Work
             </Link>
@@ -98,8 +98,8 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
         >
-            <h2 className="text-3xl font-bold text-white mb-4">Our Mission & Vision</h2>
-            <p className="text-lg text-gray-300 leading-relaxed">
+            <h2 className="text-3xl font-bold  mb-4">Our Mission & Vision</h2>
+            <p className="text-lg   leading-relaxed">
             We’re on a mission to empower individuals, brands, and businesses with impactful digital
             solutions that tell their stories with clarity and creativity. Our vision is to be the
             go-to creative tech partner for high-performing digital content and web solutions.
@@ -108,7 +108,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
 
         {/* Why Choose Us */}
         <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center text-white"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -124,7 +124,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
                 key={i}
                 className="p-6 rounded-2xl bg-[#1e1e2f] border border-gray-700 hover:border-indigo-500 transition-colors"
             >
-                <h3 className="text-xl font-semibold text-white mb-2">{label}</h3>
+                <h3 className="text-xl font-semibold  mb-2">{label}</h3>
                 <p className="text-gray-400 text-sm">{desc}</p>
             </div>
             ))}
@@ -138,12 +138,12 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
         >
-            <h3 className="text-3xl font-bold text-white mb-4">Tech We Use</h3>
-            <p className="text-gray-300 max-w-3xl mx-auto mb-6">
+            <h3 className="text-3xl font-bold  mb-4">Tech We Use</h3>
+            <p className="  max-w-3xl mx-auto mb-6">
             From frontend frameworks to industry-standard creative tools, we choose the best
             technologies to deliver results that impress and perform.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-white text-sm sm:text-base">
+            <div className="flex flex-wrap justify-center gap-4  text-sm sm:text-base">
             {[
                 "Adobe After Effects",
                 "Premiere Pro",
@@ -182,7 +182,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
             { count: 3, label: "Years Experience", suffix: "+" },
             ].map(({ count, label, suffix }, idx) => (
             <div key={idx}>
-            <p className="text-4xl font-extrabold text-white">
+            <p className="text-4xl font-extrabold ">
             {achievementsInView ? (
             <CountUpNumber key={`count-${idx}-${Date.now()}`} end={count} suffix={suffix} />
             ) : (
@@ -203,7 +203,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
         >
-            <h3 className="text-3xl font-bold text-white text-center mb-10">Our Journey</h3>
+            <h3 className="text-3xl font-bold  text-center mb-10">Our Journey</h3>
             <ol className="relative border-l border-indigo-400 pl-6 space-y-10">
             {[
                 {
@@ -226,7 +226,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
                 <li key={idx} className="ml-4">
                 <div className="absolute w-3 h-3 bg-indigo-500 rounded-full -left-1.5 mt-1.5" />
                 <time className="text-sm text-indigo-400 font-semibold">{item.year}</time>
-                <p className="text-gray-300 text-base mt-1">{item.event}</p>
+                <p className="  text-base mt-1">{item.event}</p>
                 </li>
             ))}
             </ol>
@@ -239,7 +239,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            <h3 className="text-3xl font-bold text-white mb-10">What Clients Say</h3>
+            <h3 className="text-3xl font-bold  mb-10">What Clients Say</h3>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
             {[
                 {
@@ -259,8 +259,8 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
                 },
             ].map((testimonial, i) => (
                 <div key={i} className="bg-[#1f1f2f] p-6 rounded-xl shadow-md border border-gray-700">
-                <p className="text-gray-300 italic mb-4">“{testimonial.quote}”</p>
-                <p className="text-white font-semibold">{testimonial.name}</p>
+                <p className="  italic mb-4">“{testimonial.quote}”</p>
+                <p className="  font-semibold">{testimonial.name}</p>
                 <p className="text-indigo-400 text-sm">{testimonial.role}</p>
                 </div>
             ))}
@@ -274,7 +274,7 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            <h3 className="text-2xl font-semibold text-white mb-4">Trusted By</h3>
+            <h3 className="text-2xl font-semibold  mb-4">Trusted By</h3>
             <div className="flex flex-wrap justify-center items-center gap-6 opacity-80 grayscale hover:grayscale-0 transition-all">
             {[
                 "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
@@ -302,12 +302,12 @@ const { ref: achievementsRef, inView: achievementsInView } = useInView({
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
         >
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+            <h3 className="text-2xl sm:text-3xl font-bold  mb-4">
             Ready to bring your vision to life?
             </h3>
             <Link
             href="/contact-us"
-            className="inline-block bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-full font-medium shadow-md transition-all"
+            className="inline-block bg-indigo-500 hover:bg-indigo-600  px-8 py-3 rounded-full font-medium shadow-md transition-all text-white"
             >
             Contact Us Today
             </Link>

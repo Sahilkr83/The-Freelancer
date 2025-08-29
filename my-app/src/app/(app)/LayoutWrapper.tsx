@@ -4,7 +4,9 @@ import { usePathname } from "next/navigation";
 import NavBar from "@/component/NavBar";
 import Footer from "@/component/Footer";
 import FloatingParticles from "@/component/FloatingParticles";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "next-themes";
+import { useEffect } from "react";
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
@@ -14,8 +16,16 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
   const pathname = usePathname();
   const isDomeSite = pathname.includes("demo-site");
 
+  useEffect(() => {
+    if (localStorage.getItem("login_success")) {
+      toast.success("Signed in successfully!");
+      localStorage.removeItem("login_success");
+    }
+  }, []);
+
+
   return (
-    <>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       {!isDomeSite && <FloatingParticles />}
       <div className="relative min-h-screen overflow-x-hidden">
         {!isDomeSite && <NavBar />}
@@ -43,6 +53,6 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
 
         {!isDomeSite && <Footer />}
       </div>
-    </>
+    </ThemeProvider>
   );
 }

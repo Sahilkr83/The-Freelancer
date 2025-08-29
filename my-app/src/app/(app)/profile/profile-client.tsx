@@ -10,9 +10,9 @@ import Image from 'next/image';
 
 export default function ProfilePage() {
   const { status: sessionStatus } = useSession();
+  const { user } = useContext(AppContext)!;
+  const router = useRouter();
 
-  const { user} = useContext(AppContext)!;
-  const router = useRouter()
   const handleLogout = async () => {
     signOut({ callbackUrl: "/auth/sign-in" });
     toast.success("Logged out successfully!");
@@ -20,10 +20,9 @@ export default function ProfilePage() {
 
   if (sessionStatus === "loading") {
     return (
-      <div className="text-white pt-7 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 min-h-screen flex justify-center items-center">
+      <div className="pt-7 lg:px-7 mx-auto max-w-[1460px] w-11/12 min-h-screen flex justify-center items-center">
         <div className="flex flex-col items-center space-y-4">
-          {/* Spinning loader */}
-          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-xl font-semibold tracking-wide">Loading...</p>
         </div>
       </div>
@@ -31,75 +30,69 @@ export default function ProfilePage() {
   }
 
   return (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true }}
-  >
-    <div className="text-white relative pt-24 pb-0 lg:pb-36 lg:px-7 z-20 mx-auto max-w-[1460px] w-11/12 font-['Rajdhani',_sans-serif]">
-      <div className="flex flex-col md:flex-row justify-between items-start gap-10 mt-10">
-        <div className="flex items-center space-x-6">
-          <div className="w-24 h-24 rounded-full  flex items-center justify-center   font-extrabold">
-            <Image 
-              src={user?.image || "/default-avatar.png"}
-              width={80} 
-              height={80}
-              alt="User"
-              className="h-full w-full rounded-full object-cover border border-white"
-            />
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      className="relative min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-black flex items-center justify-center"
+    >
+      <div className="relative pt-28 pb-20 lg:px-7 mx-auto max-w-[1000px] w-11/12 font-['Rajdhani',_sans-serif] ">
+        
+        {/* Profile Card */}
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl ">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10">
+            <div className="relative w-32 h-32">
+              <Image
+                src={user?.image || "/default-avatar.png"}
+                width={128}
+                height={128}
+                alt="User"
+                className="rounded-full object-cover border-4 border-indigo-500 shadow-lg"
+              />
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-green-500 border-2 border-black rounded-full"></div>
+            </div>
+            <div className="text-center md:text-left">
+              <h1 className="text-4xl font-extrabold tracking-wide text-white">
+                {user?.name}
+              </h1>
+              <p className="text-lg mt-1 text-gray-300">{user?.email}</p>
+              <p className="text-md text-indigo-400 font-semibold">@{user?.username}</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-4xl font-extrabold tracking-wide ">
-              {user?.name}
-            </h1>
-            <p className="text-gray-300 text-lg mt-1">{user?.email}</p>
-          </div>
-        </div>
 
-        <div className="flex flex-col space-y-5">
-          <div>
-            <h3 className="text-xl font-semibold tracking-wide mb-3 text-indigo-400 uppercase drop-shadow-md">
-              Profile Info
+          {/* Profile Info */}
+          <div className="mt-10">
+            <h3 className="text-2xl font-semibold tracking-wide mb-4 text-indigo-400 uppercase">
+              Profile Information
             </h3>
-            <ul className="space-y-2 text-gray-300 text-lg">
-              <li><strong>Name:</strong> {user?.name}</li>
-              <li><strong>Email:</strong> {user?.email}</li>
-              {/* Add more profile fields if needed */}
+            <ul className="space-y-3 text-gray-200 text-lg">
+              <li><span className="text-indigo-300 font-medium">Full Name:</span> {user?.name}</li>
+              <li><span className="text-indigo-300 font-medium">Username:</span> {user?.username}</li>
+              <li><span className="text-indigo-300 font-medium">Email:</span> {user?.email}</li>
+              <li><span className="text-indigo-300 font-medium">Verified:</span> {user?.isVerified ? "✅ Yes" : "❌ No"}</li>
             </ul>
           </div>
-          <button
-            onClick={() => router.push("/auth/change-password")}
-            className="px-6 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-purple-700 text-white font-bold tracking-widest uppercase shadow-lg hover:brightness-110 transition"
-          >
-            Change Password
-          </button>
+
+          {/* Actions */}
+          <div className="mt-12 flex flex-col md:flex-row gap-5">
+            <button
+              onClick={() => router.push("/auth/change-password")}
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-700 text-white font-bold tracking-widest uppercase shadow-lg hover:scale-105 transition-transform"
+            >
+              Change Password
+            </button>
+            <button
+              onClick={handleLogout}
+              className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 font-bold tracking-widest uppercase text-white shadow-lg hover:scale-105 transition-transform"
+            >
+              Log Out
+            </button>
+          </div>
         </div>
       </div>
-
-      <button
-        onClick={handleLogout}
-        className="mt-12 w-full md:w-auto px-6 py-3 bg-red-600 hover:bg-red-700 rounded-full font-bold tracking-wide uppercase text-white shadow-lg transition"
-      >
-        Log Out
-      </button>
-    </div>
-
-    <style jsx>{`
-      .shadow-neon-glow {
-        box-shadow:
-          0 0 8px rgba(99, 102, 241, 0.7),
-          0 0 20px rgba(99, 102, 241, 0.6),
-          0 0 40px rgba(139, 92, 246, 0.5);
-      }
-      .text-gradient-neon {
-        background: linear-gradient(90deg, #7f00ff, #e100ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 0 2px #b37feb);
-      }
-    `}</style>
-  </motion.div>
+    </motion.div>
   );
 }

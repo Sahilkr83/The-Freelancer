@@ -57,17 +57,17 @@ export default function DashboardPage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-    <div className="text-white relative pt-24 pb-20 lg:px-7 z-20 mx-auto max-w-[1280px] w-11/12 font-['Rajdhani',_sans-serif]">
+    <div className=" relative pt-24 pb-20 lg:px-7 z-20 mx-auto max-w-[1280px] w-11/12 font-['Rajdhani',_sans-serif]">
       <div className="absolute top-28 right-4 text-right">
         <h1 className="text-sm font-semibold">{user?.name}</h1>
-        <p className="text-xs text-gray-300">{user?.email}</p>
+        <p className="text-xs  ">{user?.email}</p>
       </div>
 
       {/* DEMO PROJECT SECTION */}
       <section>
        <h1 className="text-2xl sm:text-3xl font-bold py-4">Demo Website</h1>
        <hr className="pb-4 border-gray-600" />
-       <p className="text-gray-300 leading-6">
+       <p className="  leading-6">
         Welcome {user?.name}! 🎉 Start exploring our demo project — customize it as much as you like and share your creativity with the world.
        </p>
 
@@ -100,13 +100,13 @@ export default function DashboardPage() {
         <div className=" sm:px-6 sm:pt-6 pl-2 flex flex-col justify-between w-full h-full cursor-pointer" onClick={() => window.open(`/demo-site/${user?.username}`, "_blank")}>
           <div>
             <h2 className="text-lg sm:text-2xl font-bold">{projects[0]?.title}</h2>
-            <p className="text-gray-300 text-sm sm:text-base sm:mt-2 leading-relaxed">
+            <p className="  text-sm sm:text-base sm:mt-2 leading-relaxed">
               {projects[0]?.description}
             </p>
           </div>
         </div>
         <div className="mt-3 flex gap-4 items-center sm:px-6 sm:pb-3 pl-2">
-          <span className="px-4 sm:py-2 py-1  mb-1 w-24 bg-indigo-500 rounded-full text-xs font-semibold hover:bg-indigo-600 transition">
+          <span className="px-4 sm:py-2 py-1  mb-1 w-24 bg-indigo-500 rounded-full text-xs font-semibold hover:bg-indigo-600 transition text-white">
             {projects[0]?.status}
           </span>
           <button
@@ -123,10 +123,10 @@ export default function DashboardPage() {
       <section className="mt-10 sm:mt-20">
         <h2 className="text-2xl sm:text-3xl font-bold py-4">Your Website&apos;s</h2>
         <hr className="pb-4" />
-        <p className="text-gray-300">
+        <p className=" ">
           Manage your personal projects and share them with others.
         </p>
-        <div className="text-gray-400 text-lg py-6 px-4 mt-4 text-center border border-dashed border-gray-600 rounded-lg bg-gray-800/50">
+        <div className=" text-lg py-6 px-4 mt-4 text-center border border-dashed border-gray-600 rounded-lg bg-gray-800/50">
           You currently don&apos;t have any projects with us.
         </div>
 
@@ -149,7 +149,7 @@ export default function DashboardPage() {
         <div className="sm:p-6 pl-2 flex flex-col justify-between">
           <div>
             <h3 className="text-lg sm:text-2xl font-bold">{projects[1]?.title}</h3>
-            <p className="text-gray-300 text-sm sm:text-base sm:mt-2 leading-relaxed">
+            <p className="  text-sm sm:text-base sm:mt-2 leading-relaxed">
               {projects[1]?.description}
             </p>
           </div>

@@ -20,7 +20,7 @@ const VideoPortfolioPage = () => {
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
     >
-      <main className="text-white relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-[1460px] w-full z-30 select-none">
+      <main className="  relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-[1460px] w-full z-30 select-none">
         
         {/* Hero Section */}
         <section className="py-20" aria-label="Hero Introduction">
@@ -39,7 +39,7 @@ const VideoPortfolioPage = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-xl sm:text-2xl lg:text-3xl pt-4 font-bold max-w-5xl mx-auto text-center text-gray-300"
+            className="text-xl sm:text-2xl lg:text-3xl pt-4 font-bold max-w-5xl mx-auto text-center "
           >
             The Freelancer — Expert Video Editing & Web Design Solutions
           </motion.h2>
@@ -67,7 +67,7 @@ const VideoPortfolioPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
               viewport={{ once: true }}
-              className="max-w-xl text-center lg:text-left text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide"
+              className="max-w-xl text-center lg:text-left  text-base sm:text-lg leading-relaxed tracking-wide"
             >
               <p className="mb-6">
                 At <strong>The Freelancer Shop</strong>, we don’t just edit videos — we craft stories that connect, inspire, and convert. Our editing style blends precision, artistry, and industry-leading techniques to give your content a cinematic edge.
@@ -131,7 +131,7 @@ const VideoPortfolioPage = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="py-10 max-w-4xl mx-auto text-center text-gray-300 text-base sm:text-lg leading-relaxed tracking-wide"
+          className="py-10 max-w-4xl mx-auto text-center  text-base sm:text-lg leading-relaxed tracking-wide"
         >
           <p>
             Every project we take on is approached with one goal: <strong>maximum impact</strong>. We edit with precision, using top-tier software like <strong>Adobe Premiere Pro</strong>, <strong>After Effects</strong>, and <strong>CapCut Pro</strong> to produce crisp, engaging videos that tell your story exactly how it should be told.

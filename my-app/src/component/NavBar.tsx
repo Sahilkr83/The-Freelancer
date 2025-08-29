@@ -1,40 +1,58 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import logo from '@/assets/logo/TheFreelancer logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaFilm } from "react-icons/fa";
 import { useSession } from 'next-auth/react';
-// import { ReactNode } from 'react';
-// import{AnimatePresence, motion} from 'framer-motion';
+import ThemeSwitch from './ThemeToggle';
+
 
 export default function NavBar() {
   const router = useRouter();
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { data: session, status } = useSession();
   const user = session?.user || null;
   const [mounted, setMounted] = useState(false); // track client mount
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    setMounted(true); // now we are on the client
-  }, []);
+  useEffect(() => setMounted(true), []);
   const loadingUser = !mounted || status === 'loading';
 
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        menuOpen &&
+        menuRef.current &&
+        buttonRef.current &&
+        !menuRef.current.contains(e.target as Node) &&
+        !buttonRef.current.contains(e.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener('click', handleClickOutside);
+    return () => window.removeEventListener('click', handleClickOutside);
+  }, [menuOpen]);
+
   return (
     <div
       className={`
-        fixed top-0 w-full z-[9999] transition-all duration-300 backdrop-blur-lg
-        ${scrolled ? 'bg-slate-950/80 border-b border-indigo-700 shadow-[0_2px_12px_rgba(93,118,255,0.25)]' : 'bg-transparent'}
+        fixed top-0 w-full z-[9999] transition-all duration-300 backdrop-blur-lg nav-bar 
+        ${scrolled ? ' border-b border-indigo-700 shadow-[0_2px_12px_rgba(93,118,255,0.25)]' : 'bg-transparent'}
         font-['Rajdhani',_sans-serif]
       `}
     >
@@ -52,13 +70,13 @@ export default function NavBar() {
         />
 
         {/* Desktop Links */}
-      <div className="hidden lg:flex gap-6 items-center font-medium relative">
+      <div className="hidden lg:flex gap-6 items-center relative font-bold">
         {/* Home */}
         {/* <FlyOutLink href='/' FlyoutContent={<WebPortfolio/>}>Home</FlyOutLink> */}
         <Link
           href="/"
-          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
-            pathname === '/' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'}`}
+          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
+            pathname === '/' ? 'nav-text' : 'border-transparent hover:text-indigo-400'}`}
         >
           Home
         </Link>
@@ -67,7 +85,7 @@ export default function NavBar() {
         <Link
           href="/web-development"
           className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
-            pathname === '/web-development' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'
+            pathname === '/web-development' ? 'nav-text' : 'border-transparent  hover:text-indigo-400'
           }`}
         >
           Web Portfolio
@@ -76,7 +94,7 @@ export default function NavBar() {
         <Link
           href="/video-portfolio"
           className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
-            pathname === '/video-portfolio' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'
+            pathname === '/video-portfolio' ? 'nav-text' : 'border-transparent  hover:text-indigo-400'
           }`}
         >
           Video Portfolio
@@ -87,7 +105,7 @@ export default function NavBar() {
         <Link
           href="/about-us"
           className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
-            pathname === '/about-us' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'
+            pathname === '/about-us' ? 'nav-text' : 'border-transparent  hover:text-indigo-400'
           }`}
         >
           About Us
@@ -96,16 +114,17 @@ export default function NavBar() {
         <Link
           href="/contact-us"
           className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
-            pathname === '/contact-us' ? 'border-indigo-400 text-indigo-400' : 'border-transparent text-gray-300 hover:text-indigo-400'
+            pathname === '/contact-us' ? 'nav-text' : 'border-transparent  hover:text-indigo-400'
           }`}
         >
           Contact Us
         </Link>
+                  
       </div>
-
-
+      
         {/* User Buttons */}
         <div className="hidden lg:flex items-center gap-4">
+          <ThemeSwitch/>
           {/* <Link
             href="/contact-us"
             className="px-4 py-2 rounded-lg bg-white text-black font-semibold hover:bg-gray-200 transition"
@@ -123,13 +142,15 @@ export default function NavBar() {
                 Dashboard
               </Link>
               <Link href="/profile" className="flex items-center gap-2">
-                <Image
-                  src={user.image}
-                  width={40}
-                  height={40}
-                  alt={user.image}
-                  className="h-10 w-10 rounded-full object-cover border border-white"
-                />
+               {user?.image && (
+                  <Image
+                    src={user.image}
+                    width={40}
+                    height={40}
+                    alt={user.name ?? "User Avatar"}
+                    className="h-10 w-10 rounded-full object-cover border border-white"
+                  />
+                )}
                 <span>{user.name?.split(' ')[0]}</span>
               </Link>
             </div>
@@ -152,8 +173,11 @@ export default function NavBar() {
         </div>
 
         {/* Hamburger */}
+        <div className='gap-4 flex lg:hidden items-center'>
+        <ThemeSwitch/>
         <button
-          className="lg:hidden p-2 rounded-md border border-white"
+          className=" p-2 rounded-md border border-white"
+          ref={buttonRef}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -173,12 +197,14 @@ export default function NavBar() {
             )}
           </svg>
         </button>
+        </div>
       </div>
 
       {/* Mobile Dropdown */}
       <div
+        ref={menuRef}
         className={`
-          absolute top-full right-4 mt-3 w-64 rounded-xl border border-gray-700 bg-slate-950
+          absolute top-full right-4 mt-3 w-64 rounded-xl border border-gray-700 nav-bar-mobile
           transition-all duration-300 origin-top-right shadow-2xl
           ${menuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}
           lg:hidden

@@ -91,15 +91,15 @@ const Frame: React.FC<FrameProps> = ({
       transition={{ duration: 0.5, delay: 0.2 }}
       viewport={{ once: true }}
       className="flex flex-col items-center gap-20 mb-20" id={id}>
-      <div className="frame-text text-center py-2 px-8 font-semibold uppercase text-[#a8e3f5] border-[#a8e3f5] border-4 w-fit flex gap-5 items-center">
+      <div className="frame-text text-center py-2 px-8 font-semibold uppercase border-4 w-fit flex gap-5 items-center">
         <FaSearch aria-hidden="true" />
-        <h4>{editName} edit</h4>
+        <h3>{editName} edit</h3>
       </div>
 
       <div className="flex items-center justify-around w-full frame">
         {videos.map((src, i) => (
-          <div key={i} className="relative w-fit h-fit group">
-            <Image src={iphoneFrame} alt="iPhone frame" />
+          <div key={i} className="relative w-fit h-fit group bg-black rounded-[40] ">
+            <Image src={iphoneFrame} alt="iPhone frame" className=" " />
             <video
               suppressHydrationWarning
               ref={videoRefs[i]}
@@ -110,7 +110,7 @@ const Frame: React.FC<FrameProps> = ({
               src={src}
               aria-label='Freelance video editing portfolio reel'
               title="Freelance video editing portfolio reel"
-              className="absolute top-3 right-3 w-[185px] h-[400px] rounded-lg"
+              className="absolute top-3 right-3 w-[185px] h-[400px] rounded-lg "
               onPlay={() => setIsPlaying(prev => prev.map((p, idx) => (idx === i ? true : p)))}
               onPause={() => setIsPlaying(prev => prev.map((p, idx) => (idx === i ? false : p)))}
               onVolumeChange={() => {
@@ -149,19 +149,19 @@ const Frame: React.FC<FrameProps> = ({
         ))}
 
         <div className="flex flex-col text-[1.5rem] gap-4">
-          <h3 className="uppercase text-[2rem] font-semibold text-[#a8e3f5]">{editName} edit</h3>
+          <h3 className="uppercase text-[2rem] font-semibold frame-text">{editName} edit</h3>
           <ol className="flex flex-col gap-3">
-            <li><span className="text-[#a8e3f5]">1.</span> Fine Cuts</li>
-            <li><span className="text-[#a8e3f5]">2.</span> Fine Transition</li>
-            <li><span className="text-[#a8e3f5]">3.</span> Subtitles</li>
+            <li><span className="frame-text">1.</span> Fine Cuts</li>
+            <li><span className="frame-text">2.</span> Fine Transition</li>
+            <li><span className="frame-text">3.</span> Subtitles</li>
             {number1 && type1 && (
-              <li><span className="text-[#a8e3f5]">{number1}</span> {type1}</li>
+              <li><span className="frame-text">{number1}</span> {type1}</li>
             )}
             {number2 && type2 && (
-              <li><span className="text-[#a8e3f5]">{number2}</span> {type2}</li>
+              <li><span className="frame-text">{number2}</span> {type2}</li>
             )}
             {number3 && type3 && (
-              <li><span className="text-[#a8e3f5]">{number3}</span> {type3}</li>
+              <li><span className="frame-text">{number3}</span> {type3}</li>
             )}
           </ol>
         </div>
