@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://thefreelancer.shop/assets/webdev-og-banner.webp",
+        url: "https://thefreelancer.shop/assets/webdev-og-banner.png",
         width: 1200,
         height: 630,
         alt: "The Freelancer Shop Web Development Banner",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Web Development Portfolio – The Freelancer Shop",
     description: "Explore modern frontend and full-stack web apps created by The Freelancer Shop.",
-    images: ["https://thefreelancer.shop/assets/webdev-twitter-banner.webp"],
+    images: ["https://thefreelancer.shop/assets/webdev-og-banner.png"],
   },
   metadataBase: new URL("https://thefreelancer.shop/")
 };

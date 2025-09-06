@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://thefreelancer.shop/assets/about-banner.png", // Replace with a real image
+        url: "https://thefreelancer.shop/assets/about-banner.png", 
         width: 1200,
         height: 630,
         alt: "The Freelancer Shop About Us Banner",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "About Us – The Freelancer Shop",
     description:
       "Get to know our team and how we bring brands to life with design and video.",
-    images: ["https://thefreelancer.shop/assets/about-banner.png"], // Replace with a real image
+    images: ["https://thefreelancer.shop/assets/about-banner.png"],
   },
   metadataBase: new URL("https://thefreelancer.shop/"),
 };
