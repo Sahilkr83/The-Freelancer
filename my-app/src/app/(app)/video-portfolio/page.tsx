@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Professional Video Editing Services – The Freelancer Shop",
     description: "Motion graphics, cinematic storytelling, and flawless editing for YouTube, social media, and businesses.",
-    images: ["https://thefreelancer.shop/assets/ideo-editing-og-banner.png"],
+    images: ["https://thefreelancer.shop/assets/video-editing-og-banner.png"],
   },
   metadataBase: new URL("https://thefreelancer.shop/")
 };

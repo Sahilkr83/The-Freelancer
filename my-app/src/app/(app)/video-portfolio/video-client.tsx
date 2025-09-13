@@ -76,7 +76,7 @@ const VideoPortfolioPage = () => {
                 Whether you’re building your brand, launching a campaign, or leveling up your YouTube channel, we deliver professional-grade <span className="font-semibold">color grading</span>, <span className="font-semibold">motion graphics</span>, and <span className="font-semibold">seamless transitions</span> that captivate audiences.
               </p>
               <p>
-                From sleek websites to high-impact promotional videos, we combine <strong>Next.js</strong>, <strong>React</strong>, and cutting-edge editing tools like <strong>Premiere Pro</strong> and <strong>After Effects</strong> to make sure your brand stands out — both visually and strategically.
+                From sleek high-impact promotional videos, we combine cutting-edge editing tools like <strong>Premiere Pro</strong> and <strong>After Effects</strong> to make sure your brand stands out — both visually and strategically.
               </p>
             </motion.div>
           </div>
@@ -108,9 +108,9 @@ const VideoPortfolioPage = () => {
           video1={urls[0].motion1}
           video2={urls[0].motion3}
           video3={urls[0].motion2}
-          number1="1." type1="Dynamic Visual Hooks"
-          number2="2." type2="Custom Motion Transitions"
-          number3="3." type3="High-Impact Animation"
+          number1="4." type1="Dynamic Visual Hooks"
+          number2="5." type2="Custom Motion Transitions"
+          number3="6." type3="High-Impact Animation"
         />
 
         {/* Commercial Editing Frame */}
@@ -120,9 +120,9 @@ const VideoPortfolioPage = () => {
           video1={urls[0].ad1}
           video2={urls[0].ad3}
           video3={urls[0].ad2}
-          number1="1." type1="Brand-Centric Storytelling"
-          number2="2." type2="Advanced Color Grading"
-          number3="3." type3="Fast-Paced Ad Sequencing"
+          number1="4." type1="Brand-Centric Storytelling"
+          number2="5." type2="Advanced Color Grading"
+          number3="6." type3="Fast-Paced Ad Sequencing"
         />
 
         {/* About Our Process */}
