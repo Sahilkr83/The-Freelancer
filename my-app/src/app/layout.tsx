@@ -94,6 +94,7 @@ export default function RootLayout({
         gtag('config', 'G-HJ9BJPTM79');
       `}
     </Script>
+    <meta name="google-adsense-account" content="ca-pub-5488328565550611"></meta>
   </head>
     <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-['Rajdhani',_sans-serif]`}>
       <AuthProvider>
