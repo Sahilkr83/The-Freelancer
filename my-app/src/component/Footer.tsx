@@ -6,9 +6,11 @@ import { useRouter,usePathname } from "next/navigation";
 import href from "@/component/urlfiles/links";
 
 const Footer = () => {
-  const hideLayoutRoutes = ['/auth/sign-in', '/auth/sign-up', '/contact-us', '/profile', '/dashboard','/auth/change-password', '/auth/forget-password','/auth/reset-password'];
+  const hideLayoutRoutes = ['/auth/sign-in', '/auth/sign-up', '/contact-us', '/profile', '/dashboard','/auth/change-password', '/auth/forget-password','/auth/reset-password','/cloud-storage'];
+  const hideLayoutRoutes2 = ['/cloud-storage'];
   const pathname = usePathname();
   const contactOn = hideLayoutRoutes.some((route) => pathname.startsWith(route));
+  const contactOn2 = hideLayoutRoutes2.some((route) => pathname.startsWith(route));
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const router = useRouter()
   useEffect(() => {
@@ -33,7 +35,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="footer-bg  w-full relative overflow-hidden z-10 pb-8">
+    <footer className={`footer-bg  w-full relative overflow-hidden z-10 pb-8 ${contactOn2 ? 'hidden': 'block'}`}>
       {/* ==== CTA VIDEO SECTION ==== */}
       {!contactOn && (
         <section className="relative w-full h-[400px] overflow-hidden" aria-label="Video Background Section">

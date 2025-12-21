@@ -2,6 +2,7 @@
 
 import React from 'react';
 import videoPortfolioImg from "@/assets/videoPortfolio.webp";
+import podcastImg from '@/assets/podcast.webp';
 import simpleImg from '@/assets/Simple.jpeg.webp';
 import motionGraphic from '@/assets/news_image_3269.webp';
 import commercial from '@/assets/Simple Edits.webp';
@@ -86,43 +87,53 @@ const VideoPortfolioPage = () => {
         <section className='flex flex-col justify-between py-10 w-full gap-5 text-center' id="services" aria-label="Service Types">
           <h3 className='font-bold uppercase types-of-edit-heading'>Our Editing Expertise</h3> 
           <div className='flex justify-between flex-wrap'>
-            <Types href='#simple' img={simpleImg} editType="Basic Editing" />
-            <Types href='#motion' img={motionGraphic} editType="Motion Graphics" />
-            <Types href='#commercial' img={commercial} editType="Commercial Editing" />
+            <Types href='#podcast' img={podcastImg} editType="Podcast Editing" scale='1'/>
+            <Types href='#simple' img={simpleImg} editType="Basic Editing" scale='1.8'/>
+            <Types href='#motion' img={motionGraphic} editType="Motion Graphics" scale='1.8'/>
+            <Types href='#commercial' img={commercial} editType="Commercial Editing" scale='1'/>
           </div>
         </section>
         
+        {/* Podcast Frame */}
+        <Frame
+          editName="Podcast"
+          id='podcast'
+          videos={[urls[0].pd2,urls[0].pd1,urls[0].pd3,urls[0].pd4,urls[0].pd5,urls[0].pd6,urls[0].pd7]}
+        />
         {/* Basic Editing Frame */}
         <Frame
           editName="Basic Editing"
-          id='simple'
-          video1={urls[0].simple1}
-          video2={urls[0].simple2}
-          video3={urls[0].simple3}
+          id='simple'      
+          videos={[urls[0].simple1,urls[0].simple2,urls[0].simple3]}
+          items={[
+            { number: "4.", type: "Smooth Transitions" },
+            { number: "5.", type: "Color Correction" },
+            { number: "6.", type: "Audio Enhancement" }
+          ]}
         />
 
         {/* Motion Graphics Frame */}
         <Frame
           editName="Motion Graphics"
           id='motion'
-          video1={urls[0].motion1}
-          video2={urls[0].motion3}
-          video3={urls[0].motion2}
-          number1="4." type1="Dynamic Visual Hooks"
-          number2="5." type2="Custom Motion Transitions"
-          number3="6." type3="High-Impact Animation"
+          videos={[urls[0].motion1,urls[0].motion3,urls[0].motion2]}
+          items={[
+            { number: "4.", type: "Dynamic Visual Hooks" },
+            { number: "5.", type: "Custom Motion Transitions" },
+            { number: "6.", type: "High-Impact Animation" }
+          ]}
         />
 
         {/* Commercial Editing Frame */}
         <Frame
           editName="Commercial Editing"
           id='commercial'
-          video1={urls[0].ad1}
-          video2={urls[0].ad3}
-          video3={urls[0].ad2}
-          number1="4." type1="Brand-Centric Storytelling"
-          number2="5." type2="Advanced Color Grading"
-          number3="6." type3="Fast-Paced Ad Sequencing"
+          videos={[urls[0].ad1,urls[0].ad2,urls[0].ad3]}
+          items={[
+            { number: "4.", type: "Brand-Centric Storytelling" },
+            { number: "5.", type: "Advanced Color Grading" },
+            { number: "6.", type: "Fast-Paced Ad Sequencing" }
+          ]}
         />
 
         {/* About Our Process */}

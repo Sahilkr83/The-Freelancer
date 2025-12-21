@@ -4,165 +4,264 @@ import { useEffect, useRef, useState } from "react";
 import { FaSearch, FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 import { motion } from "framer-motion";
 import iphoneFrame from "@/assets/iphone_frame.webp";
-import Image from 'next/image';
+import Image from "next/image";
 
 interface FrameProps {
   id: string;
-  video1: string;
-  video2: string;
-  video3: string;
+  videos?: string[];
   editName: string;
-  number1?: string;
-  number2?: string;
-  number3?: string;
-  type1?: string;
-  type2?: string;
-  type3?: string;
+  items?: { number: string; type: string }[];
 }
 
 const Frame: React.FC<FrameProps> = ({
-  id, video1, video2, video3, editName,
-  number1, number2, number3, type1, type2, type3
+  id,
+  videos = [],
+  editName,
+  items
 }) => {
-  const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
-  const [isPlaying, setIsPlaying] = useState([false, false, false]);
-  const [isMuted, setIsMuted] = useState([true, true, true]);
-  const videos = [video1, video2, video3];
 
+  /* =========================
+     REFS & STATE
+  ========================== */
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const userInteractedRef = useRef(false);
+
+  const [isPlaying, setIsPlaying] = useState<boolean[]>(
+    () => Array(videos.length).fill(false)
+  );
+
+  const [isMuted, setIsMuted] = useState<boolean[]>(
+    () => Array(videos.length).fill(true)
+  );
+
+  const [videoLength, setVideoLength] = useState(false);
+
+  /* =========================
+     AUTO SCROLL (PING-PONG)
+  ========================== */
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    let position = el.scrollLeft;
+    let direction = 1;
+    let paused = false;
+    const speed = 0.6;
+
+    const scroll = () => {
+      if (!paused) {
+        position += speed * direction;
+        el.scrollLeft = Math.round(position);
+
+        if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
+          direction = -1;
+          position = el.scrollLeft - 1;
+        }
+
+        if (el.scrollLeft <= 0) {
+          direction = 1;
+          position = 1;
+        }
+      }
+      requestAnimationFrame(scroll);
+    };
+
+    requestAnimationFrame(scroll);
+
+    const pause = () => (paused = true);
+    const resume = () => (paused = false);
+    const syncPosition = () => (position = el.scrollLeft);
+
+    el.addEventListener("mouseenter", pause);
+    el.addEventListener("mouseleave", resume);
+    el.addEventListener("touchstart", pause, { passive: true });
+    el.addEventListener("touchend", resume);
+    el.addEventListener("scroll", syncPosition);
+
+    return () => {
+      el.removeEventListener("mouseenter", pause);
+      el.removeEventListener("mouseleave", resume);
+      el.removeEventListener("touchstart", pause);
+      el.removeEventListener("touchend", resume);
+      el.removeEventListener("scroll", syncPosition);
+    };
+  }, []);
+
+  /* =========================
+     VIDEO COUNT CHECK
+  ========================== */
+  useEffect(() => {
+    setVideoLength(videos.length !== 3);
+  }, [videos.length]);
+
+  /* =========================
+     INTERSECTION OBSERVER
+  ========================== */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(({ isIntersecting, target }) => {
           const video = target as HTMLVideoElement;
-          isIntersecting ? video.play().catch(console.warn) : video.pause();
+
+          if (!userInteractedRef.current) {
+            isIntersecting
+              ? video.play().catch(() => {})
+              : video.pause();
+          }
+
+          if (!isIntersecting) {
+            userInteractedRef.current = false;
+          }
         });
       },
-      { root: null, rootMargin: "0px", threshold: 0.5 }
+      { threshold: 0.5 }
     );
 
-    videoRefs.forEach(ref => {
-      if (ref.current) observer.observe(ref.current);
+    videoRefs.current.forEach(video => {
+      if (video) observer.observe(video);
     });
 
     return () => {
-      videoRefs.forEach(ref => {
-        if (ref.current) observer.unobserve(ref.current);
+      videoRefs.current.forEach(video => {
+        if (video) observer.unobserve(video);
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [videos]);
 
-  const handleVolumeChange = (index: number) => {
-    videoRefs.forEach((ref, i) => {
-      if (ref.current && i !== index && !ref.current.muted) {
-        ref.current.muted = true;
-        setIsMuted(prev => prev.map((m, idx) => (idx === i ? true : m)));
-      }
+  /* =========================
+     SYNC ICONS WITH VIDEO
+  ========================== */
+  useEffect(() => {
+    videoRefs.current.forEach((video, idx) => {
+      if (!video) return;
+
+      const onPlay = () =>
+        setIsPlaying(p => p.map((_, i) => i === idx));
+      const onPause = () =>
+        setIsPlaying(p => p.map(() => false));
+
+      video.addEventListener("play", onPlay);
+      video.addEventListener("pause", onPause);
+
+      return () => {
+        video.removeEventListener("play", onPlay);
+        video.removeEventListener("pause", onPause);
+      };
     });
-  };
+  }, [videos]);
 
+  /* =========================
+     CONTROLS
+  ========================== */
   const togglePlay = (i: number) => {
-    const video = videoRefs[i].current;
-    if (video) {
-      if (video.paused) {
-        video.play();
-        setIsPlaying(prev => prev.map((p, idx) => (idx === i ? true : p)));
-      } else {
-        video.pause();
-        setIsPlaying(prev => prev.map((p, idx) => (idx === i ? false : p)));
-      }
+    const video = videoRefs.current[i];
+    if (!video) return;
+
+    userInteractedRef.current = true;
+
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
     }
   };
 
   const toggleMute = (i: number) => {
-    const video = videoRefs[i].current;
-    if (video) {
-      const newMuted = !video.muted;
-      video.muted = newMuted;
-      setIsMuted(prev => prev.map((m, idx) => (idx === i ? newMuted : m)));
-      handleVolumeChange(i);
-    }
+    const target = videoRefs.current[i];
+    if (!target) return;
+
+    const shouldUnmute = target.muted;
+
+    videoRefs.current.forEach((video, idx) => {
+      if (!video) return;
+      video.muted = idx === i ? !shouldUnmute : true;
+    });
+
+    setIsMuted(prev =>
+      prev.map((_, idx) => (idx === i ? !shouldUnmute : true))
+    );
   };
 
+  /* =========================
+     RENDER
+  ========================== */
   return (
-    <motion.div 
+    <motion.div
+      id={id}
       initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
       viewport={{ once: true }}
-      className="flex flex-col items-center gap-20 mb-20" id={id}>
-      <div className="frame-text text-center py-2 px-8 font-semibold uppercase border-4 w-fit flex gap-5 items-center">
-        <FaSearch aria-hidden="true" />
-        <h3>{editName} edit</h3>
+      className="flex flex-col items-center gap-20 mb-20"
+    >
+      {/* TITLE */}
+      <div className="frame-text py-2 px-8 font-semibold uppercase border-4 flex gap-5 items-center">
+        <FaSearch />
+        <h3>{editName} edits</h3>
       </div>
 
-      <div className="flex items-center justify-around w-full frame">
-        {videos.map((src, i) => (
-          <div key={i} className="relative w-fit h-fit group bg-black rounded-[40] ">
-            <Image src={iphoneFrame} alt="iPhone frame" className=" " />
-            <video
-              suppressHydrationWarning
-              ref={videoRefs[i]}
-              playsInline
-              muted={isMuted[i]}
-              loop
-              preload="auto"
-              src={src}
-              aria-label='Freelance video editing portfolio reel'
-              title="Freelance video editing portfolio reel"
-              className="absolute top-3 right-3 w-[185px] h-[400px] rounded-lg "
-              onPlay={() => setIsPlaying(prev => prev.map((p, idx) => (idx === i ? true : p)))}
-              onPause={() => setIsPlaying(prev => prev.map((p, idx) => (idx === i ? false : p)))}
-              onVolumeChange={() => {
-                const muted = videoRefs[i].current?.muted ?? true;
-                setIsMuted(prev => prev.map((m, idx) => (idx === i ? muted : m)));
-              }}
-            >
-              <track kind="captions" srcLang="en" label="No captions available" />
-            </video>
+      <div className="flex  justify-around w-full gap-10 sm:flex-row flex-col">
+        {/* VIDEOS */}
+        <div
+          ref={containerRef}
+          className="w-full overflow-x-auto no-scrollbar whitespace-nowrap "
+        >
+          <div
+            className={`grid gap-6 px-2 py-5 
+              sm:flex sm:gap-5 
+              ${!videoLength ? "sm:w-full w-full sm:justify-around grid-cols-1 grid-rows-3 place-items-center " : "sm:w-max w-max grid-cols-4 grid-rows-2"}
+            `}
+          >
+            {videos.map((src, i) => (
+              <div key={i} className="relative group bg-black rounded-[40px] flex items-center w-max">
+                <Image src={iphoneFrame} alt="iPhone frame" />
+                <video
+                  ref={(el) => {
+                    videoRefs.current[i] = el;
+                  }}
+                  playsInline
+                  muted={isMuted[i]}
+                  loop
+                  preload="auto"
+                  src={src}
+                  className="absolute top-3 right-3 w-[185px] h-[400px] rounded-lg"
+                />
 
-            {/* Custom Controls */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 controls">
-              <button
-                onClick={() => togglePlay(i)}
-                className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-lg text-white hover:bg-white/40 flex items-center justify-center transition-transform duration-150 active:scale-90 relative group"
-                aria-label={isPlaying[i] ? "Pause" : "Play"}
-              >
-                {isPlaying[i] ? <FaPause /> : <FaPlay />}
-                <span className={`absolute  right-1/6 -translate-x-1/2 text-xs  text-white px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 controls ${isPlaying[i] ? "pr-[10px]" : "pr-4"}`}>
-                  {isPlaying[i] ? "Pause" : "Play"}
-                </span>
-              </button>
+                {/* CONTROLS */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
+                  <button
+                    onClick={() => togglePlay(i)}
+                    className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center"
+                  >
+                    {isPlaying[i] ? <FaPause /> : <FaPlay />}
+                  </button>
 
-              <button
-                onClick={() => toggleMute(i)}
-                className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-lg text-white hover:bg-white/40 flex items-center justify-center transition-transform duration-150 active:scale-90 relative group"
-                aria-label={isMuted[i] ? "Unmute" : "Mute"}
-              >
-                {isMuted[i] ? <FaVolumeMute /> : <FaVolumeUp />}
-                <span className={`absolute  left-1/5 translate-x-1/2 text-xs  text-white px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 controls ${isMuted[i] ? "pl-2" : "pl-4"}`}>
-                  {isMuted[i] ? "Unmute" : "Mute"}
-                </span>
-              </button>
-            </div>
+                  <button
+                    onClick={() => toggleMute(i)}
+                    className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center"
+                  >
+                    {isMuted[i] ? <FaVolumeMute /> : <FaVolumeUp />}
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
 
-        <div className="flex flex-col text-[1.5rem] gap-4">
-          <h3 className="uppercase text-[2rem] font-semibold frame-text">{editName} edit</h3>
-          <ol className="flex flex-col gap-3">
+        {/* TEXT */}
+        <div className={`flex flex-col gap-4 text-xl ${videoLength ? 'w-[250px]' : 'w-[500px]'}`}>
+          <h3 className={`text-[2rem] font-semibold frame-text uppercase`}>{editName} Edits</h3>
+          <ol className="flex flex-col gap-3 text-[24px]">
             <li><span className="frame-text">1.</span> Fine Cuts</li>
             <li><span className="frame-text">2.</span> Fine Transition</li>
             <li><span className="frame-text">3.</span> Subtitles</li>
-            {number1 && type1 && (
-              <li><span className="frame-text">{number1}</span> {type1}</li>
-            )}
-            {number2 && type2 && (
-              <li><span className="frame-text">{number2}</span> {type2}</li>
-            )}
-            {number3 && type3 && (
-              <li><span className="frame-text">{number3}</span> {type3}</li>
-            )}
+            {items?.map((item, i) => (
+              <li key={i}>
+                <span className="frame-text">{item.number} </span>
+                 {item.type}
+              </li>
+            ))}
           </ol>
         </div>
       </div>

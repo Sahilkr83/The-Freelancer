@@ -2,16 +2,17 @@
 import { WelcomeEmailfunction } from "@/heplers/welcomeEmail";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
+import jwt from "jsonwebtoken";
 
 
 export async function POST(request: Request) {
     await dbConnect()
 
         try{
-        const {username,code} = await request.json()
+        const {identifier,code} = await request.json()
         // console.log("Verifying user with username:", username, "and code:", code)
-        const decodedUsername = decodeURIComponent(username)
-        const user = await UserModel.findOne({username:decodedUsername})
+        // const decodedUsername = decodeURIComponent(username)
+        const user = await UserModel.findOne({$or:[{email:identifier},{username:identifier}]})
         if(!user){
             return Response.json({
                 success:false,
@@ -33,6 +34,11 @@ export async function POST(request: Request) {
             user.isVerified = true;
             user.verifyCode = 'VERIFIED';
             await user.save();
+            const token = jwt.sign(
+                  { id: user._id, email: user.email, username: user.username },
+                  process.env.NEXTAUTH_SECRET!,
+                  { expiresIn: "7d" }
+                );
             
             const emailResponse = await WelcomeEmailfunction(user?.name ,user.email);
             if(!emailResponse.success){
@@ -47,7 +53,16 @@ export async function POST(request: Request) {
 
             return Response.json({
                 success:true,
-                message:"Account verified successfully"
+                message:"Account verified successfully",
+                user: {
+                    email: user.email,
+                    username: user.username,
+                    name: user.name,
+                    image: user.image || `https://api.dicebear.com/5.x/initials/png?seed=${user.name}`,
+                    isVerified: user.isVerified,
+                    userProject: [],
+                },
+                token,
             }, {status:200})
 
         }else if (!isCodeNotExpired){

@@ -169,12 +169,12 @@ const Home = () => {
         <Frame
           editName="Motion Graphics"
           id='motion'
-          video1={urls[0].motion1}
-          video2={urls[0].motion3}
-          video3={urls[0].motion2}
-          number1="4." type1="Hook Elements"
-          number2="5." type2="Motion Transition"
-          number3="6." type3="Fastpace Editing"
+          videos={[urls[0].motion1,urls[0].motion3,urls[0].motion2]}
+          items={[
+            { number: "4.", type: "Dynamic Visual Hooks" },
+            { number: "5.", type: "Custom Motion Transitions" },
+            { number: "6.", type: "High-Impact Animation" }
+          ]}
         />
         
         <div className="mt-10 mb-16 flex justify-center gap-6 text-white">

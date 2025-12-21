@@ -32,6 +32,30 @@ function optimizeCloudinaryUrl(url) {
       motion3: optimizeCloudinaryUrl(
         "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1736136336/The%20Freelancer/motion%203.mp4"
       ),
+      pd1: optimizeCloudinaryUrl(
+        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766070412/prime_roll_eehsdu.mp4"
+      ),
+      pd2: optimizeCloudinaryUrl(
+        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766065363/V-2_gm2i2s.mp4"
+      ),
+      pd3: optimizeCloudinaryUrl(
+        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766065365/final_flag_ni9crx.mp4"
+      ),
+      pd4: optimizeCloudinaryUrl(
+        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766065359/Why_Rakesh_Jhunjhunwala_was_the_GOATxashish_hhpgn4.mp4"
+      ),
+      pd5: optimizeCloudinaryUrl(
+        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766065365/oahu_vid1_gqjmp0.mp4"
+      ),
+      pd6: optimizeCloudinaryUrl(
+        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766068773/script_2_xo0aub.mp4"
+      ),
+      pd7: optimizeCloudinaryUrl(
+        "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766065323/WhatsApp_Video_2025-12-11_at_10.38.34_PM_irlr9m.mp4"
+      ),
+      // pd8: optimizeCloudinaryUrl(
+      //   "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1736136336/The%20Freelancer/motion%203.mp4"
+      // ),
 
     },
   ];

@@ -16,6 +16,27 @@
   --star-color: #6200EE; /* light color for dark background */
 
 }
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* track */
+::-webkit-scrollbar-track {
+  background: #0f172a; /* dark */
+}
+
+/* thumb */
+::-webkit-scrollbar-thumb {
+  background: #6366f1; /* indigo */
+  border-radius: 8px;
+}
+
+/* hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4f46e5;
+}
+
 
 .dark {
   --color-background: theme(colors.slate.950);

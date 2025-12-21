@@ -14,7 +14,8 @@ interface LayoutWrapperProps {
 
 export default function LayoutWrapper({ children }: LayoutWrapperProps) {
   const pathname = usePathname();
-  const isDomeSite = pathname.includes("demo-site");
+  const isDomeSite = pathname.includes("demo-site") || pathname.includes("preview");
+
 
   useEffect(() => {
     if (localStorage.getItem("login_success")) {

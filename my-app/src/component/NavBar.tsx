@@ -1,30 +1,31 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import logo from '@/assets/logo/TheFreelancer logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaFilm } from "react-icons/fa";
 import { useSession } from 'next-auth/react';
+import logo from '@/assets/logo/TheFreelancer logo.png';
 import ThemeSwitch from './ThemeToggle';
-
 
 export default function NavBar() {
   const router = useRouter();
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const { data: session, status } = useSession();
   const user = session?.user || null;
-  const [mounted, setMounted] = useState(false); // track client mount
-  const menuRef = useRef<HTMLDivElement>(null);
+
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => setMounted(true), []);
   const loadingUser = !mounted || status === 'loading';
 
-  // Handle scroll effect
+  // Scroll effect
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
@@ -50,9 +51,8 @@ export default function NavBar() {
 
   return (
     <div
-      className={`
-        fixed top-0 w-full z-[9999] transition-all duration-300 backdrop-blur-lg nav-bar 
-        ${scrolled ? ' border-b border-indigo-700 shadow-[0_2px_12px_rgba(93,118,255,0.25)]' : 'bg-transparent'}
+      className={`fixed top-0 w-full z-[9999] transition-all duration-300 backdrop-blur-lg nav-bar 
+        ${scrolled ? 'border-b border-indigo-700 shadow-[0_2px_12px_rgba(93,118,255,0.25)]' : 'bg-transparent'}
         font-['Rajdhani',_sans-serif]
       `}
     >
@@ -70,71 +70,70 @@ export default function NavBar() {
         />
 
         {/* Desktop Links */}
-      <div className="hidden lg:flex gap-6 items-center relative font-bold">
-        {/* Home */}
-        {/* <FlyOutLink href='/' FlyoutContent={<WebPortfolio/>}>Home</FlyOutLink> */}
-        <Link
-          href="/"
-          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
-            pathname === '/' ? 'nav-text' : 'border-transparent hover:text-indigo-400'}`}
-        >
-          Home
-        </Link>
+        <div className="hidden lg:flex gap-6 items-center relative font-bold">
+          <Link
+            href="/"
+            className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
+              pathname === '/' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
+            }`}
+          >
+            Home
+          </Link>
 
-          {/* web-development */}
-        <Link
-          href="/web-development"
-          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
-            pathname === '/web-development' ? 'nav-text' : 'border-transparent  hover:text-indigo-400'
-          }`}
-        >
-          Web Portfolio
-        </Link>
-          {/* video-portfolio*/}
-        <Link
-          href="/video-portfolio"
-          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
-            pathname === '/video-portfolio' ? 'nav-text' : 'border-transparent  hover:text-indigo-400'
-          }`}
-        >
-          Video Portfolio
-        </Link>
+          {user ? (
+            <Link
+              href="/cloud-storage"
+              className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
+                pathname === '/cloud-storage' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
+              }`}
+            >
+              Cloud Storage
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/web-development"
+                className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
+                  pathname === '/web-development' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
+                }`}
+              >
+                Web Portfolio
+              </Link>
+              <Link
+                href="/video-portfolio"
+                className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
+                  pathname === '/video-portfolio' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
+                }`}
+              >
+                Video Portfolio
+              </Link>
+              <Link
+                href="/about-us"
+                className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
+                  pathname === '/about-us' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
+                }`}
+              >
+                About Us
+              </Link>
+              <Link
+                href="/contact-us"
+                className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
+                  pathname === '/contact-us' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
+                }`}
+              >
+                Contact Us
+              </Link>
+            </>
+          )}
+        </div>
 
-
-        {/* About Us */}
-        <Link
-          href="/about-us"
-          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
-            pathname === '/about-us' ? 'nav-text' : 'border-transparent  hover:text-indigo-400'
-          }`}
-        >
-          About Us
-        </Link>
-        {/* contact Us */}
-        <Link
-          href="/contact-us"
-          className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250  ${
-            pathname === '/contact-us' ? 'nav-text' : 'border-transparent  hover:text-indigo-400'
-          }`}
-        >
-          Contact Us
-        </Link>
-                  
-      </div>
-      
         {/* User Buttons */}
         <div className="hidden lg:flex items-center gap-4">
-          <ThemeSwitch/>
-          {/* <Link
-            href="/contact-us"
-            className="px-4 py-2 rounded-lg bg-white text-black font-semibold hover:bg-gray-200 transition"
-          >
-            Contact Us
-          </Link> */}
+          <ThemeSwitch />
           {loadingUser ? (
             <div className="w-32 h-10 bg-gray-700 animate-pulse rounded-md" />
           ) : user ? (
-            <div className='flex items-center gap-4'>
+            <div className="flex items-center gap-4">
               <Link
                 href="/dashboard"
                 className="px-3 py-1.5 border border-white rounded-md hover:bg-white hover:text-black transition"
@@ -142,7 +141,7 @@ export default function NavBar() {
                 Dashboard
               </Link>
               <Link href="/profile" className="flex items-center gap-2">
-               {user?.image && (
+                {user.image && (
                   <Image
                     src={user.image}
                     width={40}
@@ -173,38 +172,33 @@ export default function NavBar() {
         </div>
 
         {/* Hamburger */}
-        <div className='gap-4 flex lg:hidden items-center'>
-        <ThemeSwitch/>
-        <button
-          className=" p-2 rounded-md border border-white"
-          ref={buttonRef}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            viewBox="0 0 24 24"
+        <div className="gap-4 flex lg:hidden items-center">
+          <ThemeSwitch />
+          <button
+            className="p-2 rounded-md border border-white"
+            ref={buttonRef}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
           >
-            {menuOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path d="M3 12h18M3 6h18M3 18h18" />
-            )}
-          </svg>
-        </button>
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              viewBox="0 0 24 24"
+            >
+              {menuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M3 12h18M3 6h18M3 18h18" />}
+            </svg>
+          </button>
         </div>
       </div>
 
       {/* Mobile Dropdown */}
       <div
         ref={menuRef}
-        className={`
-          absolute top-full right-4 mt-3 w-64 rounded-xl border border-gray-700 nav-bar-mobile
+        className={`absolute top-full right-4 mt-3 w-64 rounded-xl border border-gray-700 nav-bar-mobile
           transition-all duration-300 origin-top-right shadow-2xl
           ${menuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}
           lg:hidden
@@ -212,32 +206,18 @@ export default function NavBar() {
       >
         <div className="flex flex-col p-4 space-y-2 font-medium text-white">
           <Link href="/" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-            <span aria-hidden="true">🏠</span> Home
+            🏠 Home
           </Link>
-          <Link href="/web-development" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-            <span aria-hidden="true">💻</span> Web Portfolio
-          </Link>
-          <Link href="/video-portfolio" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-            <FaFilm className="w-5 h-5" aria-hidden="true" /> Video Portfolio
-          </Link>
-          <Link href="/contact-us" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-            <span aria-hidden="true">📞</span> Contact Us
-          </Link>
-          <Link href="/about-us" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-            <span aria-hidden="true">ℹ️</span> About Us
-          </Link>
-          <div className="border-t border-gray-700 my-2" />
 
-          {loadingUser ? (
-            <div className="w-full h-10 bg-gray-700 animate-pulse rounded-md" />
-          ) :mounted ? (
-            user ? (
-            <div className="flex flex-col gap-2">
-              <Link
-                href="/profile"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-3 hover:bg-gray-700 px-4 py-2 rounded-md"
-              >
+          {user ? (
+            <>
+              <Link href="/cloud-storage" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+                ☁️ Cloud Storage
+              </Link>
+              <Link href="/dashboard" onClick={() => setMenuOpen(false)} className="px-4 py-2 mx-1 rounded-md border border-white text-center">
+                Dashboard
+              </Link>
+              <Link href="/profile" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 hover:bg-gray-700 px-4 py-2 rounded-md">
                 <Image
                   src={user.image || '/default-avatar.png'}
                   width={40}
@@ -247,28 +227,28 @@ export default function NavBar() {
                 />
                 <span>{user.name?.split(' ')[0]}</span>
               </Link>
-              <Link
-                href="/dashboard"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-2 mx-1 rounded-md  border border-white text-center"
-              >
-                Dashboard
-              </Link>
-            </div>
-            
+            </>
           ) : (
             <>
+              <Link href="/web-development" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+                💻 Web Portfolio
+              </Link>
+              <Link href="/video-portfolio" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+                <FaFilm className="w-5 h-5" /> Video Portfolio
+              </Link>
+              <Link href="/about-us" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+                ℹ️ About Us
+              </Link>
+              <Link href="/contact-us" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+                📞 Contact Us
+              </Link>
+              <div className="border-t border-gray-700 my-2" />
               <Link href="/auth/sign-in" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md">
                 🔐 Login
               </Link>
               <Link href="/auth/sign-up" onClick={() => setMenuOpen(false)} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold text-center">
                 ✨ Sign Up
               </Link>
-            </>
-          )) : (
-            <>
-              <a className="hover:bg-gray-700 px-4 py-2 rounded-md invisible">Login</a>
-              <a className="bg-blue-600 px-4 py-2 rounded-md invisible">Sign Up</a>
             </>
           )}
         </div>
@@ -278,6 +258,7 @@ export default function NavBar() {
     </div>
   );
 }
+
 
 
 

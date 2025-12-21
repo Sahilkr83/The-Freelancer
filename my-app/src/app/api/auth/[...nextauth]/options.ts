@@ -7,6 +7,18 @@ import UserModel from "@/model/User";
 
 import GoogleProvider from "next-auth/providers/google";
 import { randomBytes } from "crypto";
+import AWS from "aws-sdk";
+import { S3 } from "@aws-sdk/client-s3";
+import { ListObjectsV2Command, PutObjectCommand } from "@aws-sdk/client-s3";
+
+const s3 = new S3({
+  region: process.env.AWS_REGION!,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+  },
+});
+
 
 interface AuthUser extends NextAuthUser {
   id:string;
@@ -77,6 +89,7 @@ export const authOptions:NextAuthOptions = {
                 const googleProfile = profile as { email: string; name: string; picture: string };
                 const randomPassword = randomBytes(8).toString('hex');
                 const email = profile.email;
+                const username =  email?.split('@')[0];
                 const name = profile.name;
                 const image = googleProfile.picture || `https://api.dicebear.com/5.x/initials/png?seed=${name}`;   
                 // check if user exists
@@ -86,7 +99,7 @@ export const authOptions:NextAuthOptions = {
                     await UserModel.create({
                         name,
                         email,
-                        username: email?.split('@')[0],
+                        username,
                         image,
                         isVerified: true,
                         password: await bcrypt.hash(randomPassword, 10),
@@ -95,6 +108,28 @@ export const authOptions:NextAuthOptions = {
                         userProject:[] // empty or random password
                     });
                 }
+                const folderKey = `${username}/`;
+                const result = await s3.send(
+                    new ListObjectsV2Command({
+                        Bucket: process.env.AWS_BUCKET_NAME!,
+                        Prefix: folderKey,
+                        MaxKeys: 1,
+                    })
+                    );
+
+                const folderExists = result.Contents && result.Contents.length > 0;
+
+                if (!folderExists) {
+                    await s3.send(
+                        new PutObjectCommand({
+                        Bucket: process.env.AWS_BUCKET_NAME!,
+                        Key: folderKey,
+                        })
+                    );
+                    console.log(`✅ Created folder for ${username}`);
+                    } else {
+                    console.log(`⚡ Folder for ${username} already exists`);
+                    }
             }
 
             return true;
