@@ -80,7 +80,7 @@ export default function NavBar() {
             Home
           </Link>
 
-          {user ? (
+          {/* {user ? (
             <Link
               href="/cloud-storage"
               className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
@@ -89,7 +89,7 @@ export default function NavBar() {
             >
               Cloud Storage
             </Link>
-          ) : (
+          ) : ( */}
             <>
               <Link
                 href="/web-development"
@@ -124,7 +124,7 @@ export default function NavBar() {
                 Contact Us
               </Link>
             </>
-          )}
+          {/* )} */}
         </div>
 
         {/* User Buttons */}
@@ -211,9 +211,9 @@ export default function NavBar() {
 
           {user ? (
             <>
-              <Link href="/cloud-storage" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
+              {/* <Link href="/cloud-storage" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
                 ☁️ Cloud Storage
-              </Link>
+              </Link> */}
               <Link href="/dashboard" onClick={() => setMenuOpen(false)} className="px-4 py-2 mx-1 rounded-md border border-white text-center">
                 Dashboard
               </Link>

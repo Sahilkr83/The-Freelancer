@@ -24,31 +24,38 @@ const VideoPortfolioPage = () => {
       <main className="  relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-[1460px] w-full z-30 select-none">
         
         {/* Hero Section */}
-        <section className="py-20" aria-label="Hero Introduction">
+        <section className="relative py-28 text-center" aria-label="Hero Introduction">
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute left-1/2 top-1/3 -translate-x-1/2 w-[900px] h-[500px] bg-indigo-500/20 blur-[140px]" />
+          </div>
           <motion.h1
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight max-w-5xl mx-auto text-center"
-          >
-            Transform Your Vision Into Cinematic Reality
-          </motion.h1>
-
-          <motion.h2
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-xl sm:text-2xl lg:text-3xl pt-4 font-bold max-w-5xl mx-auto text-center "
-          >
-            The Freelancer — Expert Video Editing & Web Design Solutions
-          </motion.h2>
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-5xl mx-auto"
+            >
+              Editing That Turns Vision Into
+              <span className="block text-indigo-400 mt-2">
+                Cinematic Reality
+              </span>
+            </motion.h1>
+             <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto opacity-80"
+            >
+              Professional video editing & motion design built to increase
+              engagement, retention, and brand authority.
+            </motion.p>
 
           <div className="mt-10 flex flex-col lg:flex-row items-center lg:items-start gap-12 max-w-7xl mx-auto">
             <motion.div
-              whileHover={{ scale: 1.05, filter: "brightness(1.1)" }}
-              transition={{ type: "spring", stiffness: 300 }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
               viewport={{ once: true }}
               className="rounded-xl overflow-hidden shadow-2xl"
             >
@@ -85,8 +92,8 @@ const VideoPortfolioPage = () => {
 
         {/* Services Section */}
         <section className='flex flex-col justify-between py-10 w-full gap-5 text-center' id="services" aria-label="Service Types">
-          <h3 className='font-bold uppercase types-of-edit-heading'>Our Editing Expertise</h3> 
-          <div className='sm:flex justify-between sm:flex-wrap grid grid-cols-2 grid-rows-2 scal'>
+          <h3 className="frame-title ">Our Editing Expertise</h3> 
+          <div className='sm:flex justify-between sm:flex-wrap grid grid-cols-2 grid-rows-2 scal pt-10'>
             <Types href='#podcast' img={podcastImg} editType="Podcast Edits" scale='1.2'/>
             <Types href='#simple' img={simpleImg} editType="Basic Edits" scale='1.8'/>
             <Types href='#motion' img={motionGraphic} editType="Motion Graphics" scale='2.1'/>
@@ -99,17 +106,17 @@ const VideoPortfolioPage = () => {
           editName="Podcast"
           id='podcast'
           videos={[urls[0].pd2,urls[0].pd1,urls[0].pd3,urls[0].pd4,urls[0].pd5,urls[0].pd6,urls[0].pd7]}
+          items={[
+            { number: "4.", type: "Clean Multi-Cam Cuts" },
+            { number: "5.", type: "Engaging Jump Cuts & Pacing" },
+            { number: "6.", type: "Social-Ready Podcast Clips" }
+          ]}
         />
         {/* Basic Editing Frame */}
         <Frame
-          editName="Basic Editing"
+          editName="Basic"
           id='simple'      
           videos={[urls[0].simple1,urls[0].simple2,urls[0].simple3]}
-          items={[
-            { number: "4.", type: "Smooth Transitions" },
-            { number: "5.", type: "Color Correction" },
-            { number: "6.", type: "Audio Enhancement" }
-          ]}
         />
 
         {/* Motion Graphics Frame */}
@@ -126,7 +133,7 @@ const VideoPortfolioPage = () => {
 
         {/* Commercial Editing Frame */}
         <Frame
-          editName="Commercial Editing"
+          editName="Commercial"
           id='commercial'
           videos={[urls[0].ad1,urls[0].ad2,urls[0].ad3]}
           items={[

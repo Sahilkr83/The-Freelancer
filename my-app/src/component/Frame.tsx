@@ -196,77 +196,130 @@ const Frame: React.FC<FrameProps> = ({
       className="flex flex-col items-center gap-20 mb-20"
     >
       {/* TITLE */}
-      <div className="frame-text py-2 px-8 font-semibold uppercase border-4 flex gap-5 items-center">
-        <FaSearch />
-        <h3>{editName} edits</h3>
+      <div className="frame-title">
+
+        <span>{editName} edits</span>
       </div>
 
       <div className="flex  justify-around w-full gap-10 sm:flex-row flex-col">
         {/* VIDEOS */}
         <div
           ref={containerRef}
-          className="w-full overflow-x-auto no-scrollbar whitespace-nowrap "
+          className="w-full overflow-x-auto no-scrollbar"
         >
           <div
-            className={`grid gap-6 px-2 py-5 
-              sm:flex sm:gap-5 
-              ${!videoLength ? "sm:w-full w-full sm:justify-around grid-cols-1 grid-rows-3 place-items-center " : "sm:w-max w-max grid-cols-4 grid-rows-2"}
+            className={`relative grid gap-10 px-10 py-5
+              sm:flex sm:gap-24
+              ${
+                !videoLength
+                  ? "sm:w-full w-full sm:justify-around grid-cols-1 place-items-center"
+                  : "sm:w-max w-max grid-cols-4"
+              }
             `}
           >
             {videos.map((src, i) => (
-              <div key={i} className="relative group bg-black rounded-[40px] flex items-center w-max">
-                <Image src={iphoneFrame} alt="iPhone frame" />
-                <video
-                  ref={(el) => {
-                    videoRefs.current[i] = el;
-                  }}
-                  playsInline
-                  muted={isMuted[i]}
-                  loop
-                  preload="auto"
-                  src={src}
-                  className="absolute top-3 right-3 w-[185px] h-[400px] rounded-lg"
-                />
+              <div
+                key={i}
+                className="
+                  relative group
+                  flex flex-col items-center
+                  transition-transform duration-500
+                  hover:-translate-y-2
+                "
+              >
 
-                {/* CONTROLS */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
+                {/* DEVICE PREVIEW */}
+                <div className="relative flex items-center justify-center">
+                  
+                  <Image
+                    src={iphoneFrame}
+                    alt="iPhone frame"
+                    className="select-none w-[210px] z-20"
+                  />
+
+                  <video
+                    ref={(el) => {
+                      videoRefs.current[i] = el;
+                    }}
+                    playsInline
+                    muted={isMuted[i]}
+                    loop
+                    preload="auto"
+                    src={src}
+                    className="
+                      absolute top-[8px] right-2
+                      w-[192px] h-[407px]
+                      z-10
+                      rounded-[16px]
+                      object-cover
+                      bg-black
+                    "
+                  />
+                </div>
+
+                {/* CONTROL RAIL */}
+                <div
+                  className="
+                    mt-6
+                    flex items-center gap-5
+                    opacity-100 sm:opacity-0
+                    group-hover:opacity-100
+                    transition-opacity duration-300
+                  "
+                >
                   <button
                     onClick={() => togglePlay(i)}
-                    className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center"
+                    className="
+                      text-sm tracking-wide
+                      transition
+                    "
                   >
-                    {isPlaying[i] ? <FaPause /> : <FaPlay />}
+                    {isPlaying[i] ? "Pause" : "Play"}
                   </button>
+
+                  <span className="h-3 w-px bg-black/20 dark:bg-white/20" />
 
                   <button
                     onClick={() => toggleMute(i)}
-                    className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center"
+                    className="
+                      text-sm tracking-wide
+                      transition
+                    "
                   >
-                    {isMuted[i] ? <FaVolumeMute /> : <FaVolumeUp />}
+                    {isMuted[i] ? "Muted" : "Sound"}
                   </button>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
         {/* TEXT */}
-        <div className={`flex flex-col gap-4 text-xl ${videoLength ? 'w-[250px]' : 'w-[500px]'}`}>
-          <h3 className={`text-[2rem] font-semibold frame-text uppercase`}>{editName} Edits</h3>
-          <ol className="flex flex-col gap-3 text-[24px]">
-            <li><span className="frame-text">1.</span> Fine Cuts</li>
-            <li><span className="frame-text">2.</span> Fine Transition</li>
-            <li><span className="frame-text">3.</span> Subtitles</li>
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
+          viewport={{ once: true }}
+          className="max-w-md flex flex-col gap-6 "
+        >
+          <h3 className="text-4xl font-bold uppercase tracking-wide">
+            {editName} Edits
+          </h3>
+
+          <ol className="space-y-4 text-xl">
+            <li><span className="font-bold">01.</span> Fine Cuts</li>
+            <li><span className="font-bold">02.</span> Smooth Transitions</li>
+            <li><span className="font-bold">03.</span> Subtitles</li>
             {items?.map((item, i) => (
               <li key={i}>
-                <span className="frame-text">{item.number} </span>
-                 {item.type}
+                <span className="font-bold">0{item.number}</span> {item.type}
               </li>
             ))}
           </ol>
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );
 };
 
 export default Frame;
+
