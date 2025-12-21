@@ -22,7 +22,7 @@ const Types: React.FC<TypesProps> = ({img,editType,href,scale}) => {
   return (
     <div onClick={handleScroll}  className=' flex flex-col gap-3 pb-3 items-center'> 
     <div className='border-4 border-[#a8e3f5] border-solid bg-white w-[200px] h-[180px]  flex justify-center items-center rounded-2xl  pt-3 types-of-edit-img overflow-hidden '>
-    <Image  src={img} width={300} className={`scale-[${scale}]  object-contain`} alt={`${editType} Img`} />
+    <Image  src={img} width={300} className="object-contain" style={{ transform: `scale(${scale})` }} alt={`${editType} Img`} />
     </div>
     <h4 className='uppercase types-of-edit-text'>{editType}</h4>
     <hr

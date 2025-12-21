@@ -86,10 +86,10 @@ const VideoPortfolioPage = () => {
         {/* Services Section */}
         <section className='flex flex-col justify-between py-10 w-full gap-5 text-center' id="services" aria-label="Service Types">
           <h3 className='font-bold uppercase types-of-edit-heading'>Our Editing Expertise</h3> 
-          <div className='sm:flex justify-between sm:flex-wrap grid grid-cols-2 grid-rows-2'>
-            <Types href='#podcast' img={podcastImg} editType="Podcast Edits" scale='1'/>
-            <Types href='#simple' img={simpleImg} editType="Basic Edits" scale='2'/>
-            <Types href='#motion' img={motionGraphic} editType="Motion Graphics" scale='2'/>
+          <div className='sm:flex justify-between sm:flex-wrap grid grid-cols-2 grid-rows-2 scal'>
+            <Types href='#podcast' img={podcastImg} editType="Podcast Edits" scale='1.2'/>
+            <Types href='#simple' img={simpleImg} editType="Basic Edits" scale='1.8'/>
+            <Types href='#motion' img={motionGraphic} editType="Motion Graphics" scale='2.1'/>
             <Types href='#commercial' img={commercial} editType="Commercial Edits" scale='1'/>
           </div>
         </section>
