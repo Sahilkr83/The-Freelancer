@@ -229,7 +229,7 @@ const Frame: React.FC<FrameProps> = ({
                 />
 
                 {/* CONTROLS */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
                   <button
                     onClick={() => togglePlay(i)}
                     className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center"
