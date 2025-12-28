@@ -20,14 +20,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "The Freelancer Shop – Video Editing & Web Design Services",
   description: "Expert freelance video editing, motion graphics, and modern responsive web design services to elevate your brand and digital presence.",
-  icons: {
-    icon: [
-      { url: "/favicon.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-    apple: "/apple-touch-icon.png",
-  },
-
   keywords: [
     "professional video editing",
     "pro video editor",
