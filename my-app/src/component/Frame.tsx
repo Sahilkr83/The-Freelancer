@@ -246,15 +246,8 @@ const Frame: React.FC<FrameProps> = ({
                     loop
                     preload="auto"
                     src={src}
-                    className="
-                      absolute top-[8px] right-2
-                      w-[192px] h-[407px]
-                      z-10
-                      rounded-[16px]
-                      object-cover
-                      bg-black
-                    "
-                  />
+                    className=" absolute top-2 right-2 w-48 h-[407px] z-10  rounded-2xl object-cover bg-black"/>
+                    
                 </div>
 
                 {/* CONTROL RAIL */}

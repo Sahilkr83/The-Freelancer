@@ -21,12 +21,12 @@ const VideoPortfolioPage = () => {
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
     >
-      <main className="  relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-[1460px] w-full z-30 select-none">
+      <main className="  relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-365 w-full z-30 select-none">
         
         {/* Hero Section */}
         <section className="relative py-28 text-center" aria-label="Hero Introduction">
           <div className="absolute inset-0 -z-10">
-            <div className="absolute left-1/2 top-1/3 -translate-x-1/2 w-[900px] h-[500px] bg-indigo-500/20 blur-[140px]" />
+            <div className="absolute left-1/2 top-1/3 -translate-x-1/2 w-225 h-125 bg-indigo-500/20 blur-[140px]" />
           </div>
           <motion.h1
               initial={{ opacity: 0, y: 20 }}

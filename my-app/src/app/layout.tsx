@@ -21,8 +21,13 @@ export const metadata: Metadata = {
   title: "The Freelancer Shop – Video Editing & Web Design Services",
   description: "Expert freelance video editing, motion graphics, and modern responsive web design services to elevate your brand and digital presence.",
   icons: {
-    apple: '/apple-touch-icon.png',  
+    icon: [
+      { url: "/favicon.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
+
   keywords: [
     "professional video editing",
     "pro video editor",
@@ -95,6 +100,11 @@ export default function RootLayout({
       `}
     </Script>
     <meta name="google-adsense-account" content="ca-pub-5488328565550611"></meta>
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
   </head>
     <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-['Rajdhani',_sans-serif]`}>
       <AuthProvider>
