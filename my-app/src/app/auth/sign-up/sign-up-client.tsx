@@ -1,7 +1,7 @@
 "use client";
 import {zodResolver} from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import React, { useEffect, useRef, useState } from 'react';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import toast from 'react-hot-toast';
@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import axios , {AxiosError} from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 import { signUpSchema } from "@/schemas/signUpSchema";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 
 const SignupPage = () => {
@@ -28,8 +28,8 @@ const SignupPage = () => {
         confirmPassword: "",
   }});
 
-  const { register, handleSubmit, watch, formState: { errors,isValid }, } = form
-  const passwordValue = watch('password',''); 
+  const { register, handleSubmit, control, formState: { errors,isValid }, } = form
+  const passwordValue = useWatch({ control, name: 'password', defaultValue: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const [otpField, setOtpField] = useState(false)
@@ -37,17 +37,11 @@ const SignupPage = () => {
   const [verifying, setVerifying] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [passwordo, setPassword] = useState('');
-  const [otp , setOtp] = useState<string>("")
-
   const [otpValues, setOtpValues] = useState(new Array(6).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
   const [loadingGoogle , setLoadingGoogle] = useState(false)
-  const usernameValue = watch('username');
-  const { status } = useSession();
+  const usernameValue = useWatch({ control, name: 'username', defaultValue: '' });
   useEffect(() => {
-    if (typingTimeout) clearTimeout(typingTimeout);
-
     const timeout = setTimeout(async () => {
       if (!usernameValue) {
         setUsernameMessage('');
@@ -83,18 +77,8 @@ const SignupPage = () => {
       }
   }, 1000); // 500ms after the user stops typing
 
-  setTypingTimeout(timeout);
-
   return () => clearTimeout(timeout);
-  // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [usernameValue]);
-
-  useEffect(() => {
-    if (status === "authenticated" && loadingGoogle) {
-      toast.success("Signed in successfully!");
-      setLoadingGoogle(false);
-    }
-  }, [status, loadingGoogle]);
 
   const handleGoogleLogin = async () => {
     if (loadingGoogle) return; // prevent double clicks
@@ -109,8 +93,8 @@ const SignupPage = () => {
       toast.error(result.error || "Failed to sign in with Google");
       setLoadingGoogle(false);
     } else  {
-      localStorage.setItem("login_success", "true"); // mark login success
-  // redirect
+      toast.success("Signed in successfully!");
+      router.replace("/");
     }
   };
 
@@ -157,7 +141,6 @@ const SignupPage = () => {
 
       const isOtpComplete = updated.every(val => val !== "");
       if (isOtpComplete) {
-        setOtp(updated.join("")); 
       }
     }
 
@@ -180,7 +163,6 @@ const SignupPage = () => {
 
         if(isOtpComplete){
           const finalOtp = otpValues.join("");
-          setOtp(finalOtp);
           verifyEmail(finalOtp);
         } else {
           toast.error("Please enter the complete OTP.");
@@ -220,18 +202,17 @@ const SignupPage = () => {
 
   // Verify OTP
   const verifyEmail = async (enteredOtp: string) => {
-    enteredOtp = otp
     if (!enteredOtp || enteredOtp.trim().length !== otpValues.length) {
       toast.error('Invalid or incomplete OTP.');
       return;
     }
     setVerifying(true);
     try {
-      const response = await fetch("/api/verify-code", {
+      const response = await fetch("/api/app/verify-code", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ code: enteredOtp,username:username  }),
+        body: JSON.stringify({ code: enteredOtp, identifier: username }),
       });
       const res = await response.json();
 
@@ -264,7 +245,7 @@ const SignupPage = () => {
     transition={{ duration: 0.6 }}
     viewport={{ once: true }}
   >
-    <div className=" pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
+    <div className="auth-shell pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full">
       <section className="py-20 sm:py-24 md:py-28 lg:py-32">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -303,14 +284,8 @@ const SignupPage = () => {
           <div
             className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-md 
                p-4 sm:p-6 md:p-10 
-               rounded-3xl border shadow-lg backdrop-blur-md
-               bg-[color:var(--color-background)] 
-               border-[color:var(--color-border)] 
+               auth-card rounded-3xl
                text-[color:var(--color-foreground)]"
-            style={{
-              boxShadow:
-                "0 0 15px 2px rgba(65, 105, 225, 0.4), inset 0 0 10px 2px rgba(65, 105, 225, 0.2)",
-            }}
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
               {/* Username */}
@@ -581,7 +556,6 @@ const SignupPage = () => {
                 const isOtpComplete = otpValues.every((val) => val !== '');
                 if (isOtpComplete) {
                   const fullOtp = otpValues.join('');
-                  setOtp(fullOtp);
                   verifyEmail(fullOtp);
                 } else {
                   toast.error('Please enter the complete OTP.');

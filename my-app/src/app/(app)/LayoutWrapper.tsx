@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import NavBar from "@/component/NavBar";
 import Footer from "@/component/Footer";
-import FloatingParticles from "@/component/FloatingParticles";
 import toast, { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "next-themes";
 import { useEffect } from "react";
@@ -26,9 +25,8 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
 
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      {!isDomeSite && <FloatingParticles />}
-      <div className="relative min-h-screen overflow-x-hidden">
+    <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" enableSystem={false}>
+      <div className="portfolio-page relative min-h-screen overflow-x-hidden">
         {!isDomeSite && <NavBar />}
         {!isDomeSite && (
           <Toaster

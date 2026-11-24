@@ -1,17 +1,23 @@
-'use client';
+"use client";
 
-import React from 'react';
-import homePAgeImg from "@/assets/homePageImg.webp";
-import Frame from '@/component/Frame';
-import urls from '@/component/urlfiles/Urls';
-import { motion } from 'framer-motion';
-import ProjectFrame from '@/component/ProjectFrame';
-import Image, { StaticImageData } from 'next/image';
-import razorpayImg from '@/assets/web-client/Razorpay Landing Page Clone.webp';
-import eCommerceCartImg from '@/assets/web-client/React E-commerce Cart System.webp';
-import freelancerAgencyImg from '@/assets/web-client/Freelancer Agency Platform.webp';
-import Link from 'next/link';
-interface InnerProject {
+import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Check,
+  Code2,
+  Film,
+  Layers3,
+  Sparkles,
+} from "lucide-react";
+import homePageImg from "@/assets/homePageImg.webp";
+import razorpayImg from "@/assets/web-client/Razorpay Landing Page Clone.webp";
+import eCommerceCartImg from "@/assets/web-client/React E-commerce Cart System.webp";
+import freelancerAgencyImg from "@/assets/web-client/Freelancer Agency Platform.webp";
+import ProjectFrame from "@/component/ProjectFrame";
+
+interface Project {
   id: number;
   title: string;
   description: string;
@@ -21,296 +27,301 @@ interface InnerProject {
   url: string;
 }
 
-interface ProjectCategory {
-  id: string;
-  title: string;
-  description: string;
-  img: string;
-  project: InnerProject[];
-}
+const projects: Project[] = [
+  {
+    id: 1,
+    title: "Razorpay Landing Page Clone",
+    description:
+      "A precise, responsive product experience built with React and Tailwind CSS.",
+    feature: true,
+    date: "25/07/2025",
+    img: razorpayImg,
+    url: "https://sahils-razorpay-clone.netlify.app",
+  },
+  {
+    id: 2,
+    title: "Freelancer Agency Platform",
+    description:
+      "A full-stack showcase platform with authentication and real-time data.",
+    feature: true,
+    date: "19/03/2025",
+    img: freelancerAgencyImg,
+    url: "https://freelancer-agency.netlify.app/",
+  },
+  {
+    id: 3,
+    title: "React E-commerce Cart",
+    description:
+      "A polished commerce interface with context-powered state management.",
+    date: "02/04/2025",
+    img: eCommerceCartImg,
+    url: "https://shopping-cart-first.netlify.app",
+  },
+];
 
-const Home = () => {
-  const projects: ProjectCategory[] = [
-    {
-      id: 'project',
-      title: '',
-      description: 'Modern responsive websites with React, TailwindCSS, and accessibility in mind.',
-      img: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      project: [
-        {
-          id: 1,
-          title: 'Razorpay Landing Page Clone',
-          description: 'Razorpay landing page clone built with React and TailwindCSS.',
-          feature: true,
-          date: "25/07/2025",
-          img: razorpayImg,
-          url: 'https://sahils-razorpay-clone.netlify.app',
-        },
-        {
-          id: 2,
-          title: 'Freelancer Agency Platform',
-          description: 'Freelancer Agency – a full-stack product showcase platform with user auth and real-time data.',
-          feature: true,
-          date: "19/03/2025",
-          img: freelancerAgencyImg,
-          url: 'https://freelancer-agency.netlify.app/',
-        },
-        {
-          id: 3,
-          title: 'React E-commerce Cart System',
-          description: "E-commerce shopping cart built with React and context-based state management.",
-          feature: true,
-          date: "02/04/2025",
-          img: eCommerceCartImg,
-          url: "https://shopping-cart-first.netlify.app",
-        },
-      ]
-    },
-  ];
+const services = [
+  {
+    icon: Code2,
+    title: "Web development",
+    text: "Fast, accessible websites and full-stack products engineered around business goals.",
+  },
+  {
+    icon: Film,
+    title: "Video post-production",
+    text: "Sharp edits, motion graphics, sound, and pacing built to retain attention.",
+  },
+  {
+    icon: Layers3,
+    title: "Digital direction",
+    text: "One cohesive creative and technical partner from initial idea to final delivery.",
+  },
+];
 
+export default function Home() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-    >
-      <main className=" relative pt-14 px-6 sm:px-12 lg:px-20 mx-auto max-w-[1460px] w-full z-30 select-none">
-        {/* Hero Section */}
-        <section
-          className="py-20"
-          aria-label="Hero Introduction"
+    <main className="overflow-hidden pt-24">
+      <section className="mx-auto grid min-h-[760px] max-w-[1380px] items-center gap-14 px-6 py-20 lg:grid-cols-[1.05fr_.95fr] lg:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65 }}
         >
-          <motion.h1
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight max-w-5xl mx-auto text-center bg-clip-text "
-          >
-            Pro Video Editing & Web Design
-          </motion.h1>
-          <motion.h2
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-xl sm:text-3xl lg:text-4xl pt-4 font-bold max-w-5xl mx-auto text-center bg-clip-text "
-          >
-            By The Freelancer - Your Hub for Creative Digital Solutions
-          </motion.h2>
-
-          <div className="mt-10 flex flex-col lg:flex-row items-center lg:items-start gap-12 max-w-7xl mx-auto">
-            <motion.div
-              whileHover={{ scale: 1.05, filter: "brightness(1.1)" }}
-              transition={{ type: "spring", stiffness: 300 }}
-              viewport={{ once: true }}
-              className="rounded-3xl overflow-hidden shadow-2xl"
-            >
-              <Image
-                title="Our professional video editing and web design service Home Page Image"
-                alt="Freelance Video Editing and Web Design Service - Homepage Image"
-                rel="preload"
-                src={homePAgeImg}
-                width={875}
-                height={450}
-                className="block rounded-3xl"
-                priority
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="max-w-xl text-center lg:text-left text-base sm:text-lg leading-relaxed tracking-wide"
-            >
-              <p className="mb-6">
-                Welcome to <strong>The Freelancer Shop</strong> — your hub for expert-level
-                <span className="font-semibold"> video editing</span> and <span className="font-semibold">web design</span> services.
-                We specialize in turning raw footage into cinematic videos and crafting sleek,
-                modern websites tailored to your brand&apos;s voice.
-              </p>
-              <p className="mb-6">
-                Whether you&apos;re a content creator, entrepreneur, or agency, we deliver
-                professional-grade <span className="font-semibold">editing</span> with seamless transitions, motion graphics,
-                and dynamic storytelling to help you grow your online presence.
-              </p>
-              <p>
-                Our <span className="font-semibold">web development</span> services include building fast, SEO-friendly sites
-                using technologies like <span className="font-semibold">React</span>, <span className="font-semibold">Next.js</span>, <span className="font-semibold">Tailwind CSS</span>,
-                and <strong>MongoDB</strong>. With attention to performance, responsiveness, and user experience,
-                we ensure your site not only looks great but ranks high too.
-              </p>
-            </motion.div>
+          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#DDD5FF] bg-[#F4F1FF] px-4 py-2 text-sm font-semibold text-[#633CFF]">
+            <Sparkles className="h-4 w-4" /> Creative development studio
           </div>
-        </section>
-
-        {/* Why Choose Us */}
-        <section className="py-20 max-w-5xl mx-auto px-4 ">
-          <h2 className="text-3xl font-bold mb-8 text-center">Why Choose The Freelancer Shop?</h2>
-          <div className="grid sm:grid-cols-2 gap-12 text-lg leading-relaxed">
-            <p>
-              We combine creativity with technical excellence to deliver tailor-made digital solutions. Whether
-              you want captivating videos to engage your audience or sleek websites to boost your business,
-              we bring your vision to life.
+          <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] tracking-[-.055em] text-[#151515] sm:text-6xl lg:text-[5.25rem]">
+            Digital work designed to be{" "}
+            <span className="text-[#633CFF]">remembered.</span>
+          </h1>
+          <p className="mt-7 max-w-xl text-lg leading-8 text-[#686868]">
+            I combine full-stack engineering and cinematic post-production to
+            help ambitious brands look credible, move faster, and connect with
+            their audience.
+          </p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link href="/web-development" className="portfolio-button gap-2">
+              Explore selected work <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href="/contact-us" className="portfolio-button-secondary">
+              Start a project
+            </Link>
+          </div>
+          <div className="mt-12 grid max-w-xl grid-cols-3 border-t border-[#E8E8EE] pt-7">
+            {[
+              ["250+", "Projects"],
+              ["3+", "Years"],
+              ["4.9/5", "Rating"],
+            ].map(([value, label]) => (
+              <div key={label}>
+                <p className="text-2xl font-semibold text-[#151515]">{value}</p>
+                <p className="mt-1 text-sm text-[#686868]">{label}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.75, delay: 0.12 }}
+          className="relative"
+        >
+          <div className="absolute -inset-5 -z-10 rounded-[3rem] bg-[#EEE9FF]" />
+          <div className="overflow-hidden rounded-[2.25rem] border border-white bg-white p-3 shadow-[0_30px_90px_rgba(46,32,99,.16)]">
+            <Image
+              src={homePageImg}
+              alt="Selected web and video work by The Freelancer"
+              priority
+              className="min-h-[500px] w-full rounded-[1.65rem] object-cover"
+            />
+          </div>
+          <div className="absolute -bottom-6 -left-5 rounded-2xl border border-[#E8E8EE] bg-white p-5 shadow-xl sm:left-[-2rem]">
+            <p className="text-xs font-semibold uppercase tracking-[.16em] text-[#8A8A8A]">
+              Now booking
             </p>
-            <p>
-              Our collaborative process keeps you in the loop every step of the way, ensuring your brand&apos;s
-              personality shines through every frame and every pixel. We pride ourselves on timely delivery,
-              attention to detail, and a commitment to quality.
+            <p className="mt-1 font-semibold text-[#151515]">
+              New projects & collaborations
             </p>
           </div>
-        </section>
+        </motion.div>
+      </section>
 
-
-
-        {/* Frame - Motion Graphics Section */}
-        <Frame
-          editName="Motion Graphics"
-          id='motion'
-          videos={[urls[0].motion1,urls[0].motion3,urls[0].motion2]}
-          items={[
-            { number: "4.", type: "Dynamic Visual Hooks" },
-            { number: "5.", type: "Custom Motion Transitions" },
-            { number: "6.", type: "High-Impact Animation" }
-          ]}
-        />
-        
-        <div className="mt-10 mb-16 flex justify-center gap-6 text-white">
-          <Link
-            href="/video-portfolio"
-            
-            className="px-6 py-3  bg-purple-600 hover:bg-purple-700  rounded-lg font-semibold transition"
-            aria-label="Go to Video Portfolio"
-          >
-            Video Portfolio
-          </Link>
+      <section className="border-y border-[#E8E8EE] bg-white py-24">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="grid gap-8 lg:grid-cols-[.75fr_1.25fr]">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#633CFF]">
+                What I do
+              </p>
+              <h2 className="mt-4 max-w-md text-4xl font-semibold leading-tight tracking-[-.04em]">
+                Strategy, craft, and technology in one place.
+              </h2>
+            </div>
+            <p className="max-w-2xl text-lg leading-8 text-[#686868] lg:justify-self-end">
+              No handoffs between disconnected specialists. Every project is
+              shaped with a consistent eye for story, usability, performance,
+              and the details that make a brand feel premium.
+            </p>
+          </div>
+          <div className="mt-14 grid gap-5 md:grid-cols-3">
+            {services.map(({ icon: Icon, title, text }, index) => (
+              <motion.article
+                key={title}
+                whileHover={{ y: -6 }}
+                className="rounded-[1.5rem] border border-[#E8E8EE] bg-[#F8F9FC] p-7"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EEE9FF] text-[#633CFF]">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <p className="mt-9 text-sm text-[#8A8A8A]">0{index + 1}</p>
+                <h3 className="mt-2 text-xl font-semibold">{title}</h3>
+                <p className="mt-3 leading-7 text-[#686868]">{text}</p>
+              </motion.article>
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Projects Section */}
-        <section className="max-w-5xl mx-auto px-4 mb-10  text-center">
-          <p className="mb-4 text-lg">
-            Explore a curated selection of projects showcasing our expertise in both frontend
-            development and full-stack applications. We focus on performance, accessibility, and
-            modern design principles to create digital experiences that captivate and convert.
-          </p>
-          <p className="mb-6 text-sm italic opacity-80">
-            Click on any project to visit the live demo and see the work in action.
-          </p>
-        </section>
-
-        {projects.map(({ id, title, description, project }) => (
-          <ProjectFrame
-            key={id}
-            id={id}
-            title={`Projects: ${title}`}
-            description={description}
-            projects={project}
-          />
-        ))}
-        {/* Portfolio Buttons */}
-        <div className="mt-10 mb-16 flex justify-center gap-6">
-          
+      <section className="mx-auto max-w-[1380px] px-6 py-28 lg:px-12">
+        <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#633CFF]">
+              Selected work
+            </p>
+            <h2 className="mt-4 text-4xl font-semibold tracking-[-.04em] sm:text-5xl">
+              Projects built for real use.
+            </h2>
+          </div>
           <Link
             href="/web-development"
-            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-semibold transition text-white"
-            aria-label="Go to Web Portfolio"
+            className="inline-flex items-center gap-2 font-semibold text-[#633CFF]"
           >
-            Web Portfolio
+            View all projects <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <section className="py-20 max-w-6xl mx-auto px-6 ">
-          <h2 className="text-4xl font-extrabold mb-12 text-centertracking-wide">
-            Technologies & Tools
-          </h2>
-          <div className="flex flex-wrap justify-center gap-12">
-            {/* Web Development Card */}
-            <div
-              className=" rounded-2xl p-8 shadow-xl hover:shadow-indigo-500/50 md:shadow-black shadow-indigo-500/50  transition-shadow duration-300 cursor-default"
-              aria-label="Web Development technologies"
-            >
-              <h3 className="font-bold text-indigo-400 text-xl mb-6 tracking-wide uppercase border-b border-indigo-500 pb-3">
-                Web Development
-              </h3>
-              <ul className="space-y-3  ">
-                {[
-                  { name: "React", icon: "⚛️" },
-                  { name: "Next.js", icon: "⏭️" },
-                  { name: "Tailwind CSS", icon: "🎨" },
-                  { name: "MongoDB", icon: "🍃" },
-                  { name: "Node.js & Express", icon: "🟢" },
-                ].map(({ name, icon }) => (
-                  <li
-                    key={name}
-                    className="flex items-center gap-3 hover:text-indigo-400 transition-colors duration-200"
-                  >
-                    <span className="text-lg">{icon}</span>
-                    {name}
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <ProjectFrame
+          id="featured-projects"
+          title=""
+          description=""
+          projects={projects}
+        />
+      </section>
 
-            {/* Video Editing Card */}
-            <div
-              className="0 rounded-2xl p-8 shadow-xl  hover:shadow-purple-500/50 md:shadow-black shadow-purple-500 transition-shadow duration-300 cursor-default"
-              aria-label="Video Editing software"
-            >
-              <h3 className="font-bold text-purple-400 text-xl mb-6 tracking-wide uppercase border-b border-purple-500 pb-3">
-                Video Editing
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  { name: "Adobe Premiere Pro", icon: "🎬" },
-                  { name: "After Effects", icon: "✨" },
-                  { name: "CapCut", icon: "✂️" },
-                  { name: "Final Cut Pro", icon: "🍎" },
-                  { name: "DaVinci Resolve", icon: "🎨" },
-                ].map(({ name, icon }) => (
-                  <li
-                    key={name}
-                    className="flex items-center gap-3 hover:text-purple-400 transition-colors duration-200"
-                  >
-                    <span className="text-lg">{icon}</span>
-                    {name}
-                  </li>
-                ))}
-              </ul>
-            </div>
+      <section className="bg-[#151515] py-28 text-white">
+        <div className="mx-auto grid max-w-[1280px] gap-14 px-6 lg:grid-cols-2 lg:px-10">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#A992FF]">
+              How I work
+            </p>
+            <h2 className="mt-4 max-w-lg text-4xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">
+              Clear thinking before polished execution.
+            </h2>
+            <p className="mt-6 max-w-lg leading-7 text-white/60">
+              A practical process that keeps decisions visible, feedback useful,
+              and delivery predictable.
+            </p>
           </div>
-        </section>
+          <ol className="space-y-3">
+            {[
+              [
+                "Discover",
+                "Understand the audience, objective, constraints, and definition of success.",
+              ],
+              [
+                "Define",
+                "Turn research into a focused scope, visual direction, and delivery plan.",
+              ],
+              [
+                "Create",
+                "Design, build, edit, and iterate with frequent progress checkpoints.",
+              ],
+              [
+                "Deliver",
+                "Polish, test, optimize, and provide everything needed to launch confidently.",
+              ],
+            ].map(([title, text], index) => (
+              <li
+                key={title}
+                className="grid grid-cols-[3rem_1fr] gap-4 rounded-2xl border border-white/10 p-5"
+              >
+                <span className="text-sm text-[#A992FF]">0{index + 1}</span>
+                <div>
+                  <h3 className="font-semibold">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-white/60">{text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
+      <section className="mx-auto max-w-[1280px] px-6 py-28 lg:px-10">
+        <div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#633CFF]">
+              Capabilities
+            </p>
+            <h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">
+              Tools chosen for the work—not the trend.
+            </h2>
+            <p className="mt-5 max-w-md leading-7 text-[#686868]">
+              A modern stack for responsive products and a professional editing
+              workflow for high-impact content.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ["Frontend", ["React", "Next.js", "TypeScript", "Tailwind CSS"]],
+              [
+                "Backend",
+                ["Node.js", "MongoDB", "REST APIs", "Authentication"],
+              ],
+              [
+                "Post-production",
+                ["Premiere Pro", "After Effects", "DaVinci Resolve", "Filmora"],
+              ],
+              [
+                "Standards",
+                ["Responsive UI", "Accessibility", "SEO", "Performance"],
+              ],
+            ].map(([title, items]) => (
+              <article
+                key={title as string}
+                className="rounded-2xl border border-[#E8E8EE] bg-white p-6"
+              >
+                <h3 className="font-semibold">{title as string}</h3>
+                <ul className="mt-5 space-y-3">
+                  {(items as string[]).map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-2 text-sm text-[#686868]"
+                    >
+                      <Check className="h-4 w-4 text-[#633CFF]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {/* Video Editing Packages Info */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="py-10 max-w-4xl mx-auto text-center text-base sm:text-lg leading-relaxed tracking-wide"
-        >
-          <p>
-            At The Freelancer Shop, we offer a variety of video editing packages including
-            <strong> simple edits</strong>, <strong>motion graphics</strong>, and <strong>commercial ad creation</strong>.
-            Whether you need quick social media content or detailed promotional videos,
-            we use industry-standard tools like After Effects, Premiere Pro, and CapCut to deliver high-quality results tailored to your needs.
+      <section className="mx-auto max-w-[1280px] px-6 pb-28 lg:px-10">
+        <div className="relative overflow-hidden rounded-[2rem] bg-[#633CFF] px-7 py-16 text-center text-white sm:px-14 sm:py-20">
+          <p className="text-sm font-semibold uppercase tracking-[.18em] text-white/70">
+            Have a project in mind?
           </p>
-        </motion.section>
-
-        {/* Testimonial Section */}
-        <section className="py-20 max-w-3xl mx-auto px-4">
-          <blockquote className="border-l-4 border-indigo-400 pl-6 italic text-lg  max-w-xl mx-auto">
-            “Working with The Freelancer Shop was an absolute pleasure. Their
-            attention to detail in both video editing and website design exceeded our expectations.
-            Highly recommended for anyone seeking professional digital solutions.”
-          </blockquote>
-          
-          <p className="mt-6 text-right font-semibold text-indigo-500">— Happy Client</p>
-        </section>
-      </main>
-    </motion.div>
+          <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-semibold tracking-[-.04em] sm:text-5xl">
+            Let&apos;s make something clear, useful, and impossible to ignore.
+          </h2>
+          <Link
+            href="/contact-us"
+            className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-6 font-semibold text-[#151515]"
+          >
+            Tell me about it <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </section>
+    </main>
   );
-};
-
-export default Home;
+}

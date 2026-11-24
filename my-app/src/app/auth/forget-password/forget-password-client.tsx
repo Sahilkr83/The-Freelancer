@@ -17,18 +17,17 @@ const ForgetPassword = () => {
   const [loading, setLoading] = useState(false);
 
   const forgetPassword: SubmitHandler<ForgetPasswordFormInputs> = async (formData) => {
-    console.log("Form Data:", formData);
     setLoading(true)
     try {
 
-      const res = await axios.post<ApiResponse>(`/api/forget-password`, formData)
+      const res = await axios.post<ApiResponse>('/api/app/forget-password', formData)
       const data = res.data;
       toast.success(data.message);
       router.push('/auth/sign-in')
 
     }catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
-      const errorMessage = axiosError.response?.data.message || "An error occurred during Sign Up";
+      const errorMessage = axiosError.response?.data.message || "Unable to send the password reset email";
       toast.error(errorMessage); // ✅ Now it's a string (Message)
     } finally {
         setLoading(false);
@@ -37,7 +36,7 @@ const ForgetPassword = () => {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-      <div className="pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
+      <div className="auth-shell pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full">
         <section className="py-20 sm:py-24 md:py-28 lg:py-32">
           <div className="flex justify-center">
             <div className="text-center mb-12 max-w-xl px-2">
@@ -51,14 +50,8 @@ const ForgetPassword = () => {
             <div
               className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-md 
                         p-4 sm:p-6 md:p-10 
-                        rounded-3xl border shadow-lg backdrop-blur-md
-                        bg-[color:var(--color-background)] 
-                        border-[color:var(--color-border)] 
+                        auth-card rounded-3xl
                         text-[color:var(--color-foreground)]"
-              style={{
-                boxShadow:
-                  "0 0 15px 2px rgba(65, 105, 225, 0.4), inset 0 0 10px 2px rgba(65, 105, 225, 0.2)",
-              }}
             >
               <form onSubmit={handleSubmit(forgetPassword)} className="space-y-8">
                 <div>

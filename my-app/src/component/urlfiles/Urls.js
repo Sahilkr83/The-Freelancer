@@ -1,6 +1,6 @@
 function optimizeCloudinaryUrl(url) {
     if (!url.includes("/upload/")) return url; 
-    return url.replace("/upload/", "/upload/q_auto,f_auto/,h_480/");
+    return url.replace("/upload/", "/upload/f_mp4,q_auto:good,h_720/");
   }
   
   const urls = [

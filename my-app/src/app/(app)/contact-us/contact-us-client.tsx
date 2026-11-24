@@ -1,261 +1,58 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
+import { ArrowUpRight, Clock3, Mail, MapPin, Phone } from 'lucide-react';
 
-const ContactPage = () => {
+export default function ContactPage() {
   const form = useRef<HTMLFormElement>(null);
   const { register } = useForm();
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    number: '',
-    subject: '',
-    help: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    emailjs.sendForm('service_1wkykx4', 'template_5zil37u', form.current!, {
-      publicKey: 'xAMcVpwEtgkUjpzOb',
-    }).then(
-      () => alert('Message sent successfully!'),
-      (error) => alert(`Failed to send message: ${error.text}`)
-    );
-
+  const [formData, setFormData] = useState({ name: '', email: '', number: '', subject: '', help: '' });
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setFormData(prev => ({ ...prev, [event.target.name]: event.target.value }));
+  const sendEmail = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    emailjs.sendForm('service_1wkykx4', 'template_5zil37u', form.current!, { publicKey: 'xAMcVpwEtgkUjpzOb' }).then(() => alert('Message sent successfully!'), error => alert(`Failed to send message: ${error.text}`));
     setFormData({ name: '', email: '', number: '', subject: '', help: '' });
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      viewport={{ once: true }}
-      className="min-h-screen  py-12 px-6 sm:px-8 lg:px-20"
-    >
-      <div className="max-w-6xl mx-auto my-20 flex flex-col gap-20 leading-7">
-        {/* Intro Section */}
-        <section>
-          <h2 className="text-indigo-400 text-lg font-semibold uppercase tracking-widest mb-2">Get In Touch</h2>
-          <h1 className="text-3xl sm:text-4xl font-extrabold mb-6 leading-tight">
-            Contact Us — Send a Message to <span className="text-indigo-400">The Freelancer Shop</span>
-          </h1>
+    <main className="pt-24">
+      <section className="mx-auto max-w-[1280px] px-6 py-20 lg:px-10 lg:py-28">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl">
+          <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#633CFF]">Contact</p>
+          <h1 className="mt-5 text-5xl font-semibold leading-[1.05] tracking-[-.055em] sm:text-6xl lg:text-7xl">Let&apos;s turn your next idea into work that performs.</h1>
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-[#686868]">Tell me about the project, the goal, and where you need help. You&apos;ll receive a clear, practical response—not a generic sales pitch.</p>
+        </motion.div>
 
-          <div className="space-y-6   text-base sm:text-lg leading-relaxed mb-8">
-            <p>
-              Whether you’re looking for professional <strong>video editing</strong> to bring your story to life or expert <strong>web development</strong> to create a stunning, responsive online presence, we’re here to help turn your vision into reality.
-            </p>
-            <p>
-              Our team delivers custom video edits—from promotional clips to cinematic content—while also crafting modern, high-performance websites tailored to your unique goals.
-            </p>
-            <p>
-              Combining creative storytelling and cutting-edge technology, we use industry-leading tools like Adobe Premiere Pro, After Effects, DaVinci Resolve, React, Next.js, and Tailwind CSS to produce engaging digital experiences.
-            </p>
-            <p>
-              Let us support your brand’s growth by creating captivating videos and seamless web applications designed to engage and impress your audience.
-            </p>
-          </div>
-
-          <address
-            className="not-italic space-y-5 text-gray-400"
-            itemScope
-            itemType="http://schema.org/Organization"
-          >
-            <div>
-              <h2 className="text-xl font-semibold text-indigo-400 mb-1">Email Address</h2>
-              <a href="mailto:thefreelancers27@gmail.com" itemProp="email" className="hover:underline break-words">
-                thefreelancers27@gmail.com
-              </a>
+        <div className="mt-16 grid gap-8 lg:grid-cols-[.72fr_1.28fr]">
+          <aside className="h-fit rounded-[1.75rem] bg-[#151515] p-7 text-white sm:p-9 lg:sticky lg:top-28">
+            <h2 className="text-2xl font-semibold">Contact details</h2>
+            <div className="mt-9 space-y-7">
+              <a href="mailto:thefreelancers27@gmail.com" className="flex items-start gap-4"><Mail className="mt-1 h-5 w-5 text-[#A992FF]" /><span><span className="block text-xs uppercase tracking-wider text-white/45">Email</span><span className="mt-1 block">thefreelancers27@gmail.com</span></span></a>
+              <a href="tel:+917004505998" className="flex items-start gap-4"><Phone className="mt-1 h-5 w-5 text-[#A992FF]" /><span><span className="block text-xs uppercase tracking-wider text-white/45">Phone / WhatsApp</span><span className="mt-1 block">(+91) 700 450 5998</span></span></a>
+              <div className="flex items-start gap-4"><MapPin className="mt-1 h-5 w-5 text-[#A992FF]" /><span><span className="block text-xs uppercase tracking-wider text-white/45">Location</span><span className="mt-1 block">India · Working worldwide</span></span></div>
+              <div className="flex items-start gap-4"><Clock3 className="mt-1 h-5 w-5 text-[#A992FF]" /><span><span className="block text-xs uppercase tracking-wider text-white/45">Typical response</span><span className="mt-1 block">Within one business day</span></span></div>
             </div>
-            <div>
-              <h2 className="text-xl font-semibold text-indigo-400 mb-1">Call / WhatsApp</h2>
-              <a href="tel:+917004505998" itemProp="telephone" className="hover:underline">
-                (+91) 70045 05998
-              </a>
-            </div>
-          </address>
-        </section>
+            <div className="mt-12 border-t border-white/10 pt-7"><p className="text-sm leading-6 text-white/55">Available for website builds, product interfaces, video editing, motion graphics, and ongoing creative partnerships.</p></div>
+          </aside>
 
+          <section className="rounded-[1.75rem] border border-[#E8E8EE] bg-white p-7 shadow-[0_24px_70px_rgba(21,21,21,.07)] sm:p-10">
+            <div className="flex items-end justify-between gap-5"><div><p className="text-sm font-semibold text-[#633CFF]">Project enquiry</p><h2 className="mt-2 text-3xl font-semibold tracking-tight">Tell me what you&apos;re building.</h2></div><ArrowUpRight className="hidden h-8 w-8 text-[#633CFF] sm:block" /></div>
+            <form ref={form} onSubmit={sendEmail} className="mt-9 grid gap-5 sm:grid-cols-2">
+              <label className="text-sm font-medium">Your name<input {...register('name')} name="name" value={formData.name} onChange={handleChange} required className="input-primary mt-2 w-full" placeholder="Full name" /></label>
+              <label className="text-sm font-medium">Email address<input {...register('email')} name="email" type="email" value={formData.email} onChange={handleChange} required className="input-primary mt-2 w-full" placeholder="you@company.com" /></label>
+              <label className="text-sm font-medium">Phone number<input {...register('number')} name="number" type="tel" value={formData.number} onChange={handleChange} className="input-primary mt-2 w-full" placeholder="Optional" /></label>
+              <label className="text-sm font-medium">Project type<input {...register('subject')} name="subject" value={formData.subject} onChange={handleChange} className="input-primary mt-2 w-full" placeholder="Website, video, or both" /></label>
+              <label className="text-sm font-medium sm:col-span-2">Project details<textarea {...register('help')} name="help" value={formData.help} onChange={handleChange} required className="textarea-primary mt-2 w-full" placeholder="What are you trying to achieve, and when do you need it?" /></label>
+              <button type="submit" className="portfolio-button mt-2 sm:col-span-2">Send project enquiry</button>
+            </form>
+          </section>
+        </div>
+      </section>
 
-        {/* Our Services */}
-        <section className=" rounded-3xl p-8 sm:p-10 shadow-xl shadow-indigo-900/50">
-          <h2 className="text-indigo-400 text-2xl font-bold mb-6">Our Services</h2>
-
-          <div className="mb-8">
-            <h3 className=" text-indigo-400 text-xl font-semibold mb-4">Video Editing</h3>
-            <ul className="list-disc list-inside   space-y-3">
-              <li><strong>Corporate & Promo Videos:</strong> Professional videos tailored to your brand identity.</li>
-              <li><strong>Social Media Reels:</strong> Dynamic short videos for Instagram, TikTok, and Facebook.</li>
-              <li><strong>YouTube Content:</strong> Full edits including cuts, color grading, and sound design.</li>
-              <li><strong>Event Highlights:</strong> Stunning recaps for weddings, conferences, and special occasions.</li>
-              <li><strong>Motion Graphics & Effects:</strong> Custom animations and cinematic touches using After Effects.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className=" text-indigo-400 text-xl font-semibold mb-4">Web Development</h3>
-            <ul className="list-disc list-inside   space-y-3">
-              <li><strong>Custom Websites:</strong> Responsive, SEO-friendly sites built with React and Next.js.</li>
-              <li><strong>E-commerce Solutions:</strong> Secure online stores with seamless user experience.</li>
-              <li><strong>Portfolio & Business Sites:</strong> Showcasing your brand professionally and attractively.</li>
-              <li><strong>API Integration & Backend:</strong> Full-stack capabilities for dynamic web applications.</li>
-              <li><strong>Maintenance & Optimization:</strong> Ensuring fast load times and smooth performance.</li>
-            </ul>
-          </div>
-        </section>
-
-        {/* How We Work */}
-        <section className=" rounded-3xl p-8 sm:p-10 shadow-xl shadow-indigo-900/50">
-          <h2 className="text-indigo-400 text-2xl font-bold mb-6">How We Work</h2>
-          <ol className="list-decimal list-inside   space-y-3">
-            <li><strong>Consultation:</strong> We listen to understand your vision, goals, and requirements.</li>
-            <li><strong>Planning:</strong> We map out timelines, workflows, and deliverables for clarity.</li>
-            <li><strong>Creation:</strong> We develop your videos or websites with attention to detail and creativity.</li>
-            <li><strong>Review:</strong> We collaborate with you to gather feedback and iterate.</li>
-            <li><strong>Delivery & Support:</strong> We provide final assets and ongoing support as needed.</li>
-          </ol>
-        </section>
-
-        {/* Testimonials */}
-        <section>
-          <h2 className="text-indigo-400 text-2xl font-bold mb-6">What Our Clients Say</h2>
-          <div className="space-y-8  ">
-            <blockquote className="border-l-4 border-indigo-400 pl-6 italic">
-              “The Freelancer Shop created a stunning promotional video that boosted our brand awareness significantly.”
-              <footer className="mt-2 font-semibold  text-indigo-400">— Priya K., Video Client</footer>
-            </blockquote>
-
-            <blockquote className="border-l-4 border-indigo-400 pl-6 italic">
-              “Their web development skills are top-notch. Our new website is fast, beautiful, and drives more customers.”
-              <footer className="mt-2 font-semibold  text-indigo-400">— Rahul S., Web Dev Client</footer>
-            </blockquote>
-
-            <blockquote className="border-l-4 border-indigo-400 pl-6 italic">
-              “Excellent communication and quick turnaround on both video edits and website fixes. Highly recommended.”
-              <footer className="mt-2 font-semibold  text-indigo-400">— Ayesha & Sameer, Happy Clients</footer>
-            </blockquote>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className=" rounded-3xl p-8 sm:p-10 shadow-xl shadow-indigo-900/50">
-          <h2 className="text-indigo-400 text-2xl font-bold mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-6  ">
-            <div>
-              <h3 className="font-semibold text-lg  text-indigo-400">What video formats do you deliver?</h3>
-              <p>We deliver MP4, MOV, AVI, and other formats optimized for your platform or use case.</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg  text-indigo-400">How long does web development usually take?</h3>
-              <p>Typically 2-6 weeks depending on project scope, with regular updates and reviews.</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg  text-indigo-400">Do you offer website maintenance?</h3>
-              <p>Yes! We offer ongoing support and optimization packages to keep your site running smoothly.</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg  text-indigo-400">Can you help with scriptwriting or storyboarding for videos?</h3>
-              <p>Absolutely, we assist with creative planning to ensure your video’s story is clear and impactful.</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg  text-indigo-400">What if I need revisions?</h3>
-              <p>We provide multiple rounds of revisions on both video and web projects to ensure your satisfaction.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Form */}
-        <section className=" rounded-3xl p-8 sm:p-10 shadow-xl shadow-indigo-900/50">
-          <h4 className="text-indigo-400 text-2xl font-bold mb-6">Send Us a Message</h4>
-          <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-5">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                {...register('name')}
-                name="name"
-                type="text"
-                value={formData.name}
-                placeholder="Your Name"
-                onChange={handleChange}
-                required
-                className="input-primary flex-1"
-              />
-              <input
-                {...register('email')}
-                name="email"
-                type="email"
-                value={formData.email}
-                placeholder="Your Email"
-                onChange={handleChange}
-                required
-                className="input-primary flex-1"
-              />
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                {...register('number')}
-                name="number"
-                type="tel"
-                value={formData.number}
-                placeholder="Your Number"
-                onChange={handleChange}
-                className="input-primary flex-1"
-              />
-              <input
-                {...register('subject')}
-                name="subject"
-                type="text"
-                value={formData.subject}
-                placeholder="Subject"
-                onChange={handleChange}
-                className="input-primary flex-1"
-              />
-            </div>
-
-            <textarea
-              {...register('help')}
-              name="help"
-              rows={6}
-              value={formData.help}
-              placeholder="How can we help you?"
-              onChange={handleChange}
-              required
-              className="textarea-primary"
-            />
-
-            <button
-              type="submit"
-              className="mt-4 py-4 bg-indigo-500 hover:bg-indigo-600 transition rounded-full font-semibold text-lg text-white shadow-md shadow-indigo-700/40"
-            >
-              Send Message
-            </button>
-          </form>
-        </section>
-
-        {/* Closing encouragement */}
-        <section className="text-center text-gray-400 mt-12 mb-24">
-          <p className="text-lg max-w-xl mx-auto">
-            Ready to start your next video or web project? Reach out today and let’s create something amazing together.
-          </p>
-        </section>
-      </div>
-
-      {/* Tailwind CSS for inputs and textarea */}
-      <style jsx>{`
-        
-      `}</style>
-    </motion.div>
+      <section className="border-y border-[#E8E8EE] bg-white py-24"><div className="mx-auto max-w-[1180px] px-6 lg:px-10"><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="text-sm font-semibold uppercase tracking-[.18em] text-[#633CFF]">Before you ask</p><h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">A few useful answers.</h2></div><div>{[['How quickly can we start?', 'Most projects can begin within one to two weeks, depending on scope and current availability.'], ['How long does a website take?', 'Focused portfolio and business sites usually take two to six weeks. Larger applications are planned in phases.'], ['Are revisions included?', 'Yes. Every proposal defines clear review points and revision rounds before work begins.'], ['Do you provide ongoing support?', 'Yes. Maintenance, optimization, and retained creative support are available after launch.']].map(([q, a]) => <div key={q} className="border-t border-[#E8E8EE] py-6"><h3 className="font-semibold">{q}</h3><p className="mt-2 leading-7 text-[#686868]">{a}</p></div>)}</div></div></div></section>
+    </main>
   );
-};
-
-export default ContactPage;
+}

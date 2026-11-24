@@ -98,7 +98,7 @@ export default function RootLayout({
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
   </head>
-    <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-['Rajdhani',_sans-serif]`}>
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <AuthProvider>
         <LayoutWrapper>
           <AppContextProvider>

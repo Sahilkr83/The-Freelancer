@@ -43,8 +43,6 @@ export async function POST(request: Request) {
     const expiryDate = new Date();
     expiryDate.setHours(expiryDate.getHours() + 1);
 
-    let finalUsername = username; // keep track of username used for S3 folder
-
     if (existingUserByEmail) {
       if (existingUserByEmail.isVerified) {
         return Response.json(

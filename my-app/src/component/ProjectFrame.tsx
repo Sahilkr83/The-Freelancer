@@ -41,7 +41,7 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
     >
       <div className="text-center mb-16 space-y-3">
         <h3 className="text-3xl sm:text-4xl font-extrabold ">{title}</h3>
-        <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
+        <p className="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
           {description}
         </p>
       </div>
@@ -54,7 +54,7 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
             whileHover={{ scale: 1.03, y: -5 }}
             viewport={{ once: true }}
             // transition={{ type: 'spring', stiffness: 100 }}
-            className={`${getWidthClass()} bg-[#1f1f2f] rounded-2xl overflow-hidden shadow-xl border border-gray-700 hover:border-indigo-500 transition-all group
+            className={`${getWidthClass()} bg-white rounded-2xl overflow-hidden shadow-[0_18px_50px_rgba(21,21,21,0.08)] border border-[#E8E8EE] hover:border-[#633CFF] transition-all group
               flex flex-col
             `}
           >
@@ -71,8 +71,8 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
               />
 
               {item.feature && (
-                <span className="absolute top-4 left-4 px-3 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-semibold rounded-full shadow-lg animate-pulse ring-2 ring-yellow-300">
-                  🚀 Featured
+                <span className="absolute top-4 left-4 px-3 py-1 bg-white/90 text-slate-900 text-xs font-semibold rounded-full shadow-lg backdrop-blur-md">
+                  Featured
                 </span>
               )}
 
@@ -97,8 +97,8 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
               </div>
             </div>
 
-            <div className="p-6 text-white space-y-4 flex flex-col flex-grow">
-              <span className="inline-block px-3 py-1 bg-blue-900 text-blue-200 text-xs font-medium rounded-full shadow-sm w-16">
+            <div className="p-6 text-slate-900 space-y-4 flex flex-col flex-grow">
+              <span className="inline-block px-3 py-1 bg-[#EEE9FF] text-[#633CFF] text-xs font-medium rounded-full w-fit">
                 Website
               </span>
 
@@ -106,11 +106,11 @@ const ProjectFrame: React.FC<ProjectFrameProps> = ({ id, title, description, pro
                 {item.title}
               </h4>
 
-              <p className="text-sm text-gray-300 leading-relaxed flex-grow">
+              <p className="text-sm text-slate-600 leading-relaxed flex-grow">
                 {item.description}
               </p>
 
-              <div className="flex items-center justify-between text-xs text-gray-400 pt-3 border-t border-gray-700 mt-4">
+              <div className="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-200 dark:border-slate-700 mt-4">
                 <span>{item.date}</span>
                 <button
                   className="flex items-center gap-1 text-indigo-400 hover:text-indigo-500 transition-all font-medium"

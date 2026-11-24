@@ -7,7 +7,6 @@ import UserModel from "@/model/User";
 
 import GoogleProvider from "next-auth/providers/google";
 import { randomBytes } from "crypto";
-import AWS from "aws-sdk";
 import { S3 } from "@aws-sdk/client-s3";
 import { ListObjectsV2Command, PutObjectCommand } from "@aws-sdk/client-s3";
 

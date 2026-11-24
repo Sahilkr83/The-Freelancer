@@ -1,7 +1,7 @@
 'use client';
 
 import React, {  useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { IoEye, IoEyeOff } from 'react-icons/io5'
 import { useRouter } from 'next/navigation';
 import axios, { AxiosError } from 'axios';
@@ -25,8 +25,9 @@ const ChangePassword = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    watch,
+    control,
   } = form
+  const password = useWatch({ control, name: 'password' });
 
   const router = useRouter();
 
@@ -59,7 +60,7 @@ const ChangePassword = () => {
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
   >
-  <div className="pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
+  <div className="auth-shell pt-12 relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 z-20 mx-auto max-w-[1460px] w-full">
     <section className="py-20 sm:py-24 md:py-28 lg:py-32">
       <div className="flex justify-center">
         <div className="text-center mb-12 max-w-xl px-2">
@@ -76,14 +77,8 @@ const ChangePassword = () => {
         <div
             className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-md 
                       p-4 sm:p-6 md:p-10 
-                      rounded-3xl border shadow-lg backdrop-blur-md
-                      bg-[color:var(--color-background)] 
-                      border-[color:var(--color-border)] 
+                      auth-card rounded-3xl
                       text-[color:var(--color-foreground)]"
-            style={{
-              boxShadow:
-                "0 0 15px 2px rgba(65, 105, 225, 0.4), inset 0 0 10px 2px rgba(65, 105, 225, 0.2)",
-            }}
           >
           <form onSubmit={handleSubmit(passwordUpdate)} className="space-y-7">
             {/* Current Password */}
@@ -151,7 +146,7 @@ const ChangePassword = () => {
                 type={showPassword2 ? 'text' : 'password'}
                 placeholder="Confirm Password"
                 {...register('confirmPassword', {
-                  validate: (value) => value === watch('password') || 'Passwords do not match',
+                  validate: (value) => value === password || 'Passwords do not match',
                 })}
               />
               <span

@@ -1,6 +1,6 @@
 import { VerificationEmail } from "../../emails/VerificationEmail";
 import { render } from '@react-email/components';
-import nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer10';
 import { ApiResponse } from "@/types/ApiResponse";
 
 const transporter = nodemailer.createTransport({

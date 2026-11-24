@@ -3,32 +3,20 @@
 import { AppContext } from "@/context/AppContext";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useContext,  useState } from "react";
-import demoImage from '@/assets/500x300.png'
+import { useContext } from "react";
+import demoImage from '@/assets/web-client/Freelancer Agency Platform.webp'
 import axios from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 export default function DashboardPage() {
   const { user } = useContext(AppContext)!;
 
 
-  // Example demo + user projects (later replace with DB fetch)
-  const [projects] = useState([
-    {
-      id: "demo",
-      title: "Demo Project",
-      description:
-        "This is a sample demo project to showcase your dashboard layout.",
-      status: "Completed",
-      thumbnail: {demoImage},
-    },
-    {
-      id: "1",
-      title: "Portfolio Website",
-      description: "A modern web dev portfolio built with Next.js & TailwindCSS.",
-      status: "In Progress",
-      thumbnail: {demoImage},
-    },
-  ]);
+  const project = {
+    id: "demo",
+    title: "Demo Project",
+    description: "Customize this sample project and publish it as your own.",
+    status: "Completed",
+  };
   const editButton = async () =>{
 
     const res = await axios.post<ApiResponse>('/api/edit-on')
@@ -57,7 +45,7 @@ export default function DashboardPage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-    <div className=" relative pt-24 pb-20 lg:px-7 z-20 mx-auto max-w-[1280px] w-11/12 font-['Rajdhani',_sans-serif]">
+    <div className="relative pt-28 pb-20 lg:px-7 z-20 mx-auto max-w-[1280px] w-11/12">
       <div className="absolute top-28 right-4 text-right">
         <h1 className="text-sm font-semibold">{user?.name}</h1>
         <p className="text-xs  ">{user?.email}</p>
@@ -72,15 +60,15 @@ export default function DashboardPage() {
        </p>
 
       <motion.div
-        key={projects[0]?.id}
+        key={project.id}
         whileHover={{ scale: 1.03, translateY: -3 }}
         transition={{ duration: 0.3 }}
-        className="mt-10 relative rounded-2xl backdrop-blur-xl h-[120%] bg-white/5 border border-white/10 shadow-lg hover:shadow-2xl overflow-hidden flex flex-row items-center"
+        className="dashboard-card mt-10 relative rounded-2xl overflow-hidden flex flex-row items-center"
       >
         {/* Edit button */}
         <button
           onClick={() => editButton()}
-          className="absolute top-2 right-2 text-sm sm:text-base bg-indigo-500 text-white px-2 py-1 rounded hover:bg-indigo-600 transition z-10"
+          className="absolute top-3 right-3 text-sm bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition z-10"
         >
           Edit
         </button>
@@ -88,7 +76,7 @@ export default function DashboardPage() {
         {/* Image */}
         <Image
           src={demoImage}
-          alt={projects[0]?.title || "Demo Project"}
+          alt={project.title}
           width={500}
           height={300}
           className="object-cover w-[110px] sm:w-[250px] h-[150px] sm:h-[180px] cursor-pointer"
@@ -99,19 +87,19 @@ export default function DashboardPage() {
         <div className="">
         <div className=" sm:px-6 sm:pt-6 pl-2 flex flex-col justify-between w-full h-full cursor-pointer" onClick={() => window.open(`/demo-site/${user?.username}`, "_blank")}>
           <div>
-            <h2 className="text-lg sm:text-2xl font-bold">{projects[0]?.title}</h2>
+            <h2 className="text-lg sm:text-2xl font-bold">{project.title}</h2>
             <p className="  text-sm sm:text-base sm:mt-2 leading-relaxed">
-              {projects[0]?.description}
+              {project.description}
             </p>
           </div>
         </div>
         <div className="mt-3 flex gap-4 items-center sm:px-6 sm:pb-3 pl-2">
-          <span className="px-4 sm:py-2 py-1  mb-1 w-24 bg-indigo-500 rounded-full text-xs font-semibold hover:bg-indigo-600 transition text-white">
-            {projects[0]?.status}
+          <span className="px-4 sm:py-2 py-1 mb-1 w-24 bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300 rounded-full text-xs font-semibold text-center">
+            {project.status}
           </span>
           <button
             onClick={() => shareButton()} // define shareButton function
-            className="px-4 sm:py-2 py-1  mb-1 w-24 h-6 sm:h-8 rounded-full text-xs font-semibold bg-green-500 text-white hover:bg-green-600 transition"
+            className="px-4 sm:py-2 py-1 mb-1 w-24 h-7 sm:h-9 rounded-full text-xs font-semibold border border-slate-200 bg-white text-slate-700 hover:border-blue-500 transition dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
           >
             Share
           </button>
@@ -126,38 +114,9 @@ export default function DashboardPage() {
         <p className=" ">
           Manage your personal projects and share them with others.
         </p>
-        <div className=" text-lg py-6 px-4 mt-4 text-center border border-dashed border-gray-600 rounded-lg bg-gray-800/50">
+        <div className="text-base py-10 px-4 mt-4 text-center border border-dashed border-slate-300 dark:border-slate-700 rounded-2xl bg-slate-50 dark:bg-slate-900/50 text-slate-500">
           You currently don&apos;t have any projects with us.
         </div>
-
-       {/* <motion.div
-        key={projects[1]?.id}
-        whileHover={{ scale: 1.03, translateY: -3 }}
-        transition={{ duration: 0.3 }}
-        className="mt-10 rounded-2xl backdrop-blur-xl bg-white/5 border border-white/10 shadow-lg hover:shadow-2xl overflow-hidden flex flex-row items-center"
-      >
-        {/* Image 
-        <Image
-          src={demoImage}
-          alt={projects[1]?.title || "Demo Project"}
-          width={600}
-          height={400}
-          className="object-cover w-[120px] sm:w-[250px] h-[130px] sm:h-[180]"
-        />
-
-        {/* Content 
-        <div className="sm:p-6 pl-2 flex flex-col justify-between">
-          <div>
-            <h3 className="text-lg sm:text-2xl font-bold">{projects[1]?.title}</h3>
-            <p className="  text-sm sm:text-base sm:mt-2 leading-relaxed">
-              {projects[1]?.description}
-            </p>
-          </div>
-          <span className="px-4 sm:py-2 py-1 mt-3 mb-1 w-28 text-center bg-indigo-500 rounded-full text-xs font-semibold hover:bg-indigo-600 transition">
-            {projects[1]?.status}
-          </span>
-        </div>
-      </motion.div> */}
       </section>
     </div>
     </motion.div>

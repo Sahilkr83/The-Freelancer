@@ -54,7 +54,8 @@ export async function POST(request: Request) {
       },
       token,
     });
-  } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message || "Authorization failed" }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Authorization failed";
+    return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }

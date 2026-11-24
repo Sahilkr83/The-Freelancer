@@ -1,208 +1,57 @@
 'use client';
-import React from 'react';
-// import Head from 'next/head';
+
+import Image, { StaticImageData } from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { ArrowRight, Braces, Database, Gauge, LayoutTemplate } from 'lucide-react';
 import frontendImg from '@/assets/web-client/web-dev.webp';
 import ProjectFrame from '@/component/ProjectFrame';
-import ProjectTypes from '@/component/ProjectTypes';
-import Image, { StaticImageData } from 'next/image';
-import razorpayImg from '@/assets/web-client/Razorpay Landing Page Clone.webp'
-import weatherForecastImg from '@/assets/web-client/Live Weather Forecast App.webp'
-import eCommerceCartImg from '@/assets/web-client/React E-commerce Cart System.webp'
-import freelancerAgencyImg from '@/assets/web-client/Freelancer Agency Platform.webp'
-import employeeManagementImg from '@/assets/web-client/Employee Management System.webp'
+import razorpayImg from '@/assets/web-client/Razorpay Landing Page Clone.webp';
+import weatherForecastImg from '@/assets/web-client/Live Weather Forecast App.webp';
+import eCommerceCartImg from '@/assets/web-client/React E-commerce Cart System.webp';
+import freelancerAgencyImg from '@/assets/web-client/Freelancer Agency Platform.webp';
+import employeeManagementImg from '@/assets/web-client/Employee Management System.webp';
 
-
-interface InnerProject {
-  id: number;
-  title: string;
-  description: string;
-  feature?: boolean;
-  date: string;
-  img: string | StaticImageData;
-  url: string;
-}
-
-interface ProjectCategory {
-  id: string;  // like 'frontend', 'fullstack'
-  title: string;
-  description: string;
-  img: string;
-  project: InnerProject[];  // array of actual projects under this category
-}
-
-
-
-
-const WebPortfolio = () => {
-  // Example project URLs or video/demo URLs, replace with your own data
-const projects: ProjectCategory[] = [
-  {
-    id: 'frontend',
-    title: 'Frontend Development',
-    description: 'Modern responsive websites with React, TailwindCSS, and accessibility in mind.',
-    img: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    project: [
-      {
-        id: 1,
-        title: 'Razorpay Landing Page Clone',
-        description: 'Razorpay landing page clone built with React and TailwindCSS.',
-        feature: true,
-        date: "25/07/2025",
-        img: razorpayImg,
-        url: 'https://sahils-razorpay-clone.netlify.app',
-      },
-      {
-        id: 2,
-        title: 'Live Weather Forecast App',
-        description: 'Weather app using OpenWeatherMap API with dynamic UI updates.',
-        date: "14/01/2025",
-        img: weatherForecastImg,
-        url: 'https://weather-app-not-accurate.netlify.app',
-      },
-      {
-        id: 3,
-        title: 'React E-commerce Cart System',
-        description: "E-commerce shopping cart built with React and context-based state management.",
-        feature: true,
-        date: "02/04/2025",
-        img: eCommerceCartImg,
-        url: "https://shopping-cart-first.netlify.app",
-      },
-    ]
-  },
-//   {
-//     id: 'backend',
-//     title: 'Backend APIs & Services',
-//     description: 'Robust RESTful APIs and microservices built with Node.js, Express, and MongoDB.',
-//     demo1: 'https://documenter.getpostman.com/view/24305875/2s9Ykn9fDw',
-//     demo2: 'https://expressjs.com/en/starter/hello-world.html',
-//     demo3: 'https://nodejs.org/en/about',
-//     img: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-//   },
-  {
-    id: 'fullstack',
-    title: 'Full Stack Projects',
-    description: 'End-to-end applications combining frontend & backend with deployment pipelines.',
-    img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-    project: [
-      {
-        id: 1,
-        title: 'Freelancer Agency Platform',
-        description: 'Freelancer Agency – a full-stack product showcase platform with user auth and real-time data.',
-        feature: true,
-        date: "19/03/2025",
-        img: freelancerAgencyImg,
-        url: 'https://freelancer-agency.netlify.app/',
-      },
-      {
-        id: 2,
-        title: 'Employee Management System',
-        description: 'A streamlined system for employee registration and record management.',
-        date: "30/05/2025",
-        img: employeeManagementImg,
-        url: 'https://test-the-back.netlify.app/',
-      },
-    ]
-
-  },
+interface Project { id: number; title: string; description: string; feature?: boolean; date: string; img: string | StaticImageData; url: string }
+const frontend: Project[] = [
+  { id: 1, title: 'Razorpay Landing Page Clone', description: 'A responsive financial product landing experience built with React and Tailwind CSS.', feature: true, date: '25/07/2025', img: razorpayImg, url: 'https://sahils-razorpay-clone.netlify.app' },
+  { id: 2, title: 'Live Weather Forecast App', description: 'A live forecast interface with location search and dynamic weather data.', date: '14/01/2025', img: weatherForecastImg, url: 'https://weather-app-not-accurate.netlify.app' },
+  { id: 3, title: 'React E-commerce Cart', description: 'A commerce experience with reusable components and context-based state.', date: '02/04/2025', img: eCommerceCartImg, url: 'https://shopping-cart-first.netlify.app' },
+];
+const fullstack: Project[] = [
+  { id: 4, title: 'Freelancer Agency Platform', description: 'A full-stack product showcase with authentication and data-driven content.', feature: true, date: '19/03/2025', img: freelancerAgencyImg, url: 'https://freelancer-agency.netlify.app/' },
+  { id: 5, title: 'Employee Management System', description: 'A focused system for employee registration and record management.', date: '30/05/2025', img: employeeManagementImg, url: 'https://test-the-back.netlify.app/' },
 ];
 
+export default function WebPortfolio() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-    >
-      <main className="  relative pt-20 px-4 sm:px-6 lg:px-8 mx-auto max-w-[1460px] z-30">
-        {/* Introduction Section */}
-        <section className="py-14">
-          <motion.h1
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="text-2xl sm:text-4xl lg:text-5xl pt-4 font-bold max-w-5xl mx-auto text-center   bg-clip-text "
-          >
-            React & Full-Stack Developer Portfolio
-          </motion.h1>
+    <main className="pt-24">
+      <section className="mx-auto max-w-[1380px] px-6 py-20 lg:px-12">
+        <div className="grid items-center gap-14 lg:grid-cols-[.88fr_1.12fr]">
+          <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }}>
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#EEE9FF] px-4 py-2 text-sm font-semibold text-[#633CFF]"><Braces className="h-4 w-4" /> Web engineering portfolio</div>
+            <h1 className="mt-7 text-5xl font-semibold leading-[1.04] tracking-[-.055em] sm:text-6xl">Products that feel simple because the engineering isn&apos;t.</h1>
+            <p className="mt-7 max-w-xl text-lg leading-8 text-[#686868]">Responsive websites and full-stack applications designed around clarity, speed, accessibility, and maintainable code.</p>
+            <div className="mt-9 flex flex-wrap gap-3"><a href="#frontend" className="portfolio-button gap-2">Browse projects <ArrowRight className="h-4 w-4" /></a><Link href="/contact-us" className="portfolio-button-secondary">Discuss a build</Link></div>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} className="relative rounded-[2rem] bg-[#151515] p-3 shadow-2xl"><Image src={frontendImg} alt="Web development projects displayed on devices" priority className="h-[480px] w-full rounded-[1.4rem] object-cover" /><div className="absolute bottom-7 left-7 right-7 grid grid-cols-3 rounded-2xl border border-white/10 bg-[#151515]/90 p-5 text-white backdrop-blur"><div><p className="text-xl font-semibold">5+</p><p className="text-xs text-white/50">Live products</p></div><div><p className="text-xl font-semibold">100%</p><p className="text-xs text-white/50">Responsive</p></div><div><p className="text-xl font-semibold">A11y</p><p className="text-xs text-white/50">Considered</p></div></div></motion.div>
+        </div>
+      </section>
 
-          <motion.h2
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-lg sm:text-xl lg:text-2xl mt-10  font-extrabold leading-tight max-w-5xl mx-auto text-center   bg-clip-text "
-          >
-            Built with JavaScript, Tailwind CSS & MongoDB
-          </motion.h2>
+      <section className="border-y border-[#E8E8EE] bg-white py-20"><div className="mx-auto max-w-[1280px] px-6 lg:px-10"><p className="text-center text-sm font-semibold uppercase tracking-[.18em] text-[#633CFF]">Development capabilities</p><div className="mt-10 grid gap-4 md:grid-cols-4">{[
+        [LayoutTemplate, 'Interface systems', 'Responsive, reusable UI designed for consistency.'],
+        [Braces, 'Frontend builds', 'React and Next.js experiences with clean component logic.'],
+        [Database, 'Full-stack systems', 'APIs, databases, authentication, and dynamic content.'],
+        [Gauge, 'Optimization', 'SEO, accessibility, performance, and deployment readiness.'],
+      ].map(([Icon, title, text]) => { const C = Icon as typeof Braces; return <article key={title as string} className="rounded-2xl bg-[#F8F9FC] p-6"><C className="h-5 w-5 text-[#633CFF]" /><h2 className="mt-8 font-semibold">{title as string}</h2><p className="mt-2 text-sm leading-6 text-[#686868]">{text as string}</p></article> })}</div></div></section>
 
-          <div className="flex flex-col-reverse lg:flex-row items-center gap-10 py-10">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="max-w-xl text-center lg:text-left   text-base sm:text-lg leading-relaxed tracking-wide xl:w-[475px] w-full xl:pl-16 h-full pb-10 xl:pb-0"
-            >
-              <p className="mb-6">
-                Discover my web development portfolio featuring real-world frontend and full-stack applications. As a React 
-                and JavaScript developer, I build modern, mobile-responsive websites and scalable backend APIs using technologies 
-                like Node.js, Express, MongoDB, and Tailwind CSS. Each project is optimized for SEO, performance, and accessibility.
-              </p>
-              <p>
-                I create user-first, responsive websites and scalable apps using React, 
-                Node.js, and more. Explore my featured frontend and full-stack work.
-              </p>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05, filter: "brightness(1.1)" }}
-              transition={{ type: "spring", stiffness: 300 }}
-              viewport={{ once: true }}
-              className="rounded-2xl overflow-hidden shadow-2xl"
-            >
-              <Image
-                title="Professional web design Image"
-                alt="React Developer working on a responsive website"
-                rel="preload"
-                src={frontendImg}
-                width={656}
-                height={366}
-                className="block rounded-2xl mt-10"
-                priority
-              />
-            </motion.div>
-          </div>
-        </section>
-        {/* Project Types */}
-        <motion.section         
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5 }} 
-        viewport={{ once: true }}
-        className="py-12 text-center  ">
-          <h2 className="text-2xl font-bold uppercase tracking-wider mb-6">Explore Project Categories</h2>
-          <div className="flex justify-center flex-wrap gap-6 flex-grow">
-            {projects.map(({ id, img, title }) => (
-              <ProjectTypes key={id} href={`#${id}`} img={img} editType={title} />
-            ))}
-          </div>
-        </motion.section>
+      <section id="frontend" className="scroll-mt-24"><ProjectFrame id="frontend-projects" title="Frontend experiences" description="Responsive interfaces focused on usability, detail, and dependable performance." projects={frontend} /></section>
 
-        {/* Projects */}
-        {projects.map(({ id, title, description, project }) => (
-          <ProjectFrame
-            key={id}
-            id={id}
-            title={`Projects: ${title}`}
-            description={description}
-            projects={project}
-          />
-        ))}
-      </main>
-    </motion.div>
+      <section className="bg-[#F0F0F5] py-5"><ProjectFrame id="fullstack" title="Full-stack products" description="End-to-end applications that connect polished interfaces to practical backend systems." projects={fullstack} /></section>
+
+      <section className="mx-auto max-w-[1200px] px-6 py-28 lg:px-10"><div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr]"><div><p className="text-sm font-semibold uppercase tracking-[.18em] text-[#633CFF]">Build process</p><h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">From rough idea to reliable release.</h2></div><ol className="grid gap-3 sm:grid-cols-2">{[['01', 'Scope', 'Goals, users, requirements, and success criteria.'], ['02', 'Prototype', 'Information architecture and interaction direction.'], ['03', 'Build', 'Responsive components, data, and integrations.'], ['04', 'Launch', 'QA, performance checks, deployment, and support.']].map(([n, title, text]) => <li key={n} className="rounded-2xl border border-[#E8E8EE] bg-white p-6"><span className="text-sm font-semibold text-[#633CFF]">{n}</span><h3 className="mt-5 text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-[#686868]">{text}</p></li>)}</ol></div></section>
+
+      <section className="mx-auto max-w-[1200px] px-6 pb-28 lg:px-10"><div className="rounded-[2rem] bg-[#633CFF] px-7 py-14 text-white sm:flex sm:items-center sm:justify-between sm:px-12"><div><p className="text-sm text-white/65">Need a website or product?</p><h2 className="mt-2 text-3xl font-semibold tracking-tight">Let&apos;s build the right version first.</h2></div><Link href="/contact-us" className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-6 font-semibold text-[#151515] sm:mt-0">Start a project <ArrowRight className="h-4 w-4" /></Link></div></section>
+    </main>
   );
-};
-
-export default WebPortfolio;
+}

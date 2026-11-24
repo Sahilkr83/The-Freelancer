@@ -1,345 +1,88 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { FaFilm } from "react-icons/fa";
+import { usePathname } from 'next/navigation';
+import { ArrowRight, ArrowUpRight, CircleUserRound, Clapperboard, Code2, Home, LayoutDashboard, Menu, MessageCircle, UserRound, X } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import logo from '@/assets/logo/TheFreelancer logo.png';
-import ThemeSwitch from './ThemeToggle';
+
+const links = [
+  { href: '/', label: 'Home', icon: Home, description: 'Overview and selected work' },
+  { href: '/web-development', label: 'Web', icon: Code2, description: 'Websites and full-stack products' },
+  { href: '/video-portfolio', label: 'Video', icon: Clapperboard, description: 'Editing and motion portfolio' },
+  { href: '/about-us', label: 'About', icon: UserRound, description: 'Studio, approach, and experience' },
+  { href: '/contact-us', label: 'Contact', icon: MessageCircle, description: 'Start a project conversation' },
+];
 
 export default function NavBar() {
-  const router = useRouter();
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  const user = session?.user || null;
-
-  const [scrolled, setScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const menuRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => setMounted(true), []);
-  const loadingUser = !mounted || status === 'loading';
-
-  // Scroll effect
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        menuOpen &&
-        menuRef.current &&
-        buttonRef.current &&
-        !menuRef.current.contains(e.target as Node) &&
-        !buttonRef.current.contains(e.target as Node)
-      ) {
-        setMenuOpen(false);
-      }
+    if (!menuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false);
     };
-    window.addEventListener('click', handleClickOutside);
-    return () => window.removeEventListener('click', handleClickOutside);
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', closeOnEscape);
+    };
   }, [menuOpen]);
+  const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <div
-      className={`fixed top-0 w-full z-[9999] transition-all duration-300 backdrop-blur-lg nav-bar 
-        ${scrolled ? 'border-b border-indigo-700 shadow-[0_2px_12px_rgba(93,118,255,0.25)]' : 'bg-transparent'}
-        font-['Rajdhani',_sans-serif]
-      `}
-    >
-      <div className="mx-auto max-w-[1350px] w-11/12 flex justify-between items-center p-7 px-4 pb-4 text-white">
-        {/* Logo */}
-        <Image
-          loading="lazy"
-          onClick={() => router.push('/')}
-          src={logo}
-          width={50}
-          height={50}
-          alt="The Freelancer Shop logo"
-          title="The Freelancer Shop – Freelance Video Editing & Web Design"
-          className="cursor-pointer"
-        />
+    <header className={`fixed inset-x-0 top-0 z-[9999] border-transparent bg-transparent transition-all duration-300 lg:border-b ${scrolled ? 'lg:border-[#E8E8EE] lg:bg-white/95 lg:shadow-[0_8px_35px_rgba(21,21,21,.06)] lg:backdrop-blur-xl' : 'lg:bg-[#F8F9FC]/85 lg:backdrop-blur-md'}`}>
+      <div className="relative z-30 mx-3 mt-3 flex h-16 max-w-[1320px] items-center justify-between rounded-2xl border border-[#E8E8EE] bg-white px-3 shadow-[0_10px_35px_rgba(21,21,21,.09)] sm:mx-5 sm:px-4 lg:mx-auto lg:mt-0 lg:h-20 lg:rounded-none lg:border-0 lg:bg-transparent lg:px-10 lg:shadow-none">
+        <Link href="/" className="flex items-center gap-3" aria-label="The Freelancer home">
+          <span className="grid h-11 w-11 place-items-center rounded-xl bg-black p-1.5 shadow-sm">
+            <Image src={logo} width={38} height={38} alt="The Freelancer logo" className="h-full w-full rounded-lg object-contain" priority />
+          </span>
+          <span className="text-sm font-semibold tracking-tight text-[#151515]">The Freelancer<span className="text-[#633CFF]">.</span></span>
+        </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden lg:flex gap-6 items-center relative font-bold">
-          <Link
-            href="/"
-            className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
-              pathname === '/' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
-            }`}
-          >
-            Home
-          </Link>
+        <nav className="hidden items-center gap-1 rounded-full border border-[#E8E8EE] bg-white p-1.5 lg:flex" aria-label="Primary navigation">
+          {links.map(link => <Link key={link.href} href={link.href} className={`rounded-full px-4 py-2 text-sm font-medium transition ${isActive(link.href) ? 'bg-[#151515] text-white' : 'text-[#686868] hover:bg-[#F0F0F5] hover:text-[#151515]'}`}>{link.label}</Link>)}
+        </nav>
 
-          {/* {user ? (
-            <Link
-              href="/cloud-storage"
-              className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
-                pathname === '/cloud-storage' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
-              }`}
-            >
-              Cloud Storage
-            </Link>
-          ) : ( */}
-            <>
-              <Link
-                href="/web-development"
-                className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
-                  pathname === '/web-development' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
-                }`}
-              >
-                Web Portfolio
-              </Link>
-              <Link
-                href="/video-portfolio"
-                className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
-                  pathname === '/video-portfolio' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
-                }`}
-              >
-                Video Portfolio
-              </Link>
-              <Link
-                href="/about-us"
-                className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
-                  pathname === '/about-us' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
-                }`}
-              >
-                About Us
-              </Link>
-              <Link
-                href="/contact-us"
-                className={`px-2 py-1 border-b-4 rounded-b-2xl transition-colors duration-250 ${
-                  pathname === '/contact-us' ? 'nav-text' : 'border-transparent hover:text-indigo-400'
-                }`}
-              >
-                Contact Us
-              </Link>
-            </>
-          {/* )} */}
+        <div className="hidden min-w-[9.5rem] justify-end lg:flex">
+          {status !== 'loading' && session?.user ? (
+            <div className="flex items-center gap-2"><Link href="/dashboard" className="text-sm font-medium text-[#686868] hover:text-[#151515]">Dashboard</Link><Link href="/profile" aria-label="Profile" className="ml-2"><Image src={session.user.image || logo} width={38} height={38} alt={session.user.name || 'Profile'} className="h-10 w-10 rounded-full border border-[#E8E8EE] object-cover" /></Link></div>
+          ) : <Link href="/contact-us" className="portfolio-button min-h-10 px-5 py-2 text-sm">Start a project</Link>}
         </div>
 
-        {/* User Buttons */}
-        <div className="hidden lg:flex items-center gap-4">
-          <ThemeSwitch />
-          {loadingUser ? (
-            <div className="w-32 h-10 bg-gray-700 animate-pulse rounded-md" />
-          ) : user ? (
-            <div className="flex items-center gap-4">
-              <Link
-                href="/dashboard"
-                className="px-3 py-1.5 border border-white rounded-md hover:bg-white hover:text-black transition"
-              >
-                Dashboard
-              </Link>
-              <Link href="/profile" className="flex items-center gap-2">
-                {user.image && (
-                  <Image
-                    src={user.image}
-                    width={40}
-                    height={40}
-                    alt={user.name ?? "User Avatar"}
-                    className="h-10 w-10 rounded-full object-cover border border-white"
-                  />
-                )}
-                <span>{user.name?.split(' ')[0]}</span>
-              </Link>
-            </div>
-          ) : (
-            <>
-              <Link
-                href="/auth/sign-in"
-                className="px-3 py-1.5 border border-white rounded-md hover:bg-white hover:text-black transition"
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/auth/sign-up"
-                className="px-3 py-1.5 bg-blue-600 rounded-md hover:bg-blue-800 transition font-semibold"
-              >
-                Sign Up
-              </Link>
-            </>
-          )}
-        </div>
-
-        {/* Hamburger */}
-        <div className="gap-4 flex lg:hidden items-center">
-          <ThemeSwitch />
-          <button
-            className="p-2 rounded-md border border-white"
-            ref={buttonRef}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              viewBox="0 0 24 24"
-            >
-              {menuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M3 12h18M3 6h18M3 18h18" />}
-            </svg>
-          </button>
-        </div>
+        <button type="button" onClick={() => setMenuOpen(value => !value)} className={`grid h-10 w-10 place-items-center rounded-xl transition lg:hidden ${menuOpen ? 'bg-[#151515] text-white' : 'bg-[#F0F0F5] text-[#151515]'}`} aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label="Toggle navigation">{menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
       </div>
 
-      {/* Mobile Dropdown */}
-      <div
-        ref={menuRef}
-        className={`absolute top-full right-4 mt-3 w-64 rounded-xl border border-gray-700 nav-bar-mobile
-          transition-all duration-300 origin-top-right shadow-2xl
-          ${menuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}
-          lg:hidden
-        `}
-      >
-        <div className="flex flex-col p-4 space-y-2 font-medium text-white">
-          <Link href="/" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-            🏠 Home
-          </Link>
+      <button type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} className={`fixed inset-0 z-10 bg-[#151515]/20 backdrop-blur-[2px] transition-opacity duration-300 lg:hidden ${menuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`} />
 
-          {user ? (
-            <>
-              {/* <Link href="/cloud-storage" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-                ☁️ Cloud Storage
-              </Link> */}
-              <Link href="/dashboard" onClick={() => setMenuOpen(false)} className="px-4 py-2 mx-1 rounded-md border border-white text-center">
-                Dashboard
-              </Link>
-              <Link href="/profile" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 hover:bg-gray-700 px-4 py-2 rounded-md">
-                <Image
-                  src={user.image || '/default-avatar.png'}
-                  width={40}
-                  height={40}
-                  alt="User"
-                  className="h-9 w-9 rounded-full object-cover border border-white"
-                />
-                <span>{user.name?.split(' ')[0]}</span>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link href="/web-development" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-                💻 Web Portfolio
-              </Link>
-              <Link href="/video-portfolio" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-                <FaFilm className="w-5 h-5" /> Video Portfolio
-              </Link>
-              <Link href="/about-us" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-                ℹ️ About Us
-              </Link>
-              <Link href="/contact-us" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md flex items-center gap-2">
-                📞 Contact Us
-              </Link>
-              <div className="border-t border-gray-700 my-2" />
-              <Link href="/auth/sign-in" onClick={() => setMenuOpen(false)} className="hover:bg-gray-700 px-4 py-2 rounded-md">
-                🔐 Login
-              </Link>
-              <Link href="/auth/sign-up" onClick={() => setMenuOpen(false)} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold text-center">
-                ✨ Sign Up
-              </Link>
-            </>
-          )}
-        </div>
+      <div id="mobile-navigation" className={`fixed inset-x-3 top-[5.5rem] z-20 max-h-[calc(100dvh-6.5rem)] overflow-y-auto rounded-[1.5rem] border border-[#E8E8EE] bg-white p-3 shadow-[0_28px_80px_rgba(21,21,21,.2)] transition-all duration-300 sm:inset-x-5 lg:hidden ${menuOpen ? 'pointer-events-auto translate-y-0 scale-100 opacity-100' : 'pointer-events-none -translate-y-3 scale-[.98] opacity-0'}`}>
+        <div className="flex items-center justify-between px-3 pb-3 pt-2"><div><p className="text-xs font-semibold uppercase tracking-[.16em] text-[#8A8A8A]">Navigation</p><p className="mt-1 text-sm text-[#686868]">Explore the studio</p></div><span className="rounded-full bg-[#EEE9FF] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.1em] text-[#633CFF]">Portfolio</span></div>
+        <nav className="grid gap-1" aria-label="Mobile navigation">
+          {links.map(link => {
+            const Icon = link.icon;
+            const active = isActive(link.href);
+            return <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className={`group grid grid-cols-[2.75rem_1fr_auto] items-center gap-3 rounded-2xl px-3 py-3 transition ${active ? 'bg-[#EEE9FF] text-[#633CFF]' : 'text-[#151515] hover:bg-[#F8F9FC]'}`}><span className={`grid h-11 w-11 place-items-center rounded-xl ${active ? 'bg-white text-[#633CFF]' : 'bg-[#F0F0F5] text-[#686868]'}`}><Icon className="h-5 w-5" /></span><span><span className="block text-sm font-semibold">{link.label}</span><span className={`mt-0.5 block text-xs ${active ? 'text-[#633CFF]/70' : 'text-[#8A8A8A]'}`}>{link.description}</span></span><ArrowUpRight className={`h-4 w-4 transition ${active ? 'text-[#633CFF]' : 'text-[#B0B0B8] group-hover:text-[#633CFF]'}`} /></Link>;
+          })}
+        </nav>
+
+        {session?.user && <div className="mt-3 border-t border-[#E8E8EE] pt-3"><p className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[.14em] text-[#8A8A8A]">Your account</p><div className="grid grid-cols-2 gap-2"><Link href="/dashboard" className="flex items-center gap-2 rounded-xl bg-[#F8F9FC] px-3 py-3 text-sm font-semibold"><LayoutDashboard className="h-4 w-4 text-[#633CFF]" />Dashboard</Link><Link href="/profile" className="flex items-center gap-2 rounded-xl bg-[#F8F9FC] px-3 py-3 text-sm font-semibold"><CircleUserRound className="h-4 w-4 text-[#633CFF]" />Profile</Link></div></div>}
+
+        {!session?.user && <Link href="/contact-us" className="mt-3 flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#633CFF] px-5 text-sm font-semibold text-white">Start a project <ArrowRight className="h-4 w-4" /></Link>}
       </div>
-
-      <div className="w-full h-[1px] bg-white opacity-30 mt-2" />
-    </div>
+    </header>
   );
 }
-
-
-
-
-// type FlyOutLinkProps = {
-//   children: ReactNode;
-//   href: string;
-//   FlyoutContent?: ReactNode;
-// };
-
-// const FlyOutLink = ({ children, href, FlyoutContent }: FlyOutLinkProps) => {
-//   const [showDropdown, setShowDropdown] = useState(false);
-//   const showFlyOut = showDropdown && FlyoutContent
-
-//   return (
-//     <div
-
-//       onMouseEnter={() => setShowDropdown(true)}
-//       onMouseLeave={()=> setShowDropdown(false)}
-//       className="relative group"
-//     >
-//       <Link href={href}>
-//         {children}
-//         <span style={{ transform : showFlyOut ? "scaleX(1)": "scaleX(0)"}} className='absolute -bottom-2 -left-2 -right-2 h-1 origin-left rounded-full bg-white transitiont-transform duration-300 ease-out'/>
-//       </Link>
-//       <AnimatePresence>
-//       {showFlyOut && (
-//         <motion.div 
-//           initial={{opacity:0 , y:10}}
-//           animate={{opacity:1 , y:0}}
-//           exit={{opacity:0 , y:10}}
-//           style={{x: '-50%'}}
-//           transition={{ duration: 0.3, ease: 'easeOut' }}
-//           className="absolute top-full left-1/2  mt-5 z-50 rounded-xl min-w-48 bg-black  backdrop-blur-md transition-all "
-//         >
-//           <div className='absolute -top-6 left-0 right-0 h-6 bg-transparent'/>
-//           <div className='absolute top-0 left-1/2 -translate-x-1/2 h-4 w-4 -translate-y-1/2 rotate-45 bg-black'/>
-//           {FlyoutContent}
-//         </motion.div>
-//       )}
-//       </AnimatePresence>
-//     </div>
-//   );
-// };
-
-// const WebPortfolio = () => {
-//   return (
-//           <div>
-//             <ul className="flex gap-3 p-5 text-sm text-gray-200 text-nowrap">
-//               <li>
-//                 <Link
-//                   href="/web-development/frontend"
-//                   className="flex items-center gap-3 mx-2 py-1 w-full  rounded-md hover:bg-black transition"
-//                 >
-//                   <span>🧩</span> <span>Frontend Projects</span>
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link
-//                   href="/web-development/fullstack"
-//                   className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-black transition"
-//                 >
-//                   <span>🧠</span> <span>Fullstack Projects</span>
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link
-//                   href="/web-development/landing-pages"
-//                   className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-black transition"
-//                 >
-//                   <span>🖼️</span> <span>Landing Pages</span>
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link
-//                   href="/web-development/ui-designs"
-//                   className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-black transition"
-//                 >
-//                   <span>🎨</span> <span>UI/UX Designs</span>
-//                 </Link>
-//               </li>
-//             </ul>
-//           </div>
-//   )
-// }

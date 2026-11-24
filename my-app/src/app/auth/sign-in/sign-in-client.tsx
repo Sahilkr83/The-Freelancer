@@ -2,7 +2,7 @@
 import {zodResolver} from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from 'react-hook-form';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
@@ -11,7 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import { signInSchema } from "@/schemas/signInSchema";
 
 
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 
 export default function SignInPage() {
@@ -27,7 +27,6 @@ export default function SignInPage() {
   const [showPassword,setShowpassword] = useState(false)
   const [loading , setLoading] = useState(false)
   const [loadingGoogle , setLoadingGoogle] = useState(false)
-  const { status } = useSession();
 //   const rememberMe = watch("rememberMe");
 
   const onSubmit = async (data: z.infer<typeof signInSchema> ) => {
@@ -48,13 +47,6 @@ export default function SignInPage() {
     setLoading(false);
   };
 
-  useEffect(() => {
-    if (status === "authenticated" && loadingGoogle) {
-      toast.success("Signed in successfully!");
-      setLoadingGoogle(false);
-    }
-  }, [status, loadingGoogle]);
-
   const handleGoogleLogin = async () => {
     if (loadingGoogle) return; // prevent double clicks
     setLoadingGoogle(true);
@@ -68,8 +60,8 @@ export default function SignInPage() {
       toast.error(result.error || "Failed to sign in with Google");
       setLoadingGoogle(false);
     } else  {
-      localStorage.setItem("login_success", "true"); // mark login success
-  // redirect
+      toast.success("Signed in successfully!");
+      router.replace("/");
     }
   };
 
@@ -81,7 +73,7 @@ export default function SignInPage() {
     transition={{ duration: 0.6 }}
     viewport={{ once: true }}
   >
-    <div className=" pt-7 relative px-4 sm:px-6 lg:px-8 z-20 mx-auto max-w-[1460px] w-full font-['Rajdhani',_sans-serif]">
+    <div className="auth-shell pt-7 relative px-4 sm:px-6 lg:px-8 z-20 mx-auto max-w-[1460px] w-full">
       <section className="py-20 sm:py-24 md:py-28">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -96,7 +88,7 @@ export default function SignInPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-widest uppercase drop-shadow-lg"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
             >
               Welcome Back
             </motion.h1>
@@ -105,7 +97,7 @@ export default function SignInPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.7 }}
               viewport={{ once: true }}
-              className="text-sm sm:text-base text-gray-400 mt-4 tracking-wide font-semibold uppercase"
+              className="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-4"
             >
               Login to your account below
             </motion.p>
@@ -122,14 +114,8 @@ export default function SignInPage() {
           <div
             className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-md 
                       p-4 sm:p-6 md:p-10 
-                      rounded-3xl border shadow-lg backdrop-blur-md
-                      bg-[color:var(--color-background)] 
-                      border-[color:var(--color-border)] 
+                      auth-card rounded-3xl
                       text-[color:var(--color-foreground)]"
-            style={{
-              boxShadow:
-                "0 0 15px 2px rgba(65, 105, 225, 0.4), inset 0 0 10px 2px rgba(65, 105, 225, 0.2)",
-            }}
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 sm:space-y-7">
               {/* Email */}
@@ -221,7 +207,7 @@ export default function SignInPage() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 type="submit"
-                disabled={!loading || !isValid}
+                disabled={loading || !isValid}
                 viewport={{ once: true }}
                 style={{
                   backgroundImage:

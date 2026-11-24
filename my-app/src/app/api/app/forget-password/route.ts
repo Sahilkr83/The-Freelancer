@@ -47,7 +47,11 @@ export async function POST(request:Request){
         const passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex'); // Hash the token for security
         const passwordResetExpiry = new Date(Date.now() + 3600 * 1000);// 1 hour from now
 
-        const resetUrl = `${process.env.NEXTAUTH_URL}auth/reset-password/${resetToken}`;
+        const baseUrl = process.env.NEXTAUTH_URL?.replace(/\/$/, "");
+        if (!baseUrl) {
+            throw new Error("NEXTAUTH_URL is not configured");
+        }
+        const resetUrl = `${baseUrl}/auth/reset-password/${resetToken}`;
 
 
 
